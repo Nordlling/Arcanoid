@@ -1,3 +1,4 @@
+using Main.Scripts.Configs;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Pool;
@@ -9,6 +10,7 @@ namespace Main.Scripts.Infrastructure.Installers
     public class PoolInstaller : MonoInstaller
     {
         [Header("Configs")]
+        [SerializeField] private TiledBlockConfig _tiledBlockConfig;
 
         [Header("Prefabs")]
         
@@ -21,10 +23,8 @@ namespace Main.Scripts.Infrastructure.Installers
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             _blockPoolProvider.Init();
-            _boostPoolProvider.Init();
-            BlockFactoryUnit blockBlockFactoryUnit = new BlockFactoryUnit(_blockPoolProvider.PoolViewUnit);
-            BoostFactoryUnit boostBlockFactoryUnit = new BoostFactoryUnit(_boostPoolProvider.PoolViewUnit);
-            _spawnTest.Construct(blockBlockFactoryUnit, boostBlockFactoryUnit);
+            BlockFactoryUnit blockBlockFactoryUnit = new BlockFactoryUnit(_blockPoolProvider.PoolViewUnit, _tiledBlockConfig);
+            serviceContainer.SetServiceSelf(blockBlockFactoryUnit);
         }
     }
 }

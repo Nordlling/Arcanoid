@@ -1,18 +1,14 @@
-using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.ButtonContainer;
-using Main.Scripts.Infrastructure.Services.LevelMap;
-using Main.Scripts.LevelMap;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers
 {
     public class GameWorldInstaller : MonoInstaller
     {
-        [Header("Configs")] 
-        [SerializeField] private TiledBlockConfig _tiledBlockConfig;
+        [Header("Configs")]
 
         [Header("Prefabs")]
         
