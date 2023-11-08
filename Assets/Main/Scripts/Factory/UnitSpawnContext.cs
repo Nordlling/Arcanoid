@@ -15,7 +15,8 @@ namespace Main.Scripts.Factory
     
     public class BlockSpawnContext : UnitSpawnContext
     {
-        public Vector3 SpawnPosition;
+        public Vector2 SpawnPosition;
+        public int BlockID;
     }
     
     
