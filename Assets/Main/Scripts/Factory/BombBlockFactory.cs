@@ -30,11 +30,9 @@ namespace Main.Scripts.Factory
             block.Construct(this);
             
             Explosion explosion = block.AddComponent<Explosion>();
-            
             block.transform.position = spawnContext.SpawnPosition;
             block.SpriteRenderer.sprite = _tiledBlockDictionary[spawnContext.BlockID].Visual;
             block.Collider.size = block.SpriteRenderer.bounds.size;
-            block.Health.Construct(_tiledBlockDictionary[spawnContext.BlockID].HealthCount, 0);
             return block;
         }
 

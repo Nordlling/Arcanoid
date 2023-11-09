@@ -3,20 +3,29 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.GameGrid
 {
-    public class GameGridZone : MonoBehaviour
+    public class ZonesManager : MonoBehaviour
     {
         public Rect GameGridRect => _gameGridRect;
 
         [SerializeField] private Camera _camera;
-        [SerializeField] private GridZoneConfig _gridZoneConfig;
+        [SerializeField] private ZonesConfig _zonesConfig;
 
-        private readonly Vector2 _center = new Vector2(0, 0);
-        private Rect _gameGridRect;
         private Rect _screenRect;
+        private Rect _gameGridRect;
+        private Rect _livingRect;
         private Resolution _currentResolution;
+        
+        public bool IsInLivingZone(Vector2 position)
+        {
+            return _livingRect.Contains(position);
+        }
+        
+        public bool IsInScreenZone(Vector2 position)
+        {
+            return _screenRect.Contains(position);
+        }
 
-
-        private void Start()
+        public void Init()
         {
             _currentResolution = Screen.currentResolution;
             UpdateAllZones();
@@ -44,14 +53,17 @@ namespace Main.Scripts.Logic.GameGrid
         private void OnDrawGizmos()
         {
             UpdateAllZones();
-            Gizmos.color = _gridZoneConfig.RectangleColor;
+            Gizmos.color = _zonesConfig.GridZoneColor;
             Gizmos.DrawWireCube(_gameGridRect.center, _gameGridRect.size);
+            Gizmos.color = _zonesConfig.LivingZoneColor;
+            Gizmos.DrawWireCube(_livingRect.center, _livingRect.size);
         }
 
         private void UpdateAllZones()
         {
             CalculateScreenRect();
             CalculateGameGridRect();
+            CalculateLivingRect();
         }
 
         private void CalculateScreenRect()
@@ -59,13 +71,21 @@ namespace Main.Scripts.Logic.GameGrid
             Vector2 screenZoneSize = CalculateScreenSizeInWorldUnits();
             _screenRect.width = screenZoneSize.x;
             _screenRect.height = screenZoneSize.y;
-            _screenRect.center = _center;
+            _screenRect.center = Vector2.zero;
         }
 
         private void CalculateGameGridRect()
         {
-            _gameGridRect.min = _screenRect.min + _screenRect.size * new Vector2(_gridZoneConfig.SideOffset, 0f);
-            _gameGridRect.max = _screenRect.max - _screenRect.size * new Vector2(_gridZoneConfig.SideOffset, _gridZoneConfig.UpperOffset);
+            _gameGridRect.min = _screenRect.min + _screenRect.size * new Vector2(_zonesConfig.SideOffset, 0f);
+            _gameGridRect.max = _screenRect.max - _screenRect.size * new Vector2(_zonesConfig.SideOffset, _zonesConfig.UpperOffset);
+        }
+        
+        private void CalculateLivingRect()
+        {
+            Vector2 livingZoneSize = _screenRect.size + (_screenRect.size * _zonesConfig.LiveOffset);
+            _livingRect.width = livingZoneSize.x;
+            _livingRect.height = livingZoneSize.y;
+            _livingRect.center = Vector2.zero;
         }
 
         private Vector2 CalculateScreenSizeInWorldUnits()

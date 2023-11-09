@@ -18,19 +18,26 @@ namespace Main.Scripts.Infrastructure.Installers
         [Header("Prefabs")]
         
         [Header("Scene Objects")]
-        [SerializeField] private GameGridZone _gameGridZone;
+        [SerializeField] private ZonesManager _zonesManager;
 
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
+            RegisterZonesManager(serviceContainer);
             RegisterGameGridService(serviceContainer);
+        }
+
+        private void RegisterZonesManager(ServiceContainer serviceContainer)
+        {
+            _zonesManager.Init();
+            serviceContainer.SetServiceSelf(_zonesManager);
         }
 
         private void RegisterGameGridService(ServiceContainer serviceContainer)
         {
             BlockPlacer blockPlacer = new BlockPlacer(
                 serviceContainer.Get<IFactoryContainer>(),
-                _gameGridZone,
+                serviceContainer.Get<ZonesManager>(),
                 _gameGridConfig);
 
             GameGridLoader gameGridLoader = new GameGridLoader();

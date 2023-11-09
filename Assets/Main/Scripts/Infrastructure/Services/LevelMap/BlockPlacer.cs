@@ -8,7 +8,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
 {
     public class BlockPlacer
     {
-        private readonly GameGridZone _gameGridZone;
+        private readonly ZonesManager _zonesManager;
         private readonly GameGridConfig _gameGridConfig;
         private readonly IFactoryContainer _factoryContainer;
         
@@ -17,10 +17,10 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
         private Vector2 _blockScale;
         private Vector2 _firstBlockPosition;
 
-        public BlockPlacer(IFactoryContainer factoryContainer, GameGridZone gameGridZone, GameGridConfig gameGridConfig)
+        public BlockPlacer(IFactoryContainer factoryContainer, ZonesManager zonesManager, GameGridConfig gameGridConfig)
         {
             _factoryContainer = factoryContainer;
-            _gameGridZone = gameGridZone;
+            _zonesManager = zonesManager;
             _gameGridConfig = gameGridConfig;
         }
 
@@ -50,7 +50,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
 
         private void CalculateBlockSize(int gridWidth)
         {
-            Rect gameGridRect = _gameGridZone.GameGridRect;
+            Rect gameGridRect = _zonesManager.GameGridRect;
             Vector2 spriteSize = _gameGridConfig.BlockSprite.bounds.size;
             float aspectRatio = spriteSize.y / spriteSize.x;
             float blockWithSpacingWidth = gameGridRect.width / gridWidth;

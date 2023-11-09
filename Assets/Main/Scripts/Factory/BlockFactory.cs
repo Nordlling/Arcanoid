@@ -3,6 +3,7 @@ using System.Linq;
 using Main.Scripts.Configs;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Pool;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Main.Scripts.Factory
@@ -24,12 +25,16 @@ namespace Main.Scripts.Factory
             {
                 return null;
             }
+            
             Block block = (Block)_poolProvider.PoolViewBlock.Spawn();
+            
+            Health health = block.AddComponent<Health>();
+            health.Construct(_tiledBlockDictionary[spawnContext.BlockID].HealthCount, 0);
             block.Construct(this);
             block.transform.position = spawnContext.SpawnPosition;
             block.SpriteRenderer.sprite = _tiledBlockDictionary[spawnContext.BlockID].Visual;
             block.Collider.size = block.SpriteRenderer.bounds.size;
-            block.Health.Construct(_tiledBlockDictionary[spawnContext.BlockID].HealthCount, 0);
+            block.Subscribe(health);
             return block;
         }
 
