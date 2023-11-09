@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 890564443088226622}
   - component: {fileID: -7411223469418669516}
-  - component: {fileID: 8847546926947894913}
   - component: {fileID: 8947759586723415734}
   m_Layer: 0
   m_Name: Block
@@ -49,19 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1435770374312161277}
   _collider: {fileID: 8947759586723415734}
-  _health: {fileID: 8847546926947894913}
---- !u!114 &8847546926947894913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6353970893081283744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d168745132254dcdbafa0f408fdc56c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _health: {fileID: 0}
 --- !u!61 &8947759586723415734
 BoxCollider2D:
   m_ObjectHideFlags: 0

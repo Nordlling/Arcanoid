@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e585b28b32c41828400652dd062669a, type: 3}
-  m_Name: GridZoneConfig
+  m_Name: ZonesConfig
   m_EditorClassIdentifier: 
-  UpperOffset: 0.15
+  UpperOffset: 0.18
   SideOffset: 0.02
-  RectangleColor: {r: 1, g: 0, b: 0, a: 1}
+  GridZoneColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  LiveOffset: 0.2
+  LivingZoneColor: {r: 1, g: 0, b: 0, a: 1}

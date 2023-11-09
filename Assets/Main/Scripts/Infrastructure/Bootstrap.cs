@@ -25,7 +25,7 @@ namespace Main.Scripts.Infrastructure
             _gameStateMachine = new GameStateMachine();
             _gameStateMachine.AddState(new BootstrapState(sceneLoader, serviceContainer));
             _gameStateMachine.AddState(new LoadSceneState(sceneLoader, _sceneContext, serviceContainer, _curtainView));
-            _gameStateMachine.AddState(new GameLoopState());
+            _gameStateMachine.AddState(new GameLoopState(serviceContainer));
         }
     }
 }

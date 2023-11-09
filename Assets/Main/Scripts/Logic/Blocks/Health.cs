@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Blocks
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, IDieable
     {
         private int _healthCount;
         private int _currentHealthCount;
@@ -32,5 +32,10 @@ namespace Main.Scripts.Logic.Blocks
                 }
             // }
         }
+    }
+
+    public interface IDieable
+    {
+        event Action OnDied;
     }
 }
