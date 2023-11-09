@@ -14,7 +14,9 @@ namespace Main.Scripts.Configs
     public class BlockInfo
     {
         public int BlockID;
+        public int ClassID;
         public SpawnableItemMono BlockPrefab;
         public Sprite Visual;
+        public int HealthCount;
     }
 }
