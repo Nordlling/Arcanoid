@@ -14,14 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BlockInfos:
   - BlockID: 1
+    ClassID: 1
     BlockPrefab: {fileID: -7411223469418669516, guid: ef9fa4847de8b1c4794f018ee0e451b9, type: 3}
     Visual: {fileID: 21300000, guid: 53c10b69cf9975745ad6b4e2cf348070, type: 3}
+    HealthCount: 1
   - BlockID: 2
+    ClassID: 1
     BlockPrefab: {fileID: -7411223469418669516, guid: ef9fa4847de8b1c4794f018ee0e451b9, type: 3}
     Visual: {fileID: 21300000, guid: 73e900c195adae94e80785afe341b42f, type: 3}
+    HealthCount: 2
   - BlockID: 3
+    ClassID: 1
     BlockPrefab: {fileID: -7411223469418669516, guid: ef9fa4847de8b1c4794f018ee0e451b9, type: 3}
     Visual: {fileID: 21300000, guid: c1e33d971161f6b42a5e3693ac9bc184, type: 3}
+    HealthCount: 3
   - BlockID: 4
+    ClassID: 1
     BlockPrefab: {fileID: -7411223469418669516, guid: ef9fa4847de8b1c4794f018ee0e451b9, type: 3}
     Visual: {fileID: 21300000, guid: b65960088c231d9479fdf16d0c98e4db, type: 3}
+    HealthCount: 4
+  - BlockID: 5
+    ClassID: 1
+    BlockPrefab: {fileID: -7411223469418669516, guid: ef9fa4847de8b1c4794f018ee0e451b9, type: 3}
+    Visual: {fileID: 21300000, guid: ace97c3d01e0bf743a0f751e9fd15473, type: 3}
+    HealthCount: 0
+  - BlockID: 6
+    ClassID: 2
+    BlockPrefab: {fileID: -7411223469418669516, guid: ef9fa4847de8b1c4794f018ee0e451b9, type: 3}
+    Visual: {fileID: 21300000, guid: ad83e020904d0a8409a86b3657468783, type: 3}
+    HealthCount: 0

@@ -29,7 +29,7 @@ namespace Main.Scripts.Infrastructure.Installers
         private void RegisterGameGridService(ServiceContainer serviceContainer)
         {
             BlockPlacer blockPlacer = new BlockPlacer(
-                serviceContainer.Get<BlockFactoryUnit>(),
+                serviceContainer.Get<IFactoryContainer>(),
                 _gameGridZone,
                 _gameGridConfig);
 

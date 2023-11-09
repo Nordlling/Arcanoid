@@ -10,16 +10,16 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
     {
         private readonly GameGridZone _gameGridZone;
         private readonly GameGridConfig _gameGridConfig;
-        private readonly IFactoryUnit _blockFactoryUnit;
+        private readonly IFactoryContainer _factoryContainer;
         
         private Vector2 _blockWithSpacingScale;
         private Vector2 _blockWithSpacingSize;
         private Vector2 _blockScale;
         private Vector2 _firstBlockPosition;
 
-        public BlockPlacer(IFactoryUnit blockFactoryUnit, GameGridZone gameGridZone, GameGridConfig gameGridConfig)
+        public BlockPlacer(IFactoryContainer factoryContainer, GameGridZone gameGridZone, GameGridConfig gameGridConfig)
         {
-            _blockFactoryUnit = blockFactoryUnit;
+            _factoryContainer = factoryContainer;
             _gameGridZone = gameGridZone;
             _gameGridConfig = gameGridConfig;
         }
@@ -38,7 +38,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                     }
                     Vector2 spawnPosition = _firstBlockPosition + _blockWithSpacingSize * new Vector2(x, -y);
                     BlockSpawnContext blockSpawnContext = new BlockSpawnContext { SpawnPosition = spawnPosition, BlockID = levelMapInfo.LevelMap[x, y]};
-                    var block = _blockFactoryUnit.Spawn(blockSpawnContext);
+                    var block = _factoryContainer.GetFactoryByBlockId(blockSpawnContext.BlockID).Spawn(blockSpawnContext);
                     if (block != null)
                     {
                         block.transform.localScale = new Vector3(_blockScale.x, _blockScale.y, 1f);
