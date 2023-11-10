@@ -180,5 +180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
   _movingSpeed: 5
-  _decelerationSpeed: 0.08
+  _minDistanceToMove: 0.05
+  _decelerationSpeed: 0.25
   _spriteRenderer: {fileID: 5723084284022063460}

@@ -7,14 +7,15 @@ namespace Main.Scripts.Logic.Platforms
 {
     public class PlatformMoving : MonoBehaviour
     {
-        [SerializeField] private Camera _camera;
         [SerializeField] private float _movingSpeed;
+        [SerializeField] private float _minDistanceToMove;
         [SerializeField] private float _decelerationSpeed;
         [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private ZonesManager _zonesManager;
         private BallMovement _ball;
-        
+        private Camera _camera;
+
 
         private Vector2 _currentPosition;
         private Vector2 _targetPosition;
@@ -24,10 +25,11 @@ namespace Main.Scripts.Logic.Platforms
         private float _currentSpeed;
         private bool _started;
 
-        public void Construct(ZonesManager zonesManager, BallMovement ball)
+        public void Construct(ZonesManager zonesManager, BallMovement ball, Camera viewCamera)
         {
             _zonesManager = zonesManager;
             _ball = ball;
+            _camera = viewCamera;
 
             _currentPosition = transform.position;
             _targetPosition.y = _currentPosition.y;
@@ -86,8 +88,10 @@ namespace Main.Scripts.Logic.Platforms
         private void MovePlatform()
         {
             float deltaSpeed = _currentSpeed * Time.deltaTime;
-            if (Math.Abs(_targetPosition.x - _currentPosition.x) < deltaSpeed)
+            if (Math.Abs(_targetPosition.x - _currentPosition.x) < _minDistanceToMove)
             {
+                _currentPosition = _targetPosition;
+                transform.position = _currentPosition;
                 return;
             }
             

@@ -55,7 +55,7 @@ namespace Main.Scripts.Infrastructure.Installers
         {
             BallMovement ball = Instantiate(_ballPrefab, _platform.transform);
             ball.Construct(serviceContainer.Get<ZonesManager>());
-            _platform.Construct(serviceContainer.Get<ZonesManager>(), ball);
+            _platform.Construct(serviceContainer.Get<ZonesManager>(), ball, _camera);
         }
     }
 }
