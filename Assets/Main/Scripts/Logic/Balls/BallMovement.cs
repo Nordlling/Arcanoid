@@ -28,9 +28,18 @@ namespace Main.Scripts.Logic.Balls
 
         private void Update()
         {
+            CheckSpeed();
             if (!_zonesManager.IsInLivingZone(transform.position))
             {
                 Destroy(gameObject);
+            }
+        }
+        
+        private void CheckSpeed()
+        {
+            if (Math.Abs(_rigidbody.velocity.magnitude - _speed) > _epsilon)
+            {
+                _rigidbody.velocity = _rigidbody.velocity.normalized * _speed;
             }
         }
 
