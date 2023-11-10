@@ -1,5 +1,6 @@
 using System;
 using Main.Scripts.Configs;
+using Main.Scripts.Factory.Components;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Pool;

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5205741318240743834}
   - component: {fileID: 5205741318240743835}
-  - component: {fileID: 5205741318240743836}
   m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
@@ -85,22 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &5205741318240743836
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205741318240743833}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.13
 --- !u!1 &5205741318861024148
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +97,7 @@ GameObject:
   - component: {fileID: 5205741318861024153}
   - component: {fileID: -7841186240600258137}
   - component: {fileID: -3540441734131561973}
+  - component: {fileID: 6086058248431022506}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
@@ -129,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5205741318861024148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -0.056640662}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -200,3 +184,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfeb214a4ebf4f72af91531bcc5ec314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &6086058248431022506
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5205741318861024148}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1

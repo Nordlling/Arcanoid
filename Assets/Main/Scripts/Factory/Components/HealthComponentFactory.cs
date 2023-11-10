@@ -2,7 +2,7 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Logic.Blocks;
 using Unity.VisualScripting;
 
-namespace Main.Scripts.Factory
+namespace Main.Scripts.Factory.Components
 {
     public class HealthComponentFactory : IComponentFactory
     {

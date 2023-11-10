@@ -7,10 +7,11 @@ namespace Main.Scripts.Logic.Platforms
 {
     public class PlatformMovement : MonoBehaviour
     {
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private float _movingSpeed;
         [SerializeField] private float _minDistanceToMove;
         [SerializeField] private float _decelerationSpeed;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Transform _ballPoint;
 
         private ZonesManager _zonesManager;
         private BallMovement _ball;
@@ -30,6 +31,7 @@ namespace Main.Scripts.Logic.Platforms
         {
             _zonesManager = zonesManager;
             _ball = ball;
+            _ball.transform.position = _ballPoint.position;
             _camera = viewCamera;
 
             _currentPosition = transform.position;

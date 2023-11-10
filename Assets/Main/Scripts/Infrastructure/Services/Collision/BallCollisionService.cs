@@ -17,6 +17,11 @@ namespace Main.Scripts.Infrastructure.Services.Collision
             {
                 health.Hit();
             }
+            
+            if (enteredObject.TryGetComponent(out BreaksVisual breaksVisual))
+            {
+                breaksVisual.AddBreak();
+            }
 
             if (enteredObject.TryGetComponent(out Explosion explosion))
             {

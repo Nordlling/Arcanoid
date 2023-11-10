@@ -950,8 +950,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5723084284900565287, guid: 2609e76955b94a34e98737365ab6b346, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 519420031}
+      propertyPath: _minDistanceToMove
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2609e76955b94a34e98737365ab6b346, type: 3}

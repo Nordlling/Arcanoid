@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 53c10b69cf9975745ad6b4e2cf348070, type: 3}
+    - {fileID: 11400000, guid: d15a46170d13a654a80ba04c3b6772e6, type: 2}
     - {fileID: 21300000, guid: 73e900c195adae94e80785afe341b42f, type: 3}
     - {fileID: 21300000, guid: c1e33d971161f6b42a5e3693ac9bc184, type: 3}
     - {fileID: 21300000, guid: b65960088c231d9479fdf16d0c98e4db, type: 3}
@@ -55,15 +56,24 @@ MonoBehaviour:
       Data: 0
     - Name: ComponentFactories
       Entry: 7
-      Data: 3|Main.Scripts.Factory.IComponentFactory[], Assembly-CSharp
+      Data: 3|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 4|Main.Scripts.Factory.HealthComponentFactory, Assembly-CSharp
+      Data: 4|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
+    - Name: BlockBreaksConfig
+      Entry: 10
       Data: 1
     - Name: 
       Entry: 8
@@ -88,22 +98,31 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 7
-      Data: 5|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 6|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
-      Data: 1
+      Data: 2
     - Name: ComponentFactories
       Entry: 7
-      Data: 6|Main.Scripts.Factory.IComponentFactory[], Assembly-CSharp
+      Data: 7|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 7|Main.Scripts.Factory.HealthComponentFactory, Assembly-CSharp
+      Data: 8|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
       Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
+    - Name: BlockBreaksConfig
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -127,22 +146,31 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 8|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 10|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: ComponentFactories
       Entry: 7
-      Data: 9|Main.Scripts.Factory.IComponentFactory[], Assembly-CSharp
+      Data: 11|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 10|Main.Scripts.Factory.HealthComponentFactory, Assembly-CSharp
+      Data: 12|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
       Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
+    - Name: BlockBreaksConfig
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -166,22 +194,31 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 7
-      Data: 11|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 14|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
-      Data: 3
+      Data: 4
     - Name: ComponentFactories
       Entry: 7
-      Data: 12|Main.Scripts.Factory.IComponentFactory[], Assembly-CSharp
+      Data: 15|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 13|Main.Scripts.Factory.HealthComponentFactory, Assembly-CSharp
+      Data: 16|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
       Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
+    - Name: BlockBreaksConfig
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -205,13 +242,13 @@ MonoBehaviour:
       Data: 5
     - Name: $v
       Entry: 7
-      Data: 14|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 18|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
-      Data: 4
+      Data: 5
     - Name: ComponentFactories
       Entry: 7
-      Data: 15|Main.Scripts.Factory.IComponentFactory[], Assembly-CSharp
+      Data: 19|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -235,19 +272,19 @@ MonoBehaviour:
       Data: 6
     - Name: $v
       Entry: 7
-      Data: 16|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 20|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
-      Data: 5
+      Data: 6
     - Name: ComponentFactories
       Entry: 7
-      Data: 17|Main.Scripts.Factory.IComponentFactory[], Assembly-CSharp
+      Data: 21|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 18|Main.Scripts.Factory.ExplosionComponentFactory, Assembly-CSharp
+      Data: 22|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

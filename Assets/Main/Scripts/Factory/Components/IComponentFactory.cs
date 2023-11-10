@@ -1,7 +1,7 @@
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Logic.Blocks;
 
-namespace Main.Scripts.Factory
+namespace Main.Scripts.Factory.Components
 {
     public interface IComponentFactory
     {
