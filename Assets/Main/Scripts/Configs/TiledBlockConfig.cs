@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Main.Scripts.Factory;
+using Main.Scripts.Factory.Components;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
