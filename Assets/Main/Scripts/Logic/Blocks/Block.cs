@@ -8,9 +8,11 @@ namespace Main.Scripts.Logic.Blocks
     {
         public string ID;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public SpriteRenderer BreakSpriteRenderer => _breakSpriteRenderer;
         public BoxCollider2D Collider => _collider;
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private SpriteRenderer _breakSpriteRenderer;
         [SerializeField] private BoxCollider2D _collider;
        
         private IBlockFactory _blockFactory;
