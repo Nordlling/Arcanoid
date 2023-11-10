@@ -37,7 +37,7 @@ namespace Main.Scripts.Infrastructure.Services.SaveLoad
         await Task.Delay(_delay, cancelToken.Token);
         Save(playerScore);
       }
-      catch (TaskCanceledException e)
+      catch (TaskCanceledException)
       {
       }
     }

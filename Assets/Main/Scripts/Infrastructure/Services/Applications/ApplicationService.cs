@@ -45,5 +45,11 @@ namespace Main.Scripts.Infrastructure.Services.Applications
 #endif
             }
         }
+
+        private void Plug()
+        {
+            OnSaved?.Invoke();
+            OnPaused?.Invoke();
+        }
     }
 }
