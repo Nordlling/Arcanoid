@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Platforms
 {
-    public class PlatformMoving : MonoBehaviour
+    public class PlatformMovement : MonoBehaviour
     {
         [SerializeField] private float _movingSpeed;
         [SerializeField] private float _minDistanceToMove;
@@ -35,11 +35,6 @@ namespace Main.Scripts.Logic.Platforms
             _currentPosition = transform.position;
             _targetPosition.y = _currentPosition.y;
             _halfSize = _spriteRenderer.bounds.size / 2f;
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            Debug.Log(other.gameObject.name);
         }
 
         private void Update()
@@ -89,16 +84,16 @@ namespace Main.Scripts.Logic.Platforms
         private void MovePlatform()
         {
             float deltaSpeed = _currentSpeed * Time.deltaTime;
+            
             if (Math.Abs(_targetPosition.x - _currentPosition.x) < _minDistanceToMove)
             {
                 _currentPosition = _targetPosition;
-                transform.position = _currentPosition;
-                return;
+            } 
+            else
+            {
+                Vector2 direction = (_targetPosition - _currentPosition).normalized;
+                _currentPosition += direction * deltaSpeed;
             }
-            
-            Vector2 direction = (_targetPosition - _currentPosition).normalized;
-            
-            _currentPosition += direction * deltaSpeed;
             
             _currentPosition.x = Mathf.Clamp(_currentPosition.x, _zonesManager.ScreenRect.xMin + _halfSize.x , _zonesManager.ScreenRect.xMax - _halfSize.x);
             transform.position = _currentPosition;
