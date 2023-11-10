@@ -19,6 +19,7 @@ namespace Main.Scripts.Logic.Platforms
 
         private Vector2 _currentPosition;
         private Vector2 _targetPosition;
+        private Vector2 _halfSize;
         
         private bool _move;
         private bool _decelerate;
@@ -33,7 +34,7 @@ namespace Main.Scripts.Logic.Platforms
 
             _currentPosition = transform.position;
             _targetPosition.y = _currentPosition.y;
-            
+            _halfSize = _spriteRenderer.bounds.size / 2f;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -98,13 +99,8 @@ namespace Main.Scripts.Logic.Platforms
             Vector2 direction = (_targetPosition - _currentPosition).normalized;
             
             _currentPosition += direction * deltaSpeed;
-            if (!_zonesManager.IsInScreenZone(_currentPosition - (Vector2)_spriteRenderer.bounds.size / 2f) 
-                || !_zonesManager.IsInScreenZone(_currentPosition + (Vector2)_spriteRenderer.bounds.size / 2f))
-            {
-                _currentPosition = transform.position;
-                return;
-            }
             
+            _currentPosition.x = Mathf.Clamp(_currentPosition.x, _zonesManager.ScreenRect.xMin + _halfSize.x , _zonesManager.ScreenRect.xMax - _halfSize.x);
             transform.position = _currentPosition;
         }
         

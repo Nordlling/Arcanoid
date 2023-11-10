@@ -5,7 +5,9 @@ namespace Main.Scripts.Logic.GameGrid
 {
     public class ZonesManager : MonoBehaviour
     {
+        public Rect ScreenRect => _screenRect;
         public Rect GameGridRect => _gameGridRect;
+        public Rect LivingRect => _livingRect;
 
         [SerializeField] private Camera _camera;
         [SerializeField] private ZonesConfig _zonesConfig;
