@@ -6,6 +6,7 @@ namespace Main.Scripts.Logic.Blocks
 {
     public class Block : SpawnableItemMono
     {
+        public string ID;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public BoxCollider2D Collider => _collider;
 
@@ -14,8 +15,9 @@ namespace Main.Scripts.Logic.Blocks
        
         private IBlockFactory _blockFactory;
 
-        public void Construct(IBlockFactory blockFactory)
+        public void Construct(IBlockFactory blockFactory, string id)
         {
+            ID = id;
             _blockFactory = blockFactory;
         }
 

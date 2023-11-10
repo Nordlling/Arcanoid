@@ -1,22 +1,21 @@
 using System;
-using Main.Scripts.Pool;
+using System.Collections.Generic;
+using Main.Scripts.Factory;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Main.Scripts.Configs
 {
     [CreateAssetMenu(fileName = "TiledBlockConfig", menuName = "Configs/TiledBlock")]
-    public class TiledBlockConfig : ScriptableObject
+    public class TiledBlockConfig : SerializedScriptableObject
     {
-        public BlockInfo[] BlockInfos;
+        public Dictionary<string, BlockInfo> BlockInfos;
     }
 
     [Serializable]
     public class BlockInfo
     {
-        public int BlockID;
-        public int ClassID;
-        public SpawnableItemMono BlockPrefab;
         public Sprite Visual;
-        public int HealthCount;
+        [SerializeReference] public IComponentFactory[] ComponentFactories;
     }
 }
