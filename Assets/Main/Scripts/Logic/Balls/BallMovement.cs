@@ -37,15 +37,22 @@ namespace Main.Scripts.Logic.Balls
         private void OnCollisionEnter2D(Collision2D other)
         {
             Vector2 velocity = _rigidbody.velocity;
-            Vector2 normal = other.contacts[0].normal;
-            float angle = Vector2.Angle(velocity, normal);
-            float sign = Mathf.Sign(Vector3.Cross(velocity, normal).z);
+            TryAngleControl(velocity, Vector2.right);
+            TryAngleControl(velocity, Vector2.down);
+            TryAngleControl(velocity, Vector2.left);
+            TryAngleControl(velocity, Vector2.up);
+        }
 
-            if (!(angle < _minAngle))
+        private void TryAngleControl(Vector2 velocity, Vector2 normal)
+        {
+            float angle = Vector2.Angle(velocity, normal);
+            
+            if (angle >= _minAngle)
             {
                 return;
             }
-            
+
+            float sign = Mathf.Sign(Vector3.Cross(velocity, normal).z);
             float rotationAngle = angle - _minAngle;
             velocity = Quaternion.AngleAxis(sign * rotationAngle, Vector3.forward) * velocity;
             _rigidbody.velocity = velocity;
