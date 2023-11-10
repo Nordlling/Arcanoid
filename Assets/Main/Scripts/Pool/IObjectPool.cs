@@ -10,7 +10,7 @@ namespace Main.Scripts.Pool
         void Clear();
     }
 
-    public interface IObjectPool<out T> : IFactory<T>
+    public interface IObjectPool<out T>
     {
         T Spawn();
     }

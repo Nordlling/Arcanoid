@@ -5,7 +5,7 @@ namespace Main.Scripts.Pool
 {
     public class PoolProviderMono<T> where T : SpawnableItemMono
     {
-        public ObjectPoolMono<T> ObjectPool;
+        public readonly ObjectPoolMono<T> ObjectPool;
 
         public PoolProviderMono(PoolSetting<T> poolSetting)
         {

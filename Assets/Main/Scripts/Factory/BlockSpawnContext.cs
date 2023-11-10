@@ -4,7 +4,7 @@ namespace Main.Scripts.Factory
 {
     public class BlockSpawnContext
     {
-        public int BlockID;
+        public string BlockID;
         public Vector2 SpawnPosition;
         public Quaternion SpawnRotation;
     }
