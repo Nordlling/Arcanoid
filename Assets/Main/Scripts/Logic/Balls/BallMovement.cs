@@ -1,3 +1,4 @@
+using System;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,12 +9,13 @@ namespace Main.Scripts.Logic.Balls
     {
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _speed;
-        [SerializeField] private float _minAngle;
         
         [SerializeField] private float _leftAngle;
         [SerializeField] private float _rightAngle;
+        
         private ZonesManager _zonesManager;
-
+        private const float _epsilon = 0.01f;
+        
 
         public void Construct(ZonesManager zonesManager)
         {
@@ -34,37 +36,13 @@ namespace Main.Scripts.Logic.Balls
                 Destroy(gameObject);
             }
         }
-        
+
         private void CheckSpeed()
         {
             if (Math.Abs(_rigidbody.velocity.magnitude - _speed) > _epsilon)
             {
                 _rigidbody.velocity = _rigidbody.velocity.normalized * _speed;
             }
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            Vector2 velocity = _rigidbody.velocity;
-            TryAngleControl(velocity, Vector2.right);
-            TryAngleControl(velocity, Vector2.down);
-            TryAngleControl(velocity, Vector2.left);
-            TryAngleControl(velocity, Vector2.up);
-        }
-
-        private void TryAngleControl(Vector2 velocity, Vector2 normal)
-        {
-            float angle = Vector2.Angle(velocity, normal);
-            
-            if (angle >= _minAngle)
-            {
-                return;
-            }
-
-            float sign = Mathf.Sign(Vector3.Cross(velocity, normal).z);
-            float rotationAngle = angle - _minAngle;
-            velocity = Quaternion.AngleAxis(sign * rotationAngle, Vector3.forward) * velocity;
-            _rigidbody.velocity = velocity;
         }
 
         private Vector2 GenerateStartDirection()
