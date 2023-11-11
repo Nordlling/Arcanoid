@@ -18,20 +18,19 @@ namespace Main.Scripts.Logic.Platforms
         private Camera _camera;
 
 
+        private bool _started;
         private Vector2 _currentPosition;
         private Vector2 _targetPosition;
         private Vector2 _halfSize;
-        
+
         private bool _move;
         private bool _decelerate;
         private float _currentSpeed;
-        private bool _started;
 
         public void Construct(ZonesManager zonesManager, BallMovement ball, Camera viewCamera)
         {
             _zonesManager = zonesManager;
-            _ball = ball;
-            _ball.transform.position = _ballPoint.position;
+            InitBall(ball);
             _camera = viewCamera;
 
             _currentPosition = transform.position;
@@ -39,15 +38,23 @@ namespace Main.Scripts.Logic.Platforms
             _halfSize = _spriteRenderer.bounds.size / 2f;
         }
 
+        public void InitBall(BallMovement ball)
+        {
+            _ball = ball;
+            _ball.transform.position = _ballPoint.position;
+            _started = false;
+        }
+
         private void Update()
         {
             if (Input.GetMouseButtonUp(0))
             {
-                if (!_started)
+                if (!_started && _ball != null)
                 {
                     _ball.transform.parent = null;
                     _ball.StartMove();
                     _started = true;
+                    _ball = null;
                 }
                 _decelerate = true;
             }

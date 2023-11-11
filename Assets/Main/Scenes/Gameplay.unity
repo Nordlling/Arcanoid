@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93606fa286de4a4db6d288eef8a01328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballPrefab: {fileID: 0}
+  _healthConfig: {fileID: 11400000, guid: 1f75a685be6d4844db1a5fddeeee3316, type: 2}
   _camera: {fileID: 519420031}
   _platform: {fileID: 313111202}
 --- !u!1 &175025939
