@@ -38,9 +38,9 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                     }
                     
                     Vector2 spawnPosition = _firstBlockPosition + _blockWithSpacingSize * new Vector2(x, -y);
-                    BlockSpawnContext blockSpawnContext = new BlockSpawnContext { BlockID = levelMapInfo.LevelMap[x, y].ToString(), SpawnPosition = spawnPosition};
+                    SpawnContext spawnContext = new SpawnContext { ID = levelMapInfo.LevelMap[x, y].ToString(), Position = spawnPosition};
                     
-                    var block = _blockFactory.Spawn(blockSpawnContext);
+                    var block = _blockFactory.Spawn(spawnContext);
                     
                     if (block != null)
                     {

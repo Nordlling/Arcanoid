@@ -12,15 +12,7 @@ namespace Main.Scripts.Logic.Balls
         
         [SerializeField] private float _leftAngle;
         [SerializeField] private float _rightAngle;
-        
-        private ZonesManager _zonesManager;
         private const float _epsilon = 0.01f;
-        
-
-        public void Construct(ZonesManager zonesManager)
-        {
-            _zonesManager = zonesManager;
-        }
 
         public void StartMove()
         {
@@ -31,10 +23,6 @@ namespace Main.Scripts.Logic.Balls
         private void Update()
         {
             CheckSpeed();
-            if (!_zonesManager.IsInLivingZone(transform.position))
-            {
-                Destroy(gameObject);
-            }
         }
 
         private void CheckSpeed()

@@ -8,7 +8,7 @@ namespace Main.Scripts.Factory.Components
     {
         public int HealthCount;
 
-        public void AddComponent(ServiceContainer serviceContainer, Block block, BlockSpawnContext spawnContext)
+        public void AddComponent(ServiceContainer serviceContainer, Block block, SpawnContext spawnContext)
         {
             Health health = block.AddComponent<Health>();
             health.Construct(HealthCount);

@@ -11,6 +11,7 @@ namespace Main.Scripts.Logic.Blocks
 
         public void Construct(SpriteRenderer breakSpriteRenderer, Sprite[] breakSprites)
         {
+            _breakSpriteIndex = 0;
             _breakSprites = breakSprites;
             _breakSpriteRenderer = breakSpriteRenderer;
         }
