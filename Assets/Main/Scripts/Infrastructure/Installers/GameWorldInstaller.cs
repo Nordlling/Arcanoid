@@ -1,3 +1,4 @@
+using Main.Scripts.Configs;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
@@ -14,6 +15,7 @@ namespace Main.Scripts.Infrastructure.Installers
     public class GameWorldInstaller : MonoInstaller
     {
         [Header("Configs")] 
+        [SerializeField] private HealthConfig _healthConfig;
         
         [Header("Prefabs")] 
         
@@ -26,6 +28,7 @@ namespace Main.Scripts.Infrastructure.Installers
         {
             RegisterTimeProvider(serviceContainer);
             RegisterGameplayStateMachine(serviceContainer);
+            RegisterHealthService(serviceContainer);
 
             RegisterBallCollisionService(serviceContainer);
 
@@ -53,11 +56,24 @@ namespace Main.Scripts.Infrastructure.Installers
             serviceContainer.SetService<IGameplayStateMachine, GameplayStateMachine>(gameplayStateMachine);
         }
 
-        private static void RegisterBallCollisionService(ServiceContainer serviceContainer)
+        private void RegisterHealthService(ServiceContainer serviceContainer)
+        {
+            HealthService healthService = new HealthService(
+                serviceContainer.Get<IBallFactory>(),
+                serviceContainer.Get<IGameplayStateMachine>(),
+                _platform,
+                _healthConfig);
+
+            serviceContainer.SetService<IHealthService, HealthService>(healthService);
+        }
+        
+
+        private void RegisterBallCollisionService(ServiceContainer serviceContainer)
         {
             BallCollisionService ballCollisionService = new BallCollisionService();
             serviceContainer.SetService<IBallCollisionService, BallCollisionService>(ballCollisionService);
         }
+        
 
         private void InitPlatform(ServiceContainer serviceContainer)
         {

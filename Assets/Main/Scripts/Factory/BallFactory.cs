@@ -24,7 +24,7 @@ namespace Main.Scripts.Factory
             ball.Construct(this, spawnContext.ID);
             ball.CollisionDetector.Construct(_serviceContainer.Get<IBallCollisionService>());
             ball.Collider.radius = ball.SpriteRenderer.bounds.extents.x;
-            ball.BoundsChecker.Construct(_serviceContainer.Get<ZonesManager>());
+            ball.BoundsChecker.Construct(_serviceContainer.Get<ZonesManager>(), _serviceContainer.Get<IHealthService>());
             ball.Subscribe(ball.BoundsChecker);
             ball.transform.parent = spawnContext.Parent;
             

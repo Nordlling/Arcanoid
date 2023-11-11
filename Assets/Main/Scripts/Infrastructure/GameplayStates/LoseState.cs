@@ -27,12 +27,12 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 loseable.Lose();
             }
-            _buttonContainerService.DisableAllButtons();
+            // _buttonContainerService.DisableAllButtons();
         }
 
         public void Exit()
         {
-            _buttonContainerService.EnableAllButtons();
+            // _buttonContainerService.EnableAllButtons();
         }
 
         public GameplayStateMachine StateMachine { get; set; }
