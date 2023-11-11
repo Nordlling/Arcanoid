@@ -15,18 +15,27 @@ namespace Main.Scripts.Infrastructure.Installers
         
         [Header("Scene Objects")]
         [SerializeField] private PoolProvider _blockPoolProvider;
+        [SerializeField] private PoolProvider _ballPoolProvider;
 
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             RegisterBlockFactory(serviceContainer);
+            RegisterBallFactory(serviceContainer);
         }
 
         private void RegisterBlockFactory(ServiceContainer serviceContainer)
         {
             _blockPoolProvider.Init();
-            BasicFactory basicFactory = new BasicFactory(serviceContainer, _tiledBlockConfig, _blockPoolProvider);
-            serviceContainer.SetService<IBlockFactory, BasicFactory>(basicFactory);
+            BlockFactory blockFactory = new BlockFactory(serviceContainer, _tiledBlockConfig, _blockPoolProvider);
+            serviceContainer.SetService<IBlockFactory, BlockFactory>(blockFactory);
+        }
+        
+        private void RegisterBallFactory(ServiceContainer serviceContainer)
+        {
+            _ballPoolProvider.Init();
+            BallFactory ballFactory = new BallFactory(serviceContainer, _ballPoolProvider);
+            serviceContainer.SetService<IBallFactory, BallFactory>(ballFactory);
         }
     }
 }

@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Main.Scripts.Factory
 {
-    public class BasicFactory : IBlockFactory
+    public class BlockFactory : IBlockFactory
     {
         private readonly ServiceContainer _serviceContainer;
         private readonly TiledBlockConfig _tiledBlockConfig;
@@ -17,30 +17,30 @@ namespace Main.Scripts.Factory
 
         private Component[] _basicComponents;
 
-        public BasicFactory(ServiceContainer serviceContainer, TiledBlockConfig tiledBlockConfig, PoolProvider poolProvider)
+        public BlockFactory(ServiceContainer serviceContainer, TiledBlockConfig tiledBlockConfig, PoolProvider poolProvider)
         {
             _serviceContainer = serviceContainer;
             _tiledBlockConfig = tiledBlockConfig;
             _poolProvider = poolProvider;
         }
 
-        public Block Spawn(BlockSpawnContext spawnContext)
+        public Block Spawn(SpawnContext spawnContext)
         {
-            if (!_tiledBlockConfig.BlockInfos.ContainsKey(spawnContext.BlockID))
+            if (!_tiledBlockConfig.BlockInfos.ContainsKey(spawnContext.ID))
             {
                 return null;
             }
             
-            Block block = (Block)_poolProvider.PoolViewBlock.Spawn();
+            Block block = (Block)_poolProvider.PoolItemView.Spawn();
             
             _basicComponents ??= block.GetComponents<Component>();
             
-            block.Construct(this, spawnContext.BlockID);
-            block.transform.position = spawnContext.SpawnPosition;
-            block.SpriteRenderer.sprite = _tiledBlockConfig.BlockInfos[spawnContext.BlockID].Visual;
+            block.Construct(this, spawnContext.ID);
+            block.transform.position = spawnContext.Position;
+            block.SpriteRenderer.sprite = _tiledBlockConfig.BlockInfos[spawnContext.ID].Visual;
             block.Collider.size = block.SpriteRenderer.bounds.size;
             
-            IComponentFactory[] componentFactories = _tiledBlockConfig.BlockInfos[spawnContext.BlockID].ComponentFactories;
+            IComponentFactory[] componentFactories = _tiledBlockConfig.BlockInfos[spawnContext.ID].ComponentFactories;
             
             foreach (IComponentFactory componentFactory in componentFactories)
             {
@@ -61,7 +61,7 @@ namespace Main.Scripts.Factory
                 Object.Destroy(component);
             }
             
-            _poolProvider.PoolViewBlock.Despawn(block);
+            _poolProvider.PoolItemView.Despawn(block);
         }
     }
 }

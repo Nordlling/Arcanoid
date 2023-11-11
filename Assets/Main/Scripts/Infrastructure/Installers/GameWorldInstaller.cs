@@ -1,3 +1,4 @@
+using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
@@ -15,7 +16,6 @@ namespace Main.Scripts.Infrastructure.Installers
         [Header("Configs")] 
         
         [Header("Prefabs")] 
-        [SerializeField] private BallMovement _ballPrefab;
         
         [Header("Scene Objects")]
         [SerializeField] private Camera _camera;
@@ -39,12 +39,6 @@ namespace Main.Scripts.Infrastructure.Installers
             serviceContainer.SetService<ITimeProvider, SlowedTimeProvider>(slowedTimeProvider);
         }
 
-        private static void RegisterBallCollisionService(ServiceContainer serviceContainer)
-        {
-            BallCollisionService ballCollisionService = new BallCollisionService();
-            serviceContainer.SetService<IBallCollisionService, BallCollisionService>(ballCollisionService);
-        }
-
         private void RegisterGameplayStateMachine(ServiceContainer serviceContainer)
         {
             GameplayStateMachine gameplayStateMachine = new GameplayStateMachine();
@@ -59,12 +53,18 @@ namespace Main.Scripts.Infrastructure.Installers
             serviceContainer.SetService<IGameplayStateMachine, GameplayStateMachine>(gameplayStateMachine);
         }
 
+        private static void RegisterBallCollisionService(ServiceContainer serviceContainer)
+        {
+            BallCollisionService ballCollisionService = new BallCollisionService();
+            serviceContainer.SetService<IBallCollisionService, BallCollisionService>(ballCollisionService);
+        }
+
         private void InitPlatform(ServiceContainer serviceContainer)
         {
-            BallMovement ball = Instantiate(_ballPrefab, _platform.transform);
-            ball.GetComponent<CollisionDetector>().Construct(serviceContainer.Get<IBallCollisionService>());
-            ball.Construct(serviceContainer.Get<ZonesManager>());
-            _platform.Construct(serviceContainer.Get<ZonesManager>(), ball, _camera);
+            SpawnContext spawnContext = new SpawnContext { Parent = _platform.transform };
+            Ball ball = serviceContainer.Get<IBallFactory>().Spawn(spawnContext);
+            _platform.Construct(serviceContainer.Get<ZonesManager>(), ball.BallMovement, _camera);
+            serviceContainer.SetServiceSelf(_platform);
         }
     }
 }

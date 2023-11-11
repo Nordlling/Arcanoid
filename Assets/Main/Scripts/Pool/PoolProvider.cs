@@ -6,13 +6,13 @@ namespace Main.Scripts.Pool
     {
         [SerializeField] private PoolSetting<SpawnableItemMono> _poolSetting;
 
-        public ObjectPoolMono<SpawnableItemMono> PoolViewBlock { get; private set; }
+        public ObjectPoolMono<SpawnableItemMono> PoolItemView { get; private set; }
         public PoolProviderMono<SpawnableItemMono> PoolProviderMono { get; private set; }
 
         public void Init()
         {
             PoolProviderMono = new PoolProviderMono<SpawnableItemMono>(_poolSetting);
-            PoolViewBlock = PoolProviderMono.ObjectPool;
+            PoolItemView = PoolProviderMono.ObjectPool;
         }
     }
 }

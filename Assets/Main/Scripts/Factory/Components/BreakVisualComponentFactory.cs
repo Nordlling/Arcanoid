@@ -9,7 +9,7 @@ namespace Main.Scripts.Factory.Components
     {
         public BlockBreaksConfig BlockBreaksConfig;
         
-        public void AddComponent(ServiceContainer serviceContainer, Block block, BlockSpawnContext spawnContext)
+        public void AddComponent(ServiceContainer serviceContainer, Block block, SpawnContext spawnContext)
         {
             BreaksVisual breaksVisual = block.AddComponent<BreaksVisual>();
             breaksVisual.Construct(block.BreakSpriteRenderer, BlockBreaksConfig.BreakSprites);

@@ -6,7 +6,7 @@ namespace Main.Scripts.Factory.Components
 {
     public class ExplosionComponentFactory : IComponentFactory
     {
-        public void AddComponent(ServiceContainer serviceContainer, Block block, BlockSpawnContext spawnContext)
+        public void AddComponent(ServiceContainer serviceContainer, Block block, SpawnContext spawnContext)
         {
             Explosion explosion = block.AddComponent<Explosion>();
         }

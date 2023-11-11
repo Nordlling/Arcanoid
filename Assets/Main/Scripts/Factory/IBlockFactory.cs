@@ -4,7 +4,7 @@ namespace Main.Scripts.Factory
 {
     public interface IBlockFactory
     {
-        Block Spawn(BlockSpawnContext spawnContext);
+        Block Spawn(SpawnContext spawnContext);
         void Despawn(Block gameObject);
     }
 }

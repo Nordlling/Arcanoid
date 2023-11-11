@@ -5,6 +5,6 @@ namespace Main.Scripts.Factory.Components
 {
     public interface IComponentFactory
     {
-        void AddComponent(ServiceContainer serviceContainer, Block block, BlockSpawnContext spawnContext);
+        void AddComponent(ServiceContainer serviceContainer, Block block, SpawnContext spawnContext);
     }
 }
