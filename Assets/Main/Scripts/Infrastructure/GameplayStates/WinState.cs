@@ -4,44 +4,44 @@ using Main.Scripts.UI.Views;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
-    public class GameOverState : IGameplayState
+    public class WinState : IGameplayState
     {
-        private readonly List<IGameOverable> _gameOverables = new();
+        private readonly List<IWinable> _winables = new();
         private readonly IWindowsManager _windowsManager;
 
-        public GameOverState(IWindowsManager windowsManager)
+        public WinState(IWindowsManager windowsManager)
         {
             _windowsManager = windowsManager;
         }
         
         public void AddStatable(IGameplayStatable gameplayStatable)
         {
-            if (gameplayStatable is IGameOverable overable)
+            if (gameplayStatable is IWinable winable)
             {
-                _gameOverables.Add(overable); 
+                _winables.Add(winable); 
             }
         }
 
         public void Enter()
         {
-            foreach (IGameOverable gameOverable in _gameOverables)
+            foreach (IWinable winable in _winables)
             {
-                gameOverable.GameOver();
+                winable.Win();
             }
 
-            _windowsManager.GetWindow<GameOverUIView>().Open();
+            _windowsManager.GetWindow<WinUIView>().Open();
         }
 
         public void Exit()
         {
-            _windowsManager.GetWindow<GameOverUIView>().Close();
+            _windowsManager.GetWindow<WinUIView>().Close();
         }
 
         public GameplayStateMachine StateMachine { get; set; }
     }
 
-    public interface IGameOverable : IGameplayStatable
+    public interface IWinable : IGameplayStatable
     {
-        void GameOver();
+        void Win();
     }
 }

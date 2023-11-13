@@ -1,4 +1,5 @@
 using System;
+using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.GameGrid;
@@ -6,8 +7,10 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Platforms
 {
-    public class PlatformMovement : MonoBehaviour
+    public class PlatformMovement : MonoBehaviour, ILoseable, IWinable, IPrePlayable
     {
+        public event Action OnStarted;
+        
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private float _movingSpeed;
         [SerializeField] private float _minDistanceToMove;
@@ -19,20 +22,19 @@ namespace Main.Scripts.Logic.Platforms
         private Camera _camera;
         private ITimeProvider _timeProvider;
 
-
         private bool _started;
         private Vector2 _currentPosition;
         private Vector2 _targetPosition;
         private Vector2 _halfSize;
 
+        private bool _stop;
         private bool _move;
         private bool _decelerate;
         private float _currentSpeed;
 
-        public void Construct(ZonesManager zonesManager, BallMovement ball, Camera viewCamera, ITimeProvider timeProvider)
+        public void Construct(ZonesManager zonesManager, Camera viewCamera, ITimeProvider timeProvider)
         {
             _zonesManager = zonesManager;
-            InitBall(ball);
             _camera = viewCamera;
             _timeProvider = timeProvider;
 
@@ -48,9 +50,26 @@ namespace Main.Scripts.Logic.Platforms
             _started = false;
         }
 
+        public void Lose()
+        {
+            _stop = true;
+            _started = false;
+        }
+
+        public void Win()
+        {
+            _stop = true;
+            _started = false;
+        }
+
+        public void PrePlay()
+        {
+            _stop = false;
+        }
+
         private void Update()
         {
-            if (_timeProvider.Stopped)
+            if (_stop || _timeProvider.Stopped)
             {
                 return;
             }
@@ -95,6 +114,7 @@ namespace Main.Scripts.Logic.Platforms
         {
             if (!_started && _ball != null)
             {
+                OnStarted?.Invoke();
                 _ball.transform.parent = null;
                 _ball.StartMove();
                 _started = true;

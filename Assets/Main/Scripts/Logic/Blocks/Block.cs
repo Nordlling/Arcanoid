@@ -1,4 +1,5 @@
 using Main.Scripts.Factory;
+using Main.Scripts.Infrastructure.Services.LevelMap;
 using Main.Scripts.Pool;
 using UnityEngine;
 
@@ -16,11 +17,13 @@ namespace Main.Scripts.Logic.Blocks
         [SerializeField] private BoxCollider2D _collider;
        
         private IBlockFactory _blockFactory;
+        private IGameGridService _gameGridService;
 
-        public void Construct(IBlockFactory blockFactory, string id)
+        public void Construct(IBlockFactory blockFactory, IGameGridService gameGridService, string id)
         {
-            ID = id;
             _blockFactory = blockFactory;
+            _gameGridService = gameGridService;
+            ID = id;
         }
 
         public void Subscribe(IDieable dieable)
@@ -30,6 +33,7 @@ namespace Main.Scripts.Logic.Blocks
 
         private void Die()
         {
+            _gameGridService.RemoveBlockFromGrid(this);
             _blockFactory.Despawn(this);
         }
     }

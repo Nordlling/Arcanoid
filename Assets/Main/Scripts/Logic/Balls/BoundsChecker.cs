@@ -23,8 +23,8 @@ namespace Main.Scripts.Logic.Balls
         {
             if (!_zonesManager.IsInLivingZone(transform.position))
             {
-                _healthService.DecreaseHealth();
                 OnDied?.Invoke();
+                _healthService.DecreaseHealth();
             }
         }
     }

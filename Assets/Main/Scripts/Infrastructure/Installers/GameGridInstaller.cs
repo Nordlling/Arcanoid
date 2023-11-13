@@ -1,5 +1,6 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
+using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.LevelMap;
 using Main.Scripts.LevelMap;
@@ -25,6 +26,7 @@ namespace Main.Scripts.Infrastructure.Installers
         {
             RegisterZonesManager(serviceContainer);
             RegisterGameGridService(serviceContainer);
+            InitGameGridService(serviceContainer);
         }
 
         private void RegisterZonesManager(ServiceContainer serviceContainer)
@@ -42,8 +44,25 @@ namespace Main.Scripts.Infrastructure.Installers
 
             GameGridLoader gameGridLoader = new GameGridLoader();
             GameGridParser gameGridParser = new GameGridParser();
-            GameGridService gameGridService = new GameGridService(gameGridLoader, gameGridParser, blockPlacer, _assetPathConfig, _gameGridConfig);
-            serviceContainer.SetService<ILevelMapService, GameGridService>(gameGridService);
+            GameGridService gameGridService = new GameGridService
+                (
+                    serviceContainer.Get<IBlockFactory>(), 
+                    gameGridLoader,
+                    gameGridParser, 
+                    blockPlacer, 
+                    serviceContainer.Get<IGameplayStateMachine>(), 
+                    _assetPathConfig
+                );
+            
+            serviceContainer.SetService<IGameGridService, GameGridService>(gameGridService);
+            
+            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(gameGridService);
+        }
+
+        private void InitGameGridService(ServiceContainer serviceContainer)
+        {
+            serviceContainer.Get<IGameGridService>().CurrentLevelInfo = _gameGridConfig.DefaultLevel;
+            serviceContainer.Get<IGameGridService>().CreateLevelMap();
         }
     }
 }

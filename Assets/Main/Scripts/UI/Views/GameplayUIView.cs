@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI
+namespace Main.Scripts.UI.Views
 {
     public class GameplayUIView : MonoBehaviour, ILoseable, IGameOverable, IPlayable
     {

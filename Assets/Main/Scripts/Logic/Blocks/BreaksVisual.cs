@@ -14,6 +14,7 @@ namespace Main.Scripts.Logic.Blocks
             _breakSpriteIndex = 0;
             _breakSprites = breakSprites;
             _breakSpriteRenderer = breakSpriteRenderer;
+            _breakSpriteRenderer.sprite = null;
         }
 
         public void AddBreak()

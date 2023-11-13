@@ -8,7 +8,6 @@ using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.Bounds;
 using Main.Scripts.Logic.GameGrid;
 using Main.Scripts.Logic.Platforms;
-using Main.Scripts.UI;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers
@@ -28,28 +27,13 @@ namespace Main.Scripts.Infrastructure.Installers
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            RegisterGameplayStateMachine(serviceContainer);
             RegisterTimeProvider(serviceContainer);
             RegisterHealthService(serviceContainer);
-
             RegisterBallCollisionService(serviceContainer);
-
-            InitPlatform(serviceContainer);
-            InitBounder();
-        }
-
-        private void RegisterGameplayStateMachine(ServiceContainer serviceContainer)
-        {
-            GameplayStateMachine gameplayStateMachine = new GameplayStateMachine();
-
-            gameplayStateMachine.AddState(new PrepareState(serviceContainer.Get<IWindowsManager>()));
-            gameplayStateMachine.AddState(new PlayState());
-            gameplayStateMachine.AddState(new PauseState(serviceContainer.Get<IWindowsManager>()));
-            gameplayStateMachine.AddState(new LoseState());
-            gameplayStateMachine.AddState(new GameOverState(serviceContainer.Get<IWindowsManager>()));
-            gameplayStateMachine.AddState(new RestartState());
+            RegisterPlatform(serviceContainer);
+            RegisterBallManager(serviceContainer);
             
-            serviceContainer.SetService<IGameplayStateMachine, GameplayStateMachine>(gameplayStateMachine);
+            InitBounder();
         }
 
         private void RegisterTimeProvider(ServiceContainer serviceContainer)
@@ -63,31 +47,39 @@ namespace Main.Scripts.Infrastructure.Installers
 
         private void RegisterHealthService(ServiceContainer serviceContainer)
         {
-            HealthService healthService = new HealthService(
-                serviceContainer.Get<IBallFactory>(),
-                serviceContainer.Get<IGameplayStateMachine>(),
-                _platform,
-                _healthConfig);
+            HealthService healthService = new HealthService(serviceContainer.Get<IGameplayStateMachine>(), _healthConfig);
 
             serviceContainer.SetService<IHealthService, HealthService>(healthService);
+            
+            SetGameplayStates(serviceContainer, healthService);
         }
         
-
         private void RegisterBallCollisionService(ServiceContainer serviceContainer)
         {
             BallCollisionService ballCollisionService = new BallCollisionService();
             serviceContainer.SetService<IBallCollisionService, BallCollisionService>(ballCollisionService);
         }
-        
 
-        private void InitPlatform(ServiceContainer serviceContainer)
+        private void RegisterPlatform(ServiceContainer serviceContainer)
         {
-            SpawnContext spawnContext = new SpawnContext { Parent = _platform.transform };
-            Ball ball = serviceContainer.Get<IBallFactory>().Spawn(spawnContext);
-            _platform.Construct(serviceContainer.Get<ZonesManager>(), ball.BallMovement, _camera, serviceContainer.Get<ITimeProvider>());
+            _platform.Construct(serviceContainer.Get<ZonesManager>(), _camera, serviceContainer.Get<ITimeProvider>());
             serviceContainer.SetServiceSelf(_platform);
+            
+            SetGameplayStates(serviceContainer, _platform);
+            
         }
-        
+
+        private void RegisterBallManager(ServiceContainer serviceContainer)
+        {
+            BallManager ballManager = new BallManager(
+                serviceContainer.Get<PlatformMovement>(),
+                serviceContainer.Get<IBallFactory>(),
+                serviceContainer.Get<IGameplayStateMachine>());
+            serviceContainer.SetService<IBallManager, BallManager>(ballManager);
+            
+            SetGameplayStates(serviceContainer, ballManager);
+        }
+
         private void InitBounder()
         {
             _bounder.Init();

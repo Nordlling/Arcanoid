@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7f688d36f3446285c6ba1a6e61ae43, type: 3}
   m_Name: AssetPathConfig
   m_EditorClassIdentifier: 
-  LevelPacksPath: Packs
+  LevelPacksPath: Packs/{0}/Levels/{1}
