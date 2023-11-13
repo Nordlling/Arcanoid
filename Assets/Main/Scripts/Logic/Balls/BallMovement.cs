@@ -1,4 +1,3 @@
-using System;
 using Main.Scripts.Infrastructure.Provides;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,9 +13,9 @@ namespace Main.Scripts.Logic.Balls
         [SerializeField] private float _rightAngle;
         
         private ITimeProvider _timeProvider;
-        private const float _epsilon = 0.01f;
 
         private Vector2 _direction;
+        public bool Stop { get; set; }
 
         public void Construct(ITimeProvider timeProvider)
         {
@@ -38,6 +37,10 @@ namespace Main.Scripts.Logic.Balls
             }
 
             float scaledSpeed = _speed * _timeProvider.TimeScale;
+            if (Stop)
+            {
+                scaledSpeed = 0f;
+            }
             _rigidbody.velocity = _direction * scaledSpeed;
         }
 

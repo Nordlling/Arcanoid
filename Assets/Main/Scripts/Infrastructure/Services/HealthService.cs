@@ -1,9 +1,6 @@
 using System;
 using Main.Scripts.Configs;
-using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
-using Main.Scripts.Logic.Balls;
-using Main.Scripts.Logic.Platforms;
 
 namespace Main.Scripts.Infrastructure.Services
 {
@@ -13,20 +10,14 @@ namespace Main.Scripts.Infrastructure.Services
         public event Action OnIncreased;
         public event Action OnReset;
         
-        private readonly IBallFactory _ballFactory;
         private readonly IGameplayStateMachine _gameplayStateMachine;
-        private readonly PlatformMovement _platformMovement;
         private readonly HealthConfig _healthConfig;
 
-        public HealthService(
-            IBallFactory ballFactory, 
-            IGameplayStateMachine gameplayStateMachine, 
-            PlatformMovement platformMovement,
+        public HealthService( 
+            IGameplayStateMachine gameplayStateMachine,
             HealthConfig healthConfig)
         {
-            _ballFactory = ballFactory;
             _gameplayStateMachine = gameplayStateMachine;
-            _platformMovement = platformMovement;
             _healthConfig = healthConfig;
             
             InitHealth(healthConfig);
@@ -50,9 +41,7 @@ namespace Main.Scripts.Infrastructure.Services
                 return;
             }
             
-            SpawnContext spawnContext = new SpawnContext { Parent = _platformMovement.transform };
-            Ball ball = _ballFactory.Spawn(spawnContext);
-            _platformMovement.InitBall(ball.BallMovement);
+            _gameplayStateMachine.Enter<PrePlayState>();
         }
 
         public void IncreaseHealth()

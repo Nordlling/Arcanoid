@@ -22,10 +22,12 @@ namespace Main.Scripts.Logic.Balls
         [SerializeField] private BallMovement _ballMovement;
        
         private IBallFactory _ballFactory;
+        private IBallManager _ballManager;
 
-        public void Construct(IBallFactory ballFactory, string id)
+        public void Construct(IBallFactory ballFactory, IBallManager ballManager, string id)
         {
             _ballFactory = ballFactory;
+            _ballManager = ballManager;
             ID = id;
         }
 
@@ -36,7 +38,7 @@ namespace Main.Scripts.Logic.Balls
 
         private void Die()
         {
-            _ballFactory.Despawn(this);
+            _ballManager.RemoveBall(this);
         }
     }
 }
