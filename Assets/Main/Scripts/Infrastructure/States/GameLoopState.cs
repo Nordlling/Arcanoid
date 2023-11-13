@@ -16,7 +16,7 @@ namespace Main.Scripts.Infrastructure.States
 
         public void Enter()
         {
-            _serviceContainer.Get<IGameplayStateMachine>().Enter<PlayState>();
+            _serviceContainer.Get<IGameplayStateMachine>()?.Enter<PlayState>();
         }
 
         public void Exit()

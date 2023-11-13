@@ -1,11 +1,18 @@
 using System.Collections.Generic;
+using Main.Scripts.UI;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class GameOverState : IGameplayState
     {
-        private List<IGameOverable> _gameOverables = new();
+        private readonly List<IGameOverable> _gameOverables = new();
+        private readonly IWindowsManager _windowsManager;
 
+        public GameOverState(IWindowsManager windowsManager)
+        {
+            _windowsManager = windowsManager;
+        }
+        
         public void AddStatable(IGameplayStatable gameplayStatable)
         {
             if (gameplayStatable is IGameOverable overable)
@@ -20,10 +27,13 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 gameOverable.GameOver();
             }
+
+            _windowsManager.GetWindow<GameOverUIView>().Open();
         }
 
         public void Exit()
         {
+            _windowsManager.GetWindow<GameOverUIView>().Close();
         }
 
         public GameplayStateMachine StateMachine { get; set; }

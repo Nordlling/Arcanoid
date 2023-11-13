@@ -3,7 +3,7 @@ using Main.Scripts.LevelMap;
 
 namespace Main.Scripts.Infrastructure.Services.LevelMap
 {
-    public class GameGridService : ILevelMapService
+    public class GameGridService : IGameGridService
     {
         private readonly ILevelMapLoader _levelMapLoader;
         private readonly ILevelMapParser _levelMapParser;

@@ -15,6 +15,7 @@ namespace Main.Scripts.Infrastructure.Services.Applications
         public void Construct(ApplicationConfig applicationConfig)
         {
             _applicationConfig = applicationConfig;
+            Init();
         }
 
         private void OnEnable()
@@ -27,11 +28,10 @@ namespace Main.Scripts.Infrastructure.Services.Applications
             Application.focusChanged -= FocusChanged;
         }
 
-        private void Start()
+        private void Init()
         {
             Application.targetFrameRate = _applicationConfig.TargetFPS;
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
-            
             DOTween.SetTweensCapacity(500, 300);
         }
 

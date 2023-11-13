@@ -4,7 +4,7 @@ namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class RestartState : IGameplayState
     {
-        private List<IRestartable> _restartables = new();
+        private readonly List<IRestartable> _restartables = new();
         
         public void AddStatable(IGameplayStatable gameplayStatable)
         {
