@@ -1,22 +1,25 @@
 using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Main.Scripts.UI.Views
 {
-    public class GameOverUIView : UIView
+    public class WinUIView : UIView
     {
-        [SerializeField] private Button _restartButton;
+        [SerializeField] private Button _nextButton;
+        [SerializeField] private TextMeshProUGUI _packProgressValue;
+        [SerializeField] private Image _mapImage;
         
         private void OnEnable()
         {
-            _restartButton.onClick.AddListener(RestartGame);
+            _nextButton.onClick.AddListener(RestartGame);
         }
 
         private void OnDisable()
         {
-            _restartButton.onClick.RemoveListener(RestartGame);
+            _nextButton.onClick.RemoveListener(RestartGame);
         }
 
         private async void RestartGame()

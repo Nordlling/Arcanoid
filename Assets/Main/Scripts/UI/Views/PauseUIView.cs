@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.States;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI
+namespace Main.Scripts.UI.Views
 {
     public class PauseUIView : UIView
     {
@@ -32,15 +33,17 @@ namespace Main.Scripts.UI
             _gameStateMachine.Enter<LoadSceneState, string>(_menuSceneName);
         }
 
-        private void RestartGame()
+        private async void RestartGame()
         {
             _gameplayStateMachine.Enter<RestartState>();
             Close();
+            await Task.Yield();
+            _gameplayStateMachine.Enter<PrePlayState>();
         }
 
         private void ContinueGame()
         {
-            _gameplayStateMachine.Enter<PlayState>();
+            _gameplayStateMachine.EnterPreviousState();
             Close();
         }
     }
