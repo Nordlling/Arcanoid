@@ -2,6 +2,7 @@ using System;
 using Main.Scripts.Configs;
 using Main.Scripts.Factory.Components;
 using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.Infrastructure.Services.LevelMap;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Pool;
 using UnityEngine;
@@ -35,7 +36,7 @@ namespace Main.Scripts.Factory
             
             _basicComponents ??= block.GetComponents<Component>();
             
-            block.Construct(this, spawnContext.ID);
+            block.Construct(this, _serviceContainer.Get<IGameGridService>(), spawnContext.ID);
             block.transform.position = spawnContext.Position;
             block.SpriteRenderer.sprite = _tiledBlockConfig.BlockInfos[spawnContext.ID].Visual;
             block.Collider.size = block.SpriteRenderer.bounds.size;

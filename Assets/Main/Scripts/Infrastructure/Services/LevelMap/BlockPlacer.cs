@@ -24,8 +24,10 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
             _gameGridConfig = gameGridConfig;
         }
 
-        public void SpawnGrid(LevelMapInfo levelMapInfo)
+        public BlockPlaceInfo[,] SpawnGrid(LevelMapInfo levelMapInfo)
         {
+            BlockPlaceInfo[,] blocks = new BlockPlaceInfo[levelMapInfo.Width, levelMapInfo.Height];
+            
             CalculateBlockSize(levelMapInfo.Width);
             
             for (int y = 0; y < levelMapInfo.Height; y++)
@@ -34,6 +36,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                 {
                     if (levelMapInfo.LevelMap[x, y] == 0)
                     {
+                        blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], null);
                         continue;
                     }
                     
@@ -47,8 +50,12 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                         block.transform.localScale = new Vector3(_blockScale.x, _blockScale.y, 1f);
                     }
 
+                    blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], block);
+
                 } 
             }
+
+            return blocks;
         }
 
         private void CalculateBlockSize(int gridWidth)
