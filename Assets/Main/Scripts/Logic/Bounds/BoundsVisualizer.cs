@@ -4,14 +4,14 @@ namespace Main.Scripts.Logic.Bounds
 {
     public class BoundsVisualizer : MonoBehaviour
     {
-        [SerializeField] private Bounder _spawner;
+        [SerializeField] private Bounder _bounder;
         [SerializeField] private Camera _camera;
         
         private Resolution _currentResolution;
 
         private void OnDrawGizmos()
         {
-            foreach (BoundInfo spawnInfo in _spawner.Bounders)
+            foreach (BoundInfo spawnInfo in _bounder.BoundInfos)
             {
                 SetPosition(spawnInfo);
                 DrawSpawnField(spawnInfo);
@@ -40,9 +40,10 @@ namespace Main.Scripts.Logic.Bounds
 
         private void UpdatePosition()
         {
-            foreach (BoundInfo spawnInfo in _spawner.Bounders)
+            foreach (BoundInfo spawnInfo in _bounder.BoundInfos)
             {
                 SetPosition(spawnInfo);
+                _bounder.RelocateBounders();
             }
         }
 

@@ -1,20 +1,30 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Bounds
 {
     public class Bounder : MonoBehaviour
     {
-        public BoundInfo[] Bounders => _bounders;
-        [SerializeField] private BoundInfo[] _bounders;
+        public BoundInfo[] BoundInfos => boundInfos;
+        [SerializeField] private BoundInfo[] boundInfos;
         [SerializeField] private GameObject _boundAreaPrefab;
+
+        private readonly List<GameObject> _bounders = new();
         
         public void Init()
         {
-            foreach (BoundInfo boundInfo in _bounders)
+            for (int i = 0; i < boundInfos.Length; i++)
             {
-                GameObject bounder = Instantiate(_boundAreaPrefab, transform);
-                bounder.transform.position = boundInfo.CenterPoint;
-                bounder.transform.localScale = boundInfo.Size;
+                _bounders.Add(Instantiate(_boundAreaPrefab, transform));
+            }
+        }
+
+        public void RelocateBounders()
+        {
+            for (int i = 0; i < _bounders.Count; i++)
+            {
+                _bounders[i].transform.position = boundInfos[i].CenterPoint;
+                _bounders[i].transform.localScale = boundInfos[i].Size;
             }
         }
     }
