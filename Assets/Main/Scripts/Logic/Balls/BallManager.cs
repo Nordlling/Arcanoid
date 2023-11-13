@@ -6,7 +6,7 @@ using Main.Scripts.Logic.Platforms;
 
 namespace Main.Scripts.Logic.Balls
 {
-    public class BallManager : IBallManager, IPrePlayable, ILoseable, IWinable, IPlayable
+    public class BallManager : IBallManager, IPrePlayable, ILoseable, IWinable, IRestartable
     {
         private readonly PlatformMovement _platformMovement;
         private readonly IBallFactory _ballFactory;
@@ -58,23 +58,20 @@ namespace Main.Scripts.Logic.Balls
 
         public void Win()
         {
-            foreach (Ball ball in _balls)
-            {
-                ball.BallMovement.Stop = true;
-            }
+            ClearAllBalls();
         }
 
-        public void Play()
+        public void Restart()
+        {
+            ClearAllBalls();
+        }
+
+        private void ClearAllBalls()
         {
             foreach (Ball ball in _balls)
             {
-                ball.BallMovement.Stop = false;
+                _ballFactory.Despawn(ball);
             }
         }
-    }
-
-    public interface IBallManager
-    {
-        void RemoveBall(Ball ball);
     }
 }

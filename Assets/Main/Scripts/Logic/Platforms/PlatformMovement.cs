@@ -69,7 +69,8 @@ namespace Main.Scripts.Logic.Platforms
 
         private void Update()
         {
-            if (_stop || _timeProvider.Stopped)
+            Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+            if (_stop || _timeProvider.Stopped || !_zonesManager.IsInGameGridZone(mousePosition))
             {
                 return;
             }
@@ -89,7 +90,6 @@ namespace Main.Scripts.Logic.Platforms
             
             if (Input.GetMouseButton(0))
             {
-                Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
                 _targetPosition.x = mousePosition.x;
             }
 

@@ -836,6 +836,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bounder
       objectReference: {fileID: 0}
+    - target: {fileID: 887182889826869740, guid: 908a32881c4c0e0468be3156e9e3aa04, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 887182889826869742, guid: 908a32881c4c0e0468be3156e9e3aa04, type: 3}
+      propertyPath: _bounders.Array.data[0].CenterX
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 887182889826869742, guid: 908a32881c4c0e0468be3156e9e3aa04, type: 3}
+      propertyPath: _bounders.Array.data[0].CenterPoint.x
+      value: -0.16866764
+      objectReference: {fileID: 0}
     - target: {fileID: 887182889826869743, guid: 908a32881c4c0e0468be3156e9e3aa04, type: 3}
       propertyPath: _camera
       value: 
@@ -1177,6 +1189,10 @@ PrefabInstance:
     - target: {fileID: 3030120695832226121, guid: fd53a0fe2059ff842961e55cc747dda8, type: 3}
       propertyPath: m_Name
       value: ZonesManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3030120695832226121, guid: fd53a0fe2059ff842961e55cc747dda8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3030120695832226122, guid: fd53a0fe2059ff842961e55cc747dda8, type: 3}
       propertyPath: m_RootOrder

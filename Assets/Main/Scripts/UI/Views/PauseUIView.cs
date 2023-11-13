@@ -41,10 +41,11 @@ namespace Main.Scripts.UI.Views
             _gameplayStateMachine.Enter<PrePlayState>();
         }
 
-        private void ContinueGame()
+        private async void ContinueGame()
         {
-            _gameplayStateMachine.EnterPreviousState();
             Close();
+            await Task.Yield();
+            _gameplayStateMachine.EnterPreviousState();
         }
     }
 }

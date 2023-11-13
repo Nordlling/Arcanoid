@@ -26,6 +26,11 @@ namespace Main.Scripts.Logic.GameGrid
         {
             return _screenRect.Contains(position);
         }
+        
+        public bool IsInGameGridZone(Vector2 position)
+        {
+            return _gameGridRect.Contains(position);
+        }
 
         public void Init()
         {
