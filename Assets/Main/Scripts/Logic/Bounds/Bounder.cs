@@ -8,9 +8,8 @@ namespace Main.Scripts.Logic.Bounds
         public BoundInfo[] Bounders => _bounders;
         [SerializeField] private BoundInfo[] _bounders;
         [SerializeField] private GameObject _boundAreaPrefab;
-
-
-        private void Start()
+        
+        public void Init()
         {
             foreach (BoundInfo boundInfo in _bounders)
             {
