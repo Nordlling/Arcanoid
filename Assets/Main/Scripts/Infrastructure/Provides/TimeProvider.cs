@@ -1,8 +1,9 @@
+using Main.Scripts.Infrastructure.GameplayStates;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Provides
 {
-    public class SlowedTimeProvider : ITimeProvider
+    public class TimeProvider : ITimeProvider, IPauseable
     {
         private float _timeScale = 1f;
         private float _cachedTimeScale = 1f;
@@ -10,15 +11,8 @@ namespace Main.Scripts.Infrastructure.Provides
         
         public bool Stopped => _timeScale == 0f;
         
-        public float GetDeltaTime()
-        {
-            return Time.deltaTime * _timeScale;
-        }
-
-        public float GetTimeScale()
-        {
-            return Time.timeScale * _timeScale;
-        }
+        public float DeltaTime => Time.deltaTime * _timeScale;
+        public float TimeScale => Time.timeScale * _timeScale;
 
         public void StopTime()
         {
@@ -42,6 +36,16 @@ namespace Main.Scripts.Infrastructure.Provides
         {
             _timeScale = 1f;
             _cachedTimeScale = _timeScale;
+        }
+
+        public void Pause()
+        {
+            StopTime();
+        }
+
+        public void UnPause()
+        {
+            TurnBackTime();
         }
     }
 }

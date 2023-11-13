@@ -1,4 +1,5 @@
 using System;
+using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Main.Scripts.Logic.Platforms
         private ZonesManager _zonesManager;
         private BallMovement _ball;
         private Camera _camera;
+        private ITimeProvider _timeProvider;
 
 
         private bool _started;
@@ -27,11 +29,12 @@ namespace Main.Scripts.Logic.Platforms
         private bool _decelerate;
         private float _currentSpeed;
 
-        public void Construct(ZonesManager zonesManager, BallMovement ball, Camera viewCamera)
+        public void Construct(ZonesManager zonesManager, BallMovement ball, Camera viewCamera, ITimeProvider timeProvider)
         {
             _zonesManager = zonesManager;
             InitBall(ball);
             _camera = viewCamera;
+            _timeProvider = timeProvider;
 
             _currentPosition = transform.position;
             _targetPosition.y = _currentPosition.y;
@@ -47,15 +50,14 @@ namespace Main.Scripts.Logic.Platforms
 
         private void Update()
         {
+            if (_timeProvider.Stopped)
+            {
+                return;
+            }
+            
             if (Input.GetMouseButtonUp(0))
             {
-                if (!_started && _ball != null)
-                {
-                    _ball.transform.parent = null;
-                    _ball.StartMove();
-                    _started = true;
-                    _ball = null;
-                }
+                CheckBallToStartMove();
                 _decelerate = true;
             }
             
@@ -88,11 +90,22 @@ namespace Main.Scripts.Logic.Platforms
             
             MovePlatform();
         }
-        
-        
+
+        private void CheckBallToStartMove()
+        {
+            if (!_started && _ball != null)
+            {
+                _ball.transform.parent = null;
+                _ball.StartMove();
+                _started = true;
+                _ball = null;
+            }
+        }
+
+
         private void MovePlatform()
         {
-            float deltaSpeed = _currentSpeed * Time.deltaTime;
+            float deltaSpeed = _currentSpeed * _timeProvider.DeltaTime;
             
             if (Math.Abs(_targetPosition.x - _currentPosition.x) < _minDistanceToMove)
             {

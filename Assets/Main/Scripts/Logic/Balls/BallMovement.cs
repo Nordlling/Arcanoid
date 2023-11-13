@@ -1,5 +1,5 @@
 using System;
-using Main.Scripts.Logic.GameGrid;
+using Main.Scripts.Infrastructure.Provides;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,7 +12,17 @@ namespace Main.Scripts.Logic.Balls
         
         [SerializeField] private float _leftAngle;
         [SerializeField] private float _rightAngle;
+        
+        private ITimeProvider _timeProvider;
         private const float _epsilon = 0.01f;
+
+        private Vector2 _direction;
+
+        public void Construct(ITimeProvider timeProvider)
+        {
+            _timeProvider = timeProvider;
+            _direction = Vector2.zero;
+        }
 
         public void StartMove()
         {
@@ -22,16 +32,15 @@ namespace Main.Scripts.Logic.Balls
 
         private void Update()
         {
-            CheckSpeed();
+            if (_rigidbody.velocity.magnitude != 0f)
+            {
+                _direction = _rigidbody.velocity.normalized;
+            }
+
+            float scaledSpeed = _speed * _timeProvider.TimeScale;
+            _rigidbody.velocity = _direction * scaledSpeed;
         }
 
-        private void CheckSpeed()
-        {
-            if (Math.Abs(_rigidbody.velocity.magnitude - _speed) > _epsilon)
-            {
-                _rigidbody.velocity = _rigidbody.velocity.normalized * _speed;
-            }
-        }
 
         private Vector2 GenerateStartDirection()
         {

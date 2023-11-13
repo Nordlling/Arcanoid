@@ -1,17 +1,16 @@
 using System.Collections.Generic;
-using Main.Scripts.Infrastructure.Provides;
+using Main.Scripts.UI;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class PauseState : IGameplayState
     {
-        private readonly ITimeProvider _timeProvider;
+        private readonly IWindowsManager _windowsManager;
         private List<IPauseable> _pauseables = new();
 
-
-        public PauseState(ITimeProvider timeProvider)
+        public PauseState(IWindowsManager windowsManager)
         {
-            _timeProvider = timeProvider;
+            _windowsManager = windowsManager;
         }
         
         public void AddStatable(IGameplayStatable gameplayStatable)
@@ -28,13 +27,18 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 pauseable.Pause();
             }
-
-            _timeProvider.StopTime();;
+            _windowsManager.GetWindow<PauseUIView>().Open();
+            // _windowsManager.EnableRaycast();
         }
 
         public void Exit()
         {
-            _timeProvider.TurnBackTime();
+            foreach (IPauseable pauseable in _pauseables)
+            {
+                pauseable.UnPause();
+            }
+            _windowsManager.GetWindow<PauseUIView>().Close();
+            // _windowsManager.DisableRaycast();
         }
 
         public GameplayStateMachine StateMachine { get; set; }
@@ -43,5 +47,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
     public interface IPauseable : IGameplayStatable
     {
         void Pause();
+        void UnPause();
     }
 }

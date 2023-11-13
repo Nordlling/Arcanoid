@@ -1,17 +1,10 @@
 using System.Collections.Generic;
-using Main.Scripts.Infrastructure.Services.ButtonContainer;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class LoseState : IGameplayState
     {
-        private readonly IButtonContainerService _buttonContainerService;
-        private List<ILoseable> _loseables = new();
-
-        public LoseState(IButtonContainerService buttonContainerService)
-        {
-            _buttonContainerService = buttonContainerService;
-        }
+        private readonly List<ILoseable> _loseables = new();
 
         public void AddStatable(IGameplayStatable gameplayStatable)
         {
@@ -27,12 +20,11 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 loseable.Lose();
             }
-            // _buttonContainerService.DisableAllButtons();
+            StateMachine.Enter<GameOverState>();
         }
 
         public void Exit()
         {
-            // _buttonContainerService.EnableAllButtons();
         }
 
         public GameplayStateMachine StateMachine { get; set; }

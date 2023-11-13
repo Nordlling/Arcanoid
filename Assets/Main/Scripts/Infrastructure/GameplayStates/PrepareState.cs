@@ -1,16 +1,16 @@
 using System.Collections.Generic;
-using Main.Scripts.Infrastructure.Services.ButtonContainer;
+using Main.Scripts.UI;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class PrepareState : IGameplayState
     {
-        private readonly IButtonContainerService _buttonContainerService;
-        private List<IPreparable> _preparables = new();
+        private readonly IWindowsManager _windowsManager;
+        private readonly List<IPreparable> _preparables = new();
 
-        public PrepareState(IButtonContainerService buttonContainerService)
+        public PrepareState(IWindowsManager windowsManager)
         {
-            _buttonContainerService = buttonContainerService;
+            _windowsManager = windowsManager;
         }
 
         public void AddStatable(IGameplayStatable gameplayStatable)
@@ -27,12 +27,10 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 restartable.Prepare();
             }
-            _buttonContainerService.DisableAllButtons();
         }
 
         public void Exit()
         {
-            _buttonContainerService.EnableAllButtons();
         }
 
         public GameplayStateMachine StateMachine { get; set; }

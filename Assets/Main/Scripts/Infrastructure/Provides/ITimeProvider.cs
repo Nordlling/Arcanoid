@@ -4,8 +4,8 @@ namespace Main.Scripts.Infrastructure.Provides
     {
         bool Stopped { get; }
         
-        float GetDeltaTime();
-        float GetTimeScale();
+        float DeltaTime { get; }
+        float TimeScale { get; }
         
         void StopTime();
         void SlowTime(float timeScale);

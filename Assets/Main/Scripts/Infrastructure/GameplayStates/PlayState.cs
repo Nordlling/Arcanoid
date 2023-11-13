@@ -4,7 +4,7 @@ namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class PlayState : IGameplayState
     {
-        private List<IPlayable> _playables = new();
+        private readonly List<IPlayable> _playables = new();
         
         public GameplayStateMachine StateMachine { get; set; }
         
