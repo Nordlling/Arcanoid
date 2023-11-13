@@ -7,5 +7,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
         void AddState(IGameplayState state);
         void AddGameplayStatable(IGameplayStatable gameplayStatable);
         void Enter<TState>() where TState : class, IGameplayState;
+        void EnterPreviousState();
     }
 }

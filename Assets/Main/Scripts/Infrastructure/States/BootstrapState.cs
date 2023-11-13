@@ -30,7 +30,6 @@ namespace Main.Scripts.Infrastructure.States
         {
             _serviceContainer.SetService<IGameStateMachine, GameStateMachine>(StateMachine);
             _serviceContainer.Get<IWindowsManager>().SetServiceContainer(_serviceContainer);
-            
         }
 
         public void Exit()

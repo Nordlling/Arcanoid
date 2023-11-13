@@ -28,7 +28,6 @@ namespace Main.Scripts.Infrastructure.Installers
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            RegisterGameplayStateMachine(serviceContainer);
             RegisterTimeProvider(serviceContainer);
             RegisterHealthService(serviceContainer);
 
@@ -36,20 +35,6 @@ namespace Main.Scripts.Infrastructure.Installers
 
             InitPlatform(serviceContainer);
             InitBounder();
-        }
-
-        private void RegisterGameplayStateMachine(ServiceContainer serviceContainer)
-        {
-            GameplayStateMachine gameplayStateMachine = new GameplayStateMachine();
-
-            gameplayStateMachine.AddState(new PrepareState(serviceContainer.Get<IWindowsManager>()));
-            gameplayStateMachine.AddState(new PlayState());
-            gameplayStateMachine.AddState(new PauseState(serviceContainer.Get<IWindowsManager>()));
-            gameplayStateMachine.AddState(new LoseState());
-            gameplayStateMachine.AddState(new GameOverState(serviceContainer.Get<IWindowsManager>()));
-            gameplayStateMachine.AddState(new RestartState());
-            
-            serviceContainer.SetService<IGameplayStateMachine, GameplayStateMachine>(gameplayStateMachine);
         }
 
         private void RegisterTimeProvider(ServiceContainer serviceContainer)

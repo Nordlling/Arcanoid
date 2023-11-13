@@ -7,6 +7,7 @@ namespace Main.Scripts.Infrastructure.GameplayStates
     {
         
         private IGameplayState _activeState;
+        private IGameplayState _previousState;
         private Dictionary<Type, IGameplayState> _states = new();
 
         public void AddState(IGameplayState state)
@@ -23,6 +24,13 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             }
         }
 
+        public void EnterPreviousState()
+        {
+            _activeState?.Exit();
+            (_activeState, _previousState) = (_previousState, _activeState);
+            _activeState.Enter();
+        }
+        
         public void Enter<TState>() where TState : class, IGameplayState
         {
             IGameplayState state = ChangeState<TState>();
@@ -34,6 +42,7 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             _activeState?.Exit();
       
             TState state = GetState<TState>();
+            _previousState = _activeState;
             _activeState = state;
       
             return state;

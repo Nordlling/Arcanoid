@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Main.Scripts.UI;
+using Main.Scripts.UI.Views;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
