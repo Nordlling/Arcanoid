@@ -18,4 +18,4 @@ MonoBehaviour:
     Id: 0
     TextAsset: {fileID: 4900000, guid: 139c1ad9b4b1abd45b8da0781f9cc587, type: 3}
   SaveFolder: {fileID: 102900000, guid: 9cf45a8bb141343479d7e85f3398671f, type: 3}
-  defaultLanguage: 30
+  defaultLanguage: 10

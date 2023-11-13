@@ -87,8 +87,9 @@ GameObject:
   - component: {fileID: 5395153269885725170}
   - component: {fileID: 3413011094132956450}
   - component: {fileID: 5160589441507549250}
+  - component: {fileID: 4057963419536094323}
   m_Layer: 5
-  m_Name: LoseText
+  m_Name: MenuText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,6 +212,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4057963419536094323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072169906452092557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2420e7c05ae4699a6ee5a8b1b8ce23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _localizationKey: MENU
 --- !u!1 &7251559973157315183
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +388,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackButton
       objectReference: {fileID: 0}
+    - target: {fileID: 2102154211686426129, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
+      propertyPath: _localizationKey
+      value: LEAVE
+      objectReference: {fileID: 0}
     - target: {fileID: 3565611470590451424, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
       propertyPath: m_text
       value: "\u0412\u042B\u0419\u0422\u0418"
@@ -503,6 +521,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RestartButton
       objectReference: {fileID: 0}
+    - target: {fileID: 2102154211686426129, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
+      propertyPath: _localizationKey
+      value: RESTART
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
 --- !u!114 &4005302560705856096 stripped
@@ -615,6 +637,10 @@ PrefabInstance:
     - target: {fileID: 2020716007030624783, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
       propertyPath: m_Name
       value: ContinueButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102154211686426129, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
+      propertyPath: _localizationKey
+      value: CONTINUE
       objectReference: {fileID: 0}
     - target: {fileID: 3565611470590451424, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
       propertyPath: m_text
