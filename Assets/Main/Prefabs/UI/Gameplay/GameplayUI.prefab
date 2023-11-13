@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 1818364271979553932}
   - component: {fileID: 1818364271979553933}
   - component: {fileID: 1818364271979553934}
+  - component: {fileID: 8790793446018296414}
   m_Layer: 5
   m_Name: GameplayUI
   m_TagString: Untagged
@@ -192,7 +193,24 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
+--- !u!114 &8790793446018296414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818364271979553935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2cc132bd7de40fd92c1173dd08420ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pauseButton: {fileID: 2785244830423882087}
+  _graphicRaycaster: {fileID: 1818364271979553934}
+  _pauseKey: PausePopUp
+  _loseKey: LosePopUp
+  _windowsConfig: {fileID: 11400000, guid: 83f7a399c4f01124ea96c805a38e272e, type: 2}
 --- !u!1001 &4069514197089801373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295,3 +313,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2397587575619447742, guid: a69c0a18e5238ca4ca05a949443b1c6f, type: 3}
   m_PrefabInstance: {fileID: 4069514197089801373}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2785244830423882087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2224493387717463546, guid: a69c0a18e5238ca4ca05a949443b1c6f, type: 3}
+  m_PrefabInstance: {fileID: 4069514197089801373}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,3 +1,4 @@
+using Main.Scripts.UI;
 using UnityEngine.SceneManagement;
 using ServiceContainer = Main.Scripts.Infrastructure.Services.ServiceContainer;
 
@@ -28,7 +29,7 @@ namespace Main.Scripts.Infrastructure.States
         private void RegisterServices()
         {
             _serviceContainer.SetService<IGameStateMachine, GameStateMachine>(StateMachine);
-            // _serviceContainer.SetService<IButtonContainerService, ButtonContainerService>(new ButtonContainerService());
+            _serviceContainer.Get<IWindowsManager>().SetServiceContainer(_serviceContainer);
             
         }
 
