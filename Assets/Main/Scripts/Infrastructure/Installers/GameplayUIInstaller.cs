@@ -18,11 +18,7 @@ namespace Main.Scripts.Infrastructure.Installers
 
         private void RegisterGameplayUI(ServiceContainer serviceContainer)
         {
-            _gameplayUIView.Construct
-            (
-                serviceContainer.Get<IWindowsManager>(), 
-                serviceContainer.Get<IGameplayStateMachine>()
-            );
+            _gameplayUIView.Construct(serviceContainer.Get<IGameplayStateMachine>());
             
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(_gameplayUIView);
         }
