@@ -1,7 +1,6 @@
 using System;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
-using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
@@ -9,20 +8,18 @@ namespace Main.Scripts.Logic.Platforms
 {
     public class PlatformMovement : MonoBehaviour, ILoseable, IWinable, IPrePlayable
     {
-        public event Action OnStarted;
+        public Transform BallPoint => _ballPoint;
+        [SerializeField]  private Transform _ballPoint;
         
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private float _movingSpeed;
         [SerializeField] private float _minDistanceToMove;
         [SerializeField] private float _decelerationSpeed;
-        [SerializeField] private Transform _ballPoint;
 
         private ZonesManager _zonesManager;
-        private BallMovement _ball;
         private Camera _camera;
         private ITimeProvider _timeProvider;
 
-        private bool _started;
         private Vector2 _currentPosition;
         private Vector2 _targetPosition;
         private Vector2 _halfSize;
@@ -43,23 +40,14 @@ namespace Main.Scripts.Logic.Platforms
             _halfSize = _spriteRenderer.bounds.size / 2f;
         }
 
-        public void InitBall(BallMovement ball)
-        {
-            _ball = ball;
-            _ball.transform.position = _ballPoint.position;
-            _started = false;
-        }
-
         public void Lose()
         {
             _stop = true;
-            _started = false;
         }
 
         public void Win()
         {
             _stop = true;
-            _started = false;
         }
 
         public void PrePlay()
@@ -70,6 +58,7 @@ namespace Main.Scripts.Logic.Platforms
         private void Update()
         {
             Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+            
             if (_stop || _timeProvider.Stopped || !_zonesManager.IsInInputZone(mousePosition))
             {
                 return;
@@ -77,7 +66,6 @@ namespace Main.Scripts.Logic.Platforms
             
             if (Input.GetMouseButtonUp(0))
             {
-                CheckBallToStartMove();
                 _decelerate = true;
             }
             
@@ -100,28 +88,20 @@ namespace Main.Scripts.Logic.Platforms
             
             if (_decelerate)
             {
-                _currentSpeed -= _decelerationSpeed;
-                if (_currentSpeed <= 0f)
-                {
-                    _move = false;
-                }
+                DecelerateSpeed();
             }
             
             MovePlatform();
         }
 
-        private void CheckBallToStartMove()
+        private void DecelerateSpeed()
         {
-            if (!_started && _ball != null)
+            _currentSpeed -= _decelerationSpeed;
+            if (_currentSpeed <= 0f)
             {
-                OnStarted?.Invoke();
-                _ball.transform.parent = null;
-                _ball.StartMove();
-                _started = true;
-                _ball = null;
+                _move = false;
             }
         }
-
 
         private void MovePlatform()
         {
@@ -140,6 +120,5 @@ namespace Main.Scripts.Logic.Platforms
             _currentPosition.x = Mathf.Clamp(_currentPosition.x, _zonesManager.ScreenRect.xMin + _halfSize.x , _zonesManager.ScreenRect.xMax - _halfSize.x);
             transform.position = _currentPosition;
         }
-        
     }
 }

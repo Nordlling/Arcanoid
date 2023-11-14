@@ -8,5 +8,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
         void AddGameplayStatable(IGameplayStatable gameplayStatable);
         void Enter<TState>() where TState : class, IGameplayState;
         void EnterPreviousState();
+        bool IsSameState<TState>() where TState : class, IGameplayState;
     }
 }
