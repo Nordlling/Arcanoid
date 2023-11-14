@@ -14,7 +14,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
         private readonly ILevelMapLoader _levelMapLoader;
         private readonly ILevelMapParser _levelMapParser;
         private readonly BlockPlacer _blockPlacer;
-        private IGameplayStateMachine _gameplayStateMachine;
+        private readonly IGameplayStateMachine _gameplayStateMachine;
         private readonly AssetPathConfig _assetPathConfig;
         
         private LevelMapInfo _levelMapInfo;
@@ -53,29 +53,12 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
 
         public void RemoveBlockFromGrid(Block block)
         {
-            bool anyBlock = false;
-            for (int x = 0; x < _levelMapInfo.Width; x++)
-            {
-                for (int y = 0; y < _levelMapInfo.Height; y++)
-                {
-                    if (_currentLevel[x, y].Block == block)
-                    {
-                        _currentLevel[x, y].Block = null;
-                        _currentLevel[x, y].ID = 0;
-                        continue;
-                    }
+            BlockPlaceInfo blockPlaceInfo = _currentLevel[block.GridPosition.x, block.GridPosition.y];
+            blockPlaceInfo.Block = null;
+            blockPlaceInfo.ID = 0;
+            blockPlaceInfo.CheckToWin = false;
 
-                    if (!anyBlock && _currentLevel[x, y].ID != 0)
-                    {
-                        anyBlock = true;
-                    }
-                } 
-            }
-
-            if (!anyBlock)
-            {
-                _gameplayStateMachine.Enter<WinState>();
-            }
+            CheckGridToWin();
         }
 
         public void ResetCurrentLevel()
@@ -83,7 +66,37 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
             _currentLevel = _blockPlacer.SpawnGrid(_levelMapInfo);
         }
 
+        private void CheckGridToWin()
+        {
+            if (FindBlocksToWin())
+            {
+                _gameplayStateMachine.Enter<WinState>();
+            }
+        }
+
+        private bool FindBlocksToWin()
+        {
+            for (int x = 0; x < _levelMapInfo.Width; x++)
+            {
+                for (int y = 0; y < _levelMapInfo.Height; y++)
+                {
+                    if (_currentLevel[x, y].CheckToWin)
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
+        }
+
         public void Restart()
+        {
+            DespawnBlocks();
+            _currentLevel = _blockPlacer.SpawnGrid(_levelMapInfo);
+        }
+
+        private void DespawnBlocks()
         {
             for (int x = 0; x < _levelMapInfo.Width; x++)
             {
@@ -95,20 +108,6 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                     }
                 }
             }
-            
-            _currentLevel = _blockPlacer.SpawnGrid(_levelMapInfo);
-        }
-    }
-
-    public class BlockPlaceInfo
-    {
-        public int ID;
-        public Block Block;
-        
-        public BlockPlaceInfo(int id, Block block)
-        {
-            ID = id;
-            Block = block;
         }
         
     }

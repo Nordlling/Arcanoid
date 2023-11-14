@@ -7,7 +7,9 @@ namespace Main.Scripts.Logic.Blocks
 {
     public class Block : SpawnableItemMono
     {
-        public string ID;
+        public string ID { get; private set; }
+        public Vector2Int GridPosition { get; set; }
+        
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public SpriteRenderer BreakSpriteRenderer => _breakSpriteRenderer;
         public BoxCollider2D Collider => _collider;
