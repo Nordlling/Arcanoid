@@ -7,13 +7,11 @@ namespace Main.Scripts.Infrastructure.Services
     public class ServiceContainer
     {
         private readonly ServiceContainer _parent;
-        public static ServiceContainer Instance;
         private readonly Dictionary<Type, IServiceContainer> _containers = new();
 
         public ServiceContainer(ServiceContainer parent = null)
         {
             _parent = parent;
-            Instance ??= this;
         }
 
         public void SetServiceSelf<TService>(TService value)

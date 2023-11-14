@@ -1,7 +1,7 @@
+using Main.Scripts.Infrastructure;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Main.Scripts.Infrastructure.Services;
 
 namespace Main.Scripts.Localization
 {
@@ -17,7 +17,7 @@ namespace Main.Scripts.Localization
 
         public void OnEnable()
         {
-            _localizationManager = ServiceContainer.Instance.Get<ILocalizationManager>();
+            _localizationManager = ProjectContext.Instance.ServiceContainer.Get<ILocalizationManager>();
             Localize();
             _localizationManager.LocalizationChanged += Localize;
         }

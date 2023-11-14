@@ -10,7 +10,7 @@ namespace Main.Scripts.Infrastructure
     {
         [SerializeField] private List<MonoInstaller> _installers = new();
         
-        private ServiceContainer _serviceContainer;
+        public ServiceContainer ServiceContainer { get; private set; }
         private static ProjectContext _instance;
 
 
@@ -33,16 +33,16 @@ namespace Main.Scripts.Infrastructure
 
         private void Init()
         {
-            _serviceContainer = new ServiceContainer();
+            ServiceContainer = new ServiceContainer();
             foreach (var installer in _installers)
             {
-                installer.InstallBindings(_serviceContainer);
+                installer.InstallBindings(ServiceContainer);
             }
         }
 
         public ServiceContainer GetServices()
         {
-            return _serviceContainer;
+            return ServiceContainer;
         }
     }
 }
