@@ -8,6 +8,7 @@ namespace Main.Scripts.Logic.GameGrid
         public Rect ScreenRect => _screenRect;
         public Rect GameGridRect => _gameGridRect;
         public Rect LivingRect => _livingRect;
+        public Rect InputRect => _inputRect;
 
         [SerializeField] private Camera _camera;
         [SerializeField] private ZonesConfig _zonesConfig;
@@ -15,8 +16,10 @@ namespace Main.Scripts.Logic.GameGrid
         private Rect _screenRect;
         private Rect _gameGridRect;
         private Rect _livingRect;
-        private Resolution _currentResolution;
+        private Rect _inputRect;
         
+        private Resolution _currentResolution;
+
         public bool IsInLivingZone(Vector2 position)
         {
             return _livingRect.Contains(position);
@@ -30,6 +33,11 @@ namespace Main.Scripts.Logic.GameGrid
         public bool IsInGameGridZone(Vector2 position)
         {
             return _gameGridRect.Contains(position);
+        }
+        
+        public bool IsInInputZone(Vector2 position)
+        {
+            return _inputRect.Contains(position);
         }
 
         public void Init()
@@ -60,17 +68,17 @@ namespace Main.Scripts.Logic.GameGrid
         private void OnDrawGizmos()
         {
             UpdateAllZones();
-            Gizmos.color = _zonesConfig.GridZoneColor;
-            Gizmos.DrawWireCube(_gameGridRect.center, _gameGridRect.size);
-            Gizmos.color = _zonesConfig.LivingZoneColor;
-            Gizmos.DrawWireCube(_livingRect.center, _livingRect.size);
+            DrawRect(_gameGridRect, _zonesConfig.GridZone.Color);
+            DrawRect(_livingRect, _zonesConfig.LivingZone.Color);
+            DrawRect(_inputRect, _zonesConfig.InputZone.Color);
         }
 
         private void UpdateAllZones()
         {
             CalculateScreenRect();
-            CalculateGameGridRect();
-            CalculateLivingRect();
+            CalculateRect(out _gameGridRect, _zonesConfig.GridZone);
+            CalculateRect(out _livingRect, _zonesConfig.LivingZone);
+            CalculateRect(out _inputRect, _zonesConfig.InputZone);
         }
 
         private void CalculateScreenRect()
@@ -79,20 +87,6 @@ namespace Main.Scripts.Logic.GameGrid
             _screenRect.width = screenZoneSize.x;
             _screenRect.height = screenZoneSize.y;
             _screenRect.center = Vector2.zero;
-        }
-
-        private void CalculateGameGridRect()
-        {
-            _gameGridRect.min = _screenRect.min + _screenRect.size * new Vector2(_zonesConfig.SideOffset, 0f);
-            _gameGridRect.max = _screenRect.max - _screenRect.size * new Vector2(_zonesConfig.SideOffset, _zonesConfig.UpperOffset);
-        }
-        
-        private void CalculateLivingRect()
-        {
-            Vector2 livingZoneSize = _screenRect.size + (_screenRect.size * _zonesConfig.LiveOffset);
-            _livingRect.width = livingZoneSize.x;
-            _livingRect.height = livingZoneSize.y;
-            _livingRect.center = Vector2.zero;
         }
 
         private Vector2 CalculateScreenSizeInWorldUnits()
@@ -104,6 +98,19 @@ namespace Main.Scripts.Logic.GameGrid
             float screenHeightInWorldUnits = 2f * _camera.orthographicSize;
             float screenWidthInWorldUnits = screenHeightInWorldUnits * _camera.aspect;
             return new Vector2(screenWidthInWorldUnits, screenHeightInWorldUnits);
+        }
+
+        private void CalculateRect(out Rect rect, ZoneSettings zoneSettings)
+        {
+            rect = default;
+            rect.min = _screenRect.min + _screenRect.size * new Vector2(zoneSettings.LeftOffset, zoneSettings.BottomOffset);
+            rect.max = _screenRect.max - _screenRect.size * new Vector2(zoneSettings.RightOffset, zoneSettings.UpperOffset);
+        }
+
+        private void DrawRect(Rect rect, Color color)
+        {
+            Gizmos.color = color;
+            Gizmos.DrawWireCube(rect.center, rect.size);
         }
         
     }
