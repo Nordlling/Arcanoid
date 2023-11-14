@@ -1,6 +1,7 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
 using Main.Scripts.LevelMap;
+using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
@@ -34,9 +35,10 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
             {
                 for (int x = 0; x < levelMapInfo.Width; x++)
                 {
+                    bool checkToWin = false;
                     if (levelMapInfo.LevelMap[x, y] == 0)
                     {
-                        blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], null);
+                        blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], null, checkToWin);
                         continue;
                     }
                     
@@ -48,9 +50,11 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                     if (block != null)
                     {
                         block.transform.localScale = new Vector3(_blockScale.x, _blockScale.y, 1f);
+                        block.GridPosition = new Vector2Int(x, y);
+                        checkToWin = block.TryGetComponent(out Health _);
                     }
 
-                    blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], block);
+                    blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], block, checkToWin);
 
                 } 
             }
