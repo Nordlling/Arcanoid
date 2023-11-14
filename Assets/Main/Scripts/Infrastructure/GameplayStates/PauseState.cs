@@ -1,18 +1,10 @@
 using System.Collections.Generic;
-using Main.Scripts.UI;
-using Main.Scripts.UI.Views;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class PauseState : IGameplayState
     {
-        private readonly IWindowsManager _windowsManager;
         private List<IPauseable> _pauseables = new();
-
-        public PauseState(IWindowsManager windowsManager)
-        {
-            _windowsManager = windowsManager;
-        }
         
         public void AddStatable(IGameplayStatable gameplayStatable)
         {
@@ -28,8 +20,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 pauseable.Pause();
             }
-            _windowsManager.GetWindow<PauseUIView>().Open();
-            // _windowsManager.EnableRaycast();
         }
 
         public void Exit()
@@ -38,8 +28,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 pauseable.UnPause();
             }
-            _windowsManager.GetWindow<PauseUIView>().Close();
-            // _windowsManager.DisableRaycast();
         }
 
         public GameplayStateMachine StateMachine { get; set; }

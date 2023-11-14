@@ -1,17 +1,10 @@
 using System.Collections.Generic;
-using Main.Scripts.UI;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public class PrepareState : IGameplayState
     {
-        private readonly IWindowsManager _windowsManager;
         private readonly List<IPreparable> _preparables = new();
-
-        public PrepareState(IWindowsManager windowsManager)
-        {
-            _windowsManager = windowsManager;
-        }
 
         public void AddStatable(IGameplayStatable gameplayStatable)
         {

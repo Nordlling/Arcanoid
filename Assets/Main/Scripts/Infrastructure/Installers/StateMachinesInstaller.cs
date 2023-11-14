@@ -16,14 +16,14 @@ namespace Main.Scripts.Infrastructure.Installers
         {
             GameplayStateMachine gameplayStateMachine = new GameplayStateMachine();
 
-            gameplayStateMachine.AddState(new PrepareState(serviceContainer.Get<IWindowsManager>()));
+            gameplayStateMachine.AddState(new PrepareState());
             gameplayStateMachine.AddState(new PrePlayState());
             gameplayStateMachine.AddState(new PlayState());
-            gameplayStateMachine.AddState(new PauseState(serviceContainer.Get<IWindowsManager>()));
+            gameplayStateMachine.AddState(new PauseState());
             gameplayStateMachine.AddState(new LoseState());
-            gameplayStateMachine.AddState(new GameOverState(serviceContainer.Get<IWindowsManager>()));
+            gameplayStateMachine.AddState(new GameOverState());
             gameplayStateMachine.AddState(new RestartState());
-            gameplayStateMachine.AddState(new WinState(serviceContainer.Get<IWindowsManager>()));
+            gameplayStateMachine.AddState(new WinState());
             
             serviceContainer.SetService<IGameplayStateMachine, GameplayStateMachine>(gameplayStateMachine);
         }
