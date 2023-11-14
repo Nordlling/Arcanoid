@@ -31,8 +31,10 @@ namespace Main.Scripts.Infrastructure.Installers
             RegisterHealthService(serviceContainer);
             RegisterBallCollisionService(serviceContainer);
             RegisterPlatform(serviceContainer);
-            RegisterBallManager(serviceContainer);
             
+            RegisterBallKeeper(serviceContainer);
+            RegisterBallManager(serviceContainer);
+
             InitBounder();
         }
 
@@ -62,19 +64,39 @@ namespace Main.Scripts.Infrastructure.Installers
 
         private void RegisterPlatform(ServiceContainer serviceContainer)
         {
-            _platform.Construct(serviceContainer.Get<ZonesManager>(), _camera, serviceContainer.Get<ITimeProvider>());
+            _platform.Construct
+                (
+                    serviceContainer.Get<ZonesManager>(), 
+                    _camera, 
+                    serviceContainer.Get<ITimeProvider>()
+                );
+            
             serviceContainer.SetServiceSelf(_platform);
             
             SetGameplayStates(serviceContainer, _platform);
             
         }
 
+        private void RegisterBallKeeper(ServiceContainer serviceContainer)
+        {
+            BallKeeper ballKeeper = new BallKeeper(
+                serviceContainer.Get<ZonesManager>(),
+                _camera,
+                serviceContainer.Get<ITimeProvider>(),
+                serviceContainer.Get<IGameplayStateMachine>());
+            
+            serviceContainer.SetServiceSelf(ballKeeper);
+            serviceContainer.SetService<ITickable, BallKeeper>(ballKeeper);
+            
+            SetGameplayStates(serviceContainer, ballKeeper);
+        }
         private void RegisterBallManager(ServiceContainer serviceContainer)
         {
             BallManager ballManager = new BallManager(
                 serviceContainer.Get<PlatformMovement>(),
                 serviceContainer.Get<IBallFactory>(),
-                serviceContainer.Get<IGameplayStateMachine>());
+                serviceContainer.Get<BallKeeper>());
+            
             serviceContainer.SetService<IBallManager, BallManager>(ballManager);
             
             SetGameplayStates(serviceContainer, ballManager);

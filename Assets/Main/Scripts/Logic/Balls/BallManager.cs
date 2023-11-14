@@ -10,30 +10,24 @@ namespace Main.Scripts.Logic.Balls
     {
         private readonly PlatformMovement _platformMovement;
         private readonly IBallFactory _ballFactory;
-        private readonly IGameplayStateMachine _gameplayStateMachine;
+        private readonly BallKeeper _ballKeeper;
 
         private readonly List<Ball> _balls = new();
 
-        public BallManager(PlatformMovement platformMovement, IBallFactory ballFactory, IGameplayStateMachine gameplayStateMachine)
+        public BallManager(PlatformMovement platformMovement, IBallFactory ballFactory, BallKeeper ballKeeper)
         {
             _platformMovement = platformMovement;
             _ballFactory = ballFactory;
-            _gameplayStateMachine = gameplayStateMachine;
-
-            _platformMovement.OnStarted += StartPlay;
-        }
-
-        private void StartPlay()
-        {
-            _gameplayStateMachine.Enter<PlayState>();
+            _ballKeeper = ballKeeper;
         }
 
         private void CreateBall()
         {
             SpawnContext spawnContext = new SpawnContext { Parent = _platformMovement.transform };
             Ball ball = _ballFactory.Spawn(spawnContext);
+            ball.transform.position = _platformMovement.BallPoint.position;
             _balls.Add(ball);
-            _platformMovement.InitBall(ball.BallMovement);
+            _ballKeeper.InitBall(ball.BallMovement);
         }
 
         public void RemoveBall(Ball ball)
