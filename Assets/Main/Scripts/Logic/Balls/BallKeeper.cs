@@ -1,11 +1,10 @@
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
-using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
-namespace Main.Scripts.Logic.Platforms
+namespace Main.Scripts.Logic.Balls
 {
     public class BallKeeper : ITickable, IPrePlayable, IPlayable
     {
@@ -14,7 +13,7 @@ namespace Main.Scripts.Logic.Platforms
         private readonly ITimeProvider _timeProvider;
         private readonly IGameplayStateMachine _gameplayStateMachine;
         
-        private BallMovement _ball;
+        public BallMovement Ball { get; set; }
         private bool _isPrePlay;
 
         public BallKeeper(
@@ -28,11 +27,6 @@ namespace Main.Scripts.Logic.Platforms
             _camera = viewCamera;
             _timeProvider = timeProvider;
             _gameplayStateMachine = gameplayStateMachine;
-        }
-
-        public void InitBall(BallMovement ball)
-        {
-            _ball = ball;
         }
 
         public void PrePlay()
@@ -66,14 +60,14 @@ namespace Main.Scripts.Logic.Platforms
 
         private void TryStartBallMove()
         {
-            if (_ball == null)
+            if (Ball == null)
             {
                 return;
             }
             
-            _ball.transform.parent = null;
-            _ball.StartMove();
-            _ball = null;
+            Ball.transform.parent = null;
+            Ball.StartMove();
+            Ball = null;
         }
     }
 }
