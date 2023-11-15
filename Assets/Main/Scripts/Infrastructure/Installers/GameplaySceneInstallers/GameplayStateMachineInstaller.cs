@@ -1,15 +1,12 @@
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services;
-using Main.Scripts.UI;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 {
-    public class StateMachinesInstaller : MonoInstaller
+    public class GameplayStateMachineInstaller : MonoInstaller
     {
-        
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
-            serviceContainer.Get<IWindowsManager>().SetServiceContainer(serviceContainer);
             RegisterGameplayStateMachine(serviceContainer);
         }
 

@@ -22,7 +22,7 @@ namespace Main.Scripts.UI.Views
         private void OpenPackSelect()
         {
             Close();
-            _gameStateMachine.Enter<LoadSceneState, string>(_packSelectSceneName);
+            _gameStateMachine.Enter<TransitSceneState, string>(_packSelectSceneName);
         }
     }
 }

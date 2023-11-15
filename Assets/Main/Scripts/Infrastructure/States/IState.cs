@@ -5,9 +5,14 @@ namespace Main.Scripts.Infrastructure.States
         void Enter();
     }
     
-    public interface IParametrizedState<TParameter> : IExitableState
+    public interface IParametrizedState<TParam1> : IExitableState
     {
-        void Enter(TParameter param);
+        void Enter(TParam1 param);
+    }
+    
+    public interface IParametrizedState<TParam1, TParam2> : IExitableState
+    {
+        void Enter(TParam1 param1, TParam2 param2);
     }
 
     public interface IExitableState

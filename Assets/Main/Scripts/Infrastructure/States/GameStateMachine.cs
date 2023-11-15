@@ -21,10 +21,16 @@ namespace Main.Scripts.Infrastructure.States
             state.Enter();
         }
 
-        public void Enter<TState, TParameter>(TParameter payload) where TState : class, IParametrizedState<TParameter>
+        public void Enter<TState, TParameter>(TParameter param1) where TState : class, IParametrizedState<TParameter>
         {
             TState state = ChangeState<TState>();
-            state.Enter(payload);
+            state.Enter(param1);
+        }
+
+        public void Enter<TState, TParam1, TParam2>(TParam1 param1, TParam2 param2) where TState : class, IParametrizedState<TParam1, TParam2>
+        {
+            TState state = ChangeState<TState>();
+            state.Enter(param1, param2);
         }
 
         private TState ChangeState<TState>() where TState : class, IExitableState
