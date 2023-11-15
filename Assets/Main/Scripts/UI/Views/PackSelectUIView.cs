@@ -26,13 +26,13 @@ namespace Main.Scripts.UI.Views
         private void OpenPackSelect()
         {
             Close();
-            _gameStateMachine.Enter<LoadSceneState, string>(_gameplaySceneName);
+            _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
         }
 
         private void Back()
         {
             Close();
-            _gameStateMachine.Enter<LoadSceneState, string>(_initialSceneName);
+            _gameStateMachine.Enter<TransitSceneState, string>(_initialSceneName);
         }
     }
 }

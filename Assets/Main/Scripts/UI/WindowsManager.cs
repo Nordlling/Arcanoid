@@ -41,11 +41,7 @@ namespace Main.Scripts.UI
                 window = CreateWindow(key);
             }
 
-            if (window != null)
-            {
-                window.gameObject.SetActive(true);
-            }
-
+            window.SetStateMachines(_serviceContainer.Get<IGameStateMachine>(),_serviceContainer.Get<IGameplayStateMachine>());
             return window;
         }
 
@@ -54,9 +50,10 @@ namespace Main.Scripts.UI
             RefreshCamera();
             foreach (UIView view in _createdWindowsList)
             {
-                if (view is T uiView)
+                if (view is T window)
                 {
-                    return uiView;
+                    window.SetStateMachines(_serviceContainer.Get<IGameStateMachine>(),_serviceContainer.Get<IGameplayStateMachine>());
+                    return window;
                 }
             }
             
@@ -111,10 +108,8 @@ namespace Main.Scripts.UI
         private T CreateWindowBasic<T>(T prefab) where T : UIView
         {
             T window = Instantiate(prefab, transform);
-            window.Construct(
-                this, 
-                _serviceContainer.Get<IGameStateMachine>(), 
-                _serviceContainer.Get<IGameplayStateMachine>());
+            window.Construct(this);
+            window.SetStateMachines(_serviceContainer.Get<IGameStateMachine>(),_serviceContainer.Get<IGameplayStateMachine>());
             return window;
         }
         

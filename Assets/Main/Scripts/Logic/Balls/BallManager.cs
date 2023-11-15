@@ -23,11 +23,15 @@ namespace Main.Scripts.Logic.Balls
 
         private void CreateBall()
         {
+            if (_ballKeeper.Ball is not null)
+            {
+                return;
+            }
             SpawnContext spawnContext = new SpawnContext { Parent = _platformMovement.transform };
             Ball ball = _ballFactory.Spawn(spawnContext);
             ball.transform.position = _platformMovement.BallPoint.position;
             _balls.Add(ball);
-            _ballKeeper.InitBall(ball.BallMovement);
+            _ballKeeper.Ball = ball.BallMovement;
         }
 
         public void RemoveBall(Ball ball)
@@ -35,7 +39,6 @@ namespace Main.Scripts.Logic.Balls
             _balls.Remove(ball);
             _ballFactory.Despawn(ball);
         }
-
 
         public void PrePlay()
         {

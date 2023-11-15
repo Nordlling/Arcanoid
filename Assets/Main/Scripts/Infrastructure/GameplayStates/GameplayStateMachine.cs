@@ -24,16 +24,16 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             }
         }
 
+        public bool IsSameState<TState>() where TState : class, IGameplayState
+        {
+            return _activeState is TState;
+        }
+
         public void EnterPreviousState()
         {
             _activeState?.Exit();
             (_activeState, _previousState) = (_previousState, _activeState);
             _activeState.Enter();
-        }
-
-        public bool IsSameState<TState>() where TState : class, IGameplayState
-        {
-            return _activeState is TState;
         }
 
         public void Enter<TState>() where TState : class, IGameplayState

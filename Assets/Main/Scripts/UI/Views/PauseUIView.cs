@@ -31,7 +31,7 @@ namespace Main.Scripts.UI.Views
         private void ExitGame()
         {
             Close();
-            _gameStateMachine.Enter<LoadSceneState, string>(_menuSceneName);
+            _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
         }
 
         private async void RestartGame()

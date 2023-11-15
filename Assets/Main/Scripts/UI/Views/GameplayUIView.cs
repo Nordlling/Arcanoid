@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Main.Scripts.UI.Views
 {
-    public class GameplayUIView : MonoBehaviour, ILoseable, IPrePlayable
+    public class GameplayUIView : MonoBehaviour
     {
         [SerializeField] private Button _pauseButton;
         [SerializeField] private GraphicRaycaster _graphicRaycaster;
@@ -14,16 +14,6 @@ namespace Main.Scripts.UI.Views
         public void Construct(IGameplayStateMachine gameplayStateMachine)
         {
             _gameplayStateMachine = gameplayStateMachine;
-        }
-
-        public void Lose()
-        {
-            _graphicRaycaster.enabled = false;
-        }
-
-        public void PrePlay()
-        {
-            _graphicRaycaster.enabled = true;
         }
 
         private void OnEnable()
