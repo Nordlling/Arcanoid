@@ -3,7 +3,7 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Localization;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Installers
+namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
 {
     public class LocalizationInstaller : MonoInstaller
     {
