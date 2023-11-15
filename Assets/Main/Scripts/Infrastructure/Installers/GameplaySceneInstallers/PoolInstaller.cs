@@ -4,7 +4,7 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Pool;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Installers
+namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 {
     public class PoolInstaller : MonoInstaller
     {

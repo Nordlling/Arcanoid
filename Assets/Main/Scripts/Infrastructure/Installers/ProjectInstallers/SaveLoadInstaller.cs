@@ -1,7 +1,7 @@
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.SaveLoad;
 
-namespace Main.Scripts.Infrastructure.Installers
+namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
 {
     public class SaveLoadInstaller : MonoInstaller
     {

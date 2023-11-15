@@ -10,7 +10,7 @@ using Main.Scripts.Logic.GameGrid;
 using Main.Scripts.Logic.Platforms;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Installers
+namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 {
     public class GameWorldInstaller : MonoInstaller
     {

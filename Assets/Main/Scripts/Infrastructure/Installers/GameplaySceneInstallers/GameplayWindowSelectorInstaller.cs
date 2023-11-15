@@ -7,7 +7,7 @@ using Main.Scripts.UI;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Installers
+namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 {
     public class GameplayWindowSelectorInstaller : MonoInstaller
     {

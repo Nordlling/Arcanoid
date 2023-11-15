@@ -7,7 +7,7 @@ using Main.Scripts.LevelMap;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Installers
+namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 {
     public class GameGridInstaller : MonoInstaller
     {

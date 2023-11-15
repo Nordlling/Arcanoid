@@ -16,8 +16,8 @@ namespace Main.Scripts.UI
 
         private ServiceContainer _serviceContainer;
         private WindowsConfig _windowsConfig;
-        private readonly Dictionary<string, UIView> _createdWindows = new();
-        private readonly List<UIView> _createdWindows2 = new();
+        private readonly Dictionary<string, UIView> _createdWindowsWithKey = new();
+        private readonly List<UIView> _createdWindowsList = new();
 
         public List<string> WindowKeys { get; private set; }
 
@@ -35,7 +35,8 @@ namespace Main.Scripts.UI
 
         public UIView GetWindow(string key)
         {
-            if (!_createdWindows.TryGetValue(key, out UIView window))
+            RefreshCamera();
+            if (!_createdWindowsWithKey.TryGetValue(key, out UIView window))
             {
                 window = CreateWindow(key);
             }
@@ -50,7 +51,8 @@ namespace Main.Scripts.UI
 
         public T GetWindow<T>() where T : UIView
         {
-            foreach (UIView view in _createdWindows.Values)
+            RefreshCamera();
+            foreach (UIView view in _createdWindowsList)
             {
                 if (view is T uiView)
                 {
@@ -65,7 +67,7 @@ namespace Main.Scripts.UI
         {
             _graphicRaycaster.enabled = true;
         }
-        
+
         public void DisableRaycast()
         {
             _graphicRaycaster.enabled = false;
@@ -80,19 +82,24 @@ namespace Main.Scripts.UI
             }
 
             UIView window = CreateWindowBasic(windowPrefab);
-            _createdWindows[key] = window;
+            _createdWindowsWithKey[key] = window;
             return window;
         }
-        
+
+        private void RefreshCamera()
+        {
+            _canvas.worldCamera.enabled = false;
+            _canvas.worldCamera.enabled = true;
+        }
+
         private T CreateWindow<T>() where T : UIView
         {
             foreach (var uiView in _windowsConfig.Windows.Values)
             {
-                // var view = (T)uiView;
                 if (uiView as T)
                 {
                     T window = (T)CreateWindowBasic(uiView);
-                    _createdWindows2.Add(window);
+                    _createdWindowsList.Add(window);
                     return window;
                 }
             }
@@ -100,7 +107,7 @@ namespace Main.Scripts.UI
             Debug.LogError($"Window panel with type {typeof(T)} not found");
             return null;
         }
-        
+
         private T CreateWindowBasic<T>(T prefab) where T : UIView
         {
             T window = Instantiate(prefab, transform);
