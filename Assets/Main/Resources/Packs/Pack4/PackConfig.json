@@ -1,0 +1,26 @@
+{
+	"PackID": "Pack4",
+	"PackName": "MILKYWAY",
+	"MapImagePath": "Packs/Pack4/Map",
+	"ButtonColor": "#DDCC38",
+	"LevelsCount": 4,
+	"LevelsPath": "Packs/Pack4/Levels",
+	"Levels": [
+		{
+			"LevelID": "Level1",
+			"FileName": "Level1"
+		},
+		{
+			"LevelID": "Level2",
+			"FileName": "Level2"
+		},
+		{
+			"LevelID": "Level3",
+			"FileName": "Level3"
+		},
+		{
+			"LevelID": "Level4",
+			"FileName": "Level4"
+		}
+	]
+}

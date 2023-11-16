@@ -25,6 +25,7 @@ namespace Main.Scripts.Logic.Blocks
         {
             _blockFactory = blockFactory;
             _gameGridService = gameGridService;
+            _breakSpriteRenderer.sprite = null;
             ID = id;
         }
 

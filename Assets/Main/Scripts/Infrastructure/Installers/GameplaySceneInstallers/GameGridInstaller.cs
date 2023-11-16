@@ -1,9 +1,9 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
+using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.LevelMap;
-using Main.Scripts.LevelMap;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
@@ -51,7 +51,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                     gameGridParser, 
                     blockPlacer, 
                     serviceContainer.Get<IGameplayStateMachine>(), 
-                    _assetPathConfig
+                    serviceContainer.Get<IPackService>()
                 );
             
             serviceContainer.SetService<IGameGridService, GameGridService>(gameGridService);
@@ -61,7 +61,6 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 
         private void InitGameGridService(ServiceContainer serviceContainer)
         {
-            serviceContainer.Get<IGameGridService>().CurrentLevelInfo = _gameGridConfig.DefaultLevel;
             serviceContainer.Get<IGameGridService>().CreateLevelMap();
         }
     }

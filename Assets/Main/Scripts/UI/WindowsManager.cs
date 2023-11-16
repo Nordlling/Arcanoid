@@ -74,7 +74,7 @@ namespace Main.Scripts.UI
         {
             if (!_windowsConfig.Windows.TryGetValue(key, out UIView windowPrefab))
             {
-               Debug.LogError($"Window panel with key {key} not found");
+               Debug.LogWarning($"Window panel with key {key} not found");
                return null;
             }
 
@@ -101,7 +101,7 @@ namespace Main.Scripts.UI
                 }
             }
             
-            Debug.LogError($"Window panel with type {typeof(T)} not found");
+            Debug.LogWarning($"Window panel with type {typeof(T)} not found");
             return null;
         }
 
