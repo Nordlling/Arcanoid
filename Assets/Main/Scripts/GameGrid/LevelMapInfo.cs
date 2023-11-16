@@ -1,4 +1,4 @@
-namespace Main.Scripts.LevelMap
+namespace Main.Scripts.GameGrid
 {
     public class LevelMapInfo
     {

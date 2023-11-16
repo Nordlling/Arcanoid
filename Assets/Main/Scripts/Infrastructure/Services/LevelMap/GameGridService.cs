@@ -1,8 +1,8 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Data;
 using Main.Scripts.Factory;
+using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
-using Main.Scripts.LevelMap;
 using Main.Scripts.Logic.Blocks;
 using UnityEngine;
 
@@ -11,43 +11,48 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
     public class GameGridService : IGameGridService, IRestartable
     {
         private readonly IBlockFactory _blockFactory;
-        private readonly ILevelMapLoader _levelMapLoader;
-        private readonly ILevelMapParser _levelMapParser;
+        private readonly IGameGridLoader _gameGridLoader;
+        private readonly IGameGridParser _gameGridParser;
         private readonly BlockPlacer _blockPlacer;
         private readonly IGameplayStateMachine _gameplayStateMachine;
-        private readonly AssetPathConfig _assetPathConfig;
+        private readonly IPackService _packService;
         
         private LevelMapInfo _levelMapInfo;
         private BlockPlaceInfo[,] _currentLevel;
 
         public GameGridService(
             IBlockFactory blockFactory,
-            ILevelMapLoader levelMapLoader, 
-            ILevelMapParser levelMapParser, 
+            IGameGridLoader gameGridLoader, 
+            IGameGridParser gameGridParser, 
             BlockPlacer blockPlacer, 
             IGameplayStateMachine gameplayStateMachine,
-            AssetPathConfig assetPathConfig)
+            IPackService packService)
         {
             _blockFactory = blockFactory;
-            _levelMapLoader = levelMapLoader;
-            _levelMapParser = levelMapParser;
+            _gameGridLoader = gameGridLoader;
+            _gameGridParser = gameGridParser;
             _blockPlacer = blockPlacer;
             _gameplayStateMachine = gameplayStateMachine;
-            _assetPathConfig = assetPathConfig;
+            _packService = packService;
         }
         
         public CurrentLevelInfo CurrentLevelInfo { get; set; }
 
         public void CreateLevelMap()
         {
-            if (CurrentLevelInfo is null)
+            string currentLevelPath = _packService.GetCurrentLevelPath();
+            if (string.IsNullOrEmpty(currentLevelPath))
             {
-                Debug.LogError("No Current level info");
+                Debug.LogWarning("No Current level info");
                 return;
             }
             
-            string json = _levelMapLoader.LoadLevelMap(_assetPathConfig.LevelPacksPath, CurrentLevelInfo);
-            _levelMapInfo = _levelMapParser.ParseLevelMap(json);
+            string json = _gameGridLoader.LoadLevelMap(currentLevelPath);
+            if (string.IsNullOrEmpty(json))
+            {
+                return;
+            }
+            _levelMapInfo = _gameGridParser.ParseLevelMap(json);
             _currentLevel = _blockPlacer.SpawnGrid(_levelMapInfo);
         }
 
@@ -70,6 +75,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
         {
             if (FindBlocksToWin())
             {
+                _packService.LevelUp();
                 _gameplayStateMachine.Enter<WinState>();
             }
         }
@@ -93,7 +99,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
         public void Restart()
         {
             DespawnBlocks();
-            _currentLevel = _blockPlacer.SpawnGrid(_levelMapInfo);
+            CreateLevelMap();
         }
 
         private void DespawnBlocks()

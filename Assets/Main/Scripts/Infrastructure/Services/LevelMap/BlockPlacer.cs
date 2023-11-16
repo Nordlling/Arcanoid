@@ -1,6 +1,6 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
-using Main.Scripts.LevelMap;
+using Main.Scripts.GameGrid;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;

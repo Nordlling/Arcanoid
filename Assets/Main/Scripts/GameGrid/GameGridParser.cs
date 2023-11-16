@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Main.Scripts.LevelMap
+namespace Main.Scripts.GameGrid
 {
-    public class GameGridParser : ILevelMapParser
+    public class GameGridParser : IGameGridParser
     {
         
         public LevelMapInfo ParseLevelMap(string textData)
@@ -39,7 +39,7 @@ namespace Main.Scripts.LevelMap
             }
             catch (Exception e)
             {
-                Debug.LogError("Error parsing JSON: " + e.Message);
+                Debug.LogWarning("Error parsing JSON: " + e.Message);
             }
 
             return levelMapInfo;

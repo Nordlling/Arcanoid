@@ -89,6 +89,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8ffe02faf14b23acd9d82d2c814754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5344907716553283842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1693853883014392865}
+  - component: {fileID: 8905136833045254077}
+  m_Layer: 0
+  m_Name: PackInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1693853883014392865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5344907716553283842}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2984380768963955549}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8905136833045254077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5344907716553283842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaff493e36f84a469cee77bf828ce7c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _assetPathConfig: {fileID: 11400000, guid: 6752d906dfcffaf40afc21dd319a99e2, type: 2}
 --- !u!1 &6051933604859795671
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +208,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2984380768963955549}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8560639222993621983
 MonoBehaviour:
@@ -259,6 +304,7 @@ Transform:
   - {fileID: 7145323438350344233}
   - {fileID: 2408605494778685175}
   - {fileID: 1465359967918471937}
+  - {fileID: 1693853883014392865}
   - {fileID: 1420733342775889242}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -280,4 +326,5 @@ MonoBehaviour:
   - {fileID: 7888300443094322843}
   - {fileID: 5922141142559789363}
   - {fileID: 3953793648016357427}
+  - {fileID: 8905136833045254077}
   - {fileID: 8560639222993621983}

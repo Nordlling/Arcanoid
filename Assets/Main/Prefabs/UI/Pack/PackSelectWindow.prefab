@@ -61,10 +61,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813a5a7a50e84236a350e4fd604b5064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _packSelectButton: {fileID: 6558696523128928485}
+  _packSelectButton: {fileID: 0}
   _backButton: {fileID: 2896896430677059551}
   _gameplaySceneName: Gameplay
   _initialSceneName: Initial
+  _packButtonPrefab: {fileID: 7092596130810180561, guid: 00ba54e6c047c654d9e5acaa27cb7012, type: 3}
+  _contentGroup: {fileID: 4109190367587129284}
 --- !u!1 &1196934212446072426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,17 +1930,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6878989025316970373, guid: 00ba54e6c047c654d9e5acaa27cb7012, type: 3}
   m_PrefabInstance: {fileID: 6178754537621802136}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6558696523128928485 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1061287376551654525, guid: 00ba54e6c047c654d9e5acaa27cb7012, type: 3}
-  m_PrefabInstance: {fileID: 6178754537621802136}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7422178310038639584
 PrefabInstance:
   m_ObjectHideFlags: 0
