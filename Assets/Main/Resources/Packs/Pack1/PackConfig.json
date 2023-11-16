@@ -1,0 +1,18 @@
+{
+	"PackID": "Pack1",
+	"PackName": "SIGARA",
+	"MapImagePath": "Packs/Pack1/Map",
+	"ButtonColor": "#53FD79",
+	"LevelsCount": 2,
+	"LevelsPath": "Packs/Pack1/Levels",
+	"Levels": [
+		{
+			"LevelID": "Level1",
+			"FileName": "Level1"
+		},
+		{
+			"LevelID": "Level2",
+			"FileName": "Level2"
+		}
+	]
+}

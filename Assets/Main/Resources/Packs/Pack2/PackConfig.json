@@ -1,0 +1,22 @@
+{
+	"PackID": "Pack2",
+	"PackName": "SOMBRERO",
+	"MapImagePath": "Packs/Pack2/Map",
+	"ButtonColor": "#9D58FF",
+	"LevelsCount": 3,
+	"LevelsPath": "Packs/Pack2/Levels",
+	"Levels": [
+		{
+			"LevelID": "Level1",
+			"FileName": "Level1"
+		},
+		{
+			"LevelID": "Level2",
+			"FileName": "Level2"
+		},
+		{
+			"LevelID": "Level3",
+			"FileName": "Level3"
+		}
+	]
+}
