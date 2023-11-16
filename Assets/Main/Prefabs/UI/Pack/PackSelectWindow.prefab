@@ -61,7 +61,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813a5a7a50e84236a350e4fd604b5064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _packSelectButton: {fileID: 0}
   _backButton: {fileID: 2896896430677059551}
   _gameplaySceneName: Gameplay
   _initialSceneName: Initial
@@ -608,8 +607,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09620834, y: 0.029267937}
   m_AnchorMax: {x: 0.89967716, y: 0.8817702}
-  m_AnchoredPosition: {x: 1.5, y: -3}
-  m_SizeDelta: {x: 3, y: 16}
+  m_AnchoredPosition: {x: 0, y: 11.409975}
+  m_SizeDelta: {x: 0, y: 47.29601}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4109190368662135088
 GameObject:
