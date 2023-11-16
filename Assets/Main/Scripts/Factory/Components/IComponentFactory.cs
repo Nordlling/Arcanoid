@@ -6,5 +6,6 @@ namespace Main.Scripts.Factory.Components
     public interface IComponentFactory
     {
         void AddComponent(ServiceContainer serviceContainer, Block block, SpawnContext spawnContext);
+        void RemoveComponent(Block block);
     }
 }

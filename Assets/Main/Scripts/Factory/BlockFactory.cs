@@ -1,12 +1,9 @@
-using System;
 using Main.Scripts.Configs;
 using Main.Scripts.Factory.Components;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.LevelMap;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Pool;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Main.Scripts.Factory
 {
@@ -15,8 +12,6 @@ namespace Main.Scripts.Factory
         private readonly ServiceContainer _serviceContainer;
         private readonly TiledBlockConfig _tiledBlockConfig;
         private readonly PoolProvider _poolProvider;
-
-        private Component[] _basicComponents;
 
         public BlockFactory(ServiceContainer serviceContainer, TiledBlockConfig tiledBlockConfig, PoolProvider poolProvider)
         {
@@ -33,8 +28,6 @@ namespace Main.Scripts.Factory
             }
             
             Block block = (Block)_poolProvider.PoolItemView.Spawn();
-            
-            _basicComponents ??= block.GetComponents<Component>();
             
             block.Construct(this, _serviceContainer.Get<IGameGridService>(), spawnContext.ID);
             block.transform.position = spawnContext.Position;
@@ -53,13 +46,11 @@ namespace Main.Scripts.Factory
 
         public void Despawn(Block block)
         {
-            foreach (Component component in block.GetComponents<Component>())
+            IComponentFactory[] componentFactories = _tiledBlockConfig.BlockInfos[block.ID].ComponentFactories;
+            
+            foreach (IComponentFactory componentFactory in componentFactories)
             {
-                if (Array.Exists(_basicComponents, c => c != null && c.GetType() == component.GetType()))
-                {
-                    continue;
-                }
-                Object.Destroy(component);
+                componentFactory.RemoveComponent(block);
             }
             
             _poolProvider.PoolItemView.Despawn(block);
