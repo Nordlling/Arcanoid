@@ -9,19 +9,22 @@ namespace Main.Scripts.UI.Views
 {
     public class PackButton : MonoBehaviour
     {
+        [Header("Buttons")]
         [SerializeField] private Button _packSelectButton;
         
         [Header("Pack")]
-        [SerializeField] private Image[] _coloredImages;
-        [SerializeField] private TextMeshProUGUI _packNameText;
-        [SerializeField] private LocalizedText _localizedText;
-        [SerializeField] private TextMeshProUGUI _packProgressText;
         [SerializeField] private Image _packImage;
-        [SerializeField] private GameObject _visual;
+        [SerializeField] private TextMeshProUGUI _packProgressValue;
+        [SerializeField] private TextMeshProUGUI _packProgressValueBlocked;
+        [SerializeField] private LocalizedText _packNameValue;
         
-        [SerializeField] private TextMeshProUGUI _packProgressTextBlocked;
+        [Header("Visual")]
+        [SerializeField] private GameObject _visual;
         [SerializeField] private GameObject _visualBlocked;
         
+        [Header("Color")]
+        [SerializeField] private Image[] _coloredImages;
+
         private IPackService _packService;
         private int _packIndex;
 
@@ -33,7 +36,6 @@ namespace Main.Scripts.UI.Views
             _packIndex = packIndex;
             RefreshStaticInfo(_packService.PackInfos[_packIndex]);
             RefreshDynamicInfo(_packService.PackInfos[_packIndex], _packService.PackProgresses[_packIndex]);
-            _localizedText.Localize(_packService.PackInfos[_packIndex].PackName);
         }
         
         private void OnEnable()
@@ -70,10 +72,10 @@ namespace Main.Scripts.UI.Views
                 _coloredImages[i].color = currentColor;
             }
 
-            _packNameText.text = packInfo.PackName;
+            _packNameValue.Localize(_packService.PackInfos[_packIndex].PackName);
             _packImage.sprite = packInfo.MapImage;
             
-            _packProgressTextBlocked.text = $"0/{packInfo.LevelsCount}";
+            _packProgressValueBlocked.text = $"0/{packInfo.LevelsCount}";
         }
         
         private void RefreshDynamicInfo(PackInfo packInfo, PackProgress packProgress)
@@ -81,7 +83,7 @@ namespace Main.Scripts.UI.Views
             _visual.SetActive(packProgress.IsOpen);
             _visualBlocked.SetActive(!packProgress.IsOpen);
             int passedLevelsCount = packProgress.IsPassed ? packInfo.LevelsCount : packProgress.CurrentLevelIndex;
-            _packProgressText.text = $"{passedLevelsCount}/{packInfo.LevelsCount}";
+            _packProgressValue.text = $"{passedLevelsCount}/{packInfo.LevelsCount}";
         }
     }
 }

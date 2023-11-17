@@ -16,7 +16,7 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private string _initialSceneName;
         
         [SerializeField] private PackButton _packButtonPrefab;
-        [SerializeField] private VerticalLayoutGroup _contentGroup;
+        [SerializeField] private GameObject _contentGroup;
         
         private IPackService _packService;
         private readonly List<PackButton> _buttons = new();
