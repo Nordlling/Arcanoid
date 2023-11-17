@@ -32,7 +32,7 @@ namespace Main.Scripts.Factory
             block.Construct(this, _serviceContainer.Get<IGameGridService>(), spawnContext.ID);
             block.transform.position = spawnContext.Position;
             block.SpriteRenderer.sprite = _tiledBlockConfig.BlockInfos[spawnContext.ID].Visual;
-            block.Collider.size = block.SpriteRenderer.bounds.size;
+            block.Collider.size = block.SpriteRenderer.size;
             
             IComponentFactory[] componentFactories = _tiledBlockConfig.BlockInfos[spawnContext.ID].ComponentFactories;
             
