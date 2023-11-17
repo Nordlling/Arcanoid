@@ -62,10 +62,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backButton: {fileID: 2896896430677059551}
+  _packButtonPrefab: {fileID: 7092596130810180561, guid: 00ba54e6c047c654d9e5acaa27cb7012, type: 3}
+  _minButtonsCount: 8
+  _contentGroup: {fileID: 4109190367587129290}
   _gameplaySceneName: Gameplay
   _initialSceneName: Initial
-  _packButtonPrefab: {fileID: 7092596130810180561, guid: 00ba54e6c047c654d9e5acaa27cb7012, type: 3}
-  _contentGroup: {fileID: 4109190367587129290}
 --- !u!1 &1196934212446072426
 GameObject:
   m_ObjectHideFlags: 0

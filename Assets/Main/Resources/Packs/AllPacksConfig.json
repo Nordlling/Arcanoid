@@ -11,22 +11,6 @@
 		{
 			"PackID": "Pack3",
 			"PackInfoPath": "Packs/Pack3/PackConfig"
-		},
-		{
-			"PackID": "Pack4",
-			"PackInfoPath": "Packs/Pack4/PackConfig"
-		},
-		{
-			"PackID": "Pack5",
-			"PackInfoPath": "Packs/Pack5/PackConfig"
-		},
-		{
-			"PackID": "Pack6",
-			"PackInfoPath": "Packs/Pack6/PackConfig"
-		},
-		{
-			"PackID": "Pack7",
-			"PackInfoPath": "Packs/Pack7/PackConfig"
 		}
 	]
 }

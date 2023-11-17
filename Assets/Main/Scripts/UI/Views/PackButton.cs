@@ -49,7 +49,7 @@ namespace Main.Scripts.UI.Views
 
         private void OpenPackSelect()
         {
-            if (!_packService.PackProgresses[_packIndex].IsOpen)
+            if (_packService is null || !_packService.PackProgresses[_packIndex].IsOpen)
             {
                 return;
             }

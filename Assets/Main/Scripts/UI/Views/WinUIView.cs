@@ -46,7 +46,7 @@ namespace Main.Scripts.UI.Views
         private async void NextGame()
         {
             PackProgress packProgress = _packService.PackProgresses[_packService.WonPackIndex];
-            if (packProgress.CurrentLevelIndex == 0 && packProgress.Cycle > 1)
+            if (IsReplayablePack(packProgress) || IsLastPack(packProgress))
             {
                 Close();
                 _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
@@ -59,6 +59,15 @@ namespace Main.Scripts.UI.Views
                 _gameplayStateMachine.Enter<PrePlayState>();
             }
         }
+
+        private bool IsReplayablePack(PackProgress packProgress)
+        {
+            return packProgress.CurrentLevelIndex == 0 && packProgress.Cycle > 1;
+        }
         
+        private bool IsLastPack(PackProgress packProgress)
+        {
+            return packProgress.CurrentLevelIndex == 0 && _packService.WonPackIndex == _packService.SelectedPackIndex;
+        }
     }
 }

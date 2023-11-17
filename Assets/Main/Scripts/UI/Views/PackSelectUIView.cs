@@ -10,14 +10,15 @@ namespace Main.Scripts.UI.Views
     public class PackSelectUIView : UIView
     {
         [SerializeField] private Button _backButton;
-        
+
+        [SerializeField] private PackButton _packButtonPrefab;
+        [SerializeField] private int _minButtonsCount;
+        [SerializeField] private GameObject _contentGroup;
+
         [Header("Scene Names")]
         [SerializeField] private string _gameplaySceneName;
         [SerializeField] private string _initialSceneName;
-        
-        [SerializeField] private PackButton _packButtonPrefab;
-        [SerializeField] private GameObject _contentGroup;
-        
+
         private IPackService _packService;
         private readonly List<PackButton> _buttons = new();
 
@@ -29,7 +30,7 @@ namespace Main.Scripts.UI.Views
         private void Start()
         {
             _packService = ProjectContext.Instance.ServiceContainer.Get<IPackService>();
-            CreateButtons();
+            InitButtons();
         }
 
         private void OnEnable()
@@ -42,14 +43,34 @@ namespace Main.Scripts.UI.Views
             _backButton.onClick.RemoveListener(Back);
         }
 
-        private void CreateButtons()
+        private void InitButtons()
         {
             ClearAllChildren();
+            CreateButtons();
+            CreateStubButtons();
+        }
+
+        private void CreateButtons()
+        {
             for (int i = 0; i < _packService.PackInfos.Count; i++)
             {
                 PackButton packButton = Instantiate(_packButtonPrefab, _contentGroup.transform);
                 packButton.Construct(_packService, i);
                 packButton.OnPressed += OpenPackSelect;
+                _buttons.Add(packButton);
+            }
+        }
+
+        private void CreateStubButtons()
+        {
+            if (_minButtonsCount <= _packService.PackInfos.Count)
+            {
+                return;
+            }
+            
+            for (int i = _packService.PackInfos.Count; i < _minButtonsCount; i++)
+            {
+                PackButton packButton = Instantiate(_packButtonPrefab, _contentGroup.transform);
                 _buttons.Add(packButton);
             }
         }
