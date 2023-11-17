@@ -3,6 +3,7 @@ using Main.Scripts.Data;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
+using Main.Scripts.Infrastructure.Services.LevelMap.Loader;
 using Main.Scripts.Logic.Blocks;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
     public class GameGridService : IGameGridService, IRestartable
     {
         private readonly IBlockFactory _blockFactory;
-        private readonly IGameGridLoader _gameGridLoader;
+        private readonly ISimpleLoader _simpleLoader;
         private readonly IGameGridParser _gameGridParser;
         private readonly BlockPlacer _blockPlacer;
         private readonly IGameplayStateMachine _gameplayStateMachine;
@@ -22,14 +23,14 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
 
         public GameGridService(
             IBlockFactory blockFactory,
-            IGameGridLoader gameGridLoader, 
+            ISimpleLoader simpleLoader, 
             IGameGridParser gameGridParser, 
             BlockPlacer blockPlacer, 
             IGameplayStateMachine gameplayStateMachine,
             IPackService packService)
         {
             _blockFactory = blockFactory;
-            _gameGridLoader = gameGridLoader;
+            _simpleLoader = simpleLoader;
             _gameGridParser = gameGridParser;
             _blockPlacer = blockPlacer;
             _gameplayStateMachine = gameplayStateMachine;
@@ -47,7 +48,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                 return;
             }
             
-            string json = _gameGridLoader.LoadLevelMap(currentLevelPath);
+            string json = _simpleLoader.LoadTextFile(currentLevelPath);
             if (string.IsNullOrEmpty(json))
             {
                 return;

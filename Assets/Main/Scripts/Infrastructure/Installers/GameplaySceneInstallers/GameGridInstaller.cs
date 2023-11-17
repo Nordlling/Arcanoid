@@ -4,6 +4,7 @@ using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.LevelMap;
+using Main.Scripts.Infrastructure.Services.LevelMap.Loader;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
@@ -42,12 +43,12 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                 serviceContainer.Get<ZonesManager>(),
                 _gameGridConfig);
 
-            GameGridLoader gameGridLoader = new GameGridLoader();
+            SimpleLoader simpleLoader = new SimpleLoader();
             GameGridParser gameGridParser = new GameGridParser();
             GameGridService gameGridService = new GameGridService
                 (
                     serviceContainer.Get<IBlockFactory>(), 
-                    gameGridLoader,
+                    simpleLoader,
                     gameGridParser, 
                     blockPlacer, 
                     serviceContainer.Get<IGameplayStateMachine>(), 
