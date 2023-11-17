@@ -1,6 +1,6 @@
 using System;
-using Main.Scripts.Infrastructure.Services.LevelMap;
-using Main.Scripts.Infrastructure.Services.LevelMap.Parser;
+using Main.Scripts.Infrastructure.Services.Packs;
+using Main.Scripts.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +14,7 @@ namespace Main.Scripts.UI.Views
         [Header("Pack")]
         [SerializeField] private Image[] _coloredImages;
         [SerializeField] private TextMeshProUGUI _packNameText;
+        [SerializeField] private LocalizedText _localizedText;
         [SerializeField] private TextMeshProUGUI _packProgressText;
         [SerializeField] private Image _packImage;
         [SerializeField] private GameObject _visual;
@@ -32,6 +33,7 @@ namespace Main.Scripts.UI.Views
             _packIndex = packIndex;
             RefreshStaticInfo(_packService.PackInfos[_packIndex]);
             RefreshDynamicInfo(_packService.PackInfos[_packIndex], _packService.PackProgresses[_packIndex]);
+            _localizedText.Localize(_packService.PackInfos[_packIndex].PackName);
         }
         
         private void OnEnable()
@@ -78,8 +80,8 @@ namespace Main.Scripts.UI.Views
         {
             _visual.SetActive(packProgress.IsOpen);
             _visualBlocked.SetActive(!packProgress.IsOpen);
-
-            _packProgressText.text = $"{packProgress.CurrentLevelIndex}/{packInfo.LevelsCount}";
+            int passedLevelsCount = packProgress.IsPassed ? packInfo.LevelsCount : packProgress.CurrentLevelIndex;
+            _packProgressText.text = $"{passedLevelsCount}/{packInfo.LevelsCount}";
         }
     }
 }

@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizationKey: NOTFOUND
+  _textField: {fileID: 0}
 --- !u!114 &4587417807253783198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,6 +1062,7 @@ MonoBehaviour:
   - {fileID: 3279278716590063014}
   - {fileID: 4591533596790554174}
   _packNameText: {fileID: 3221497876755447108}
+  _localizedText: {fileID: 3236501649986369713}
   _packProgressText: {fileID: 128390370304756232}
   _packImage: {fileID: 254129010576986817}
   _visual: {fileID: 7782070222823993803}
@@ -2015,6 +2017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizationKey: 
+  _textField: {fileID: 0}
 --- !u!114 &3221497876755447108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2246,6 +2249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizationKey: GALACTIC
+  _textField: {fileID: 0}
 --- !u!114 &4373300658936829804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2521,6 +2525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizationKey: GALACTIC
+  _textField: {fileID: 0}
 --- !u!114 &3736931977731787424
 MonoBehaviour:
   m_ObjectHideFlags: 0
