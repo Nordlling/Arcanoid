@@ -3,6 +3,7 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.GameGrid.Parser;
 using Main.Scripts.Infrastructure.Services.Packs;
+using Main.Scripts.Infrastructure.Services.SaveLoad;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
@@ -18,7 +19,7 @@ namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
 
         private void RegisterPackService(ServiceContainer serviceContainer)
         {
-            PackService packService = new PackService(_assetPathConfig, new SimpleLoader(), new SimpleParser());
+            PackService packService = new PackService(_assetPathConfig, new SimpleLoader(), new SimpleParser(), serviceContainer.Get<ISaveLoadService>());
             serviceContainer.SetService<IPackService, PackService>(packService);
         }
     }

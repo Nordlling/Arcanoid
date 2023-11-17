@@ -3,6 +3,7 @@ using Main.Scripts.Infrastructure;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Packs;
 using TMPro;
+using Main.Scripts.Infrastructure.States;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,15 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private Button _nextButton;
         [SerializeField] private TextMeshProUGUI _packProgressValue;
         [SerializeField] private Image _mapImage;
-        
+        [SerializeField] private string _menuSceneName;
+
+        private IPackService _packService;
+
+        private void Awake()
+        {
+            _packService = ProjectContext.Instance.ServiceContainer.Get<IPackService>();
+        }
+
         private void OnEnable()
         {
             _nextButton.onClick.AddListener(NextGame);
@@ -22,13 +31,11 @@ namespace Main.Scripts.UI.Views
 
         private void SetMapInfo()
         {
-            IPackService packService = ProjectContext.Instance.ServiceContainer.Get<IPackService>();
-            
-            string currentLevelIndex = packService.PackProgresses[packService.WonPackIndex].CurrentLevelIndex.ToString();
-            string allLevels = packService.PackInfos[packService.WonPackIndex].LevelsCount.ToString();
+            string currentLevelIndex = (_packService.WonLevelIndex + 1).ToString();
+            string allLevels = _packService.PackInfos[_packService.WonPackIndex].LevelsCount.ToString();
             
             _packProgressValue.text =$"{currentLevelIndex}/{allLevels}";
-            _mapImage.sprite = packService.PackInfos[packService.WonPackIndex].MapImage;
+            _mapImage.sprite = _packService.PackInfos[_packService.WonPackIndex].MapImage;
         }
 
         private void OnDisable()
@@ -38,10 +45,20 @@ namespace Main.Scripts.UI.Views
 
         private async void NextGame()
         {
-            _gameplayStateMachine.Enter<RestartState>();
-            Close();
-            await Task.Yield();
-            _gameplayStateMachine.Enter<PrePlayState>();
+            PackProgress packProgress = _packService.PackProgresses[_packService.WonPackIndex];
+            if (packProgress.CurrentLevelIndex == 0 && packProgress.Cycle > 1)
+            {
+                Close();
+                _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
+            }
+            else
+            {
+                _gameplayStateMachine.Enter<RestartState>();
+                Close();
+                await Task.Yield();
+                _gameplayStateMachine.Enter<PrePlayState>();
+            }
         }
+        
     }
 }

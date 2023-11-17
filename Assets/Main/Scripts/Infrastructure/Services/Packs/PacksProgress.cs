@@ -16,5 +16,11 @@ namespace Main.Scripts.Infrastructure.Services.Packs
         public int CurrentLevelIndex;
         public bool IsOpen;
         public bool IsPassed;
+        public int Cycle;
+
+        public PackProgress(string packID)
+        {
+            PackID = packID;
+        }
     }
 }

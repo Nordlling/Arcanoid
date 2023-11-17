@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.GameGrid.Parser;
+using Main.Scripts.Infrastructure.Services.SaveLoad;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.Packs
@@ -11,19 +12,27 @@ namespace Main.Scripts.Infrastructure.Services.Packs
         private readonly ISimpleLoader _simpleLoader;
         private readonly ISimpleParser _simpleParser;
         private readonly AssetPathConfig _assetPathConfig;
-        private const string _packsProgressSaveKey = "PacksProgress";
+        private readonly ISaveLoadService _saveLoadService;
 
-        public List<PackProgress> PackProgresses { get; private set; } = new();
+        public List<PackProgress> PackProgresses => _packsProgress.Packs;
         public List<PackInfo> PackInfos { get; private set; } = new();
 
-        public int SelectedPackIndex { get; set; }
-        public int WonPackIndex { get; set; }
+        private PacksProgress _packsProgress;
 
-        public PackService(AssetPathConfig assetPathConfig, ISimpleLoader simpleLoader, ISimpleParser simpleParser)
+        public int SelectedPackIndex { get; set; }
+        public int WonPackIndex { get; private set; }
+        public int WonLevelIndex { get; private set; }
+
+        public PackService(
+            AssetPathConfig assetPathConfig, 
+            ISimpleLoader simpleLoader, 
+            ISimpleParser simpleParser,
+            ISaveLoadService saveLoadService)
         {
             _assetPathConfig = assetPathConfig;
             _simpleLoader = simpleLoader;
             _simpleParser = simpleParser;
+            _saveLoadService = saveLoadService;
             InitPacks();
         }
 
@@ -41,30 +50,33 @@ namespace Main.Scripts.Infrastructure.Services.Packs
         public void LevelUp()
         {
             WonPackIndex = SelectedPackIndex;
-            
-            int currentLevelIndex = PackProgresses[SelectedPackIndex].CurrentLevelIndex;
+            WonLevelIndex = PackProgresses[SelectedPackIndex].CurrentLevelIndex;
+
+            int currentLevelIndex = WonLevelIndex;
             int levelsCount = PackInfos[SelectedPackIndex].Levels.Count;
             
             currentLevelIndex++;
-            
-            if (currentLevelIndex > levelsCount)
-            {
-                currentLevelIndex = 1;
-            }
 
-            PackProgresses[SelectedPackIndex].CurrentLevelIndex = currentLevelIndex;
-            
-            if (currentLevelIndex == levelsCount)
+            if (currentLevelIndex >= levelsCount)
             {
-                PackProgresses[SelectedPackIndex].IsPassed = true;
-                if (SelectedPackIndex + 1 < PackInfos.Count)
-                {
-                    PackProgresses[SelectedPackIndex + 1].IsOpen = true;
-                }
+                currentLevelIndex = 0;
+                PackUp();
+            }
+            
+            PackProgresses[WonPackIndex].CurrentLevelIndex = currentLevelIndex;
+            
+            _saveLoadService.SavePacksProgress(_packsProgress);
+        }
+
+        private void PackUp()
+        {
+            PackProgresses[WonPackIndex].Cycle++;
+            PackProgresses[WonPackIndex].IsPassed = true;
+            if (SelectedPackIndex + 1 < PackInfos.Count)
+            {
                 SelectedPackIndex++;
+                PackProgresses[SelectedPackIndex].IsOpen = true;
             }
-
-            PlayerPrefs.SetString(_packsProgressSaveKey, JsonConvert.SerializeObject(new PacksProgress { Packs = PackProgresses }));
         }
 
         private void InitPacks()
@@ -105,33 +117,23 @@ namespace Main.Scripts.Infrastructure.Services.Packs
                 return;
             }
             
-            PacksProgress packsProgress = JsonConvert.DeserializeObject<PacksProgress>(PlayerPrefs.GetString(_packsProgressSaveKey));
-            packsProgress = CheckForNewPacks(packsProgress);
-            PackProgresses = packsProgress.Packs;
+            _packsProgress = _saveLoadService.LoadPacksProgress();
+            CheckForNewPacks();
         }
 
-        private PacksProgress CheckForNewPacks(PacksProgress packsProgress)
+        private void CheckForNewPacks()
         {
-            if (packsProgress == null)
+            _packsProgress ??= new PacksProgress { Packs = new List<PackProgress>() };
+
+            for (int i = _packsProgress.Packs.Count; i < PackInfos.Count; i++)
             {
-                packsProgress = new PacksProgress { Packs = new List<PackProgress>() };
+                PackProgress packProgress = new PackProgress(PackInfos[i].PackID);
+                _packsProgress.Packs.Add(packProgress);
             }
 
-            for (int i = packsProgress.Packs.Count; i < PackInfos.Count; i++)
-            {
-                PackProgress packProgress = new PackProgress
-                {
-                    PackID = PackInfos[i].PackID
-                };
-                packsProgress.Packs.Add(packProgress);
-            }
+            _packsProgress.Packs[0].IsOpen = true;
 
-            packsProgress.Packs[0].IsOpen = true;
-
-            PlayerPrefs.SetString(_packsProgressSaveKey, JsonConvert.SerializeObject(packsProgress));
-
-
-            return packsProgress;
+            _saveLoadService.SavePacksProgress(_packsProgress);
         }
     }
 
