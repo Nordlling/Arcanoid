@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap.Parser
+namespace Main.Scripts.Infrastructure.Services.Packs
 {
     [Serializable]
-    public class AllPacksInfo
+    public class AllPacksData
     {
-        public List<PackConfig> PackConfigs;
+        public List<PackData> PackConfigs;
     }
     
     [Serializable]
-    public class PackConfig
+    public class PackData
     {
         public string PackID;
         public string PackInfoPath;

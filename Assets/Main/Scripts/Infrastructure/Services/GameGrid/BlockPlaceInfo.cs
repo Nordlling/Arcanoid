@@ -1,6 +1,6 @@
 using Main.Scripts.Logic.Blocks;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap
+namespace Main.Scripts.Infrastructure.Services.GameGrid
 {
     public class BlockPlaceInfo
     {

@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap.Parser
+namespace Main.Scripts.Infrastructure.Services.GameGrid.Parser
 {
     public class SimpleParser : ISimpleParser
     {

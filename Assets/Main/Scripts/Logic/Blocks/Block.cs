@@ -1,5 +1,5 @@
 using Main.Scripts.Factory;
-using Main.Scripts.Infrastructure.Services.LevelMap;
+using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Pool;
 using UnityEngine;
 

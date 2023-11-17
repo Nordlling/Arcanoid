@@ -1,7 +1,7 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory.Components;
 using Main.Scripts.Infrastructure.Services;
-using Main.Scripts.Infrastructure.Services.LevelMap;
+using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Pool;
 

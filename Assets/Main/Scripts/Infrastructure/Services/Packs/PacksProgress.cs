@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap
+namespace Main.Scripts.Infrastructure.Services.Packs
 {
     [Serializable]
     public class PacksProgress

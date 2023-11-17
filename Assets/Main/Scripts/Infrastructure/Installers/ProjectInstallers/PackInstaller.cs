@@ -1,8 +1,8 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.Services;
-using Main.Scripts.Infrastructure.Services.LevelMap;
-using Main.Scripts.Infrastructure.Services.LevelMap.Loader;
-using Main.Scripts.Infrastructure.Services.LevelMap.Parser;
+using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
+using Main.Scripts.Infrastructure.Services.GameGrid.Parser;
+using Main.Scripts.Infrastructure.Services.Packs;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers

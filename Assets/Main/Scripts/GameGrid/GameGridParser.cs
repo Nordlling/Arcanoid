@@ -7,32 +7,31 @@ namespace Main.Scripts.GameGrid
 {
     public class GameGridParser : IGameGridParser
     {
-        
-        public LevelMapInfo ParseLevelMap(string textData)
+        public GameGridInfo ParseLevelMap(string textData)
         {
             return ParseLevelMapJson(textData);
         }
         
-        private LevelMapInfo ParseLevelMapJson(string json)
+        private GameGridInfo ParseLevelMapJson(string json)
         {
-            LevelMapInfo levelMapInfo = new();
+            GameGridInfo gameGridInfo = new();
             try
             {
-                MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
+                TiledMapData tiledMapData = JsonConvert.DeserializeObject<TiledMapData>(json);
 
-                if (mapData != null && mapData.layers != null && mapData.layers.Count > 0)
+                if (tiledMapData != null && tiledMapData.layers != null && tiledMapData.layers.Count > 0)
                 {
-                    levelMapInfo.Width = mapData.width;
-                    levelMapInfo.Height = mapData.height;
-                    levelMapInfo.LevelMap = new int[levelMapInfo.Width, levelMapInfo.Height];
-                    List<int> mapDataList = mapData.layers[0].data;
+                    gameGridInfo.Width = tiledMapData.width;
+                    gameGridInfo.Height = tiledMapData.height;
+                    gameGridInfo.LevelMap = new int[gameGridInfo.Width, gameGridInfo.Height];
+                    List<int> mapDataList = tiledMapData.layers[0].data;
 
-                    for (int y = 0; y < levelMapInfo.Height; y++)
+                    for (int y = 0; y < gameGridInfo.Height; y++)
                     {
-                        for (int x = 0; x < levelMapInfo.Width; x++)
+                        for (int x = 0; x < gameGridInfo.Width; x++)
                         {
-                            int tileValue = mapDataList[y * levelMapInfo.Width + x];
-                            levelMapInfo.LevelMap[x, y] = tileValue;
+                            int tileValue = mapDataList[y * gameGridInfo.Width + x];
+                            gameGridInfo.LevelMap[x, y] = tileValue;
                         }
                     }
                 }
@@ -42,11 +41,11 @@ namespace Main.Scripts.GameGrid
                 Debug.LogWarning("Error parsing JSON: " + e.Message);
             }
 
-            return levelMapInfo;
+            return gameGridInfo;
         }
         
         [Serializable]
-        private class MapData
+        private class TiledMapData
         {
             public int width;
             public int height;

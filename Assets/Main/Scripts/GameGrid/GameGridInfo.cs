@@ -1,6 +1,6 @@
 namespace Main.Scripts.GameGrid
 {
-    public class LevelMapInfo
+    public class GameGridInfo
     {
         public int Width;
         public int Height;

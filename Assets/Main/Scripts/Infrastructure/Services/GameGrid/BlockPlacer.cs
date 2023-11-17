@@ -5,7 +5,7 @@ using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap
+namespace Main.Scripts.Infrastructure.Services.GameGrid
 {
     public class BlockPlacer
     {
@@ -25,25 +25,25 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
             _gameGridConfig = gameGridConfig;
         }
 
-        public BlockPlaceInfo[,] SpawnGrid(LevelMapInfo levelMapInfo)
+        public BlockPlaceInfo[,] SpawnGrid(GameGridInfo gameGridInfo)
         {
-            BlockPlaceInfo[,] blocks = new BlockPlaceInfo[levelMapInfo.Width, levelMapInfo.Height];
+            BlockPlaceInfo[,] blocks = new BlockPlaceInfo[gameGridInfo.Width, gameGridInfo.Height];
             
-            CalculateBlockSize(levelMapInfo.Width);
+            CalculateBlockSize(gameGridInfo.Width);
             
-            for (int y = 0; y < levelMapInfo.Height; y++)
+            for (int y = 0; y < gameGridInfo.Height; y++)
             {
-                for (int x = 0; x < levelMapInfo.Width; x++)
+                for (int x = 0; x < gameGridInfo.Width; x++)
                 {
                     bool checkToWin = false;
-                    if (levelMapInfo.LevelMap[x, y] == 0)
+                    if (gameGridInfo.LevelMap[x, y] == 0)
                     {
-                        blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], null, checkToWin);
+                        blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], null, checkToWin);
                         continue;
                     }
                     
                     Vector2 spawnPosition = _firstBlockPosition + _blockWithSpacingSize * new Vector2(x, -y);
-                    SpawnContext spawnContext = new SpawnContext { ID = levelMapInfo.LevelMap[x, y].ToString(), Position = spawnPosition};
+                    SpawnContext spawnContext = new SpawnContext { ID = gameGridInfo.LevelMap[x, y].ToString(), Position = spawnPosition};
                     
                     var block = _blockFactory.Spawn(spawnContext);
                     
@@ -54,7 +54,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                         checkToWin = block.TryGetComponent(out Health _);
                     }
 
-                    blocks[x, y] = new BlockPlaceInfo(levelMapInfo.LevelMap[x, y], block, checkToWin);
+                    blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], block, checkToWin);
 
                 } 
             }

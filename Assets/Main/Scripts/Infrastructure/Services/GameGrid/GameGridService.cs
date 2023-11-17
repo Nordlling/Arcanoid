@@ -1,13 +1,13 @@
-using Main.Scripts.Configs;
 using Main.Scripts.Data;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
-using Main.Scripts.Infrastructure.Services.LevelMap.Loader;
+using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
+using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Logic.Blocks;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap
+namespace Main.Scripts.Infrastructure.Services.GameGrid
 {
     public class GameGridService : IGameGridService, IRestartable
     {
@@ -18,7 +18,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
         private readonly IGameplayStateMachine _gameplayStateMachine;
         private readonly IPackService _packService;
         
-        private LevelMapInfo _levelMapInfo;
+        private GameGridInfo _gameGridInfo;
         private BlockPlaceInfo[,] _currentLevel;
 
         public GameGridService(
@@ -53,8 +53,8 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
             {
                 return;
             }
-            _levelMapInfo = _gameGridParser.ParseLevelMap(json);
-            _currentLevel = _blockPlacer.SpawnGrid(_levelMapInfo);
+            _gameGridInfo = _gameGridParser.ParseLevelMap(json);
+            _currentLevel = _blockPlacer.SpawnGrid(_gameGridInfo);
         }
 
         public void RemoveBlockFromGrid(Block block)
@@ -69,7 +69,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
 
         public void ResetCurrentLevel()
         {
-            _currentLevel = _blockPlacer.SpawnGrid(_levelMapInfo);
+            _currentLevel = _blockPlacer.SpawnGrid(_gameGridInfo);
         }
 
         private void CheckGridToWin()
@@ -83,9 +83,9 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
 
         private bool FindBlocksToWin()
         {
-            for (int x = 0; x < _levelMapInfo.Width; x++)
+            for (int x = 0; x < _gameGridInfo.Width; x++)
             {
-                for (int y = 0; y < _levelMapInfo.Height; y++)
+                for (int y = 0; y < _gameGridInfo.Height; y++)
                 {
                     if (_currentLevel[x, y].CheckToWin)
                     {
@@ -105,9 +105,9 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
 
         private void DespawnBlocks()
         {
-            for (int x = 0; x < _levelMapInfo.Width; x++)
+            for (int x = 0; x < _gameGridInfo.Width; x++)
             {
-                for (int y = 0; y < _levelMapInfo.Height; y++)
+                for (int y = 0; y < _gameGridInfo.Height; y++)
                 {
                     if (_currentLevel[x, y].Block != null)
                     {

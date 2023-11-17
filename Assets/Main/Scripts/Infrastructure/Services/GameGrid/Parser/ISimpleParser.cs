@@ -1,4 +1,4 @@
-namespace Main.Scripts.Infrastructure.Services.LevelMap.Parser
+namespace Main.Scripts.Infrastructure.Services.GameGrid.Parser
 {
     public interface ISimpleParser
     {

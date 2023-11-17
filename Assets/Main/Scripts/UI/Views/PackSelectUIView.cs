@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Main.Scripts.Infrastructure;
-using Main.Scripts.Infrastructure.Services.LevelMap;
+using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Infrastructure.States;
 using UnityEngine;
 using UnityEngine.UI;

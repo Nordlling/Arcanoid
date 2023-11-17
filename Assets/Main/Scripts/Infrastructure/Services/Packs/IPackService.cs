@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Main.Scripts.Infrastructure.Services.LevelMap.Parser;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap
+namespace Main.Scripts.Infrastructure.Services.Packs
 {
     public interface IPackService : IService
     {
         List<PackProgress> PackProgresses { get; }
         List<PackInfo> PackInfos { get; }
         int SelectedPackIndex { get; set; }
-        int WonPackIndex { get; set; }
+        int WonPackIndex { get; }
+        int WonLevelIndex { get; }
         string GetCurrentLevelPath();
         void LevelUp();
     

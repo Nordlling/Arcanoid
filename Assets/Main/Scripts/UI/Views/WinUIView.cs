@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Main.Scripts.Infrastructure;
 using Main.Scripts.Infrastructure.GameplayStates;
-using Main.Scripts.Infrastructure.Services.LevelMap;
+using Main.Scripts.Infrastructure.Services.Packs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

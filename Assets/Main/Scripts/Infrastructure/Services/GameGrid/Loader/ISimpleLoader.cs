@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap.Loader
+namespace Main.Scripts.Infrastructure.Services.GameGrid.Loader
 {
     public interface ISimpleLoader
     {

@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using Main.Scripts.Configs;
-using Main.Scripts.Infrastructure.Services.LevelMap.Loader;
-using Main.Scripts.Infrastructure.Services.LevelMap.Parser;
-using Newtonsoft.Json;
+using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
+using Main.Scripts.Infrastructure.Services.GameGrid.Parser;
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Services.LevelMap
+namespace Main.Scripts.Infrastructure.Services.Packs
 {
     public class PackService : IPackService
     {
@@ -83,7 +82,7 @@ namespace Main.Scripts.Infrastructure.Services.LevelMap
                 return;
             }
 
-            List<PackConfig> packConfigs = _simpleParser.ParseText<AllPacksInfo>(json).PackConfigs;
+            List<PackData> packConfigs = _simpleParser.ParseText<AllPacksData>(json).PackConfigs;
             
             for (int i = 0; i < packConfigs.Count; i++)
             {
