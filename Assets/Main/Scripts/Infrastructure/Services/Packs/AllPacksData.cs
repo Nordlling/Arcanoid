@@ -26,7 +26,6 @@ namespace Main.Scripts.Infrastructure.Services.Packs
         public string MapImagePath;
         public Sprite MapImage;
         public string ButtonColor;
-        public int LevelsCount;
         public string LevelsPath;
         public List<PackLevelInfo> Levels;
     }

@@ -15,37 +15,34 @@ namespace Main.Scripts.Localization
         {
             _localizationManager = localizationManager;
         }
-        
-        private void Localize()
-        {
-            Localize(_localizationKey);
-        }
 
         public void Localize(string localizationKey)
         {
-            if (_localizationManager is null)
-            {
-                InitLocalizationManager();
-            }
-            
             if (string.IsNullOrEmpty(localizationKey))
             {
                 return;
             }
+            
+            Init();
 
-            if (_textField is null)
+            if (_localizationManager is null || _textField is null)
             {
                 return;
             }
 
             _localizationKey = localizationKey;
-            _textField.text = _localizationManager?.Localize(localizationKey);
+            _textField.text = _localizationManager.Localize(localizationKey);
         }
 
         private void Awake()
         {
+            Init();
+        }
+
+        private void Init()
+        {
             TryGetComponent(out _textField);
-            InitLocalizationManager();
+            _localizationManager = ProjectContext.Instance.ServiceContainer.Get<ILocalizationManager>();
         }
 
         private void OnEnable()
@@ -54,14 +51,14 @@ namespace Main.Scripts.Localization
             Localize();
         }
 
+        private void Localize()
+        {
+            Localize(_localizationKey);
+        }
+
         private void OnDisable()
         {
             _localizationManager.LocalizationChanged -= Localize;
-        }
-
-        private void InitLocalizationManager()
-        {
-            _localizationManager = ProjectContext.Instance.ServiceContainer.Get<ILocalizationManager>();
         }
     }
 }
