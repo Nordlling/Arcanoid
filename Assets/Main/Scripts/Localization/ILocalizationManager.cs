@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Main.Scripts.Localization
 {
@@ -8,7 +7,7 @@ namespace Main.Scripts.Localization
         event Action LocalizationChanged;
         string CurrentLanguage { get; }
         string[] AllLanguages { get; }
-        void ChangeLanguage(SystemLanguage language);
+        void ChangeLanguage(string language);
         string Localize(string localizationKey);
     }
 }

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Main.Scripts.Configs;
+using Main.Scripts.Infrastructure.Services.Packs;
+using Main.Scripts.Infrastructure.Services.SaveLoad;
 using UnityEngine;
 
 namespace Main.Scripts.Localization
@@ -10,26 +12,32 @@ namespace Main.Scripts.Localization
 	{
 		private readonly string _defaultLanguage;
 		private readonly ILocalizationParser _localizationParser;
+		private readonly ISaveLoadService _saveLoadService;
 		private readonly LocalizationConfig _localizationConfig;
 		private Dictionary<string, Dictionary<string, string>> _wordDictionary = new();
+		private UserSettings _userSettings;
 
 		public event Action LocalizationChanged;
-		public string CurrentLanguage { get; private set; }
+		public string CurrentLanguage => _userSettings.SelectedLanguage;
 		public string[] AllLanguages { get; private set; }
 
-		public LocalizationManager(ILocalizationParser localizationParser, LocalizationConfig localizationConfig)
+		public LocalizationManager(ILocalizationParser localizationParser, ISaveLoadService saveLoadService, LocalizationConfig localizationConfig)
 		{
 			_localizationParser = localizationParser;
+			_saveLoadService = saveLoadService;
 			_localizationConfig = localizationConfig;
-			CurrentLanguage = localizationConfig.defaultLanguage.ToString();
-			ReadLocalization();
+			
+			InitCurrentLanguage();
 			_defaultLanguage = CurrentLanguage;
+			
+			ReadLocalization();
 			AllLanguages = _wordDictionary.Keys.ToArray();
 		}
 
-		public void ChangeLanguage(SystemLanguage language)
+		public void ChangeLanguage(string language)
 		{
-			CurrentLanguage = language.ToString();
+			_userSettings.SelectedLanguage = language;
+			_saveLoadService.SaveUserSettings(_userSettings);
 			LocalizationChanged?.Invoke();
 		}
 
@@ -53,6 +61,17 @@ namespace Main.Scripts.Localization
 			}
 
 			return _wordDictionary[CurrentLanguage][localizationKey];
+		}
+
+		private void InitCurrentLanguage()
+		{
+			_userSettings = _saveLoadService.LoadUserSettings();
+
+			if (_userSettings is null || string.IsNullOrEmpty(_userSettings.SelectedLanguage))
+			{
+				_userSettings = new UserSettings(_localizationConfig.defaultLanguage.ToString());
+				_saveLoadService.SaveUserSettings(_userSettings);
+			}
 		}
 
 		private void ReadLocalization()

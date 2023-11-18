@@ -1,5 +1,6 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.Infrastructure.Services.SaveLoad;
 using Main.Scripts.Localization;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
         
         private void RegisterLocalizationService(ServiceContainer serviceContainer)
         {
-            LocalizationManager localizationManager = new LocalizationManager(new LocalizationParser(), _localizationConfig);
+            LocalizationManager localizationManager = new LocalizationManager(new LocalizationParser(), serviceContainer.Get<ISaveLoadService>(),  _localizationConfig);
             serviceContainer.SetService<ILocalizationManager, LocalizationManager>(localizationManager);
         }
     }

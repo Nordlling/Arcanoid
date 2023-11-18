@@ -6,5 +6,8 @@ namespace Main.Scripts.Infrastructure.Services.SaveLoad
   {
     void SavePacksProgress(PacksProgress packsProgress);
     PacksProgress LoadPacksProgress();
+    
+    void SaveUserSettings(UserSettings userSettings);
+    UserSettings LoadUserSettings();
   }
 }
