@@ -1,4 +1,5 @@
 using Main.Scripts.Infrastructure.GameplayStates;
+using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.Packs;
@@ -28,7 +29,11 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         
         private void RegisterProgressUI(ServiceContainer serviceContainer)
         {
-            _progressUIView.Construct(serviceContainer.Get<IPackService>(), serviceContainer.Get<IGameGridService>());
+            _progressUIView.Construct
+                (
+                    serviceContainer.Get<IPackService>(), 
+                    serviceContainer.Get<IGameGridService>(),
+                    serviceContainer.Get<ITimeProvider>());
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(_progressUIView);
         }
         

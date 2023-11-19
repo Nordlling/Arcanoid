@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 7579529575410951518}
   - component: {fileID: 7579529575410951513}
   - component: {fileID: 6191996913727371784}
+  - component: {fileID: 2886400020331446955}
   m_Layer: 0
   m_Name: UIProgressView
   m_TagString: Untagged
@@ -274,9 +275,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48c0f2606224a628bd1d6d9a725b135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _runningCounterAnimation: {fileID: 2886400020331446955}
   _packProgressValue: {fileID: 7579529575269766237}
+  _packProgressText: '%'
   _packImage: {fileID: 7579529576709201036}
   _levelProgressValue: {fileID: 7579529576884457732}
+--- !u!114 &2886400020331446955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7579529575410951519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6094fc99a714b51a090ed2987dbe3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationDuration: 0.5
+  _pauseDuration: 0
 --- !u!1 &7579529575707560870
 GameObject:
   m_ObjectHideFlags: 0
