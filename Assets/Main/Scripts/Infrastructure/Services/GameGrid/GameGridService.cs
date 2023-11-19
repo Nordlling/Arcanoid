@@ -1,3 +1,4 @@
+using System;
 using Main.Scripts.Data;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
@@ -21,6 +22,11 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         private GameGridInfo _gameGridInfo;
         private BlockPlaceInfo[,] _currentLevel;
 
+        public int AllBlocks { get; private set; }
+        public int AllBlocksToWin { get; private set; }
+        public int DestroyedBlocksToWin { get; private set; }
+        
+
         public GameGridService(
             IBlockFactory blockFactory,
             ISimpleLoader simpleLoader, 
@@ -39,6 +45,8 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         
         public CurrentLevelInfo CurrentLevelInfo { get; set; }
 
+        public event Action OnDestroyed;
+
         public void CreateLevelMap()
         {
             string currentLevelPath = _packService.GetCurrentLevelPath();
@@ -51,50 +59,68 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             string json = _simpleLoader.LoadTextFile(currentLevelPath);
             if (string.IsNullOrEmpty(json))
             {
+                Debug.LogWarning("Can't load level info");
                 return;
             }
+            
             _gameGridInfo = _gameGridParser.ParseLevelMap(json);
-            _currentLevel = _blockPlacer.SpawnGrid(_gameGridInfo);
+            InitGrid();
         }
 
         public void RemoveBlockFromGrid(Block block)
         {
             BlockPlaceInfo blockPlaceInfo = _currentLevel[block.GridPosition.x, block.GridPosition.y];
+
+            if (blockPlaceInfo.CheckToWin)
+            {
+                DestroyedBlocksToWin++;
+            }
+            
             blockPlaceInfo.Block = null;
             blockPlaceInfo.ID = 0;
             blockPlaceInfo.CheckToWin = false;
-
+           
+            OnDestroyed?.Invoke();
             CheckGridToWin();
         }
 
         public void ResetCurrentLevel()
         {
-            _currentLevel = _blockPlacer.SpawnGrid(_gameGridInfo);
+            InitGrid();
         }
 
         private void CheckGridToWin()
         {
-            if (FindBlocksToWin())
+            if (DestroyedBlocksToWin >= AllBlocksToWin)
             {
                 _packService.LevelUp();
                 _gameplayStateMachine.Enter<WinState>();
             }
         }
 
-        private bool FindBlocksToWin()
+        private void InitGrid()
         {
+            _currentLevel = _blockPlacer.SpawnGrid(_gameGridInfo);
+            AllBlocks = 0;
+            AllBlocksToWin = 0;
+            DestroyedBlocksToWin = 0;
+            
             for (int x = 0; x < _gameGridInfo.Width; x++)
             {
                 for (int y = 0; y < _gameGridInfo.Height; y++)
                 {
+                    if (_currentLevel[x, y].ID == 0)
+                    {
+                        continue;
+                    }
+                    
+                    AllBlocks++;
                     if (_currentLevel[x, y].CheckToWin)
                     {
-                        return false;
+                        AllBlocksToWin++;
                     }
                 }
             }
-            
-            return true;
         }
 
         public void Restart()

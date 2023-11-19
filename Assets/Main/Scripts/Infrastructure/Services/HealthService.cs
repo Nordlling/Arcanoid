@@ -35,7 +35,7 @@ namespace Main.Scripts.Infrastructure.Services
             LeftHealths--;
             OnDecreased?.Invoke();
             
-            if (LeftHealths <= 0)
+            if (LeftHealths < 0)
             {
                 _gameplayStateMachine.Enter<LoseState>();
                 return;

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7579529575269766236}
   - component: {fileID: 7579529575269766237}
   m_Layer: 0
-  m_Name: MapCountValue
+  m_Name: PackProgressValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7579529575291960588}
   - component: {fileID: 7579529575291960589}
   m_Layer: 0
-  m_Name: MapCountBackground
+  m_Name: PackProgressBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,6 +221,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7579529575410951518}
   - component: {fileID: 7579529575410951513}
+  - component: {fileID: 6191996913727371784}
+  - component: {fileID: 2886400020331446955}
   m_Layer: 0
   m_Name: UIProgressView
   m_TagString: Untagged
@@ -261,6 +263,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7579529575410951519}
   m_CullTransparentMesh: 1
+--- !u!114 &6191996913727371784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7579529575410951519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48c0f2606224a628bd1d6d9a725b135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _runningCounterAnimation: {fileID: 2886400020331446955}
+  _packProgressValue: {fileID: 7579529575269766237}
+  _packProgressText: '%'
+  _packImage: {fileID: 7579529576709201036}
+  _levelProgressValue: {fileID: 7579529576884457732}
+--- !u!114 &2886400020331446955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7579529575410951519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6094fc99a714b51a090ed2987dbe3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationDuration: 0.5
+  _pauseDuration: 0
 --- !u!1 &7579529575707560870
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +306,7 @@ GameObject:
   - component: {fileID: 7579529575707560867}
   - component: {fileID: 7579529575707560864}
   m_Layer: 0
-  m_Name: MapBackground
+  m_Name: PackImageBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,7 +382,7 @@ GameObject:
   - component: {fileID: 7579529576709201039}
   - component: {fileID: 7579529576709201036}
   m_Layer: 0
-  m_Name: Map
+  m_Name: PackImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,7 +458,7 @@ GameObject:
   - component: {fileID: 7579529576884457735}
   - component: {fileID: 7579529576884457732}
   m_Layer: 0
-  m_Name: GameProgressValue
+  m_Name: LevelProgressValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
