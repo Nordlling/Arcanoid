@@ -22,12 +22,10 @@ namespace Main.Scripts.Factory
         {
             Ball ball = (Ball)_poolProvider.PoolItemView.Spawn();
             
-            ball.Construct(this,_serviceContainer.Get<IBallManager>(),  spawnContext.ID);
+            ball.Construct(this, spawnContext.ID);
             ball.CollisionDetector.Construct(_serviceContainer.Get<IBallCollisionService>());
             ball.Collider.radius = ball.SpriteRenderer.bounds.extents.x;
-            ball.BoundsChecker.Construct(_serviceContainer.Get<ZonesManager>(), _serviceContainer.Get<IHealthService>());
             ball.BallMovement.Construct(_serviceContainer.Get<ITimeProvider>());
-            ball.Subscribe(ball.BoundsChecker);
             ball.transform.parent = spawnContext.Parent;
             
             return ball;

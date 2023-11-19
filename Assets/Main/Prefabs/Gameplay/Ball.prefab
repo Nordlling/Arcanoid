@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 5205741318861024153}
   - component: {fileID: -7841186240600258137}
   - component: {fileID: -3540441734131561973}
-  - component: {fileID: 7840086951485226034}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
@@ -138,7 +137,6 @@ MonoBehaviour:
   ID: 
   _spriteRenderer: {fileID: 5205741318240743835}
   _collider: {fileID: 6086058248431022506}
-  _boundsChecker: {fileID: 7840086951485226034}
   _collisionDetector: {fileID: -3540441734131561973}
   _ballMovement: {fileID: 5205741318861024153}
 --- !u!50 &5205741318861024149
@@ -192,8 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 5205741318861024149}
   _speed: 5
-  _leftAngle: 0
-  _rightAngle: 0
+  _leftAngle: 0.1
+  _rightAngle: 0.1
 --- !u!114 &-7841186240600258137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 5205741318861024149}
-  _minAngle: 20
+  _minAngle: 15
 --- !u!114 &-3540441734131561973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,17 +216,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfeb214a4ebf4f72af91531bcc5ec314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7840086951485226034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205741318861024148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 207dd7bbb6a142ecb33bf42699098461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

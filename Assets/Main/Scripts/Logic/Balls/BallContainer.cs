@@ -1,24 +1,30 @@
-using System;
 using System.Collections.Generic;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
+using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Logic.Platforms;
 
 namespace Main.Scripts.Logic.Balls
 {
-    public class BallManager : IBallManager, IPrePlayable, ILoseable, IWinable, IRestartable
+    public class BallContainer : IBallContainer, IPrePlayable, ILoseable, IWinable, IRestartable
     {
         private readonly PlatformMovement _platformMovement;
         private readonly IBallFactory _ballFactory;
         private readonly BallKeeper _ballKeeper;
+        private readonly IHealthService _healthService;
 
-        private readonly List<Ball> _balls = new();
+        public List<Ball> Balls { get; private set; } = new();
 
-        public BallManager(PlatformMovement platformMovement, IBallFactory ballFactory, BallKeeper ballKeeper)
+        public BallContainer(
+            PlatformMovement platformMovement, 
+            IBallFactory ballFactory, 
+            BallKeeper ballKeeper,
+            IHealthService healthService)
         {
             _platformMovement = platformMovement;
             _ballFactory = ballFactory;
             _ballKeeper = ballKeeper;
+            _healthService = healthService;
         }
 
         private void CreateBall()
@@ -30,14 +36,19 @@ namespace Main.Scripts.Logic.Balls
             SpawnContext spawnContext = new SpawnContext { Parent = _platformMovement.transform };
             Ball ball = _ballFactory.Spawn(spawnContext);
             ball.transform.position = _platformMovement.BallPoint.position;
-            _balls.Add(ball);
+            Balls.Add(ball);
             _ballKeeper.Ball = ball.BallMovement;
         }
 
         public void RemoveBall(Ball ball)
         {
-            _balls.Remove(ball);
+            Balls.Remove(ball);
             _ballFactory.Despawn(ball);
+
+            if (Balls.Count <= 0)
+            {
+                _healthService.DecreaseHealth();
+            }
         }
 
         public void PrePlay()
@@ -47,7 +58,7 @@ namespace Main.Scripts.Logic.Balls
 
         public void Lose()
         {
-            foreach (Ball ball in _balls)
+            foreach (Ball ball in Balls)
             {
                 ball.BallMovement.Stop = true;
             }
@@ -65,7 +76,7 @@ namespace Main.Scripts.Logic.Balls
 
         private void ClearAllBalls()
         {
-            foreach (Ball ball in _balls)
+            foreach (Ball ball in Balls)
             {
                 _ballFactory.Despawn(ball);
             }
