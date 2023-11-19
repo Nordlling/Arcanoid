@@ -1,9 +1,10 @@
 using System;
+using Main.Scripts.Infrastructure.Services.Collision;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Blocks
 {
-    public class Health : MonoBehaviour, IDieable
+    public class Health : MonoBehaviour, IDieable, ICollisionInteractable
     {
         private int _healthCount;
         private int _currentHealthCount;
@@ -17,7 +18,7 @@ namespace Main.Scripts.Logic.Blocks
             _currentHealthCount = _healthCount;
         }
 
-        public void Hit()
+        public void Interact()
         {
             _currentHealthCount--;
             if (_currentHealthCount == 0)

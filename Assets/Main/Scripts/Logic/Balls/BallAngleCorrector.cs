@@ -1,14 +1,15 @@
+using Main.Scripts.Infrastructure.Services.Collision;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Balls
 {
-    public class BallAngleCorrector : MonoBehaviour
+    public class BallAngleCorrector : MonoBehaviour, ICollisionInteractable
     {
         [SerializeField] private Rigidbody2D _rigidbody;
         [Range(0f, 45f)]
         [SerializeField] private float _minAngle;
 
-        public void CorrectAngle()
+        public void Interact()
         {
             Vector2 velocity = _rigidbody.velocity;
             TryAngleControl(velocity, Vector2.right);

@@ -1,8 +1,9 @@
+using Main.Scripts.Infrastructure.Services.Collision;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Blocks
 {
-    public class BreaksVisual : MonoBehaviour
+    public class BreaksVisual : MonoBehaviour, ICollisionInteractable
     {
         private SpriteRenderer _breakSpriteRenderer;
         private Sprite[] _breakSprites;
@@ -17,7 +18,7 @@ namespace Main.Scripts.Logic.Blocks
             _breakSpriteRenderer.sprite = null;
         }
 
-        public void AddBreak()
+        public void Interact()
         {
             if (_breakSpriteIndex >= _breakSprites.Length)
             {
