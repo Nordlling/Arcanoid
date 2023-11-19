@@ -1,8 +1,8 @@
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
+using Main.Scripts.Infrastructure.Services.Difficulty;
 using Main.Scripts.Logic.Balls;
-using Main.Scripts.Logic.GameGrid;
 using Main.Scripts.Pool;
 
 namespace Main.Scripts.Factory
@@ -25,7 +25,7 @@ namespace Main.Scripts.Factory
             ball.Construct(this, spawnContext.ID);
             ball.CollisionDetector.Construct(_serviceContainer.Get<IBallCollisionService>());
             ball.Collider.radius = ball.SpriteRenderer.bounds.extents.x;
-            ball.BallMovement.Construct(_serviceContainer.Get<ITimeProvider>());
+            ball.BallMovement.Construct(_serviceContainer.Get<ITimeProvider>(), _serviceContainer.Get<IDifficultyService>());
             ball.transform.parent = spawnContext.Parent;
             
             return ball;

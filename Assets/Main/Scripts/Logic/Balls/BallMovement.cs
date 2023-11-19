@@ -1,4 +1,5 @@
 using Main.Scripts.Infrastructure.Provides;
+using Main.Scripts.Infrastructure.Services.Difficulty;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,26 +8,28 @@ namespace Main.Scripts.Logic.Balls
     public class BallMovement : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private float _speed;
-        
         [SerializeField] private float _leftAngle;
         [SerializeField] private float _rightAngle;
-        
+
         private ITimeProvider _timeProvider;
+        private IDifficultyService _difficultyService;
 
         private Vector2 _direction;
+
         public bool Stop { get; set; }
 
-        public void Construct(ITimeProvider timeProvider)
+        public void Construct(ITimeProvider timeProvider, IDifficultyService difficultyService)
         {
             _timeProvider = timeProvider;
+            _difficultyService = difficultyService;
+
             _direction = Vector2.zero;
         }
 
         public void StartMove()
         {
             Vector2 startDirection = GenerateStartDirection();
-            _rigidbody.AddForce(startDirection * _speed);
+            _rigidbody.AddForce(startDirection * _difficultyService.Speed);
         }
 
         private void Update()
@@ -36,7 +39,7 @@ namespace Main.Scripts.Logic.Balls
                 _direction = _rigidbody.velocity.normalized;
             }
 
-            float scaledSpeed = _speed * _timeProvider.TimeScale;
+            float scaledSpeed = _difficultyService.Speed * _timeProvider.TimeScale;
             if (Stop)
             {
                 scaledSpeed = 0f;
