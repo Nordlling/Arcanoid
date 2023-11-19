@@ -189,7 +189,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 5205741318861024149}
-  _speed: 5
   _leftAngle: 0.1
   _rightAngle: 0.1
 --- !u!114 &-7841186240600258137
