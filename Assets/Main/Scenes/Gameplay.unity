@@ -624,6 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameplayUIView: {fileID: 145077515}
+  _progressUIView: {fileID: 1818364272452593352}
 --- !u!1 &1351698069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1413,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 973bf037bdce61d4a9f2f9e52df43953, type: 3}
+--- !u!114 &1818364272452593352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5024492606657766957, guid: 973bf037bdce61d4a9f2f9e52df43953, type: 3}
+  m_PrefabInstance: {fileID: 1818364272452593351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48c0f2606224a628bd1d6d9a725b135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3030120695705491765
 PrefabInstance:
   m_ObjectHideFlags: 0

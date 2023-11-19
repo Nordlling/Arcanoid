@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Main.Scripts.Infrastructure.Services.Packs
@@ -11,6 +12,7 @@ namespace Main.Scripts.Infrastructure.Services.Packs
         int WonLevelIndex { get; }
         string GetCurrentLevelPath();
         void LevelUp();
-    
+
+        event Action OnLevelUp;
     }
 }

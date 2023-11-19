@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
@@ -22,6 +23,8 @@ namespace Main.Scripts.Infrastructure.Services.Packs
         public int SelectedPackIndex { get; set; }
         public int WonPackIndex { get; private set; }
         public int WonLevelIndex { get; private set; }
+        
+        public event Action OnLevelUp;
 
         public PackService(
             AssetPathConfig assetPathConfig, 
@@ -65,6 +68,7 @@ namespace Main.Scripts.Infrastructure.Services.Packs
             
             PackProgresses[WonPackIndex].CurrentLevelIndex = currentLevelIndex;
             
+            OnLevelUp?.Invoke();
             _saveLoadService.SavePacksProgress(_packsProgress);
         }
 
