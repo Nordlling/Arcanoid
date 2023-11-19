@@ -13,10 +13,12 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [Header("Scene Objects")]
         [SerializeField] private GameplayUIView _gameplayUIView;
         [SerializeField] private ProgressUIView _progressUIView;
+        [SerializeField] private HealthUIView _healthUIView;
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             RegisterGameplayUI(serviceContainer);
             RegisterProgressUI(serviceContainer);
+            RegisterHealthUI(serviceContainer);
         }
 
         private void RegisterGameplayUI(ServiceContainer serviceContainer)
@@ -28,6 +30,11 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         {
             _progressUIView.Construct(serviceContainer.Get<IPackService>(), serviceContainer.Get<IGameGridService>());
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(_progressUIView);
+        }
+        
+        private void RegisterHealthUI(ServiceContainer serviceContainer)
+        {
+            _healthUIView.Construct(serviceContainer.Get<IHealthService>());
         }
     }
 }
