@@ -3,6 +3,7 @@ using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
+using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.GameGrid;
 using Main.Scripts.Logic.Platforms;
@@ -19,7 +20,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         {
             RegisterBallCollisionService(serviceContainer);
             RegisterBallKeeper(serviceContainer);
-            RegisterBallManager(serviceContainer);
+            RegisterBallContainer(serviceContainer);
             RegisterBallBoundsChecker(serviceContainer);
         }
         
@@ -42,7 +43,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             
             SetGameplayStates(serviceContainer, ballKeeper);
         }
-        private void RegisterBallManager(ServiceContainer serviceContainer)
+        private void RegisterBallContainer(ServiceContainer serviceContainer)
         {
             BallContainer ballContainer = new BallContainer(
                 serviceContainer.Get<PlatformMovement>(),

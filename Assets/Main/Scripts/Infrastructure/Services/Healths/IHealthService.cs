@@ -1,6 +1,6 @@
 using System;
 
-namespace Main.Scripts.Infrastructure.Services
+namespace Main.Scripts.Infrastructure.Services.Healths
 {
     public interface IHealthService : IService
     {

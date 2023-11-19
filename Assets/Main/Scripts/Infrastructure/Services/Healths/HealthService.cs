@@ -2,7 +2,7 @@ using System;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.GameplayStates;
 
-namespace Main.Scripts.Infrastructure.Services
+namespace Main.Scripts.Infrastructure.Services.Healths
 {
     public class HealthService : IHealthService, IRestartable
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
-using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Logic.Platforms;
 
 namespace Main.Scripts.Logic.Balls

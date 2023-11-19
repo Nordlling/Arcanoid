@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.UI.Animations;
 using UnityEngine;
 using UnityEngine.UI;
