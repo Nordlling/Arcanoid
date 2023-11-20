@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9cdba1f33340939053614ad8be0277, type: 3}
   m_Name: DifficultyConfig
   m_EditorClassIdentifier: 
-  BallSpeedInit: 3.5
+  BallSpeedInit: 4
   BallSpeedIncrement: 0.2
   BallMaxSpeed: 8
