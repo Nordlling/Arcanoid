@@ -1,6 +1,6 @@
-using System;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.GameplayStates;
+using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.Difficulty
 {
@@ -16,10 +16,15 @@ namespace Main.Scripts.Infrastructure.Services.Difficulty
             ResetDifficulty();
         }
 
-        public void IncreaseDifficulty()
+        public void IncreaseDifficulty(int destroyedBlocksToWin, int allBlocksToWin)
         {
-            Speed += _difficultyConfig.BallSpeedIncrement;
-            Speed = Math.Clamp(Speed, 0f, _difficultyConfig.BallMaxSpeed);
+            if (allBlocksToWin == 0)
+            {
+                return;
+            }
+
+            float interpolation = destroyedBlocksToWin / (float)allBlocksToWin;
+            Speed = Mathf.Lerp(_difficultyConfig.BallSpeedInit, _difficultyConfig.BallMaxSpeed, interpolation);
         }
 
         public void Restart()

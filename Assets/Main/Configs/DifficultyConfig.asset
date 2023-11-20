@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: DifficultyConfig
   m_EditorClassIdentifier: 
   BallSpeedInit: 4
-  BallSpeedIncrement: 0.2
-  BallMaxSpeed: 8
+  BallMaxSpeed: 10

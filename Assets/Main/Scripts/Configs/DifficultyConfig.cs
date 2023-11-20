@@ -5,8 +5,9 @@ namespace Main.Scripts.Configs
     [CreateAssetMenu(fileName = "DifficultyConfig", menuName = "Configs/Difficulty")]
     public class DifficultyConfig : ScriptableObject
     {
-        public float BallSpeedInit = 2f;
-        public float BallSpeedIncrement = 0.1f;
-         public float BallMaxSpeed = 8f;
+        [Range(1f, 30f)]
+        public float BallSpeedInit = 4f;
+        [Range(1f, 30f)]
+        public float BallMaxSpeed = 10f;
     }
 }

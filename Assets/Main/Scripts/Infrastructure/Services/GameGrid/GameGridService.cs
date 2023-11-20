@@ -115,8 +115,8 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             
             if (blockPlaceInfo.CheckToWin)
             {
-                _difficultyService.IncreaseDifficulty();
                 DestroyedBlocksToWin++;
+                _difficultyService.IncreaseDifficulty(DestroyedBlocksToWin, AllBlocksToWin);
             }
             
             blockPlaceInfo.Block = null;

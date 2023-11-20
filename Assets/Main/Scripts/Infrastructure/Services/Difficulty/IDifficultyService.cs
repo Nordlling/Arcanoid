@@ -2,7 +2,7 @@ namespace Main.Scripts.Infrastructure.Services.Difficulty
 {
     public interface IDifficultyService : IService
     {
-        void IncreaseDifficulty();
+        void IncreaseDifficulty(int destroyedBlocksToWin, int allBlocksToWin);
         float Speed { get; }
     }
 }
