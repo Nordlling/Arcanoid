@@ -23,6 +23,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: b65960088c231d9479fdf16d0c98e4db, type: 3}
     - {fileID: 21300000, guid: ace97c3d01e0bf743a0f751e9fd15473, type: 3}
     - {fileID: 21300000, guid: ad83e020904d0a8409a86b3657468783, type: 3}
+    - {fileID: 11400000, guid: cddbe921ae60ad84cb846859cfbdbd60, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -251,7 +252,14 @@ MonoBehaviour:
       Data: 19|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 20|Main.Scripts.Factory.Components.DestroyOnExplodeComponentFactory,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -272,19 +280,22 @@ MonoBehaviour:
       Data: 6
     - Name: $v
       Entry: 7
-      Data: 20|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 21|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 6
     - Name: ComponentFactories
       Entry: 7
-      Data: 21|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 22|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 22|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
+      Data: 23|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
+    - Name: ExplosionConfig
+      Entry: 10
+      Data: 7
     - Name: 
       Entry: 8
       Data: 

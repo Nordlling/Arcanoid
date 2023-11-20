@@ -9,8 +9,7 @@ namespace Main.Scripts.Infrastructure.Services.Collision
         
         private readonly ICollisionHandler[] _handlers = {
             new ChangeAngleOnHitHandler(),
-            new SimpleHandler<Health>(),
-            new SimpleHandler<BreaksVisual>(),
+            new HealthHandler(),
             new SimpleHandler<Explosion>(),
         };
 

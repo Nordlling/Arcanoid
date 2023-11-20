@@ -5,21 +5,18 @@ using Object = UnityEngine.Object;
 
 namespace Main.Scripts.Factory.Components
 {
-    public class HealthComponentFactory : IComponentFactory
+    public class DestroyOnExplodeComponentFactory : IComponentFactory
     {
-        public int HealthCount;
-
         public void AddComponent(ServiceContainer serviceContainer, Block block, SpawnContext spawnContext)
         {
-            Health health = block.AddComponent<Health>();
-            health.Construct(HealthCount);
+            DestroyOnExplode destroyOnExplode = block.AddComponent<DestroyOnExplode>();
         }
         
         public void RemoveComponent(Block block)
         {
-            if (block.TryGetComponent(out Health health))
+            if (block.TryGetComponent(out DestroyOnExplode destroyer))
             {
-                Object.Destroy(health);
+                Object.Destroy(destroyer);
             }
         }
     }
