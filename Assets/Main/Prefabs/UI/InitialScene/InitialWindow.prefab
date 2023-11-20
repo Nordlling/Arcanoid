@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _packSelectButton: {fileID: 4144298817020613899}
   _packSelectSceneName: Menu
+  _gameplaySceneName: Gameplay
 --- !u!1001 &5045770360390940930
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,5 +6,6 @@ namespace Main.Scripts.Configs
     public class AssetPathConfig : ScriptableObject
     {
         public string LevelPacksPath;
+        public string DefaultLevelPath;
     }
 }

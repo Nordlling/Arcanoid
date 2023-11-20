@@ -20,7 +20,20 @@ namespace Main.Scripts.Infrastructure.Services.Packs
 
         private PacksProgress _packsProgress;
 
-        public int SelectedPackIndex { get; set; }
+        private bool _isSelected;
+
+        public int SelectedPackIndex
+        {
+            get => _selectedPackIndex;
+            set
+            {
+                _selectedPackIndex = value;
+                _isSelected = true;
+            }
+        }
+
+        private int _selectedPackIndex;
+
         public int WonPackIndex { get; private set; }
         public int WonLevelIndex { get; private set; }
         
@@ -41,22 +54,27 @@ namespace Main.Scripts.Infrastructure.Services.Packs
 
         public string GetCurrentLevelPath()
         {
-            int currentLevelIndex = PackProgresses[SelectedPackIndex].CurrentLevelIndex;
-            if (currentLevelIndex >= PackInfos[SelectedPackIndex].Levels.Count)
+            if (!_isSelected)
+            {
+                return _assetPathConfig.DefaultLevelPath;
+            }
+            
+            int currentLevelIndex = PackProgresses[_selectedPackIndex].CurrentLevelIndex;
+            if (currentLevelIndex >= PackInfos[_selectedPackIndex].Levels.Count)
             {
                 currentLevelIndex = 0;
             }
-            PackInfo selectedPackInfo = PackInfos[SelectedPackIndex];
+            PackInfo selectedPackInfo = PackInfos[_selectedPackIndex];
             return $"{selectedPackInfo.LevelsPath}/{selectedPackInfo.Levels[currentLevelIndex].FileName}";
         }
 
         public void LevelUp()
         {
-            WonPackIndex = SelectedPackIndex;
-            WonLevelIndex = PackProgresses[SelectedPackIndex].CurrentLevelIndex;
+            WonPackIndex = _selectedPackIndex;
+            WonLevelIndex = PackProgresses[_selectedPackIndex].CurrentLevelIndex;
 
             int currentLevelIndex = WonLevelIndex;
-            int levelsCount = PackInfos[SelectedPackIndex].Levels.Count;
+            int levelsCount = PackInfos[_selectedPackIndex].Levels.Count;
             
             currentLevelIndex++;
 
@@ -76,10 +94,10 @@ namespace Main.Scripts.Infrastructure.Services.Packs
         {
             PackProgresses[WonPackIndex].Cycle++;
             PackProgresses[WonPackIndex].IsPassed = true;
-            if (SelectedPackIndex + 1 < PackInfos.Count)
+            if (_selectedPackIndex + 1 < PackInfos.Count)
             {
-                SelectedPackIndex++;
-                PackProgresses[SelectedPackIndex].IsOpen = true;
+                _selectedPackIndex++;
+                PackProgresses[_selectedPackIndex].IsOpen = true;
             }
         }
 

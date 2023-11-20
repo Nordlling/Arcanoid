@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _installers:
-  - {fileID: 1611040585}
+  - {fileID: 1611040587}
 --- !u!4 &1559648428
 Transform:
   m_ObjectHideFlags: 0
@@ -516,28 +516,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1611040586}
-  - component: {fileID: 1611040585}
+  - component: {fileID: 1611040587}
   m_Layer: 0
-  m_Name: FirstSceneWindowInstaller
+  m_Name: InitialSceneWindowInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1611040585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611040584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95ed71e389dc4aa9b7d9ab8ba05377d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _windowsConfig: {fileID: 11400000, guid: 83f7a399c4f01124ea96c805a38e272e, type: 2}
-  _firstSceneKey: InitialWindow
 --- !u!4 &1611040586
 Transform:
   m_ObjectHideFlags: 0
@@ -553,6 +539,18 @@ Transform:
   m_Father: {fileID: 1559648428}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1611040587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611040584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4554d6fe656543a88239b71f88f8eb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2050581452
 GameObject:
   m_ObjectHideFlags: 0

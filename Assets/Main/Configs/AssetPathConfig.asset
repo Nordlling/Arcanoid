@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: AssetPathConfig
   m_EditorClassIdentifier: 
   LevelPacksPath: Packs/AllPacksConfig
+  DefaultLevelPath: Packs/AllLevels/Level9

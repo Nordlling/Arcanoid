@@ -7,6 +7,7 @@ namespace Main.Scripts.Infrastructure.Services.SaveLoad
   {
     private const string _packsProgressKey = "PacksProgress";
     private const string _userSettingsKey = "UserSettings";
+    private const string _isPlayedKey = "IsPlayed";
 
     public void SavePacksProgress(PacksProgress packsProgress)
     {
@@ -29,5 +30,17 @@ namespace Main.Scripts.Infrastructure.Services.SaveLoad
     {
       return JsonUtility.FromJson<UserSettings>(PlayerPrefs.GetString(_userSettingsKey));
     }
+    
+    public void SaveIsPlayed(int isPlayed)
+    {
+      PlayerPrefs.SetInt(_isPlayedKey, isPlayed);
+      PlayerPrefs.Save();
+    }
+
+    public int LoadIsPlayed()
+    {
+      return PlayerPrefs.GetInt(_isPlayedKey);
+    }
+    
   }
 }

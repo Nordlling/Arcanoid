@@ -9,5 +9,8 @@ namespace Main.Scripts.Infrastructure.Services.SaveLoad
     
     void SaveUserSettings(UserSettings userSettings);
     UserSettings LoadUserSettings();
+    
+    void SaveIsPlayed(int isPlayed);
+    int LoadIsPlayed();
   }
 }

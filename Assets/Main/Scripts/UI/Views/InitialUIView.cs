@@ -1,3 +1,5 @@
+using Main.Scripts.Infrastructure.Services.Packs;
+using Main.Scripts.Infrastructure.Services.SaveLoad;
 using Main.Scripts.Infrastructure.States;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +10,16 @@ namespace Main.Scripts.UI.Views
     {
         [SerializeField] private Button _packSelectButton;
         [SerializeField] private string _packSelectSceneName;
+        [SerializeField] private string _gameplaySceneName;
+        
+        private ISaveLoadService _saveLoadService;
+        private IPackService _packService;
+
+        public void Construct(ISaveLoadService saveLoadService, IPackService packService)
+        {
+            _saveLoadService = saveLoadService;
+            _packService = packService;
+        }
         
         private void OnEnable()
         {
@@ -22,7 +34,17 @@ namespace Main.Scripts.UI.Views
         private void OpenPackSelect()
         {
             Close();
-            _gameStateMachine.Enter<TransitSceneState, string>(_packSelectSceneName);
+            
+            if (_saveLoadService.LoadIsPlayed() == 1)
+            {
+                _gameStateMachine.Enter<TransitSceneState, string>(_packSelectSceneName);
+            }
+            else
+            {
+                _saveLoadService.SaveIsPlayed(1);
+                _packService.SelectedPackIndex = 0;
+                _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
+            }
         }
     }
 }
