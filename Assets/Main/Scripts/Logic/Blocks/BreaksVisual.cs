@@ -1,9 +1,8 @@
-using Main.Scripts.Infrastructure.Services.Collision;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Blocks
 {
-    public class BreaksVisual : MonoBehaviour, ICollisionInteractable
+    public class BreaksVisual : MonoBehaviour
     {
         private SpriteRenderer _breakSpriteRenderer;
         private Sprite[] _breakSprites;
@@ -12,20 +11,20 @@ namespace Main.Scripts.Logic.Blocks
 
         public void Construct(SpriteRenderer breakSpriteRenderer, Sprite[] breakSprites)
         {
-            _breakSpriteIndex = 0;
+            _breakSpriteIndex = -1;
             _breakSprites = breakSprites;
             _breakSpriteRenderer = breakSpriteRenderer;
             _breakSpriteRenderer.sprite = null;
         }
 
-        public void Interact()
+        public void Refresh(int count)
         {
+            _breakSpriteIndex += count;
             if (_breakSpriteIndex >= _breakSprites.Length)
             {
-                return;
+                _breakSpriteIndex = _breakSprites.Length - 1;
             }
             _breakSpriteRenderer.sprite = _breakSprites[_breakSpriteIndex];
-            _breakSpriteIndex++;
         }
         
     }

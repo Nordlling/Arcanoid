@@ -70,11 +70,49 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             _gameGridInfo = _gameGridParser.ParseLevelMap(json);
             InitGrid();
         }
-
-        public void RemoveBlockFromGrid(Block block)
+        
+        public bool TryGet(out Block block, Vector2Int position)
         {
-            BlockPlaceInfo blockPlaceInfo = _currentLevel[block.GridPosition.x, block.GridPosition.y];
+            block = null;
+            if (position.x < 0 || position.x >= _currentLevel.GetLength(0) ||
+                position.y < 0 || position.y >= _currentLevel.GetLength(1))
+            {
+                return false;
+            }
 
+            if (_currentLevel[position.x, position.y].Block == null)
+            {
+                return false;
+            }
+
+            block = _currentLevel[position.x, position.y].Block;
+            return true;
+
+        }
+
+        public void RemoveAt(Block block)
+        {
+            RemoveAt(new Vector2Int(block.GridPosition.x, block.GridPosition.y));
+        }
+
+        public void RemoveAt(Vector2Int position)
+        {
+            if (position.x >= 0 && position.x < _currentLevel.GetLength(0) &&
+                position.y >= 0 && position.y < _currentLevel.GetLength(1))
+            {
+                RemoveBlock(_currentLevel[position.x, position.y]);
+            }
+        }
+
+        private void RemoveBlock(BlockPlaceInfo blockPlaceInfo)
+        {
+            if (blockPlaceInfo.Block == null || blockPlaceInfo.ID == 0)
+            {
+                return;
+            }
+            
+            _blockFactory.Despawn(blockPlaceInfo.Block);
+            
             if (blockPlaceInfo.CheckToWin)
             {
                 _difficultyService.IncreaseDifficulty();

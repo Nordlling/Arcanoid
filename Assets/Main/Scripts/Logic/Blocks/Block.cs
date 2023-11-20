@@ -29,15 +29,9 @@ namespace Main.Scripts.Logic.Blocks
             ID = id;
         }
 
-        public void Subscribe(IDieable dieable)
+        public void Destroy()
         {
-            dieable.OnDied += Die;
-        }
-
-        private void Die()
-        {
-            _gameGridService.RemoveBlockFromGrid(this);
-            _blockFactory.Despawn(this);
+            _gameGridService.RemoveAt(this);
         }
     }
 }
