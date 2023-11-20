@@ -27,10 +27,20 @@ namespace Main.Scripts.Logic.Balls
                 return;
             }
 
-            float sign = Mathf.Sign(Vector3.Cross(velocity, normal).z);
+            float rotationDirection = CalculateRotateDirection(velocity, normal);
             float rotationAngle = angle - _minAngle;
-            velocity = Quaternion.AngleAxis(sign * rotationAngle, Vector3.forward) * velocity;
+            velocity = RotateVelocity(velocity, rotationDirection, rotationAngle);
             _rigidbody.velocity = velocity;
+        }
+
+        private float CalculateRotateDirection(Vector2 velocity, Vector2 normal)
+        {
+            return Mathf.Sign(Vector3.Cross(velocity, normal).z);
+        }
+
+        private Vector3 RotateVelocity(Vector2 velocity, float rotateDirection, float rotationAngle)
+        {
+            return Quaternion.AngleAxis(rotateDirection * rotationAngle, Vector3.forward) * velocity;
         }
     }
 }
