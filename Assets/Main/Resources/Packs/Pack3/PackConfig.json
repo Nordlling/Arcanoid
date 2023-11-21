@@ -3,23 +3,6 @@
 	"PackName": "MILKYWAY",
 	"MapImagePath": "Packs/Pack3/Map",
 	"ButtonColor": "#DDCC38",
-	"LevelsPath": "Packs/AllLevels",
-	"Levels": [
-		{
-			"LevelID": "Level6",
-			"FileName": "Level6"
-		},
-		{
-			"LevelID": "Level7",
-			"FileName": "Level7"
-		},
-		{
-			"LevelID": "Level8",
-			"FileName": "Level8"
-		},
-		{
-			"LevelID": "Level9",
-			"FileName": "Level9"
-		}
-	]
+	"LevelsPathTemplate": "Packs/AllLevels/Level{0}",
+	"LevelsCount": 4
 }

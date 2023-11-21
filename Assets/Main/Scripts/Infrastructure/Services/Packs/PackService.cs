@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.GameGrid.Parser;
@@ -59,13 +60,19 @@ namespace Main.Scripts.Infrastructure.Services.Packs
                 return _assetPathConfig.DefaultLevelPath;
             }
             
-            int currentLevelIndex = PackProgresses[_selectedPackIndex].CurrentLevelIndex;
-            if (currentLevelIndex >= PackInfos[_selectedPackIndex].Levels.Count)
+            int currentPackLevelIndex = PackProgresses[_selectedPackIndex].CurrentLevelIndex;
+            if (currentPackLevelIndex >= PackInfos[_selectedPackIndex].LevelsCount)
             {
-                currentLevelIndex = 0;
+                currentPackLevelIndex = 0;
             }
+            
+            int previousPacksLevelsCount = PackInfos.Take(_selectedPackIndex).Sum(pack => pack.LevelsCount);
+            int currentLevelIndex = previousPacksLevelsCount + currentPackLevelIndex + 1;
+            
             PackInfo selectedPackInfo = PackInfos[_selectedPackIndex];
-            return $"{selectedPackInfo.LevelsPath}/{selectedPackInfo.Levels[currentLevelIndex].FileName}";
+            string resultPath = string.Format(selectedPackInfo.LevelsPathTemplate, currentLevelIndex);
+            
+            return resultPath;
         }
 
         public void LevelUp()
@@ -74,7 +81,7 @@ namespace Main.Scripts.Infrastructure.Services.Packs
             WonLevelIndex = PackProgresses[_selectedPackIndex].CurrentLevelIndex;
 
             int currentLevelIndex = WonLevelIndex;
-            int levelsCount = PackInfos[_selectedPackIndex].Levels.Count;
+            int levelsCount = PackInfos[_selectedPackIndex].LevelsCount;
             
             currentLevelIndex++;
 

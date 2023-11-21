@@ -3,15 +3,6 @@
 	"PackName": "SIGARA",
 	"MapImagePath": "Packs/Pack1/Map",
 	"ButtonColor": "#53FD79",
-	"LevelsPath": "Packs/AllLevels",
-	"Levels": [
-		{
-			"LevelID": "Level1",
-			"FileName": "Level1"
-		},
-		{
-			"LevelID": "Level2",
-			"FileName": "Level2"
-		}
-	]
+	"LevelsPathTemplate": "Packs/AllLevels/Level{0}",
+	"LevelsCount": 2
 }

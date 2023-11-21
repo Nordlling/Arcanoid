@@ -50,7 +50,7 @@ namespace Main.Scripts.UI.Views
         private void RefreshPackProgress()
         {
             int currentLevelNumber = _packService.PackProgresses[_packService.SelectedPackIndex].CurrentLevelIndex + 1;
-            int allLevelsCount = _packService.PackInfos[_packService.SelectedPackIndex].Levels.Count;
+            int allLevelsCount = _packService.PackInfos[_packService.SelectedPackIndex].LevelsCount;
             _packProgressValue.text = $"{currentLevelNumber}/{allLevelsCount}";
 
             _packImage.sprite = _packService.PackInfos[_packService.SelectedPackIndex].MapImage;

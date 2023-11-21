@@ -32,7 +32,7 @@ namespace Main.Scripts.UI.Views
         private void SetMapInfo()
         {
             string currentLevelIndex = (_packService.WonLevelIndex + 1).ToString();
-            string allLevels = _packService.PackInfos[_packService.WonPackIndex].Levels.Count.ToString();
+            string allLevels = _packService.PackInfos[_packService.WonPackIndex].LevelsCount.ToString();
             
             _packProgressValue.text =$"{currentLevelIndex}/{allLevels}";
             _mapImage.sprite = _packService.PackInfos[_packService.WonPackIndex].MapImage;

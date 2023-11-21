@@ -75,15 +75,15 @@ namespace Main.Scripts.UI.Views
             _packNameValue.Localize(_packService.PackInfos[_packIndex].PackName);
             _packImage.sprite = packInfo.MapImage;
             
-            _packProgressValueBlocked.text = $"0/{packInfo.Levels.Count}";
+            _packProgressValueBlocked.text = $"0/{packInfo.LevelsCount}";
         }
         
         private void RefreshDynamicInfo(PackInfo packInfo, PackProgress packProgress)
         {
             _visual.SetActive(packProgress.IsOpen);
             _visualBlocked.SetActive(!packProgress.IsOpen);
-            int passedLevelsCount = packProgress.IsPassed ? packInfo.Levels.Count : packProgress.CurrentLevelIndex;
-            _packProgressValue.text = $"{passedLevelsCount}/{packInfo.Levels.Count}";
+            int passedLevelsCount = packProgress.IsPassed ? packInfo.LevelsCount : packProgress.CurrentLevelIndex;
+            _packProgressValue.text = $"{passedLevelsCount}/{packInfo.LevelsCount}";
         }
     }
 }
