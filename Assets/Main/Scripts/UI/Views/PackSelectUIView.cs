@@ -3,6 +3,7 @@ using Main.Scripts.Infrastructure;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Infrastructure.States;
 using UnityEngine;
+using Main.Scripts.UI.Buttons;
 using UnityEngine.UI;
 
 namespace Main.Scripts.UI.Views
@@ -14,6 +15,7 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private PackButton _packButtonPrefab;
         [SerializeField] private int _minButtonsCount;
         [SerializeField] private GameObject _contentGroup;
+        private PackButton _lastOpenedButton;
 
         [Header("Scene Names")]
         [SerializeField] private string _gameplaySceneName;
@@ -41,6 +43,13 @@ namespace Main.Scripts.UI.Views
         private void OnDisable()
         {
             _backButton.onClick.RemoveListener(Back);
+        }
+
+        private void OnEnable()
+        {
+            FindLastOpenedButton();
+            _lastOpenedButton.Focus();
+            _backButton.onClick.AddListener(Back);
         }
 
         private void InitButtons()
@@ -73,6 +82,20 @@ namespace Main.Scripts.UI.Views
                 PackButton packButton = Instantiate(_packButtonPrefab, _contentGroup.transform);
                 _buttons.Add(packButton);
             }
+        }
+
+        private void FindLastOpenedButton()
+        {
+            for (int i = 0; i < _packService.PackProgresses.Count; i++)
+            {
+                if (_packService.PackProgresses[i].IsOpen)
+                {
+                    continue;
+                }
+                _lastOpenedButton = _buttons[i - 1];
+                return;
+            }
+            _lastOpenedButton = _buttons[_packService.PackProgresses.Count - 1];
         }
 
         private void OpenPackSelect()

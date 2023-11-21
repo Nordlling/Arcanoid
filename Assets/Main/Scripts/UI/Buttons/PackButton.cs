@@ -1,11 +1,12 @@
 using System;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Localization;
+using Main.Scripts.UI.Animations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.Buttons
 {
     public class PackButton : MonoBehaviour
     {
@@ -24,6 +25,10 @@ namespace Main.Scripts.UI.Views
         
         [Header("Color")]
         [SerializeField] private Image[] _coloredImages;
+        
+        [Header("Animation")]
+        [SerializeField] private PulseAnimation _pulseAnimation;
+        [SerializeField] private Transform _glowTransformToPulse;
 
         private IPackService _packService;
         private int _packIndex;
@@ -36,6 +41,11 @@ namespace Main.Scripts.UI.Views
             _packIndex = packIndex;
             RefreshStaticInfo(_packService.PackInfos[_packIndex]);
             RefreshDynamicInfo(_packService.PackInfos[_packIndex], _packService.PackProgresses[_packIndex]);
+        }
+
+        public void Focus()
+        {
+            _pulseAnimation.Play(_glowTransformToPulse);
         }
         
         private void OnEnable()
