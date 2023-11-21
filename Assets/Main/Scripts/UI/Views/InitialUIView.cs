@@ -1,6 +1,7 @@
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Infrastructure.Services.SaveLoad;
 using Main.Scripts.Infrastructure.States;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,27 +9,39 @@ namespace Main.Scripts.UI.Views
 {
     public class InitialUIView : UIView
     {
-        [SerializeField] private Button _packSelectButton;
+        [ValueDropdown("GetSceneNames")]
         [SerializeField] private string _packSelectSceneName;
+        [ValueDropdown("GetSceneNames")]
         [SerializeField] private string _gameplaySceneName;
+
+        [SerializeField] private Button _packSelectButton;
+        [SerializeField] private LanguageSelectUIView _languageSelectUIView;
         
+        private IGameStateMachine _gameStateMachine;
         private ISaveLoadService _saveLoadService;
         private IPackService _packService;
 
-        public void Construct(ISaveLoadService saveLoadService, IPackService packService)
+        protected override void OnInitialize()
         {
-            _saveLoadService = saveLoadService;
-            _packService = packService;
-        }
-        
-        private void OnEnable()
-        {
-            _packSelectButton.onClick.AddListener(OpenPackSelect);
+            base.OnInitialize();
+            _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
+            _saveLoadService = _serviceContainer.Get<ISaveLoadService>();
+            _packService = _serviceContainer.Get<IPackService>();
+            _languageSelectUIView.Init();
         }
 
-        private void OnDisable()
+        protected override void OnOpen()
         {
+            base.OnOpen();
+            _packSelectButton.onClick.AddListener(OpenPackSelect);
+            _languageSelectUIView.OnOpen();
+        }
+        
+        protected override void OnClose()
+        {
+            base.OnClose();
             _packSelectButton.onClick.RemoveListener(OpenPackSelect);
+            _languageSelectUIView.OnClose();
         }
 
         private void OpenPackSelect()

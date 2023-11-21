@@ -9,22 +9,25 @@ namespace Main.Scripts.UI.Views
     {
         [SerializeField] private Button _restartButton;
         
-        private void OnEnable()
+        protected override void OnOpen()
         {
+            base.OnOpen();
             _restartButton.onClick.AddListener(RestartGame);
         }
-
-        private void OnDisable()
+        
+        protected override void OnClose()
         {
+            base.OnClose();
             _restartButton.onClick.RemoveListener(RestartGame);
         }
 
         private async void RestartGame()
         {
-            _gameplayStateMachine.Enter<RestartState>();
+            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
+            gamePlayStateMachine.Enter<RestartState>();
             Close();
             await Task.Yield();
-            _gameplayStateMachine.Enter<PrePlayState>();
+            gamePlayStateMachine.Enter<PrePlayState>();
         }
     }
 }

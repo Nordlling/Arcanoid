@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af23a10aef44fb2a0ad45f8b885d03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scenesConfig: {fileID: 11400000, guid: dea6e8fd3fdc9154f870dd15ca15a56a, type: 2}
   _continueButton: {fileID: 352278555107773175}
   _restartButton: {fileID: 4005302560705856096}
   _menuButton: {fileID: 7790142859016611516}

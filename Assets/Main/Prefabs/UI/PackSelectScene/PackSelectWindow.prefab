@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5981494046317566218}
   - component: {fileID: 1816851936173461427}
   - component: {fileID: 7816385656729788357}
+  - component: {fileID: 8459999191174813373}
   m_Layer: 5
   m_Name: PackSelectWindow
   m_TagString: Untagged
@@ -61,12 +62,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813a5a7a50e84236a350e4fd604b5064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scenesConfig: {fileID: 11400000, guid: dea6e8fd3fdc9154f870dd15ca15a56a, type: 2}
   _backButton: {fileID: 2896896430677059551}
   _packButtonPrefab: {fileID: 7092596130810180561, guid: 00ba54e6c047c654d9e5acaa27cb7012, type: 3}
   _minButtonsCount: 8
   _contentGroup: {fileID: 4109190367587129290}
   _gameplaySceneName: Gameplay
   _initialSceneName: Initial
+--- !u!114 &8459999191174813373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869443477379842123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e3a78b56be442a8b100b87976b7e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollRect: {fileID: 4109190367393365986}
+  _target: 5
+  scrollTime: 2
+  holdTime: 3
 --- !u!1 &1196934212446072426
 GameObject:
   m_ObjectHideFlags: 0

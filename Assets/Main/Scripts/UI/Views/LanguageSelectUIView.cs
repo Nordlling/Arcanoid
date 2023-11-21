@@ -5,24 +5,24 @@ using UnityEngine;
 
 namespace Main.Scripts.UI.Views
 {
-	public class LanguageSelectUIView : UIView
+	public class LanguageSelectUIView : MonoBehaviour
 	{
 		[SerializeField] private TMP_Dropdown _languageDropdown;
 		
 		private ILocalizationManager _localizationManager;
 
-		private void Start()
+		public void Init()
 		{
 			_localizationManager = ProjectContext.Instance.ServiceContainer.Get<ILocalizationManager>();
 			InitDropdown();
 		}
-
-		private void OnEnable()
+		
+		public void OnOpen()
 		{
 			_languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
 		}
-
-		private void OnDisable()
+        
+		public void OnClose()
 		{
 			_languageDropdown.onValueChanged.RemoveListener(OnLanguageChanged);
 		}

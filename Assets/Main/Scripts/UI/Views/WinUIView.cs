@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
-using Main.Scripts.Infrastructure;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Packs;
 using TMPro;
 using Main.Scripts.Infrastructure.States;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,22 +11,34 @@ namespace Main.Scripts.UI.Views
 {
     public class WinUIView : UIView
     {
+        [ValueDropdown("GetSceneNames")]
+        [SerializeField] private string _menuSceneName;
+        
         [SerializeField] private Button _nextButton;
         [SerializeField] private TextMeshProUGUI _packProgressValue;
         [SerializeField] private Image _mapImage;
-        [SerializeField] private string _menuSceneName;
-
+        
+        private IGameStateMachine _gameStateMachine;
         private IPackService _packService;
 
-        private void Awake()
+        protected override void OnInitialize()
         {
-            _packService = ProjectContext.Instance.ServiceContainer.Get<IPackService>();
+            base.OnInitialize();
+            _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
+            _packService = _serviceContainer.Get<IPackService>();
         }
 
-        private void OnEnable()
+        protected override void OnOpen()
         {
+            base.OnOpen();
             _nextButton.onClick.AddListener(NextGame);
             SetMapInfo();
+        }
+        
+        protected override void OnClose()
+        {
+            base.OnClose();
+            _nextButton.onClick.RemoveListener(NextGame);
         }
 
         private void SetMapInfo()
@@ -38,14 +50,11 @@ namespace Main.Scripts.UI.Views
             _mapImage.sprite = _packService.PackInfos[_packService.WonPackIndex].MapImage;
         }
 
-        private void OnDisable()
-        {
-            _nextButton.onClick.RemoveListener(NextGame);
-        }
-
         private async void NextGame()
         {
             PackProgress packProgress = _packService.PackProgresses[_packService.WonPackIndex];
+            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
+
             if (IsReplayablePack(packProgress) || IsLastPack(packProgress))
             {
                 Close();
@@ -53,10 +62,10 @@ namespace Main.Scripts.UI.Views
             }
             else
             {
-                _gameplayStateMachine.Enter<RestartState>();
+                gamePlayStateMachine?.Enter<RestartState>();
                 Close();
                 await Task.Yield();
-                _gameplayStateMachine.Enter<PrePlayState>();
+                gamePlayStateMachine?.Enter<PrePlayState>();
             }
         }
 

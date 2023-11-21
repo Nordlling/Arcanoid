@@ -1,35 +1,55 @@
-using Main.Scripts.Infrastructure.GameplayStates;
-using Main.Scripts.Infrastructure.States;
+using System.Collections.Generic;
+using Main.Scripts.Configs;
+using Main.Scripts.Infrastructure.Services;
 using UnityEngine;
 
 namespace Main.Scripts.UI
 {
     public class UIView : MonoBehaviour
     {
-        protected IWindowsManager _windowsManager;
-        protected IGameStateMachine _gameStateMachine;
-        protected IGameplayStateMachine _gameplayStateMachine;
+        protected ServiceContainer _serviceContainer;
+
+        [SerializeField] private ScenesConfig _scenesConfig;
+        
         public PanelMessage PanelMessage { get; set; }
 
-        public void Construct(IWindowsManager windowsManager)
+        public void SetSceneServiceContainer(ServiceContainer serviceContainer)
         {
-            _windowsManager = windowsManager;
+            _serviceContainer = serviceContainer;
         }
 
-        public void SetStateMachines(IGameStateMachine gameStateMachine, IGameplayStateMachine gameplayStateMachine)
+        public void Init()
         {
-            _gameStateMachine = gameStateMachine;
-            _gameplayStateMachine = gameplayStateMachine; 
+            OnInitialize();
         }
-        
+
         public void Open()
         {
             gameObject.SetActive(true);
+            OnOpen();
         }
-        
+
         public void Close()
         {
+            OnClose();
             gameObject.SetActive(false);
+        }
+
+        protected virtual void OnInitialize()
+        {
+        }
+
+        protected virtual void OnOpen()
+        {
+        }
+
+        protected virtual void OnClose()
+        {
+        }
+
+        protected List<string> GetSceneNames()
+        {
+            return _scenesConfig.SceneNames;
         }
     }
 }

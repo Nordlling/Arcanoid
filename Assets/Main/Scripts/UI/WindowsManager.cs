@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Main.Scripts.Configs;
-using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services;
-using Main.Scripts.Infrastructure.States;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +39,7 @@ namespace Main.Scripts.UI
                 window = CreateWindow(key);
             }
 
-            window.SetStateMachines(_serviceContainer.Get<IGameStateMachine>(),_serviceContainer.Get<IGameplayStateMachine>());
+            window.SetSceneServiceContainer(_serviceContainer);
             return window;
         }
 
@@ -52,7 +50,7 @@ namespace Main.Scripts.UI
             {
                 if (view is T window)
                 {
-                    window.SetStateMachines(_serviceContainer.Get<IGameStateMachine>(),_serviceContainer.Get<IGameplayStateMachine>());
+                    window.SetSceneServiceContainer(_serviceContainer);
                     return window;
                 }
             }
@@ -108,8 +106,8 @@ namespace Main.Scripts.UI
         private T CreateWindowBasic<T>(T prefab) where T : UIView
         {
             T window = Instantiate(prefab, transform);
-            window.Construct(this);
-            window.SetStateMachines(_serviceContainer.Get<IGameStateMachine>(),_serviceContainer.Get<IGameplayStateMachine>());
+            window.SetSceneServiceContainer(_serviceContainer);
+            window.Init();
             return window;
         }
         

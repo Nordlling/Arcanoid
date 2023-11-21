@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 829201aad9604474bba6093a4395c3b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scenesConfig: {fileID: 11400000, guid: dea6e8fd3fdc9154f870dd15ca15a56a, type: 2}
   _languageDropdown: {fileID: 6408678695735693162}
 --- !u!1001 &2300964384706296778
 PrefabInstance:

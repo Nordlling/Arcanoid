@@ -1,15 +1,20 @@
 using System.Collections.Generic;
-using Main.Scripts.Infrastructure;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Infrastructure.States;
-using UnityEngine;
 using Main.Scripts.UI.Buttons;
+using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Main.Scripts.UI.Views
 {
     public class PackSelectUIView : UIView
     {
+        [ValueDropdown("GetSceneNames")]
+        [SerializeField] private string _gameplaySceneName;
+        [ValueDropdown("GetSceneNames")]
+        [SerializeField] private string _initialSceneName;
+        
         [SerializeField] private Button _backButton;
 
         [SerializeField] private PackButton _packButtonPrefab;
@@ -17,39 +22,31 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private GameObject _contentGroup;
         private PackButton _lastOpenedButton;
 
-        [Header("Scene Names")]
-        [SerializeField] private string _gameplaySceneName;
-        [SerializeField] private string _initialSceneName;
-
-        private IPackService _packService;
         private readonly List<PackButton> _buttons = new();
 
-        public void Construct(IPackService packService)
-        {
-            _packService = packService;
-        }
+        private IGameStateMachine _gameStateMachine;
+        private IPackService _packService;
 
-        private void Start()
+        protected override void OnInitialize()
         {
-            _packService = ProjectContext.Instance.ServiceContainer.Get<IPackService>();
+            base.OnInitialize();
+            _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
+            _packService = _serviceContainer.Get<IPackService>();
             InitButtons();
         }
-
-        private void OnEnable()
+        
+        protected override void OnOpen()
         {
-            _backButton.onClick.AddListener(Back);
-        }
-
-        private void OnDisable()
-        {
-            _backButton.onClick.RemoveListener(Back);
-        }
-
-        private void OnEnable()
-        {
+            base.OnOpen();
             FindLastOpenedButton();
             _lastOpenedButton.Focus();
             _backButton.onClick.AddListener(Back);
+        }
+        
+        protected override void OnClose()
+        {
+            base.OnClose();
+            _backButton.onClick.RemoveListener(Back);
         }
 
         private void InitButtons()

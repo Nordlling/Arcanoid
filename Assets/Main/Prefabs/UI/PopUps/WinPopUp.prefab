@@ -1085,10 +1085,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4d5b8a453441edac893a270ff948fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scenesConfig: {fileID: 11400000, guid: dea6e8fd3fdc9154f870dd15ca15a56a, type: 2}
+  _menuSceneName: Menu
   _nextButton: {fileID: 4005302560705856096}
   _packProgressValue: {fileID: 6394301295756403089}
   _mapImage: {fileID: 3227854766074301812}
-  _menuSceneName: Menu
 --- !u!1 &7868062491170598824
 GameObject:
   m_ObjectHideFlags: 0
