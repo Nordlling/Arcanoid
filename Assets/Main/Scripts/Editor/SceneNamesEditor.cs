@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Main.Scripts.Configs;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Main.Scripts.Editor
 {

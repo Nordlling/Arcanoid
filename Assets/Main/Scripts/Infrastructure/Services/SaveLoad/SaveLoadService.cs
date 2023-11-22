@@ -1,34 +1,37 @@
+using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.Packs;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.SaveLoad
 {
   public class SaveLoadService : ISaveLoadService
   {
+    private const string _isPlayedKey = "IsPlayed";
     private const string _packsProgressKey = "PacksProgress";
     private const string _userSettingsKey = "UserSettings";
-    private const string _isPlayedKey = "IsPlayed";
+    private const string _energyKey = "Energy";
 
     public void SavePacksProgress(PacksProgress packsProgress)
     {
-      PlayerPrefs.SetString(_packsProgressKey, JsonUtility.ToJson(packsProgress));
+      PlayerPrefs.SetString(_packsProgressKey, JsonConvert.SerializeObject(packsProgress));
       PlayerPrefs.Save();
     }
 
     public PacksProgress LoadPacksProgress()
     {
-      return JsonUtility.FromJson<PacksProgress>(PlayerPrefs.GetString(_packsProgressKey));
+      return JsonConvert.DeserializeObject<PacksProgress>(PlayerPrefs.GetString(_packsProgressKey));
     }
     
     public void SaveUserSettings(UserSettings userSettings)
     {
-      PlayerPrefs.SetString(_userSettingsKey, JsonUtility.ToJson(userSettings));
+      PlayerPrefs.SetString(_userSettingsKey, JsonConvert.SerializeObject(userSettings));
       PlayerPrefs.Save();
     }
 
     public UserSettings LoadUserSettings()
     {
-      return JsonUtility.FromJson<UserSettings>(PlayerPrefs.GetString(_userSettingsKey));
+      return JsonConvert.DeserializeObject<UserSettings>(PlayerPrefs.GetString(_userSettingsKey));
     }
     
     public void SaveIsPlayed(int isPlayed)
@@ -41,6 +44,17 @@ namespace Main.Scripts.Infrastructure.Services.SaveLoad
     {
       return PlayerPrefs.GetInt(_isPlayedKey);
     }
-    
+
+    public void SaveEnergy(EnergyData energyData)
+    {
+      PlayerPrefs.SetString(_energyKey, JsonConvert.SerializeObject(energyData));
+      PlayerPrefs.Save();
+    }
+
+    public EnergyData LoadEnergy()
+    {
+      EnergyData energyData = JsonConvert.DeserializeObject<EnergyData>(PlayerPrefs.GetString(_energyKey));
+      return energyData;
+    }
   }
 }

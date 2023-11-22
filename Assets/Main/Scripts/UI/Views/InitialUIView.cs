@@ -1,3 +1,4 @@
+using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Infrastructure.Services.SaveLoad;
 using Main.Scripts.Infrastructure.States;
@@ -20,6 +21,7 @@ namespace Main.Scripts.UI.Views
         private IGameStateMachine _gameStateMachine;
         private ISaveLoadService _saveLoadService;
         private IPackService _packService;
+        private IEnergyService _energyService;
 
         protected override void OnInitialize()
         {
@@ -27,6 +29,7 @@ namespace Main.Scripts.UI.Views
             _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
             _saveLoadService = _serviceContainer.Get<ISaveLoadService>();
             _packService = _serviceContainer.Get<IPackService>();
+            _energyService = _serviceContainer.Get<IEnergyService>();
             _languageSelectUIView.Init();
         }
 
@@ -54,6 +57,7 @@ namespace Main.Scripts.UI.Views
             }
             else
             {
+                _energyService.TryWasteEnergy(_energyService.EnergyForPlay);
                 _saveLoadService.SaveIsPlayed(1);
                 _packService.SelectedPackIndex = 0;
                 _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);

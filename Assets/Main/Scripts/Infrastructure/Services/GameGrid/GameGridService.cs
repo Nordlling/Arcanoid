@@ -4,6 +4,7 @@ using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Difficulty;
+using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Logic.Blocks;
@@ -20,6 +21,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         private readonly IGameplayStateMachine _gameplayStateMachine;
         private readonly IPackService _packService;
         private readonly IDifficultyService _difficultyService;
+        private readonly IEnergyService _energyService;
 
         private GameGridInfo _gameGridInfo;
         private BlockPlaceInfo[,] _currentLevel;
@@ -36,7 +38,8 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             BlockPlacer blockPlacer, 
             IGameplayStateMachine gameplayStateMachine,
             IPackService packService,
-            IDifficultyService difficultyService)
+            IDifficultyService difficultyService,
+            IEnergyService energyService)
         {
             _blockFactory = blockFactory;
             _simpleLoader = simpleLoader;
@@ -45,6 +48,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             _gameplayStateMachine = gameplayStateMachine;
             _packService = packService;
             _difficultyService = difficultyService;
+            _energyService = energyService;
         }
         
         public CurrentLevelInfo CurrentLevelInfo { get; set; }
@@ -137,6 +141,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             if (DestroyedBlocksToWin >= AllBlocksToWin)
             {
                 _packService.LevelUp();
+                _energyService.RewardEnergy();
                 _gameplayStateMachine.Enter<WinState>();
             }
         }

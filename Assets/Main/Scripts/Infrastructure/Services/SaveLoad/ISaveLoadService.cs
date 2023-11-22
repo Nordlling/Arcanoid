@@ -1,3 +1,4 @@
+using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.Packs;
 
 namespace Main.Scripts.Infrastructure.Services.SaveLoad
@@ -12,5 +13,8 @@ namespace Main.Scripts.Infrastructure.Services.SaveLoad
     
     void SaveIsPlayed(int isPlayed);
     int LoadIsPlayed();
+    
+    void SaveEnergy(EnergyData energyData);
+    EnergyData LoadEnergy();
   }
 }
