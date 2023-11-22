@@ -19,13 +19,13 @@ namespace Main.Scripts.UI.Views
 
         private IPackService _packService;
         private IGameGridService _gameGridService;
+        private ITimeProvider _timeProvider;
 
         public void Construct(IPackService packService, IGameGridService gameGridService, ITimeProvider timeProvider)
         {
+            _timeProvider = timeProvider;
             _packService = packService;
             _gameGridService = gameGridService;
-            
-            _runningCounterAnimation.Construct(timeProvider);
             
             RefreshPackProgress();
             RefreshLevelProgress();
@@ -47,6 +47,11 @@ namespace Main.Scripts.UI.Views
             _gameGridService.OnDestroyed -= RefreshLevelProgress;
         }
 
+        private void Update()
+        {
+            _runningCounterAnimation.UpdateTime(_timeProvider.Stopped ? 0f : 1f);
+        }
+
         private void RefreshPackProgress()
         {
             int currentLevelNumber = _packService.PackProgresses[_packService.SelectedPackIndex].CurrentLevelIndex + 1;
@@ -60,7 +65,7 @@ namespace Main.Scripts.UI.Views
         {
             float levelProgressValue = (float)_gameGridService.DestroyedBlocksToWin / _gameGridService.AllBlocksToWin;
             int levelProgressPercents = (int)(100 * levelProgressValue);
-            _runningCounterAnimation.Play(_levelProgressValue, _packProgressText, levelProgressPercents);
+            _runningCounterAnimation.Play(_levelProgressValue, levelProgressPercents, _packProgressText);
         }
     }
 }

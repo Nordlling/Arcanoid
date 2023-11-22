@@ -6,14 +6,14 @@ namespace Main.Scripts.UI.Animations
 {
     public class PulseAnimation : MonoBehaviour
     {
-        [SerializeField] private float _pauseDuration;
-        
         [SerializeField] private float _animationDuration;
-        [SerializeField] private int _vibrato;
-        [SerializeField] private float _elasticity;
+        [SerializeField] private float _pauseDuration;
+
+        [SerializeField] private int _vibrato = 1;
+        [SerializeField] private float _elasticity = 1;
+        [SerializeField] private int _loops = 2;
         [SerializeField] private Vector3 _scaleMultiplier;
-        [SerializeField] private int _loops;
-        
+
         private readonly Dictionary<Transform, Sequence> _sequences = new();
 
         public void Play(Transform currentObject)

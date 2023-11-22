@@ -4,6 +4,7 @@ using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Difficulty;
+using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.Packs;
@@ -55,7 +56,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                     blockPlacer, 
                     serviceContainer.Get<IGameplayStateMachine>(), 
                     serviceContainer.Get<IPackService>(),
-                    serviceContainer.Get<IDifficultyService>()
+                    serviceContainer.Get<IDifficultyService>(),
+                    serviceContainer.Get<IEnergyService>()
                 );
             
             serviceContainer.SetService<IGameGridService, GameGridService>(gameGridService);

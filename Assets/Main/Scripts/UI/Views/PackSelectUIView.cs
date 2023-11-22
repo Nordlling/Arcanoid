@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Infrastructure.States;
 using Main.Scripts.UI.Buttons;
@@ -15,23 +16,32 @@ namespace Main.Scripts.UI.Views
         [ValueDropdown("GetSceneNames")]
         [SerializeField] private string _initialSceneName;
         
+        [Header("Buttons")]
         [SerializeField] private Button _backButton;
 
+        [Header("Packs")]
         [SerializeField] private PackButton _packButtonPrefab;
         [SerializeField] private int _minButtonsCount;
         [SerializeField] private GameObject _contentGroup;
+        
+        [Header("Energy")]
+        [SerializeField] private EnergyBarUIView _energyBarUIView;
+        
         private PackButton _lastOpenedButton;
 
         private readonly List<PackButton> _buttons = new();
 
         private IGameStateMachine _gameStateMachine;
         private IPackService _packService;
+        private IEnergyService _energyService;
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
             _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
             _packService = _serviceContainer.Get<IPackService>();
+            _energyService = _serviceContainer.Get<IEnergyService>();
+            _energyBarUIView.Construct(_energyService);
             InitButtons();
         }
         
@@ -41,12 +51,15 @@ namespace Main.Scripts.UI.Views
             FindLastOpenedButton();
             _lastOpenedButton.Focus();
             _backButton.onClick.AddListener(Back);
+            _energyBarUIView.OnOpen();
+            _energyBarUIView.RefreshEnergy();
         }
         
         protected override void OnClose()
         {
             base.OnClose();
             _backButton.onClick.RemoveListener(Back);
+            _energyBarUIView.OnClose();
         }
 
         private void InitButtons()
@@ -97,8 +110,15 @@ namespace Main.Scripts.UI.Views
 
         private void OpenPackSelect()
         {
-            Close();
-            _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
+            if (_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
+            {
+                Close();
+                _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
+            }
+            else
+            {
+                _energyBarUIView.Focus();
+            }
         }
 
         private void Back()

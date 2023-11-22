@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
+using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.Packs;
 using TMPro;
 using Main.Scripts.Infrastructure.States;
@@ -17,15 +18,19 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private Button _nextButton;
         [SerializeField] private TextMeshProUGUI _packProgressValue;
         [SerializeField] private Image _mapImage;
+        [SerializeField] private EnergyBarUIView _energyBarUIView;
         
         private IGameStateMachine _gameStateMachine;
         private IPackService _packService;
+        private IEnergyService _energyService;
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
             _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
             _packService = _serviceContainer.Get<IPackService>();
+            _energyService = _serviceContainer.Get<IEnergyService>();
+            _energyBarUIView.Construct(_energyService);
         }
 
         protected override void OnOpen()
@@ -33,12 +38,15 @@ namespace Main.Scripts.UI.Views
             base.OnOpen();
             _nextButton.onClick.AddListener(NextGame);
             SetMapInfo();
+            _energyBarUIView.OnOpen();
+            _energyBarUIView.RefreshEnergyWithAnimations();
         }
         
         protected override void OnClose()
         {
             base.OnClose();
             _nextButton.onClick.RemoveListener(NextGame);
+            _energyBarUIView.OnClose();
         }
 
         private void SetMapInfo()
@@ -55,7 +63,7 @@ namespace Main.Scripts.UI.Views
             PackProgress packProgress = _packService.PackProgresses[_packService.WonPackIndex];
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
 
-            if (IsReplayablePack(packProgress) || IsLastPack(packProgress))
+            if (IsReplayablePack(packProgress) || IsLastPack(packProgress) || !_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
             {
                 Close();
                 _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);

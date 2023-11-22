@@ -24,7 +24,6 @@ namespace Main.Scripts.Infrastructure.Provides
         {
             _cachedTimeScale = _timeScale;
             _timeScale = timeScale;
-            
         }
 
         public void TurnBackTime()
