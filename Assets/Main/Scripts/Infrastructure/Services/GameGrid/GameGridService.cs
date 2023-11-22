@@ -101,8 +101,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         public void RemoveAt(Vector2Int position)
         {
-            if (position.x >= 0 && position.x < _currentLevel.GetLength(0) &&
-                position.y >= 0 && position.y < _currentLevel.GetLength(1))
+            if (IsWithinArrayBounds(_currentLevel, position.x, position.y))
             {
                 RemoveBlock(_currentLevel[position.x, position.y]);
             }
@@ -189,6 +188,19 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                     }
                 }
             }
+        }
+        
+        private bool IsWithinArrayBounds(BlockPlaceInfo[,] array, params int[] positions)
+        {
+            for (int i = 0; i < positions.Length; i++)
+            {
+                if (positions[i] < 0 || positions[i] >= array.GetLength(i))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         
     }
