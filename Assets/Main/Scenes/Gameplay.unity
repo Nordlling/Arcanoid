@@ -777,12 +777,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneStarter:
-    rid: 5355157621018722304
+    rid: 5355157621018722307
   references:
     version: 2
     RefIds:
-    - rid: 5355157621018722304
-      type: {class: GameplaySceneStarter, ns: Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers, asm: Assembly-CSharp}
+    - rid: 5355157621018722307
+      type: {class: GameplaySceneStarter, ns: Main.Scripts.Infrastructure.Starters, asm: Assembly-CSharp}
 --- !u!1 &1500524887
 GameObject:
   m_ObjectHideFlags: 0
