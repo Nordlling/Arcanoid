@@ -11,8 +11,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         void CreateLevelMap();
         void RemoveAt(Block block);
         void RemoveAt(Vector2Int position);
-        bool TryGet(out Block block, Vector2Int position);
-        void ResetCurrentLevel();
+        bool TryGetBlock(out Block block, Vector2Int gridPosition);
+        bool TryGetWorldPosition(out Vector2 worldPosition, Vector2Int gridPosition);
+
         event Action OnDestroyed;
         int AllBlocks { get; }
         int AllBlocksToWin { get; }

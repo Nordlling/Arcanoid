@@ -1,7 +1,6 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
-using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.GameGrid;
 using UnityEngine;
 
@@ -35,14 +34,14 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             {
                 for (int x = 0; x < gameGridInfo.Size.x; x++)
                 {
-                    bool checkToWin = false;
+                    Vector2 spawnPosition = _firstBlockPosition + _blockWithSpacingSize * new Vector2(x, -y);
+                    
                     if (gameGridInfo.LevelMap[x, y] == 0)
                     {
-                        blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], null, checkToWin);
+                        blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], null, false, spawnPosition);
                         continue;
                     }
-                    
-                    Vector2 spawnPosition = _firstBlockPosition + _blockWithSpacingSize * new Vector2(x, -y);
+
                     SpawnContext spawnContext = new SpawnContext { ID = gameGridInfo.LevelMap[x, y].ToString(), Position = spawnPosition};
                     
                     var block = _blockFactory.Spawn(spawnContext);
@@ -51,11 +50,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                     {
                         block.transform.localScale = new Vector3(_blockScale.x, _blockScale.y, 1f);
                         block.GridPosition = new Vector2Int(x, y);
-                        checkToWin = block.TryGetComponent(out Health _);
                     }
 
-                    blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], block, checkToWin);
-
+                    blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], block, block.CheckToWin, spawnPosition);
                 } 
             }
 

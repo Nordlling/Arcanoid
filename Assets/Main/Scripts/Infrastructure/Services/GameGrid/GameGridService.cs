@@ -99,6 +99,19 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             RemoveAt(new Vector2Int(block.GridPosition.x, block.GridPosition.y));
         }
 
+        public bool TryGetWorldPosition(out Vector2 worldPosition, Vector2Int gridPosition)
+        {
+            worldPosition = Vector2.zero;
+            
+            if (!IsWithinArrayBounds(gridPosition))
+            {
+                return false;
+            }
+
+            worldPosition = _currentLevel[gridPosition.x, gridPosition.y].WorldPosition;
+            return true;
+        }
+
         public void RemoveAt(Vector2Int position)
         {
             if (IsWithinArrayBounds(_currentLevel, position.x, position.y))
