@@ -8,6 +8,5 @@ namespace Main.Scripts.Configs
     {
         public float Spacing;
         public Sprite BlockSprite;
-        public CurrentLevelInfo DefaultLevel;
     }
 }

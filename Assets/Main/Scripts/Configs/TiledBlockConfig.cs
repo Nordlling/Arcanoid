@@ -16,6 +16,7 @@ namespace Main.Scripts.Configs
     public class BlockInfo
     {
         public Sprite Visual;
+        public bool CheckToWin = true;
         [SerializeReference] public IComponentFactory[] ComponentFactories;
     }
 }

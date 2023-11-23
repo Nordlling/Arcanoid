@@ -16,12 +16,14 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [Header("Scene Objects")]
         [SerializeField] private PoolProvider _blockPoolProvider;
         [SerializeField] private PoolProvider _ballPoolProvider;
+        [SerializeField] private PoolProvider _effectPoolProvider;
 
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             RegisterBlockFactory(serviceContainer);
             RegisterBallFactory(serviceContainer);
+            RegisterEffectFactory(serviceContainer);
         }
 
         private void RegisterBlockFactory(ServiceContainer serviceContainer)
@@ -36,6 +38,13 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             _ballPoolProvider.Init();
             BallFactory ballFactory = new BallFactory(serviceContainer, _ballPoolProvider);
             serviceContainer.SetService<IBallFactory, BallFactory>(ballFactory);
+        }
+        
+        private void RegisterEffectFactory(ServiceContainer serviceContainer)
+        {
+            _effectPoolProvider.Init();
+            EffectFactory effectFactory = new EffectFactory(serviceContainer, _effectPoolProvider);
+            serviceContainer.SetService<IEffectFactory, EffectFactory>(effectFactory);
         }
     }
 }

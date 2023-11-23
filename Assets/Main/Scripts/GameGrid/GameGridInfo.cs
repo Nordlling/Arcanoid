@@ -1,9 +1,10 @@
+using UnityEngine;
+
 namespace Main.Scripts.GameGrid
 {
     public class GameGridInfo
     {
-        public int Width;
-        public int Height;
+        public Vector2Int Size;
         public int[,] LevelMap;
     }
 }

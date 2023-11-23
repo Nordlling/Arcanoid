@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Localization
 {
+    [RequireComponent(typeof(TextMeshProUGUI))]
     public class LocalizedText : MonoBehaviour
     {
         [SerializeField] private string _localizationKey;
@@ -14,6 +15,7 @@ namespace Main.Scripts.Localization
         public void Construct(ILocalizationManager localizationManager)
         {
             _localizationManager = localizationManager;
+            TryGetComponent(out _textField);
         }
 
         public void Localize(string localizationKey)

@@ -29,7 +29,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         public int AllBlocks { get; private set; }
         public int AllBlocksToWin { get; private set; }
         public int DestroyedBlocksToWin { get; private set; }
-        
+        public Vector2Int GridSize => _gameGridInfo.Size;
 
         public GameGridService(
             IBlockFactory blockFactory,
@@ -75,21 +75,20 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             InitGrid();
         }
         
-        public bool TryGet(out Block block, Vector2Int position)
+        public bool TryGetBlock(out Block block, Vector2Int gridPosition)
         {
             block = null;
-            if (position.x < 0 || position.x >= _currentLevel.GetLength(0) ||
-                position.y < 0 || position.y >= _currentLevel.GetLength(1))
+            if (!IsWithinArrayBounds(gridPosition))
             {
                 return false;
             }
 
-            if (_currentLevel[position.x, position.y].Block == null)
+            if (_currentLevel[gridPosition.x, gridPosition.y].Block == null)
             {
                 return false;
             }
 
-            block = _currentLevel[position.x, position.y].Block;
+            block = _currentLevel[gridPosition.x, gridPosition.y].Block;
             return true;
 
         }
@@ -99,9 +98,22 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             RemoveAt(new Vector2Int(block.GridPosition.x, block.GridPosition.y));
         }
 
+        public bool TryGetWorldPosition(out Vector2 worldPosition, Vector2Int gridPosition)
+        {
+            worldPosition = Vector2.zero;
+            
+            if (!IsWithinArrayBounds(gridPosition))
+            {
+                return false;
+            }
+
+            worldPosition = _currentLevel[gridPosition.x, gridPosition.y].WorldPosition;
+            return true;
+        }
+
         public void RemoveAt(Vector2Int position)
         {
-            if (IsWithinArrayBounds(_currentLevel, position.x, position.y))
+            if (IsWithinArrayBounds(position))
             {
                 RemoveBlock(_currentLevel[position.x, position.y]);
             }
@@ -130,9 +142,10 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             CheckGridToWin();
         }
 
-        public void ResetCurrentLevel()
+        public bool IsWithinArrayBounds(Vector2Int position)
         {
-            InitGrid();
+            return position.x >= 0 && position.x < _currentLevel.GetLength(0) 
+                                   && position.y >= 0 && position.y < _currentLevel.GetLength(1);
         }
 
         private void CheckGridToWin()
@@ -152,9 +165,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             AllBlocksToWin = 0;
             DestroyedBlocksToWin = 0;
             
-            for (int x = 0; x < _gameGridInfo.Width; x++)
+            for (int x = 0; x < _gameGridInfo.Size.x; x++)
             {
-                for (int y = 0; y < _gameGridInfo.Height; y++)
+                for (int y = 0; y < _gameGridInfo.Size.y; y++)
                 {
                     if (_currentLevel[x, y].ID == 0)
                     {
@@ -178,9 +191,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         private void DespawnBlocks()
         {
-            for (int x = 0; x < _gameGridInfo.Width; x++)
+            for (int x = 0; x < _gameGridInfo.Size.x; x++)
             {
-                for (int y = 0; y < _gameGridInfo.Height; y++)
+                for (int y = 0; y < _gameGridInfo.Size.y; y++)
                 {
                     if (_currentLevel[x, y].Block != null)
                     {
@@ -188,19 +201,6 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                     }
                 }
             }
-        }
-        
-        private bool IsWithinArrayBounds(BlockPlaceInfo[,] array, params int[] positions)
-        {
-            for (int i = 0; i < positions.Length; i++)
-            {
-                if (positions[i] < 0 || positions[i] >= array.GetLength(i))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
         
     }

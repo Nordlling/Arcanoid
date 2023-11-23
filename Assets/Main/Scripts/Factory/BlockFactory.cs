@@ -26,15 +26,16 @@ namespace Main.Scripts.Factory
             {
                 return null;
             }
-            
+
+            BlockInfo blockInfo = _tiledBlockConfig.BlockInfos[spawnContext.ID];
             Block block = (Block)_poolProvider.PoolItemView.Spawn();
             
-            block.Construct(this, _serviceContainer.Get<IGameGridService>(), spawnContext.ID);
+            block.Construct(_serviceContainer.Get<IGameGridService>(), spawnContext.ID, blockInfo.CheckToWin);
             block.transform.position = spawnContext.Position;
-            block.SpriteRenderer.sprite = _tiledBlockConfig.BlockInfos[spawnContext.ID].Visual;
+            block.SpriteRenderer.sprite = blockInfo.Visual;
             block.Collider.size = block.SpriteRenderer.size;
             
-            IComponentFactory[] componentFactories = _tiledBlockConfig.BlockInfos[spawnContext.ID].ComponentFactories;
+            IComponentFactory[] componentFactories = blockInfo.ComponentFactories;
             
             foreach (IComponentFactory componentFactory in componentFactories)
             {
