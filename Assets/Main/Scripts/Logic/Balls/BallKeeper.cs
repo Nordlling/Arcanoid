@@ -1,7 +1,7 @@
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
-using Main.Scripts.Logic.GameGrid;
+using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Balls

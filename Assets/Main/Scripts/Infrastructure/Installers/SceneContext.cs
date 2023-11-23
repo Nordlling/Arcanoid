@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.Services;
 using UnityEngine;
 
@@ -12,13 +14,13 @@ namespace Main.Scripts.Infrastructure.Installers
         private readonly List<IInitializable> _initializables = new();
         private readonly List<ITickable> _tickables = new();
 
-        public void Setup(ServiceContainer serviceContainer)
+        public void Setup(ServiceContainer serviceContainer,  TaskCompletionSource<bool> tcs = null)
         {
             BuildContainer(serviceContainer);
             _initializables.AddRange(serviceContainer.GetServices<IInitializable>());
             _tickables.AddRange(serviceContainer.GetServices<ITickable>());
             
-            StartCoroutine(DelayStart());
+            StartCoroutine(DelayStart(() => tcs?.SetResult(true)));
         }
         
         private void Update()
@@ -29,10 +31,11 @@ namespace Main.Scripts.Infrastructure.Installers
             }
         }
 
-        private IEnumerator DelayStart()
+        private IEnumerator DelayStart(Action onFinished = null)
         {
             yield return null;
             Init();
+            onFinished?.Invoke();
         }
         
         private void Init()

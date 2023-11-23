@@ -1,7 +1,7 @@
 using System;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
-using Main.Scripts.Logic.GameGrid;
+using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Platforms
@@ -24,7 +24,7 @@ namespace Main.Scripts.Logic.Platforms
         private Vector2 _targetPosition;
         private Vector2 _halfSize;
 
-        private bool _stop;
+        private bool _stop = true;
         private bool _move;
         private bool _decelerate;
         private float _currentSpeed;
@@ -57,9 +57,14 @@ namespace Main.Scripts.Logic.Platforms
 
         private void Update()
         {
+            if (_stop)
+            {
+                return;
+            }
+            
             Vector2 mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             
-            if (_stop || _timeProvider.Stopped || !_zonesManager.IsInInputZone(mousePosition))
+            if (_timeProvider.Stopped || !_zonesManager.IsInInputZone(mousePosition))
             {
                 return;
             }

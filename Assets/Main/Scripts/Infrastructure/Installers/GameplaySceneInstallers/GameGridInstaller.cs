@@ -8,7 +8,7 @@ using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.Packs;
-using Main.Scripts.Logic.GameGrid;
+using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
@@ -36,6 +36,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         private void RegisterZonesManager(ServiceContainer serviceContainer)
         {
             _zonesManager.Init();
+            serviceContainer.SetService<ITickable, ZonesManager>(_zonesManager);
             serviceContainer.SetServiceSelf(_zonesManager);
         }
 

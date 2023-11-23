@@ -1,7 +1,7 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
-using Main.Scripts.Logic.GameGrid;
+using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.GameGrid
