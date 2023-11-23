@@ -1,5 +1,5 @@
 using Main.Scripts.Infrastructure.Installers;
-using Main.Scripts.Logic.GameGrid;
+using Main.Scripts.Logic.Zones;
 
 namespace Main.Scripts.Logic.Balls
 {

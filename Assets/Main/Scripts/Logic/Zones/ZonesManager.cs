@@ -1,7 +1,7 @@
 using Main.Scripts.Configs;
 using UnityEngine;
 
-namespace Main.Scripts.Logic.GameGrid
+namespace Main.Scripts.Logic.Zones
 {
     public class ZonesManager : MonoBehaviour
     {

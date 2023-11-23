@@ -8,7 +8,7 @@ using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.Packs;
-using Main.Scripts.Logic.GameGrid;
+using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers

@@ -5,8 +5,8 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Logic.Balls;
-using Main.Scripts.Logic.GameGrid;
 using Main.Scripts.Logic.Platforms;
+using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
