@@ -17,5 +17,6 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         int AllBlocks { get; }
         int AllBlocksToWin { get; }
         int DestroyedBlocksToWin { get; }
+        Vector2Int GridSize { get; }
     }
 }

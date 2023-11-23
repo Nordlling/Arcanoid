@@ -21,16 +21,16 @@ namespace Main.Scripts.GameGrid
 
                 if (tiledMapData != null && tiledMapData.layers != null && tiledMapData.layers.Count > 0)
                 {
-                    gameGridInfo.Width = tiledMapData.width;
-                    gameGridInfo.Height = tiledMapData.height;
-                    gameGridInfo.LevelMap = new int[gameGridInfo.Width, gameGridInfo.Height];
+                    gameGridInfo.Size.x = tiledMapData.width;
+                    gameGridInfo.Size.y = tiledMapData.height;
+                    gameGridInfo.LevelMap = new int[gameGridInfo.Size.x, gameGridInfo.Size.y];
                     List<int> mapDataList = tiledMapData.layers[0].data;
 
-                    for (int y = 0; y < gameGridInfo.Height; y++)
+                    for (int y = 0; y < gameGridInfo.Size.y; y++)
                     {
-                        for (int x = 0; x < gameGridInfo.Width; x++)
+                        for (int x = 0; x < gameGridInfo.Size.x; x++)
                         {
-                            int tileValue = mapDataList[y * gameGridInfo.Width + x];
+                            int tileValue = mapDataList[y * gameGridInfo.Size.x + x];
                             gameGridInfo.LevelMap[x, y] = tileValue;
                         }
                     }

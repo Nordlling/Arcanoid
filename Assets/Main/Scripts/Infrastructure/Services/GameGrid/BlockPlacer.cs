@@ -27,13 +27,13 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         public BlockPlaceInfo[,] SpawnGrid(GameGridInfo gameGridInfo)
         {
-            BlockPlaceInfo[,] blocks = new BlockPlaceInfo[gameGridInfo.Width, gameGridInfo.Height];
+            BlockPlaceInfo[,] blocks = new BlockPlaceInfo[gameGridInfo.Size.x, gameGridInfo.Size.y];
             
-            CalculateBlockSize(gameGridInfo.Width);
+            CalculateBlockSize(gameGridInfo.Size.x);
             
-            for (int y = 0; y < gameGridInfo.Height; y++)
+            for (int y = 0; y < gameGridInfo.Size.y; y++)
             {
-                for (int x = 0; x < gameGridInfo.Width; x++)
+                for (int x = 0; x < gameGridInfo.Size.x; x++)
                 {
                     bool checkToWin = false;
                     if (gameGridInfo.LevelMap[x, y] == 0)

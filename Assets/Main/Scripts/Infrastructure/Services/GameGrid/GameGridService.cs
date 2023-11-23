@@ -29,7 +29,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         public int AllBlocks { get; private set; }
         public int AllBlocksToWin { get; private set; }
         public int DestroyedBlocksToWin { get; private set; }
-        
+        public Vector2Int GridSize => _gameGridInfo.Size;
 
         public GameGridService(
             IBlockFactory blockFactory,
@@ -152,9 +152,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             AllBlocksToWin = 0;
             DestroyedBlocksToWin = 0;
             
-            for (int x = 0; x < _gameGridInfo.Width; x++)
+            for (int x = 0; x < _gameGridInfo.Size.x; x++)
             {
-                for (int y = 0; y < _gameGridInfo.Height; y++)
+                for (int y = 0; y < _gameGridInfo.Size.y; y++)
                 {
                     if (_currentLevel[x, y].ID == 0)
                     {
@@ -178,9 +178,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         private void DespawnBlocks()
         {
-            for (int x = 0; x < _gameGridInfo.Width; x++)
+            for (int x = 0; x < _gameGridInfo.Size.x; x++)
             {
-                for (int y = 0; y < _gameGridInfo.Height; y++)
+                for (int y = 0; y < _gameGridInfo.Size.y; y++)
                 {
                     if (_currentLevel[x, y].Block != null)
                     {
