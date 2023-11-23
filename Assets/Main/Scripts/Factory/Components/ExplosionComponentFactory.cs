@@ -14,7 +14,7 @@ namespace Main.Scripts.Factory.Components
         public void AddComponent(ServiceContainer serviceContainer, Block block, SpawnContext spawnContext)
         {
             Explosion explosion = block.AddComponent<Explosion>();
-            explosion.Construct(serviceContainer.Get<IGameGridService>(), block, ExplosionConfig);
+            explosion.Construct(serviceContainer.Get<IGameGridService>(), block, ExplosionConfig, serviceContainer.Get<IEffectFactory>());
         }
         
         public void RemoveComponent(Block block)

@@ -10,6 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7edc1d62b514156be4a7b012b4a395a, type: 3}
-  m_Name: ExplosionConfig
+  m_Name: SimpleExplosionConfig
   m_EditorClassIdentifier: 
   Damage: 1
+  Directions:
+  - {x: 1, y: 0}
+  - {x: 0, y: -1}
+  - {x: -1, y: 0}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
+  - {x: 1, y: -1}
+  - {x: -1, y: -1}
+  - {x: -1, y: 1}
+  Length: 1
+  SecondsPerWave: 0.2
+  ExplosionEffectKey: Explosion
