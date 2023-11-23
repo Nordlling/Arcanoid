@@ -17,5 +17,5 @@ MonoBehaviour:
   - {x: 1, y: 0}
   - {x: -1, y: 0}
   Length: -1
-  SecondsPerWave: 0.2
+  SecondsPerWave: 0.4
   ExplosionEffectKey: Explosion
