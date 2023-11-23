@@ -36,6 +36,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         private void RegisterZonesManager(ServiceContainer serviceContainer)
         {
             _zonesManager.Init();
+            serviceContainer.SetService<ITickable, ZonesManager>(_zonesManager);
             serviceContainer.SetServiceSelf(_zonesManager);
         }
 

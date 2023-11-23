@@ -48,10 +48,10 @@ namespace Main.Scripts.UI.Views
             _energyBarUIView.OnClose();
         }
 
-        private void ExitGame()
+        private async void ExitGame()
         {
+            await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
             Close();
-            _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
         }
 
         private async void RestartGame()

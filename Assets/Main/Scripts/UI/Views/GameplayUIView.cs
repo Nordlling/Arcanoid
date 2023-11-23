@@ -14,10 +14,6 @@ namespace Main.Scripts.UI.Views
         public void Construct(IGameplayStateMachine gameplayStateMachine)
         {
             _gameplayStateMachine = gameplayStateMachine;
-        }
-
-        private void OnEnable()
-        {
             _pauseButton.onClick.AddListener(PauseGame);
         }
 

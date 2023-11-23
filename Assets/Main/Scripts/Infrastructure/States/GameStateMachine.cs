@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Main.Scripts.Infrastructure.States
 {
@@ -15,22 +16,22 @@ namespace Main.Scripts.Infrastructure.States
             state.StateMachine = this;
         }
         
-        public void Enter<TState>() where TState : class, IState
+        public async Task Enter<TState>() where TState : class, IState
         {
             IState state = ChangeState<TState>();
-            state.Enter();
+            await state.Enter();
         }
 
-        public void Enter<TState, TParameter>(TParameter param1) where TState : class, IParametrizedState<TParameter>
+        public async Task Enter<TState, TParameter>(TParameter param1) where TState : class, IParametrizedState<TParameter>
         {
             TState state = ChangeState<TState>();
-            state.Enter(param1);
+            await state.Enter(param1);
         }
 
-        public void Enter<TState, TParam1, TParam2>(TParam1 param1, TParam2 param2) where TState : class, IParametrizedState<TParam1, TParam2>
+        public async Task Enter<TState, TParam1, TParam2>(TParam1 param1, TParam2 param2) where TState : class, IParametrizedState<TParam1, TParam2>
         {
             TState state = ChangeState<TState>();
-            state.Enter(param1, param2);
+            await state.Enter(param1, param2);
         }
 
         private TState ChangeState<TState>() where TState : class, IExitableState

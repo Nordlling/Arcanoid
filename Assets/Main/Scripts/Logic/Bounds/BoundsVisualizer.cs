@@ -1,13 +1,28 @@
+using Main.Scripts.Infrastructure.Installers;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Bounds
 {
-    public class BoundsVisualizer : MonoBehaviour
+    public class BoundsVisualizer : MonoBehaviour, ITickable
     {
         [SerializeField] private Bounder _bounder;
         [SerializeField] private Camera _camera;
         
         private Resolution _currentResolution;
+
+        public void Init()
+        {
+            _currentResolution = Screen.currentResolution;
+            UpdatePosition();
+        }
+
+        public void Tick()
+        {
+            if (ResolutionIsChanged())
+            {
+                UpdatePosition();
+            }
+        }
 
         private void OnDrawGizmos()
         {
@@ -15,20 +30,6 @@ namespace Main.Scripts.Logic.Bounds
             {
                 SetPosition(spawnInfo);
                 DrawSpawnField(spawnInfo);
-            }
-        }
-
-        private void Start()
-        {
-            _currentResolution = Screen.currentResolution;
-            UpdatePosition();
-        }
-
-        private void Update()
-        {
-            if (ResolutionIsChanged())
-            {
-                UpdatePosition();
             }
         }
 

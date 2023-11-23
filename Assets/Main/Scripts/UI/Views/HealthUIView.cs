@@ -23,16 +23,22 @@ namespace Main.Scripts.UI.Views
         {
             _healthService = healthService;
             InitHealths();
+            Subscribe();
         }
-
-        private void OnEnable()
+        
+        private void Subscribe()
         {
             _healthService.OnDecreased += DecreaseHealth;
             _healthService.OnIncreased += IncreaseHealth;
             _healthService.OnReset += ResetHealths;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
+        {
+            Unsubscribe();
+        }
+        
+        private void Unsubscribe()
         {
             _healthService.OnDecreased -= DecreaseHealth;
             _healthService.OnIncreased -= IncreaseHealth;

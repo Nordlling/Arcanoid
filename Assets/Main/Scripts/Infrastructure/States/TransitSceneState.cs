@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.UI.Views;
 
 namespace Main.Scripts.Infrastructure.States
 {
@@ -15,13 +17,16 @@ namespace Main.Scripts.Infrastructure.States
             _serviceContainer = serviceContainer;
         }
 
-        public async void Enter(string sceneName)
+        public async Task Enter(string sceneName)
         {
+            _serviceContainer.Get<CurtainUIView>().gameObject.SetActive(true);
+            await _serviceContainer.Get<CurtainUIView>().Enable();
             await _sceneLoader.Load(sceneName);
         }
 
-        public void Exit()
+        public Task Exit()
         {
+            return Task.CompletedTask;
         }
     }
 }

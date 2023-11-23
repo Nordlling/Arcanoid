@@ -1,4 +1,5 @@
 using Main.Scripts.Infrastructure.GameplayStates;
+using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.Packs;
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Main.Scripts.UI.Views
 {
-    public class ProgressUIView : MonoBehaviour, IRestartable
+    public class ProgressUIView : MonoBehaviour, ITickable, IRestartable
     {
         [SerializeField] private RunningCounterAnimation _runningCounterAnimation;
         [SerializeField] private TextMeshProUGUI _packProgressValue;
@@ -29,6 +30,8 @@ namespace Main.Scripts.UI.Views
             
             RefreshPackProgress();
             RefreshLevelProgress();
+            
+            Subscribe();
         }
 
         public void Restart()
@@ -37,17 +40,22 @@ namespace Main.Scripts.UI.Views
             RefreshLevelProgress();
         }
 
-        private void OnEnable()
+        private void Subscribe()
         {
             _gameGridService.OnDestroyed += RefreshLevelProgress;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
+        {
+            Unsubscribe();
+        }
+
+        private void Unsubscribe()
         {
             _gameGridService.OnDestroyed -= RefreshLevelProgress;
         }
 
-        private void Update()
+        public void Tick()
         {
             _runningCounterAnimation.UpdateTime(_timeProvider.Stopped ? 0f : 1f);
         }

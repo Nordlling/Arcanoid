@@ -65,8 +65,8 @@ namespace Main.Scripts.UI.Views
 
             if (IsReplayablePack(packProgress) || IsLastPack(packProgress) || !_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
             {
+                await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
                 Close();
-                _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
             }
             else
             {

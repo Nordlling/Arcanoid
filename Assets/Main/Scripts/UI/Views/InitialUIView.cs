@@ -47,21 +47,21 @@ namespace Main.Scripts.UI.Views
             _languageSelectUIView.OnClose();
         }
 
-        private void OpenPackSelect()
+        private async void OpenPackSelect()
         {
+            string transitSceneName = _packSelectSceneName;
             Close();
             
-            if (_saveLoadService.LoadIsPlayed() == 1)
+            if (_saveLoadService.LoadIsPlayed() == 0)
             {
-                _gameStateMachine.Enter<TransitSceneState, string>(_packSelectSceneName);
-            }
-            else
-            {
+                transitSceneName = _gameplaySceneName;
                 _energyService.TryWasteEnergy(_energyService.EnergyForPlay);
                 _saveLoadService.SaveIsPlayed(1);
                 _packService.SelectedPackIndex = 0;
-                _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
             }
+            
+            await _gameStateMachine.Enter<TransitSceneState, string>(transitSceneName);
+            Close();
         }
     }
 }

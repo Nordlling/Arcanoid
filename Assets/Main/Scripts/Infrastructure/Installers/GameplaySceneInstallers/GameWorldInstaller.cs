@@ -21,6 +21,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [SerializeField] private Camera _camera;
         [SerializeField] private PlatformMovement _platform;
         [SerializeField] private Bounder _bounder;
+        [SerializeField] private BoundsVisualizer _boundsVisualizer;
 
 
         public override void InstallBindings(ServiceContainer serviceContainer)
@@ -28,8 +29,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             RegisterTimeProvider(serviceContainer);
             RegisterHealthService(serviceContainer);
             RegisterPlatform(serviceContainer);
-
-            InitBounder();
+            RegisterBounder(serviceContainer);
         }
 
         private void RegisterTimeProvider(ServiceContainer serviceContainer)
@@ -65,9 +65,11 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             
         }
 
-        private void InitBounder()
+        private void RegisterBounder(ServiceContainer serviceContainer)
         {
             _bounder.Init();
+            _boundsVisualizer.Init();
+            serviceContainer.SetService<ITickable, BoundsVisualizer>(_boundsVisualizer);
         }
         
         private void SetGameplayStates(ServiceContainer serviceContainer, IGameplayStatable gameplayStatable)

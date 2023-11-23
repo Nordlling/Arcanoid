@@ -1,5 +1,7 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.UI.Views;
 
 namespace Main.Scripts.Infrastructure.States
 {
@@ -8,14 +10,19 @@ namespace Main.Scripts.Infrastructure.States
 
         public GameStateMachine StateMachine { get; set; }
 
-        public void Enter(ServiceContainer serviceContainer, SceneContext sceneContext)
+        public async Task Enter(ServiceContainer serviceContainer, SceneContext sceneContext)
         {
-            sceneContext.Setup(serviceContainer);
-            StateMachine.Enter<GameLoopState>();
+            TaskCompletionSource<bool> tcs = new();
+            sceneContext.Setup(serviceContainer, tcs);
+            await tcs.Task;
+            await StateMachine.Enter<GameLoopState, ServiceContainer>(serviceContainer);
+            await serviceContainer.Get<CurtainUIView>().Disable();
+            serviceContainer.Get<CurtainUIView>().gameObject.SetActive(false);
         }
 
-        public void Exit()
+        public Task Exit()
         {
+            return Task.CompletedTask;
         }
     }
 }

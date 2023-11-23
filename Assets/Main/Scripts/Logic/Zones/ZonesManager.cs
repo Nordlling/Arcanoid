@@ -1,9 +1,10 @@
 using Main.Scripts.Configs;
+using Main.Scripts.Infrastructure.Installers;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Zones
 {
-    public class ZonesManager : MonoBehaviour
+    public class ZonesManager : MonoBehaviour, ITickable
     {
         public Rect ScreenRect => _screenRect;
         public Rect GameGridRect => _gameGridRect;
@@ -46,7 +47,7 @@ namespace Main.Scripts.Logic.Zones
             UpdateAllZones();
         }
 
-        private void Update()
+        public void Tick()
         {
             if (ResolutionIsChanged())
             {

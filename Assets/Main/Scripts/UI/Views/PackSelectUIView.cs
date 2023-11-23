@@ -108,12 +108,12 @@ namespace Main.Scripts.UI.Views
             _lastOpenedButton = _buttons[_packService.PackProgresses.Count - 1];
         }
 
-        private void OpenPackSelect()
+        private async void OpenPackSelect()
         {
             if (_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
             {
+                await _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
                 Close();
-                _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
             }
             else
             {
@@ -121,10 +121,10 @@ namespace Main.Scripts.UI.Views
             }
         }
 
-        private void Back()
+        private async void Back()
         {
+            await _gameStateMachine.Enter<TransitSceneState, string>(_initialSceneName);
             Close();
-            _gameStateMachine.Enter<TransitSceneState, string>(_initialSceneName);
         }
         
         private void ClearAllChildren()

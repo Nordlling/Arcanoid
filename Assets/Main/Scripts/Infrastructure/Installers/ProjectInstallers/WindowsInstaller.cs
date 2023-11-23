@@ -16,15 +16,23 @@ namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
         
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
+            RegisterViewCamera(serviceContainer);
             RegisterWindowsManager(serviceContainer);
         }
 
         private void RegisterWindowsManager(ServiceContainer serviceContainer)
         {
-            Camera viewCamera = Instantiate(_cameraPrefab, transform);
-            WindowsManager windowsManager = Instantiate(_windowsManagerPrefab, transform);
-            windowsManager.Construct(_windowsConfig, viewCamera);
+            WindowsManager windowsManager = Instantiate(_windowsManagerPrefab);
+            windowsManager.Construct(_windowsConfig, serviceContainer.Get<Camera>());
             serviceContainer.SetService<IWindowsManager, WindowsManager>(windowsManager);
+            DontDestroyOnLoad(windowsManager);
+        }
+
+        private void RegisterViewCamera(ServiceContainer serviceContainer)
+        {
+            Camera viewCamera = Instantiate(_cameraPrefab);
+            serviceContainer.SetServiceSelf(viewCamera);
+            DontDestroyOnLoad(viewCamera);
         }
     }
 }

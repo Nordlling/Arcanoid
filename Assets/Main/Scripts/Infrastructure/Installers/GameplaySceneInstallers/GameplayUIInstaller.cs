@@ -35,6 +35,9 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                     serviceContainer.Get<IPackService>(), 
                     serviceContainer.Get<IGameGridService>(),
                     serviceContainer.Get<ITimeProvider>());
+
+            serviceContainer.SetService<ITickable, ProgressUIView>(_progressUIView);
+            
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(_progressUIView);
         }
         
