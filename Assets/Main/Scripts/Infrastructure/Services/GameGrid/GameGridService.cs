@@ -51,8 +51,6 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             _energyService = energyService;
         }
         
-        public CurrentLevelInfo CurrentLevelInfo { get; set; }
-
         public event Action OnDestroyed;
 
         public void Init()
@@ -78,11 +76,6 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         }
 
-        public void RemoveAt(Block block)
-        {
-            RemoveAt(new Vector2Int(block.GridPosition.x, block.GridPosition.y));
-        }
-
         public bool TryGetWorldPosition(out Vector2 worldPosition, Vector2Int gridPosition)
         {
             worldPosition = Vector2.zero;
@@ -96,12 +89,37 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             return true;
         }
 
-        public void RemoveAt(Vector2Int position)
+        public bool TryGetBlockPlaceInfo(out BlockPlaceInfo blockPlaceInfo, Vector2Int gridPosition)
         {
-            if (IsWithinArrayBounds(position))
+            blockPlaceInfo = null;
+            
+            if (!IsWithinArrayBounds(gridPosition))
             {
-                RemoveBlock(_currentLevel[position.x, position.y]);
+                return false;
             }
+
+            blockPlaceInfo = _currentLevel[gridPosition.x, gridPosition.y];
+            return true;
+        }
+
+        public bool TryRemoveAt(Block block, out BlockPlaceInfo blockPlaceInfo)
+        {
+            return TryRemoveAt(new Vector2Int(block.GridPosition.x, block.GridPosition.y), out blockPlaceInfo);
+        }
+
+        public bool TryRemoveAt(Vector2Int position, out BlockPlaceInfo blockPlaceInfo)
+        {
+            blockPlaceInfo = null;
+            
+            if (!IsWithinArrayBounds(position))
+            {
+                return false;
+            }
+            
+            blockPlaceInfo = _currentLevel[position.x, position.y];
+            RemoveBlock(blockPlaceInfo);
+            return true;
+
         }
 
         private void RemoveBlock(BlockPlaceInfo blockPlaceInfo)

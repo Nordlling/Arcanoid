@@ -7,7 +7,7 @@ namespace Main.Scripts.Infrastructure.Starters
     {
         public void StartScene(ServiceContainer serviceContainer)
         {
-            serviceContainer.Get<IGameplayStateMachine>()?.Enter<PrePlayState>();
+            serviceContainer.Get<IGameplayStateMachine>().Enter<PrePlayState>();
         }
 
     }
