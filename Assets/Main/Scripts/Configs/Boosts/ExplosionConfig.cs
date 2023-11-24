@@ -8,7 +8,6 @@ namespace Main.Scripts.Configs.Boosts
     {
         [Range(0f, 10f)]
         public int Damage;
-        
         public Vector2Int[] Directions;
         
         [PropertyTooltip("Set to -1 if you want the length to be to the edges of the grid")]
@@ -17,8 +16,11 @@ namespace Main.Scripts.Configs.Boosts
 
         [Range(0f, 5f)]
         public float SecondsPerWave;
-        
         public string ExplosionEffectKey;
+
+        [Header("Chain")]
+        public bool Chain;
+        public int[] CellIdsToFindTargets;
 
     }
 }

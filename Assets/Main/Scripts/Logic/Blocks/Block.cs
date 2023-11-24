@@ -30,7 +30,7 @@ namespace Main.Scripts.Logic.Blocks
 
         public void Destroy()
         {
-            _gameGridService.RemoveAt(this);
+            _gameGridService.TryRemoveAt(this, out _);
         }
     }
 }

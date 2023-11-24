@@ -38,7 +38,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                     
                     if (gameGridInfo.LevelMap[x, y] == 0)
                     {
-                        blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], null, false, spawnPosition);
+                        blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], null, false, new Vector2Int(x, y), spawnPosition);
                         continue;
                     }
 
@@ -52,7 +52,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                         block.GridPosition = new Vector2Int(x, y);
                     }
 
-                    blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], block, block.CheckToWin, spawnPosition);
+                    blocks[x, y] = new BlockPlaceInfo(gameGridInfo.LevelMap[x, y], block, block.CheckToWin, new Vector2Int(x, y), spawnPosition);
                 } 
             }
 

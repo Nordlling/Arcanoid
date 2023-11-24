@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.UI.Animations;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Main.Scripts.UI.Views
 {
-    public class HealthUIView : MonoBehaviour
+    public class HealthUIView : MonoBehaviour, IInitializable
     {
         [SerializeField] private ChangeImageColorAnimation _changeImageColorAnimation;
         [SerializeField] private GameObject _healthPanel;
@@ -22,27 +23,12 @@ namespace Main.Scripts.UI.Views
         public void Construct(IHealthService healthService)
         {
             _healthService = healthService;
-            InitHealths();
             Subscribe();
         }
-        
-        private void Subscribe()
-        {
-            _healthService.OnDecreased += DecreaseHealth;
-            _healthService.OnIncreased += IncreaseHealth;
-            _healthService.OnReset += ResetHealths;
-        }
 
-        private void OnDestroy()
+        public void Init()
         {
-            Unsubscribe();
-        }
-        
-        private void Unsubscribe()
-        {
-            _healthService.OnDecreased -= DecreaseHealth;
-            _healthService.OnIncreased -= IncreaseHealth;
-            _healthService.OnReset -= ResetHealths;
+            InitHealths();
         }
 
         private void InitHealths()
@@ -59,6 +45,25 @@ namespace Main.Scripts.UI.Views
                 _currentHealthCount++;
                 _allHealthImages.Add(healthImage);
             }
+        }
+
+        private void Subscribe()
+        {
+            _healthService.OnDecreased += DecreaseHealth;
+            _healthService.OnIncreased += IncreaseHealth;
+            _healthService.OnReset += ResetHealths;
+        }
+
+        private void OnDestroy()
+        {
+            Unsubscribe();
+        }
+
+        private void Unsubscribe()
+        {
+            _healthService.OnDecreased -= DecreaseHealth;
+            _healthService.OnIncreased -= IncreaseHealth;
+            _healthService.OnReset -= ResetHealths;
         }
 
         private void ResetHealths()

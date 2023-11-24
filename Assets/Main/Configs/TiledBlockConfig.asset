@@ -28,6 +28,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7bce65f48889a6b40b66a2b4d9f0d5ae, type: 2}
     - {fileID: 21300000, guid: cc666f73dbb520b4fb59ac3a8fe9bd8f, type: 3}
     - {fileID: 11400000, guid: 23768289360d15a419f1be0e59802d20, type: 2}
+    - {fileID: 21300000, guid: 1a549c0665a92b54eb8e0458838c6974, type: 3}
+    - {fileID: 11400000, guid: d7ddb46754b44434e85b9cb18587f098, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -46,7 +48,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 8
+      Data: 9
     - Name: 
       Entry: 7
       Data: 
@@ -402,6 +404,48 @@ MonoBehaviour:
     - Name: ExplosionConfig
       Entry: 10
       Data: 11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 9
+    - Name: $v
+      Entry: 7
+      Data: 30|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 12
+    - Name: CheckToWin
+      Entry: 5
+      Data: true
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 31|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 32|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
+    - Name: ExplosionConfig
+      Entry: 10
+      Data: 13
     - Name: 
       Entry: 8
       Data: 

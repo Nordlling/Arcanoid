@@ -16,9 +16,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
     public class GameGridInstaller : MonoInstaller
     {
         [Header("Configs")] 
-        [SerializeField] private TiledBlockConfig _tiledBlockConfig;
         [SerializeField] private GameGridConfig _gameGridConfig;
-        [SerializeField] private AssetPathConfig _assetPathConfig;
 
         [Header("Prefabs")]
         
@@ -30,7 +28,6 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         {
             RegisterZonesManager(serviceContainer);
             RegisterGameGridService(serviceContainer);
-            InitGameGridService(serviceContainer);
         }
 
         private void RegisterZonesManager(ServiceContainer serviceContainer)
@@ -60,15 +57,11 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                     serviceContainer.Get<IDifficultyService>(),
                     serviceContainer.Get<IEnergyService>()
                 );
-            
-            serviceContainer.SetService<IGameGridService, GameGridService>(gameGridService);
-            
-            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(gameGridService);
-        }
 
-        private void InitGameGridService(ServiceContainer serviceContainer)
-        {
-            serviceContainer.Get<IGameGridService>().CreateLevelMap();
+            serviceContainer.SetService<IGameGridService, GameGridService>(gameGridService);
+            serviceContainer.SetService<IInitializable, GameGridService>(gameGridService);
+
+            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(gameGridService);
         }
     }
 }
