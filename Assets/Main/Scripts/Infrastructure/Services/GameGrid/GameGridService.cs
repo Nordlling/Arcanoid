@@ -1,8 +1,8 @@
 using System;
-using Main.Scripts.Data;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
+using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Services.Difficulty;
 using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.GameGrid
 {
-    public class GameGridService : IGameGridService, IRestartable
+    public class GameGridService : IGameGridService, IInitializable, IRestartable
     {
         private readonly IBlockFactory _blockFactory;
         private readonly ISimpleLoader _simpleLoader;
@@ -55,24 +55,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         public event Action OnDestroyed;
 
-        public void CreateLevelMap()
+        public void Init()
         {
-            string currentLevelPath = _packService.GetCurrentLevelPath();
-            if (string.IsNullOrEmpty(currentLevelPath))
-            {
-                Debug.LogWarning("No Current level info");
-                return;
-            }
-            
-            string json = _simpleLoader.LoadTextFile(currentLevelPath);
-            if (string.IsNullOrEmpty(json))
-            {
-                Debug.LogWarning("Can't load level info");
-                return;
-            }
-            
-            _gameGridInfo = _gameGridParser.ParseLevelMap(json);
-            InitGrid();
+            CreateLevelMap();
         }
         
         public bool TryGetBlock(out Block block, Vector2Int gridPosition)
@@ -140,6 +125,26 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
            
             OnDestroyed?.Invoke();
             CheckGridToWin();
+        }
+
+        private void CreateLevelMap()
+        {
+            string currentLevelPath = _packService.GetCurrentLevelPath();
+            if (string.IsNullOrEmpty(currentLevelPath))
+            {
+                Debug.LogWarning("No Current level info");
+                return;
+            }
+            
+            string json = _simpleLoader.LoadTextFile(currentLevelPath);
+            if (string.IsNullOrEmpty(json))
+            {
+                Debug.LogWarning("Can't load level info");
+                return;
+            }
+            
+            _gameGridInfo = _gameGridParser.ParseLevelMap(json);
+            InitGrid();
         }
 
         public bool IsWithinArrayBounds(Vector2Int position)

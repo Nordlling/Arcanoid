@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Main.Scripts.UI.Views
 {
-    public class ProgressUIView : MonoBehaviour, ITickable, IRestartable
+    public class ProgressUIView : MonoBehaviour, IInitializable, ITickable, IRestartable
     {
         [SerializeField] private RunningCounterAnimation _runningCounterAnimation;
         [SerializeField] private TextMeshProUGUI _packProgressValue;
@@ -29,9 +29,18 @@ namespace Main.Scripts.UI.Views
             _gameGridService = gameGridService;
             
             RefreshPackProgress();
-            RefreshLevelProgress();
             
             Subscribe();
+        }
+
+        public void Init()
+        {
+            RefreshLevelProgress();
+        }
+
+        public void Tick()
+        {
+            _runningCounterAnimation.UpdateTime(_timeProvider.Stopped ? 0f : 1f);
         }
 
         public void Restart()
@@ -55,11 +64,6 @@ namespace Main.Scripts.UI.Views
             _gameGridService.OnDestroyed -= RefreshLevelProgress;
         }
 
-        public void Tick()
-        {
-            _runningCounterAnimation.UpdateTime(_timeProvider.Stopped ? 0f : 1f);
-        }
-
         private void RefreshPackProgress()
         {
             int currentLevelNumber = _packService.PackProgresses[_packService.SelectedPackIndex].CurrentLevelIndex + 1;
@@ -71,6 +75,10 @@ namespace Main.Scripts.UI.Views
 
         private void RefreshLevelProgress()
         {
+            if (_gameGridService.AllBlocksToWin == 0)
+            {
+                _levelProgressValue.text = $"0{_packProgressText}";
+            }
             float levelProgressValue = (float)_gameGridService.DestroyedBlocksToWin / _gameGridService.AllBlocksToWin;
             int levelProgressPercents = (int)(100 * levelProgressValue);
             _runningCounterAnimation.Play(_levelProgressValue, levelProgressPercents, _packProgressText);

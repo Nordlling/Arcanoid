@@ -36,6 +36,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                     serviceContainer.Get<IGameGridService>(),
                     serviceContainer.Get<ITimeProvider>());
 
+            serviceContainer.SetService<IInitializable, ProgressUIView>(_progressUIView);
             serviceContainer.SetService<ITickable, ProgressUIView>(_progressUIView);
             
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(_progressUIView);
@@ -44,6 +45,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         private void RegisterHealthUI(ServiceContainer serviceContainer)
         {
             _healthUIView.Construct(serviceContainer.Get<IHealthService>());
+            serviceContainer.SetService<IInitializable, HealthUIView>(_healthUIView);
         }
     }
 }
