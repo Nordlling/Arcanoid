@@ -32,12 +32,12 @@ namespace Main.Scripts.Factory
             
             block.Construct(_serviceContainer.Get<IGameGridService>(), spawnContext.ID, blockInfo.CheckToWin);
             block.transform.position = spawnContext.Position;
-            block.SpriteRenderer.sprite = blockInfo.Visual;
+            block.SpriteRenderer.sprite = blockInfo.BasicInfo.Visual;
             block.Collider.size = block.SpriteRenderer.size;
             
-            IComponentFactory[] componentFactories = blockInfo.ComponentFactories;
+            IBlockComponentFactory[] componentFactories = blockInfo.ComponentFactories;
             
-            foreach (IComponentFactory componentFactory in componentFactories)
+            foreach (IBlockComponentFactory componentFactory in componentFactories)
             {
                 componentFactory.AddComponent(_serviceContainer, block, spawnContext);
             }
@@ -47,9 +47,9 @@ namespace Main.Scripts.Factory
 
         public void Despawn(Block block)
         {
-            IComponentFactory[] componentFactories = _tiledBlockConfig.BlockInfos[block.ID].ComponentFactories;
+            IBlockComponentFactory[] componentFactories = _tiledBlockConfig.BlockInfos[block.ID].ComponentFactories;
             
-            foreach (IComponentFactory componentFactory in componentFactories)
+            foreach (IBlockComponentFactory componentFactory in componentFactories)
             {
                 componentFactory.RemoveComponent(block);
             }

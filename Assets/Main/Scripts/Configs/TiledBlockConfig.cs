@@ -10,13 +10,27 @@ namespace Main.Scripts.Configs
     public class TiledBlockConfig : SerializedScriptableObject
     {
         public Dictionary<string, BlockInfo> BlockInfos;
+        public Dictionary<string, BoostInfo> BoostInfos;
     }
 
     [Serializable]
     public class BlockInfo
     {
-        public Sprite Visual;
+        public BasicInfo BasicInfo;
         public bool CheckToWin = true;
-        [SerializeReference] public IComponentFactory[] ComponentFactories;
+        [SerializeReference] public IBlockComponentFactory[] ComponentFactories;
+    }
+    
+    [Serializable]
+    public class BoostInfo
+    {
+        public BasicInfo BasicInfo;
+        [SerializeReference] public IBoostComponentFactory[] ComponentFactories;
+    }
+    
+    [Serializable]
+    public class BasicInfo
+    {
+        public Sprite Visual;
     }
 }
