@@ -22,7 +22,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                 serviceContainer.Get<ITimeProvider>());
             
             serviceContainer.SetService<ITickable, ExplosionSystem>(explosionSystem);
-            serviceContainer.SetServiceSelf(explosionSystem);
+            serviceContainer.SetService<IExplosionSystem, ExplosionSystem>(explosionSystem);
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(explosionSystem);
         }
     }

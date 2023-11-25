@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Main.Scripts.Infrastructure.Services.Collision
+namespace Main.Scripts.Logic.Blocks
 {
     public class ChangeAngleOnHit : MonoBehaviour
     {

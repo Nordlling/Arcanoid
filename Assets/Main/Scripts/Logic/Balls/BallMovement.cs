@@ -1,5 +1,4 @@
 using Main.Scripts.Infrastructure.Provides;
-using Main.Scripts.Infrastructure.Services.Difficulty;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,16 +11,16 @@ namespace Main.Scripts.Logic.Balls
         [SerializeField] private float _rightAngle;
 
         private ITimeProvider _timeProvider;
-        private IDifficultyService _difficultyService;
+        private IBallSpeedSystem _ballSpeedSystem;
 
         private Vector2 _direction;
 
         public bool Stop { get; set; }
 
-        public void Construct(ITimeProvider timeProvider, IDifficultyService difficultyService)
+        public void Construct(ITimeProvider timeProvider, IBallSpeedSystem ballSpeedSystem)
         {
             _timeProvider = timeProvider;
-            _difficultyService = difficultyService;
+            _ballSpeedSystem = ballSpeedSystem;
 
             _direction = Vector2.zero;
         }
@@ -29,7 +28,7 @@ namespace Main.Scripts.Logic.Balls
         public void StartMove()
         {
             Vector2 startDirection = GenerateStartDirection();
-            _rigidbody.AddForce(startDirection * _difficultyService.Speed);
+            _rigidbody.AddForce(startDirection * _ballSpeedSystem.CurrentSpeed);
         }
 
         private void Update()
@@ -39,7 +38,7 @@ namespace Main.Scripts.Logic.Balls
                 _direction = _rigidbody.velocity.normalized;
             }
 
-            float scaledSpeed = _difficultyService.Speed * _timeProvider.TimeScale;
+            float scaledSpeed = _ballSpeedSystem.CurrentSpeed * _timeProvider.TimeScale;
             if (Stop)
             {
                 scaledSpeed = 0f;

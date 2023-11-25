@@ -7,6 +7,8 @@ namespace Main.Scripts.Infrastructure.Services.Difficulty
     public class DifficultyService : IDifficultyService, IRestartable
     {
         public float Speed { get; private set; }
+        public float MinSpeed => _difficultyConfig.MinBallSpeed;
+        public float MaxSpeed => _difficultyConfig.MaxBallSpeed;
         
         private readonly DifficultyConfig _difficultyConfig;
 
@@ -24,7 +26,7 @@ namespace Main.Scripts.Infrastructure.Services.Difficulty
             }
 
             float interpolation = destroyedBlocksToWin / (float)allBlocksToWin;
-            Speed = Mathf.Lerp(_difficultyConfig.BallSpeedInit, _difficultyConfig.BallMaxSpeed, interpolation);
+            Speed = Mathf.Lerp(_difficultyConfig.StartBallSpeed, _difficultyConfig.FinishBallSpeed, interpolation);
         }
 
         public void Restart()
@@ -34,7 +36,7 @@ namespace Main.Scripts.Infrastructure.Services.Difficulty
 
         private void ResetDifficulty()
         {
-            Speed = _difficultyConfig.BallSpeedInit;
+            Speed = _difficultyConfig.StartBallSpeed;
         }
     }
 }

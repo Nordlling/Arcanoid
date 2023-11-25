@@ -6,8 +6,13 @@ namespace Main.Scripts.Configs
     public class DifficultyConfig : ScriptableObject
     {
         [Range(1f, 30f)]
-        public float BallSpeedInit = 4f;
+        public float StartBallSpeed = 4f;
         [Range(1f, 30f)]
-        public float BallMaxSpeed = 10f;
+        public float FinishBallSpeed = 10f;
+
+        [Range(1f, 30f)]
+        public float MinBallSpeed = 1f;
+        [Range(1f, 30f)]
+        public float MaxBallSpeed = 11f;
     }
 }

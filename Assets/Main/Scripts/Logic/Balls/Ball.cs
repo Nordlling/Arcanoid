@@ -20,10 +20,10 @@ namespace Main.Scripts.Logic.Balls
        
         private IBallFactory _ballFactory;
 
-        public void Construct(IBallFactory ballFactory, string id)
+        public void Construct(string id, IBallFactory ballFactory)
         {
-            _ballFactory = ballFactory;
             ID = id;
+            _ballFactory = ballFactory;
         }
     }
 }

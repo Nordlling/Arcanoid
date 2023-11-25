@@ -9,9 +9,9 @@ namespace Main.Scripts.Logic.Blocks
     {
         private Block _block;
         private ExplosionConfig _explosionConfig;
-        private ExplosionSystem _explosionSystem;
+        private IExplosionSystem _explosionSystem;
 
-        public void Construct(Block block, ExplosionConfig explosionConfig, ExplosionSystem explosionSystem)
+        public void Construct(Block block, ExplosionConfig explosionConfig, IExplosionSystem explosionSystem)
         {
             _block = block;
             _explosionConfig = explosionConfig;
