@@ -4,17 +4,17 @@
   "layers":[
     {
       "data":[
-        0, 0, 0,
-        0, 1, 0,
-        1, 0, 1,
-        0, 0, 0],
+        0, 0, 0, 4,
+        0, 0, 3, 0,
+        0, 2, 0, 0,
+        1, 0, 0, 0],
       "height":4,
       "id":1,
       "name":"\u0421\u043b\u043e\u0439 \u0442\u0430\u0439\u043b\u043e\u0432 1",
       "opacity":1,
       "type":"tilelayer",
       "visible":true,
-      "width":3,
+      "width":4,
       "x":0,
       "y":0
     }],
@@ -32,5 +32,5 @@
   "tilewidth":104,
   "type":"map",
   "version":"1.10",
-  "width":3
+  "width":4
 }

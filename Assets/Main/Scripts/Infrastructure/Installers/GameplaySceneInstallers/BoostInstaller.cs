@@ -1,9 +1,11 @@
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
+using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
+using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Logic.Boosts;
-using Main.Scripts.Logic.Zones;
+using Main.Scripts.Logic.Explosions;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 {
@@ -12,8 +14,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             RegisterBoostContainer(serviceContainer);
-            RegisterBallBoundsChecker(serviceContainer);
             RegisterBoostCollisionService(serviceContainer);
+            RegisterExplosionSystem(serviceContainer);
         }
         
         private void RegisterBoostContainer(ServiceContainer serviceContainer)
@@ -24,21 +26,23 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(boostContainer);
         }
-        
-        private void RegisterBallBoundsChecker(ServiceContainer serviceContainer)
-        {
-            BoostBoundsChecker boostBoundsChecker = new BoostBoundsChecker(
-                serviceContainer.Get<ZonesManager>(),
-                serviceContainer.Get<IBoostContainer>());
-            
-            serviceContainer.SetServiceSelf(boostBoundsChecker);
-            serviceContainer.SetService<ITickable, BoostBoundsChecker>(boostBoundsChecker);
-        }
 
         private void RegisterBoostCollisionService(ServiceContainer serviceContainer)
         {
             BoostCollisionService boostCollisionService = new BoostCollisionService();
             serviceContainer.SetService<IBoostCollisionService, BoostCollisionService>(boostCollisionService);
+        }
+        
+        private void RegisterExplosionSystem(ServiceContainer serviceContainer)
+        {
+            ExplosionSystem explosionSystem = new ExplosionSystem(
+                serviceContainer.Get<IGameGridService>(),
+                serviceContainer.Get<IEffectFactory>(),
+                serviceContainer.Get<ITimeProvider>());
+            
+            serviceContainer.SetService<ITickable, ExplosionSystem>(explosionSystem);
+            serviceContainer.SetService<IExplosionSystem, ExplosionSystem>(explosionSystem);
+            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(explosionSystem);
         }
     }
 }

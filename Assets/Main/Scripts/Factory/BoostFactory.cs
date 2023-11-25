@@ -52,13 +52,14 @@ namespace Main.Scripts.Factory
 
         public void Despawn(Boost boost)
         {
+            IBoostComponentFactory[] componentFactories = _tiledBlockConfig.BoostInfos[boost.ID].ComponentFactories;
+            
+            foreach (IBoostComponentFactory componentFactory in componentFactories)
+            {
+                componentFactory.RemoveComponent(boost);
+            }
+            
             _poolProvider.PoolItemView.Despawn(boost);
         }
-    }
-
-    public interface IBoostFactory
-    {
-        Boost Spawn(SpawnContext spawnContext);
-        void Despawn(Boost effect);
     }
 }

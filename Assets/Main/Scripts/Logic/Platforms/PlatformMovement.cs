@@ -37,7 +37,6 @@ namespace Main.Scripts.Logic.Platforms
 
             _currentPosition = transform.position;
             _targetPosition.y = _currentPosition.y;
-            _halfSize = _spriteRenderer.bounds.size / 2f;
         }
 
         public void Lose()
@@ -122,6 +121,7 @@ namespace Main.Scripts.Logic.Platforms
                 _currentPosition += direction * deltaSpeed;
             }
             
+            _halfSize = _spriteRenderer.bounds.size / 2f;
             _currentPosition.x = Mathf.Clamp(_currentPosition.x, _zonesManager.ScreenRect.xMin + _halfSize.x , _zonesManager.ScreenRect.xMax - _halfSize.x);
             transform.position = _currentPosition;
         }
