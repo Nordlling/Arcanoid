@@ -1,15 +1,14 @@
-using Main.Scripts.Logic.Blocks;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.Collision.CollisionHandlers
 {
-    public class HealthHandler : ICollisionHandler
+    public class AcceptedCollisionHandler<T> : ICollisionHandler where T : ICollisionInteractable
     {
         public void Handle(GameObject acceptedObject, Collision2D enteredCollision)
         {
-            if (enteredCollision.gameObject.TryGetComponent(out Health health))
+            if (acceptedObject.TryGetComponent(out T collisionInteractable))
             {
-                health.TakeDamage(1);
+                collisionInteractable.Interact();
             }
         }
         
