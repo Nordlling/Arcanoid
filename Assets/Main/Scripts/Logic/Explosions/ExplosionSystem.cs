@@ -7,12 +7,13 @@ using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Logic.Blocks;
+using Main.Scripts.Logic.Boosts;
 using Main.Scripts.Logic.Effects;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Explosions
 {
-    public class ExplosionSystem : ITickable, IRestartable, ILoseable
+    public class ExplosionSystem : IExplosionSystem, ITickable, IRestartable
     {
         private readonly IGameGridService _gameGridService;
         private readonly IEffectFactory _effectFactory;
@@ -45,11 +46,6 @@ namespace Main.Scripts.Logic.Explosions
         }
 
         public void Restart()
-        {
-            _explosions.Clear();
-        }
-
-        public void Lose()
         {
             _explosions.Clear();
         }
@@ -210,6 +206,11 @@ namespace Main.Scripts.Logic.Explosions
             if (block.TryGetComponent(out DestroyOnExplode destroyOnExplode))
             {
                 destroyOnExplode.Explode();
+            }
+            
+            if (block.TryGetComponent(out BoostKeeper boostKeeper))
+            {
+                boostKeeper.Interact();
             }
 
         }

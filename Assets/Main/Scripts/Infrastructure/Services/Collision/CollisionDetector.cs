@@ -12,7 +12,12 @@ namespace Main.Scripts.Infrastructure.Services.Collision
         }
         private void OnCollisionEnter2D(Collision2D other)
         {
-            _collisionService.CollisionProcessing(this, other.gameObject);
+            _collisionService.CollisionProcessing(this, other);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            _collisionService.TriggerProcessing(this, other);
         }
         
     }

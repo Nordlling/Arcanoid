@@ -23,12 +23,17 @@ namespace Main.Scripts.Logic.Blocks
         public void TakeDamage(int count)
         {
             _currentHealthCount -= count;
-            if (TryGetComponent(out BreaksVisual breaksVisual))
+            if (TryGetComponent(out HealthVisual healthVisual))
             {
-                breaksVisual.Refresh(count);
+                healthVisual.RefreshDamageView(count);
             }
+            
             if (_currentHealthCount <= 0 && TryGetComponent(out Block block))
             {
+                if (healthVisual is not null)
+                {
+                    healthVisual.RefreshDieView();
+                }
                 block.Destroy();
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Provides
 {
-    public class TimeProvider : ITimeProvider, IPauseable
+    public class TimeProvider : ITimeProvider, IPauseable, IGameOverable, IWinable, IPrePlayable, IPlayable
     {
         private float _timeScale = 1f;
         private float _cachedTimeScale = 1f;
@@ -43,6 +43,26 @@ namespace Main.Scripts.Infrastructure.Provides
         }
 
         public void UnPause()
+        {
+            TurnBackTime();
+        }
+
+        public void GameOver()
+        {
+            StopTime();
+        }
+
+        public void Win()
+        {
+            StopTime();
+        }
+
+        public void PrePlay()
+        {
+            SetRealTime();
+        }
+
+        public void Play()
         {
             TurnBackTime();
         }

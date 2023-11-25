@@ -27,7 +27,7 @@ namespace Main.Scripts.Logic.Balls
             _healthService = healthService;
         }
 
-        private void CreateBall()
+        public void CreateBall()
         {
             if (_ballKeeper.Ball is not null)
             {
@@ -51,17 +51,17 @@ namespace Main.Scripts.Logic.Balls
             }
         }
 
-        public void PrePlay()
-        {
-            CreateBall();
-        }
-
         public void Lose()
         {
             foreach (Ball ball in Balls)
             {
                 ball.BallMovement.Stop = true;
             }
+        }
+
+        public void PrePlay()
+        {
+            CreateBall();
         }
 
         public void Win()

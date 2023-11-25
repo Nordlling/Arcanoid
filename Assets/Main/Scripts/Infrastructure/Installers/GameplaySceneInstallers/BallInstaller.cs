@@ -3,6 +3,7 @@ using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
+using Main.Scripts.Infrastructure.Services.Difficulty;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.Platforms;
@@ -22,8 +23,9 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             RegisterBallKeeper(serviceContainer);
             RegisterBallContainer(serviceContainer);
             RegisterBallBoundsChecker(serviceContainer);
+            RegisterBallSpeedController(serviceContainer);
         }
-        
+
         private void RegisterBallCollisionService(ServiceContainer serviceContainer)
         {
             BallCollisionService ballCollisionService = new BallCollisionService();
@@ -43,6 +45,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             
             SetGameplayStates(serviceContainer, ballKeeper);
         }
+
         private void RegisterBallContainer(ServiceContainer serviceContainer)
         {
             BallContainer ballContainer = new BallContainer(
@@ -55,15 +58,27 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             
             SetGameplayStates(serviceContainer, ballContainer);
         }
-        
+
         private void RegisterBallBoundsChecker(ServiceContainer serviceContainer)
         {
             BallBoundsChecker ballBoundsChecker = new BallBoundsChecker(
                 serviceContainer.Get<ZonesManager>(),
                 serviceContainer.Get<IBallContainer>());
             
-            serviceContainer.SetService<IBallBoundsChecker, BallBoundsChecker>(ballBoundsChecker);
+            serviceContainer.SetServiceSelf(ballBoundsChecker);
             serviceContainer.SetService<ITickable, BallBoundsChecker>(ballBoundsChecker);
+        }
+        
+        private void RegisterBallSpeedController(ServiceContainer serviceContainer)
+        {
+            BallSpeedSystem ballSpeedSystem = new BallSpeedSystem(
+                serviceContainer.Get<IDifficultyService>(),
+                serviceContainer.Get<ITimeProvider>());
+            
+            serviceContainer.SetService<IBallSpeedSystem, BallSpeedSystem>(ballSpeedSystem);
+            serviceContainer.SetService<ITickable, BallSpeedSystem>(ballSpeedSystem);
+            
+            SetGameplayStates(serviceContainer, ballSpeedSystem);
         }
         
         private void SetGameplayStates(ServiceContainer serviceContainer, IGameplayStatable gameplayStatable)

@@ -3,7 +3,7 @@ using Main.Scripts.Logic.Zones;
 
 namespace Main.Scripts.Logic.Balls
 {
-    public class BallBoundsChecker : IBallBoundsChecker, ITickable
+    public class BallBoundsChecker : ITickable
     {
         private readonly ZonesManager _zonesManager;
         private readonly IBallContainer _ballContainer;

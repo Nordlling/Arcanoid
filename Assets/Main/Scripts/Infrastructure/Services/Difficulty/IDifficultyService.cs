@@ -4,5 +4,7 @@ namespace Main.Scripts.Infrastructure.Services.Difficulty
     {
         void IncreaseDifficulty(int destroyedBlocksToWin, int allBlocksToWin);
         float Speed { get; }
+        float MinSpeed { get; }
+        float MaxSpeed { get; }
     }
 }

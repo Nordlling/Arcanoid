@@ -17,7 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 53c10b69cf9975745ad6b4e2cf348070, type: 3}
-    - {fileID: 11400000, guid: d15a46170d13a654a80ba04c3b6772e6, type: 2}
+    - {fileID: 11400000, guid: f831a37d2777750419693fc3ee5bc1fe, type: 2}
     - {fileID: 21300000, guid: 73e900c195adae94e80785afe341b42f, type: 3}
     - {fileID: 21300000, guid: c1e33d971161f6b42a5e3693ac9bc184, type: 3}
     - {fileID: 21300000, guid: b65960088c231d9479fdf16d0c98e4db, type: 3}
@@ -30,6 +30,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 23768289360d15a419f1be0e59802d20, type: 2}
     - {fileID: 21300000, guid: 1a549c0665a92b54eb8e0458838c6974, type: 3}
     - {fileID: 11400000, guid: d7ddb46754b44434e85b9cb18587f098, type: 2}
+    - {fileID: 21300000, guid: afad4ca5a3764a248a60416e06f812d9, type: 3}
+    - {fileID: 21300000, guid: e6e5acf1385fa6240b555cb9acd56d4e, type: 3}
+    - {fileID: 21300000, guid: 8e192438a5e17d743949030db33e0f29, type: 3}
+    - {fileID: 11400000, guid: dea437bfd01b84044988bdb833ed2db9, type: 2}
+    - {fileID: 21300000, guid: 140d2ff44e3b28b46a00904c0dc0c1cd, type: 3}
+    - {fileID: 11400000, guid: b4359df1d10918b49b558f915001b1cf, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -48,7 +54,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 9
+      Data: 11
     - Name: 
       Entry: 7
       Data: 
@@ -58,21 +64,27 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: 2|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 3|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 3|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 4|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 4|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
+      Data: 5|Main.Scripts.Factory.BlockComponents.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
       Data: 1
@@ -81,8 +93,9 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
-    - Name: BlockBreaksConfig
+      Data: 6|Main.Scripts.Factory.BlockComponents.BlockHealthVisualComponentFactory,
+        Assembly-CSharp
+    - Name: BlockHealthVisualConfig
       Entry: 10
       Data: 1
     - Name: 
@@ -108,22 +121,28 @@ MonoBehaviour:
       Data: 2
     - Name: $v
       Entry: 7
-      Data: 6|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 7|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 8|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 7|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 9|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 8|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
+      Data: 10|Main.Scripts.Factory.BlockComponents.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
       Data: 2
@@ -132,8 +151,9 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
-    - Name: BlockBreaksConfig
+      Data: 11|Main.Scripts.Factory.BlockComponents.BlockHealthVisualComponentFactory,
+        Assembly-CSharp
+    - Name: BlockHealthVisualConfig
       Entry: 10
       Data: 1
     - Name: 
@@ -159,22 +179,28 @@ MonoBehaviour:
       Data: 3
     - Name: $v
       Entry: 7
-      Data: 10|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 12|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 13|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 11|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 14|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 12|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
+      Data: 15|Main.Scripts.Factory.BlockComponents.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
       Data: 3
@@ -183,8 +209,9 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
-    - Name: BlockBreaksConfig
+      Data: 16|Main.Scripts.Factory.BlockComponents.BlockHealthVisualComponentFactory,
+        Assembly-CSharp
+    - Name: BlockHealthVisualConfig
       Entry: 10
       Data: 1
     - Name: 
@@ -210,22 +237,28 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 7
-      Data: 14|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 17|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 18|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 4
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 15|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 19|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 16|Main.Scripts.Factory.Components.HealthComponentFactory, Assembly-CSharp
+      Data: 20|Main.Scripts.Factory.BlockComponents.HealthComponentFactory, Assembly-CSharp
     - Name: HealthCount
       Entry: 3
       Data: 4
@@ -234,8 +267,9 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|Main.Scripts.Factory.Components.BreakVisualComponentFactory, Assembly-CSharp
-    - Name: BlockBreaksConfig
+      Data: 21|Main.Scripts.Factory.BlockComponents.BlockHealthVisualComponentFactory,
+        Assembly-CSharp
+    - Name: BlockHealthVisualConfig
       Entry: 10
       Data: 1
     - Name: 
@@ -261,22 +295,28 @@ MonoBehaviour:
       Data: 5
     - Name: $v
       Entry: 7
-      Data: 18|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 22|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 23|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 5
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: false
     - Name: ComponentFactories
       Entry: 7
-      Data: 19|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 24|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 20|Main.Scripts.Factory.Components.DestroyOnExplodeComponentFactory,
+      Data: 25|Main.Scripts.Factory.BlockComponents.DestroyOnExplodeComponentFactory,
         Assembly-CSharp
     - Name: 
       Entry: 8
@@ -301,22 +341,28 @@ MonoBehaviour:
       Data: 6
     - Name: $v
       Entry: 7
-      Data: 21|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 26|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 27|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 6
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 22|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 28|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 23|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
+      Data: 29|Main.Scripts.Factory.BlockComponents.ExplosionComponentFactory, Assembly-CSharp
     - Name: ExplosionConfig
       Entry: 10
       Data: 7
@@ -343,22 +389,28 @@ MonoBehaviour:
       Data: 7
     - Name: $v
       Entry: 7
-      Data: 24|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 30|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 31|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 8
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 25|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 32|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 26|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
+      Data: 33|Main.Scripts.Factory.BlockComponents.ExplosionComponentFactory, Assembly-CSharp
     - Name: ExplosionConfig
       Entry: 10
       Data: 9
@@ -385,22 +437,28 @@ MonoBehaviour:
       Data: 8
     - Name: $v
       Entry: 7
-      Data: 27|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 34|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 35|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 10
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 28|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 36|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 29|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
+      Data: 37|Main.Scripts.Factory.BlockComponents.ExplosionComponentFactory, Assembly-CSharp
     - Name: ExplosionConfig
       Entry: 10
       Data: 11
@@ -427,25 +485,245 @@ MonoBehaviour:
       Data: 9
     - Name: $v
       Entry: 7
-      Data: 30|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+      Data: 38|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 39|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: CheckToWin
       Entry: 5
       Data: true
     - Name: ComponentFactories
       Entry: 7
-      Data: 31|Main.Scripts.Factory.Components.IComponentFactory[], Assembly-CSharp
+      Data: 40|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 32|Main.Scripts.Factory.Components.ExplosionComponentFactory, Assembly-CSharp
+      Data: 41|Main.Scripts.Factory.BlockComponents.ExplosionComponentFactory, Assembly-CSharp
     - Name: ExplosionConfig
       Entry: 10
       Data: 13
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 10
+    - Name: $v
+      Entry: 7
+      Data: 42|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 43|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 14
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: CheckToWin
+      Entry: 5
+      Data: true
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 44|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 45|Main.Scripts.Factory.BlockComponents.BoosterKeeperComponentFactory,
+        Assembly-CSharp
+    - Name: BoostID
+      Entry: 1
+      Data: FastBallBoost
+    - Name: EffectKey
+      Entry: 1
+      Data: BlockDestroy
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 11
+    - Name: $v
+      Entry: 7
+      Data: 46|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 47|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 15
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: CheckToWin
+      Entry: 5
+      Data: true
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 48|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 49|Main.Scripts.Factory.BlockComponents.BoosterKeeperComponentFactory,
+        Assembly-CSharp
+    - Name: BoostID
+      Entry: 1
+      Data: SlowBallBoost
+    - Name: EffectKey
+      Entry: 1
+      Data: BlockDestroy
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: BoostInfos
+      Entry: 7
+      Data: 50|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Main.Scripts.Configs.BoostInfo,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 51|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: FastBallBoost
+    - Name: $v
+      Entry: 7
+      Data: 52|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 53|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 16
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 54|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 55|Main.Scripts.Factory.BoostComponents.BallSpeedComponentFactory, Assembly-CSharp
+    - Name: SpeedBallConfig
+      Entry: 10
+      Data: 17
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SlowBallBoost
+    - Name: $v
+      Entry: 7
+      Data: 56|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 57|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 18
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 58|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 59|Main.Scripts.Factory.BoostComponents.BallSpeedComponentFactory, Assembly-CSharp
+    - Name: SpeedBallConfig
+      Entry: 10
+      Data: 19
     - Name: 
       Entry: 8
       Data: 

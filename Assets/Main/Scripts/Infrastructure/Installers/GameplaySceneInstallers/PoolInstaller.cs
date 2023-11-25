@@ -17,6 +17,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [SerializeField] private PoolProvider _blockPoolProvider;
         [SerializeField] private PoolProvider _ballPoolProvider;
         [SerializeField] private PoolProvider _effectPoolProvider;
+        [SerializeField] private PoolProvider _boostPoolProvider;
 
 
         public override void InstallBindings(ServiceContainer serviceContainer)
@@ -24,6 +25,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             RegisterBlockFactory(serviceContainer);
             RegisterBallFactory(serviceContainer);
             RegisterEffectFactory(serviceContainer);
+            RegisterBoostFactory(serviceContainer);
         }
 
         private void RegisterBlockFactory(ServiceContainer serviceContainer)
@@ -45,6 +47,13 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             _effectPoolProvider.Init();
             EffectFactory effectFactory = new EffectFactory(serviceContainer, _effectPoolProvider);
             serviceContainer.SetService<IEffectFactory, EffectFactory>(effectFactory);
+        }
+        
+        private void RegisterBoostFactory(ServiceContainer serviceContainer)
+        {
+            _boostPoolProvider.Init();
+            BoostFactory boostFactory = new BoostFactory(serviceContainer, _tiledBlockConfig, _boostPoolProvider);
+            serviceContainer.SetService<IBoostFactory, BoostFactory>(boostFactory);
         }
     }
 }
