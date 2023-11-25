@@ -29,10 +29,4 @@ namespace Main.Scripts.Factory
             _poolProvider.PoolItemView.Despawn(effect);
         }
     }
-
-    public interface IEffectFactory
-    {
-        Effect Spawn(SpawnContext spawnContext);
-        void Despawn(Effect effect);
-    }
 }
