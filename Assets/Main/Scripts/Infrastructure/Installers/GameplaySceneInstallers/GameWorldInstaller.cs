@@ -18,8 +18,6 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [Header("Prefabs")] 
         
         [Header("Scene Objects")]
-        [SerializeField] private Camera _camera;
-        [SerializeField] private PlatformMovement _platform;
         [SerializeField] private Bounder _bounder;
         [SerializeField] private BoundsVisualizer _boundsVisualizer;
 
@@ -28,7 +26,6 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         {
             RegisterTimeProvider(serviceContainer);
             RegisterHealthService(serviceContainer);
-            RegisterPlatform(serviceContainer);
             RegisterBounder(serviceContainer);
         }
 
@@ -48,21 +45,6 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             serviceContainer.SetService<IHealthService, HealthService>(healthService);
             
             SetGameplayStates(serviceContainer, healthService);
-        }
-
-        private void RegisterPlatform(ServiceContainer serviceContainer)
-        {
-            _platform.Construct
-                (
-                    serviceContainer.Get<ZonesManager>(), 
-                    _camera, 
-                    serviceContainer.Get<ITimeProvider>()
-                );
-            
-            serviceContainer.SetServiceSelf(_platform);
-            
-            SetGameplayStates(serviceContainer, _platform);
-            
         }
 
         private void RegisterBounder(ServiceContainer serviceContainer)

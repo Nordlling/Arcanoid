@@ -23,7 +23,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             RegisterBallKeeper(serviceContainer);
             RegisterBallContainer(serviceContainer);
             RegisterBallBoundsChecker(serviceContainer);
-            RegisterBallSpeedController(serviceContainer);
+            RegisterBallSpeedSystem(serviceContainer);
         }
 
         private void RegisterBallCollisionService(ServiceContainer serviceContainer)
@@ -49,7 +49,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         private void RegisterBallContainer(ServiceContainer serviceContainer)
         {
             BallContainer ballContainer = new BallContainer(
-                serviceContainer.Get<PlatformMovement>(),
+                serviceContainer.Get<Platform>().PlatformMovement,
                 serviceContainer.Get<IBallFactory>(),
                 serviceContainer.Get<BallKeeper>(),
                 serviceContainer.Get<IHealthService>());
@@ -69,7 +69,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             serviceContainer.SetService<ITickable, BallBoundsChecker>(ballBoundsChecker);
         }
         
-        private void RegisterBallSpeedController(ServiceContainer serviceContainer)
+        private void RegisterBallSpeedSystem(ServiceContainer serviceContainer)
         {
             BallSpeedSystem ballSpeedSystem = new BallSpeedSystem(
                 serviceContainer.Get<IDifficultyService>(),

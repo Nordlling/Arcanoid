@@ -7,9 +7,9 @@ namespace Main.Scripts.Logic.Balls
 {
     public class BallBoostSpeed : MonoBehaviour, ITriggerInteractable
     {
-        private IBallSpeedSystem _ballSpeedSystem;
-        private SpeedBallConfig _speedBallConfig;
         private Boost _boost;
+        private SpeedBallConfig _speedBallConfig;
+        private IBallSpeedSystem _ballSpeedSystem;
 
         public void Construct(Boost boost, SpeedBallConfig speedBallConfig, IBallSpeedSystem ballSpeedSystem)
         {
