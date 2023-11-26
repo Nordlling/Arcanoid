@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1818364271352708948}
   - component: {fileID: 1818364271352708949}
   - component: {fileID: 1818364271352708950}
+  - component: {fileID: 7945150339893991447}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -91,6 +92,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 4
   m_AspectRatio: 0.56222546
+--- !u!223 &7945150339893991447
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818364271352708936}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: -1
+  m_TargetDisplay: 0
 --- !u!1 &1818364271979553935
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +174,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &1818364271979553933
 MonoBehaviour:
@@ -208,9 +230,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseButton: {fileID: 2785244830423882087}
   _graphicRaycaster: {fileID: 1818364271979553934}
-  _pauseKey: PausePopUp
-  _loseKey: LosePopUp
-  _windowsConfig: {fileID: 11400000, guid: 83f7a399c4f01124ea96c805a38e272e, type: 2}
 --- !u!1001 &4069514197089801373
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2329363248562820018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5879484994355588117}
+  m_Layer: 6
+  m_Name: BulletSpawn1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5879484994355588117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329363248562820018}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.7534248, y: 0.3150685, z: 1.369863}
+  m_LocalScale: {x: 1.369863, y: 1.369863, z: 1.369863}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1863086792242144812}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3082894791682927934
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,6 +115,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3088939979509185057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3688040789284905658}
+  m_Layer: 6
+  m_Name: BulletSpawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3688040789284905658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3088939979509185057}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7534248, y: 0.3150685, z: 0}
+  m_LocalScale: {x: 1.369863, y: 1.369863, z: 1.369863}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1863086792242144812}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5723084284022063451
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +229,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _platformMovement: {fileID: 5723084284900565287}
   _stretchedTransform: {fileID: 1863086792242144812}
+  _bulletSpawns:
+  - {fileID: 5879484994355588117}
+  - {fileID: 3688040789284905658}
 --- !u!114 &5723084284900565287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,9 +246,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ballPoint: {fileID: 454124824909577123}
   _spriteRenderer: {fileID: 8359582939881480744}
-  _movingSpeed: 6
-  _minDistanceToMove: 0.05
-  _decelerationSpeed: 0.25
 --- !u!114 &1092018710491180978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +281,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5732874498712185789}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -258,7 +320,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5879484994355588117}
+  - {fileID: 3688040789284905658}
   m_Father: {fileID: 5723084284022063450}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

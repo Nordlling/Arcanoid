@@ -10,6 +10,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
         
         void CreateBallOnPlatform();
         Ball CreateBall(Vector2 position, float leftAngle, float rightAngle);
+        Ball CreateBullet(Vector2 position, float speed);
         void RemoveBall(Ball ball);
         void FireAllBalls();
         void UnfireAllBalls();

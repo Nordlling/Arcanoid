@@ -19,6 +19,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
 
         private readonly SpawnContext _spawnContext = new();
         private const string _ballKey = "Ball";
+        private const string _bulletKey = "Bullet";
 
         public event Action<bool> OnSwitchedFireball;
         public List<Ball> Balls { get; private set; } = new();
@@ -73,17 +74,16 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             return ball;
         }
         
-        public void CreateBall(Vector2 position)
+        public Ball CreateBullet(Vector2 position, float speed)
         {
-            SpawnContext spawnContext = new SpawnContext { Position = position };
-            Ball ball = _ballFactory.Spawn(spawnContext);
-            ball.transform.position = position;
-            if (isFireball)
-            {
-                ball.Fireball.EnableVisual();
-            }
-            ball.BallMovement.StartMove(180f, 180f);
+            _spawnContext.ID = _bulletKey;
+            _spawnContext.Position = position;
+            _spawnContext.Parent = null;
+            Ball ball = _ballFactory.Spawn(_spawnContext);
+            
             Balls.Add(ball);
+           
+            return ball;
         }
 
         public void RemoveBall(Ball ball)
