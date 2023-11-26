@@ -5,7 +5,7 @@ using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services.Difficulty;
 using UnityEngine;
 
-namespace Main.Scripts.Logic.Balls
+namespace Main.Scripts.Logic.Balls.BallSystems
 {
     public class BallSpeedSystem : IBallSpeedSystem, ITickable, IRestartable
     {

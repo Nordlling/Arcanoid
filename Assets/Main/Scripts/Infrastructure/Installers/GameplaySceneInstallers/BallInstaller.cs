@@ -4,8 +4,11 @@ using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Infrastructure.Services.Difficulty;
+using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Logic.Balls;
+using Main.Scripts.Logic.Balls.BallContainers;
+using Main.Scripts.Logic.Balls.BallSystems;
 using Main.Scripts.Logic.Platforms;
 using Main.Scripts.Logic.Zones;
 using UnityEngine;
@@ -24,6 +27,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             RegisterBallContainer(serviceContainer);
             RegisterBallBoundsChecker(serviceContainer);
             RegisterBallSpeedSystem(serviceContainer);
+            RegisterFireballSystem(serviceContainer);
         }
 
         private void RegisterBallCollisionService(ServiceContainer serviceContainer)
@@ -79,6 +83,19 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             serviceContainer.SetService<ITickable, BallSpeedSystem>(ballSpeedSystem);
             
             SetGameplayStates(serviceContainer, ballSpeedSystem);
+        }
+        
+        private void RegisterFireballSystem(ServiceContainer serviceContainer)
+        {
+            FireballSystem fireballSystem = new FireballSystem(
+                serviceContainer.Get<ITimeProvider>(),
+                serviceContainer.Get<IGameGridService>(),
+                serviceContainer.Get<IBallContainer>());
+            
+            serviceContainer.SetService<IFireballSystem, FireballSystem>(fireballSystem);
+            serviceContainer.SetService<ITickable, FireballSystem>(fireballSystem);
+            
+            SetGameplayStates(serviceContainer, fireballSystem);
         }
         
         private void SetGameplayStates(ServiceContainer serviceContainer, IGameplayStatable gameplayStatable)

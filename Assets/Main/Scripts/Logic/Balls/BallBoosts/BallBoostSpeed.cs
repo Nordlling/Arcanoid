@@ -1,9 +1,10 @@
 using Main.Scripts.Configs.Boosts;
 using Main.Scripts.Infrastructure.Services.Collision;
+using Main.Scripts.Logic.Balls.BallSystems;
 using Main.Scripts.Logic.Boosts;
 using UnityEngine;
 
-namespace Main.Scripts.Logic.Balls
+namespace Main.Scripts.Logic.Balls.BallBoosts
 {
     public class BallBoostSpeed : MonoBehaviour, ITriggerInteractable
     {

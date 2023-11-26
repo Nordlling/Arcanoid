@@ -10,9 +10,9 @@ using Object = UnityEngine.Object;
 
 namespace Main.Scripts.Factory.BoostComponents
 {
-    public class BallSpeedComponentFactory : IBoostComponentFactory
+    public class FireballComponentFactory : IBoostComponentFactory
     {   
-        public SpeedBallConfig SpeedBallConfig;
+        public FireballConfig FireballConfig;
         
         public void AddComponent<T>(ServiceContainer serviceContainer, T unit, SpawnContext spawnContext) where T : SpawnableItemMono
         {
@@ -20,16 +20,17 @@ namespace Main.Scripts.Factory.BoostComponents
             {
                 return;
             }
-            BallBoostSpeed ballBoostSpeed = boost.AddComponent<BallBoostSpeed>();
-            ballBoostSpeed.Construct(boost, SpeedBallConfig, serviceContainer.Get<IBallSpeedSystem>());
+            FireballBoost fireballBoost = boost.AddComponent<FireballBoost>();
+            fireballBoost.Construct(boost, FireballConfig, serviceContainer.Get<IFireballSystem>());
         }
         
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono
         {
-            if (unit.TryGetComponent(out BallBoostSpeed ballBoostSpeed))
+            if (unit.TryGetComponent(out FireballBoost fireballBoost))
             {
-                Object.Destroy(ballBoostSpeed);
+                Object.Destroy(fireballBoost);
             }
         }
+        
     }
 }

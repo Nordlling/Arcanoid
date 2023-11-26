@@ -3,6 +3,7 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Infrastructure.Services.Difficulty;
 using Main.Scripts.Logic.Balls;
+using Main.Scripts.Logic.Balls.BallSystems;
 using Main.Scripts.Pool;
 
 namespace Main.Scripts.Factory
@@ -26,6 +27,7 @@ namespace Main.Scripts.Factory
             ball.CollisionDetector.Construct(_serviceContainer.Get<IBallCollisionService>());
             ball.Collider.radius = ball.SpriteRenderer.bounds.extents.x;
             ball.BallMovement.Construct(_serviceContainer.Get<ITimeProvider>(), _serviceContainer.Get<IBallSpeedSystem>());
+            ball.Fireball.Construct(_serviceContainer.Get<IEffectFactory>());
             ball.transform.parent = spawnContext.Parent;
             
             return ball;
@@ -33,6 +35,7 @@ namespace Main.Scripts.Factory
 
         public void Despawn(Ball ball)
         {
+            ball.Fireball.Despawn();
             _poolProvider.PoolItemView.Despawn(ball);
         }
     }

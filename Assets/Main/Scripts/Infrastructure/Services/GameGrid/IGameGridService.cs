@@ -13,7 +13,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         bool TryGetBlockPlaceInfo(out BlockPlaceInfo blockPlaceInfo, Vector2Int gridPosition);
         bool TryGetWorldPosition(out Vector2 worldPosition, Vector2Int gridPosition);
         bool IsWithinArrayBounds(Vector2Int position);
-
+        void EnableTriggerForAllBlocks();
+        void DisableTriggerForAllBlocks();
+        
         event Action OnDestroyed;
 
         int AllBlocks { get; }
