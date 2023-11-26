@@ -119,7 +119,36 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             blockPlaceInfo = _currentLevel[position.x, position.y];
             RemoveBlock(blockPlaceInfo);
             return true;
+        }
 
+        public bool IsWithinArrayBounds(Vector2Int position)
+        {
+            return position.x >= 0 && position.x < _currentLevel.GetLength(0) 
+                                   && position.y >= 0 && position.y < _currentLevel.GetLength(1);
+        }
+
+        public void EnableTriggerForAllBlocks()
+        {
+            SwitchTriggerForAllBlocks(true);
+        }
+        
+        public void DisableTriggerForAllBlocks()
+        {
+            SwitchTriggerForAllBlocks(false);
+        }
+
+        private void SwitchTriggerForAllBlocks(bool enabled)
+        {
+            for (int x = 0; x < _gameGridInfo.Size.x; x++)
+            {
+                for (int y = 0; y < _gameGridInfo.Size.y; y++)
+                {
+                    if (_currentLevel[x, y].Block != null)
+                    {
+                        _currentLevel[x, y].Block.Collider.isTrigger = enabled;
+                    }
+                }
+            }
         }
 
         private void RemoveBlock(BlockPlaceInfo blockPlaceInfo)
@@ -163,12 +192,6 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             
             _gameGridInfo = _gameGridParser.ParseLevelMap(json);
             InitGrid();
-        }
-
-        public bool IsWithinArrayBounds(Vector2Int position)
-        {
-            return position.x >= 0 && position.x < _currentLevel.GetLength(0) 
-                                   && position.y >= 0 && position.y < _currentLevel.GetLength(1);
         }
 
         private void CheckGridToWin()
@@ -220,6 +243,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                 {
                     if (_currentLevel[x, y].Block != null)
                     {
+                        _currentLevel[x, y].Block.Collider.isTrigger = false;
                         _blockFactory.Despawn(_currentLevel[x, y].Block);
                     }
                 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Boosts
 {
-    public class BoostKeeper : MonoBehaviour, ICollisionInteractable
+    public class BoostKeeper : MonoBehaviour, ICollisionInteractable, ITriggerInteractable
     {
         private Block _block;
         private IBoostContainer _boostContainer;

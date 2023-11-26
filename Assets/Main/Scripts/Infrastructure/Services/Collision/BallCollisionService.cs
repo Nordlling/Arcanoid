@@ -1,4 +1,5 @@
 using Main.Scripts.Infrastructure.Services.Collision.CollisionHandlers;
+using Main.Scripts.Infrastructure.Services.Collision.CommonHandlers;
 using Main.Scripts.Infrastructure.Services.Collision.TriggerHandlers;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.Boosts;
@@ -11,12 +12,16 @@ namespace Main.Scripts.Infrastructure.Services.Collision
         
         private readonly ICollisionHandler[] _collisionHandlers = {
             new ChangeAngleOnHitHandler(),
-            new HealthHandler(),
+            new HealthHandler(1),
             new EnteredCollisionHandler<Explosion>(),
             new EnteredCollisionHandler<BoostKeeper>()
         };
         
         private readonly ITriggerHandler[] _triggerHandlers = {
+            new HealthHandler(999),
+            new EnteredTriggerHandler<Explosion>(),
+            new EnteredTriggerHandler<BoostKeeper>(),
+            new EnteredTriggerHandler<DestroyOnFireball>()
         };
 
         private readonly InteractionsProcessor _interactionsProcessor = new();

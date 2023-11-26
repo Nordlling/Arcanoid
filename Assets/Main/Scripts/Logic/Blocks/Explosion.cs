@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Blocks
 {
-    public class Explosion : MonoBehaviour, ICollisionInteractable
+    public class Explosion : MonoBehaviour, ICollisionInteractable, ITriggerInteractable
     {
         private Block _block;
         private ExplosionConfig _explosionConfig;
