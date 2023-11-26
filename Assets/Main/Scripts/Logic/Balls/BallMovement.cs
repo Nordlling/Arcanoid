@@ -25,10 +25,16 @@ namespace Main.Scripts.Logic.Balls
 
             _direction = Vector2.zero;
         }
+        
+        public void StartMove(float leftAngle, float rightAngle)
+        {
+            Vector2 startDirection = GenerateStartDirection(leftAngle, rightAngle);
+            _rigidbody.AddForce(startDirection * _ballSpeedSystem.CurrentSpeed);
+        }
 
         public void StartMove()
         {
-            Vector2 startDirection = GenerateStartDirection();
+            Vector2 startDirection = GenerateStartDirection(_leftAngle, _rightAngle);
             _rigidbody.AddForce(startDirection * _ballSpeedSystem.CurrentSpeed);
         }
 
@@ -48,9 +54,9 @@ namespace Main.Scripts.Logic.Balls
         }
 
 
-        private Vector2 GenerateStartDirection()
+        private Vector2 GenerateStartDirection(float leftAngle, float rightAngle)
         {
-            float angleDegrees = Random.Range(-_leftAngle, _rightAngle);
+            float angleDegrees = Random.Range(-leftAngle, rightAngle);
             Vector2 rotatedVector = Quaternion.Euler(0, 0, -angleDegrees) * Vector2.up;
             return rotatedVector.normalized;
         }
