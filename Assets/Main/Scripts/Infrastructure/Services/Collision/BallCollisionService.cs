@@ -1,6 +1,7 @@
 using Main.Scripts.Infrastructure.Services.Collision.CollisionHandlers;
 using Main.Scripts.Infrastructure.Services.Collision.CommonHandlers;
 using Main.Scripts.Infrastructure.Services.Collision.TriggerHandlers;
+using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.Boosts;
 using UnityEngine;
@@ -12,18 +13,20 @@ namespace Main.Scripts.Infrastructure.Services.Collision
         
         private readonly ICollisionHandler[] _collisionHandlers = {
             new ChangeAngleOnHitHandler(),
-            new HealthHandler(1),
+            new HealthHandler<Component>(1),
             new EnteredCollisionHandler<Explosion>(),
             new EnteredCollisionHandler<ExtraBall>(),
             new EnteredCollisionHandler<BoostKeeper>()
         };
         
         private readonly ITriggerHandler[] _triggerHandlers = {
-            new HealthHandler(999),
-            new EnteredTriggerHandler<Explosion>(),
-            new EnteredTriggerHandler<ExtraBall>(),
-            new EnteredTriggerHandler<BoostKeeper>(),
-            new EnteredTriggerHandler<DestroyOnFireball>()
+            new HealthHandler<Fireball>(999),
+            new EnteredTriggerHandler<Component, Explosion>(),
+            new EnteredTriggerHandler<Component, ExtraBall>(),
+            new EnteredTriggerHandler<Component, BoostKeeper>(),
+            new EnteredTriggerHandler<Component, DestroyOnFireball>(),
+            new HitOnBulletHandler(),
+            new AcceptedTriggerHandler<Bullet, DestroyBulletOnHit>()
         };
 
         private readonly InteractionsProcessor _interactionsProcessor = new();

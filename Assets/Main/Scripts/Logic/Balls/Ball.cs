@@ -11,14 +11,12 @@ namespace Main.Scripts.Logic.Balls
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public CircleCollider2D Collider => _collider;
         public CollisionDetector CollisionDetector => _collisionDetector;
-        public BallMovement BallMovement => _ballMovement;
-        public Fireball Fireball => _fireball;
+        public Rigidbody2D Rigidbody => _rigidbody;
 
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private CircleCollider2D _collider;
         [SerializeField] private CollisionDetector _collisionDetector;
-        [SerializeField] private BallMovement _ballMovement;
-        [SerializeField] private Fireball _fireball;
+        [SerializeField] private Rigidbody2D _rigidbody;
        
         private IBallFactory _ballFactory;
 

@@ -16,4 +16,8 @@ namespace Main.Scripts.Factory.Components
     public interface IBoostComponentFactory : IComponentFactory
     {
     }
+    
+    public interface IBallComponentFactory : IComponentFactory
+    {
+    }
 }

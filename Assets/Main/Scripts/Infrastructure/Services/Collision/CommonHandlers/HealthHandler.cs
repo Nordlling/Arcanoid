@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.Collision.CommonHandlers
 {
-    public class HealthHandler : ICollisionHandler, ITriggerHandler
+    public class HealthHandler<T>  : ICollisionHandler, ITriggerHandler
     {
         private readonly int _damage;
         
@@ -16,7 +16,7 @@ namespace Main.Scripts.Infrastructure.Services.Collision.CommonHandlers
         
         public void Handle(GameObject acceptedObject, Collision2D enteredCollision)
         {
-            if (enteredCollision.gameObject.TryGetComponent(out Health health))
+            if (acceptedObject.gameObject.TryGetComponent(out T _) && enteredCollision.gameObject.TryGetComponent(out Health health))
             {
                 health.TakeDamage(_damage);
             }
@@ -24,7 +24,7 @@ namespace Main.Scripts.Infrastructure.Services.Collision.CommonHandlers
 
         public void Handle(GameObject acceptedObject, Collider2D enteredCollider)
         {
-            if (enteredCollider.gameObject.TryGetComponent(out Health health))
+            if (acceptedObject.gameObject.TryGetComponent(out T _) && enteredCollider.gameObject.TryGetComponent(out Health health))
             {
                 health.TakeDamage(_damage);
             }

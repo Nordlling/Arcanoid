@@ -13,7 +13,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
         private readonly ITimeProvider _timeProvider;
         private readonly IGameplayStateMachine _gameplayStateMachine;
         
-        public BallMovement Ball { get; set; }
+        public Ball Ball { get; set; }
         private bool _isPrePlay;
 
         public BallKeeper(
@@ -65,8 +65,13 @@ namespace Main.Scripts.Logic.Balls.BallContainers
                 return;
             }
             
-            Ball.transform.parent = null;
-            Ball.StartMove();
+            if (!Ball.TryGetComponent(out BallMovement ballMovement))
+            {
+                return;
+            }
+            
+            ballMovement.transform.parent = null;
+            ballMovement.StartMove();
             Ball = null;
         }
     }

@@ -23,6 +23,7 @@ namespace Main.Scripts.UI
         {
             _windowsConfig = windowsConfig;
             _canvas.worldCamera = viewCamera;
+            _canvas.planeDistance = viewCamera.farClipPlane;
             WindowKeys = windowsConfig.Windows.Keys.ToList();
         }
 

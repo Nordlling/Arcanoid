@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tiledBlockConfig: {fileID: 11400000, guid: b9b9a1e295076494ebe2d2a2e0b914e0, type: 2}
+  _ballsConfig: {fileID: 11400000, guid: e280744fee345634b870a97d0fbb4363, type: 2}
   _blockPoolProvider: {fileID: 2058297196}
   _ballPoolProvider: {fileID: 1066424415}
   _effectPoolProvider: {fileID: 958966754}

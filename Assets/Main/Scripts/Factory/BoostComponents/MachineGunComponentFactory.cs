@@ -4,15 +4,17 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Logic.Balls.BallBoosts;
 using Main.Scripts.Logic.Balls.BallSystems;
 using Main.Scripts.Logic.Boosts;
+using Main.Scripts.Logic.Platforms.PlatformBoosts;
+using Main.Scripts.Logic.Platforms.PlatformSystems;
 using Main.Scripts.Pool;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
 
 namespace Main.Scripts.Factory.BoostComponents
 {
-    public class FireballComponentFactory : IBoostComponentFactory
+    public class MachineGunComponentFactory : IBoostComponentFactory
     {   
-        public FireballConfig FireballConfig;
+        public MachineGunConfig MachineGunConfig;
         
         public void AddComponent<T>(ServiceContainer serviceContainer, T unit, SpawnContext spawnContext) where T : SpawnableItemMono
         {
@@ -20,15 +22,15 @@ namespace Main.Scripts.Factory.BoostComponents
             {
                 return;
             }
-            FireballBoost fireballBoost = boost.AddComponent<FireballBoost>();
-            fireballBoost.Construct(boost, FireballConfig, serviceContainer.Get<IFireballSystem>());
+            MachineGunBoost machineGunBoost = boost.AddComponent<MachineGunBoost>();
+            machineGunBoost.Construct(boost, MachineGunConfig, serviceContainer.Get<IMachineGunSystem>());
         }
         
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono
         {
-            if (unit.TryGetComponent(out FireballBoost fireballBoost))
+            if (unit.TryGetComponent(out MachineGunBoost machineGunBoost))
             {
-                Object.Destroy(fireballBoost);
+                Object.Destroy(machineGunBoost);
             }
         }
         

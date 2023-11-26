@@ -10,6 +10,7 @@ using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.Balls.BallContainers;
 using Main.Scripts.Logic.Balls.BallSystems;
 using Main.Scripts.Logic.Platforms;
+using Main.Scripts.Logic.Platforms.PlatformSystems;
 using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             RegisterBallSpeedSystem(serviceContainer);
             RegisterExtraBallSystem(serviceContainer);
             RegisterFireballSystem(serviceContainer);
+            RegisterMachineGunSystem(serviceContainer);
         }
 
         private void RegisterBallCollisionService(ServiceContainer serviceContainer)
@@ -103,6 +105,19 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             serviceContainer.SetService<ITickable, FireballSystem>(fireballSystem);
             
             SetGameplayStates(serviceContainer, fireballSystem);
+        }
+        
+        private void RegisterMachineGunSystem(ServiceContainer serviceContainer)
+        {
+            MachineGunSystem machineGunSystem = new MachineGunSystem(
+                serviceContainer.Get<Platform>(),
+                serviceContainer.Get<ITimeProvider>(),
+                serviceContainer.Get<IBallContainer>());
+            
+            serviceContainer.SetService<IMachineGunSystem, MachineGunSystem>(machineGunSystem);
+            serviceContainer.SetService<ITickable, MachineGunSystem>(machineGunSystem);
+            
+            SetGameplayStates(serviceContainer, machineGunSystem);
         }
         
         private void SetGameplayStates(ServiceContainer serviceContainer, IGameplayStatable gameplayStatable)
