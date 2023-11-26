@@ -4,7 +4,7 @@ using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
-namespace Main.Scripts.Logic.Balls
+namespace Main.Scripts.Logic.Balls.BallContainers
 {
     public class BallKeeper : ITickable, IPrePlayable, IPlayable
     {

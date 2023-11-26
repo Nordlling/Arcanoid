@@ -4,7 +4,7 @@ using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Logic.Platforms;
 
-namespace Main.Scripts.Logic.Balls
+namespace Main.Scripts.Logic.Balls.BallContainers
 {
     public class BallContainer : IBallContainer, IPrePlayable, ILoseable, IWinable, IRestartable
     {
@@ -12,6 +12,8 @@ namespace Main.Scripts.Logic.Balls
         private readonly IBallFactory _ballFactory;
         private readonly BallKeeper _ballKeeper;
         private readonly IHealthService _healthService;
+
+        private bool isFireball;
 
         public List<Ball> Balls { get; private set; } = new();
 
@@ -36,6 +38,10 @@ namespace Main.Scripts.Logic.Balls
             SpawnContext spawnContext = new SpawnContext { Parent = _platformMovement.transform };
             Ball ball = _ballFactory.Spawn(spawnContext);
             ball.transform.position = _platformMovement.BallPoint.position;
+            if (isFireball)
+            {
+                ball.Fireball.EnableVisual();
+            }
             Balls.Add(ball);
             _ballKeeper.Ball = ball.BallMovement;
         }
@@ -48,6 +54,24 @@ namespace Main.Scripts.Logic.Balls
             if (Balls.Count <= 0)
             {
                 _healthService.DecreaseHealth();
+            }
+        }
+        
+        public void FireAllBalls()
+        {
+            isFireball = true;
+            foreach (Ball ball in Balls)
+            {
+                ball.Fireball.EnableVisual();
+            }
+        }
+        
+        public void UnfireAllBalls()
+        {
+            isFireball = false;
+            foreach (Ball ball in Balls)
+            {
+                ball.Fireball.DisableVisual();
             }
         }
 
@@ -66,11 +90,13 @@ namespace Main.Scripts.Logic.Balls
 
         public void Win()
         {
+            isFireball = false;
             ClearAllBalls();
         }
 
         public void Restart()
         {
+            isFireball = false;
             ClearAllBalls();
         }
 
