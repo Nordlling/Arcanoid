@@ -10,6 +10,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
     {
         [Header("Configs")]
         [SerializeField] private TiledBlockConfig _tiledBlockConfig;
+        [SerializeField] private BallsConfig _ballsConfig;
 
         [Header("Prefabs")]
         
@@ -38,7 +39,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         private void RegisterBallFactory(ServiceContainer serviceContainer)
         {
             _ballPoolProvider.Init();
-            BallFactory ballFactory = new BallFactory(serviceContainer, _ballPoolProvider);
+            BallFactory ballFactory = new BallFactory(serviceContainer, _ballsConfig, _ballPoolProvider);
             serviceContainer.SetService<IBallFactory, BallFactory>(ballFactory);
         }
         

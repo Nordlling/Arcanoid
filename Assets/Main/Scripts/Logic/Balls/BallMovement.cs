@@ -7,21 +7,21 @@ namespace Main.Scripts.Logic.Balls
 {
     public class BallMovement : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private float _leftAngle;
-        [SerializeField] private float _rightAngle;
-
         private ITimeProvider _timeProvider;
         private IBallSpeedSystem _ballSpeedSystem;
+        private Rigidbody2D _rigidbody;
 
         private Vector2 _direction;
 
+        private const float _angleOffset = 0.1f;
+
         public bool Stop { get; set; }
 
-        public void Construct(ITimeProvider timeProvider, IBallSpeedSystem ballSpeedSystem)
+        public void Construct(ITimeProvider timeProvider, IBallSpeedSystem ballSpeedSystem, Rigidbody2D ballRigidbody)
         {
             _timeProvider = timeProvider;
             _ballSpeedSystem = ballSpeedSystem;
+            _rigidbody = ballRigidbody;
 
             _direction = Vector2.zero;
         }
@@ -34,7 +34,7 @@ namespace Main.Scripts.Logic.Balls
 
         public void StartMove()
         {
-            Vector2 startDirection = GenerateStartDirection(_leftAngle, _rightAngle);
+            Vector2 startDirection = GenerateStartDirection(_angleOffset, _angleOffset);
             _rigidbody.AddForce(startDirection * _ballSpeedSystem.CurrentSpeed);
         }
 

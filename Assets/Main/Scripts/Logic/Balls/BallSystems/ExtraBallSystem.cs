@@ -14,7 +14,7 @@ namespace Main.Scripts.Logic.Balls.BallSystems
 
         public void ActivateExtraBallBoost(Vector2 position)
         {
-            _ballContainer.CreateBall(position);
+            _ballContainer.CreateBall(position, 180, 180);
         }
         
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Balls.BallContainers
 {
-    public class BallContainer : IBallContainer, IPrePlayable, ILoseable, IWinable, IRestartable
+    public class BallContainer : IBallContainer, IPrePlayable, IRestartable
     {
         private readonly PlatformMovement _platformMovement;
         private readonly IBallFactory _ballFactory;
@@ -16,6 +17,10 @@ namespace Main.Scripts.Logic.Balls.BallContainers
 
         private bool isFireball;
 
+        private readonly SpawnContext _spawnContext = new();
+        private const string _ballKey = "Ball";
+
+        public event Action<bool> OnSwitchedFireball;
         public List<Ball> Balls { get; private set; } = new();
 
         public BallContainer(
@@ -36,15 +41,36 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             {
                 return;
             }
-            SpawnContext spawnContext = new SpawnContext { Parent = _platformMovement.transform };
-            Ball ball = _ballFactory.Spawn(spawnContext);
+
+            _spawnContext.ID = _ballKey;
+            _spawnContext.Position = Vector2.zero;
+            _spawnContext.Parent = _platformMovement.transform;
+            Ball ball = _ballFactory.Spawn(_spawnContext);
             ball.transform.position = _platformMovement.BallPoint.position;
-            if (isFireball)
-            {
-                ball.Fireball.EnableVisual();
-            }
+            
+            OnSwitchedFireball?.Invoke(isFireball);
+
+            _ballKeeper.Ball = ball;
+            
             Balls.Add(ball);
-            _ballKeeper.Ball = ball.BallMovement;
+        }
+        
+        public Ball CreateBall(Vector2 position, float leftAngle, float rightAngle)
+        {
+            _spawnContext.ID = _ballKey;
+            _spawnContext.Position = position;
+            _spawnContext.Parent = null;
+            Ball ball = _ballFactory.Spawn(_spawnContext);
+            
+            OnSwitchedFireball?.Invoke(isFireball);
+            
+            if (ball.TryGetComponent(out BallMovement ballMovement))
+            {
+                ballMovement.StartMove(leftAngle, rightAngle);
+            }
+            
+            Balls.Add(ball);
+            return ball;
         }
         
         public void CreateBall(Vector2 position)
@@ -74,38 +100,18 @@ namespace Main.Scripts.Logic.Balls.BallContainers
         public void FireAllBalls()
         {
             isFireball = true;
-            foreach (Ball ball in Balls)
-            {
-                ball.Fireball.EnableVisual();
-            }
+            OnSwitchedFireball?.Invoke(isFireball);
         }
         
         public void UnfireAllBalls()
         {
             isFireball = false;
-            foreach (Ball ball in Balls)
-            {
-                ball.Fireball.DisableVisual();
-            }
-        }
-
-        public void Lose()
-        {
-            foreach (Ball ball in Balls)
-            {
-                ball.BallMovement.Stop = true;
-            }
+            OnSwitchedFireball?.Invoke(isFireball);
         }
 
         public void PrePlay()
         {
             CreateBallOnPlatform();
-        }
-
-        public void Win()
-        {
-            isFireball = false;
-            ClearAllBalls();
         }
 
         public void Restart()

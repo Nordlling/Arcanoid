@@ -1,4 +1,5 @@
 using Main.Scripts.Factory;
+using Main.Scripts.Logic.Balls.BallContainers;
 using Main.Scripts.Logic.Effects;
 using UnityEngine;
 
@@ -6,51 +7,63 @@ namespace Main.Scripts.Logic.Balls
 {
     public class Fireball : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer _fireballSpriteRenderer;
-        [SerializeField] private Sprite _fireballSprite;
-        [SerializeField] private string _fireballEffectKey;
         private IEffectFactory _effectFactory;
+        private IBallContainer _ballContainer;
+        private SpriteRenderer _spriteRenderer;
+        private Sprite _fireballSprite;
+        private string _fireballEffectKey;
+
+        private Sprite _originalSprite;
+        private Effect _currentEffect;
         private readonly SpawnContext _spawnContext = new();
 
-        private Effect _currentEffect;
-
-        public void Construct(IEffectFactory effectFactory)
+        public void Construct(
+            IEffectFactory effectFactory, 
+            IBallContainer ballContainer, 
+            SpriteRenderer spriteRenderer,
+            Sprite fireballSprite,
+            string fireballEffectKey)
         {
+            _spriteRenderer = spriteRenderer;
+            _ballContainer = ballContainer;
             _effectFactory = effectFactory;
-            _fireballSpriteRenderer.sprite = null;
+            _fireballSprite = fireballSprite;
+            _fireballEffectKey = fireballEffectKey;
             
+            Init();
+        }
+
+        private void Init()
+        {
+            _originalSprite = _spriteRenderer.sprite;
             if (string.IsNullOrEmpty(_fireballEffectKey))
             {
                 return;
             }
+
             _spawnContext.Position = transform.position;
             _currentEffect = _effectFactory.Spawn(_spawnContext);
             _currentEffect.EnableEffect(_fireballEffectKey);
             _currentEffect.gameObject.SetActive(false);
+
+            _ballContainer.OnSwitchedFireball += SwitchFireball;
         }
 
-        public void EnableVisual()
+        private void SwitchFireball(bool isFireball)
         {
-            _fireballSpriteRenderer.sprite = _fireballSprite;
-            if (_currentEffect is not null)
+            if (isFireball)
             {
-                _currentEffect.gameObject.SetActive(true);
+                EnableVisual();
             }
-        }
-        
-        public void DisableVisual()
-        {
-            _fireballSpriteRenderer.sprite = null;
-            
-            if (_currentEffect is not null)
+            else
             {
-                _currentEffect.gameObject.SetActive(false);
+                DisableVisual();
             }
         }
 
         public void Despawn()
         {
-            _fireballSpriteRenderer.sprite = null;
+            _ballContainer.OnSwitchedFireball -= SwitchFireball;
             if (_currentEffect is null)
             {
                 return;
@@ -63,6 +76,23 @@ namespace Main.Scripts.Logic.Balls
         {
             _currentEffect.transform.position = transform.position;
         }
+
+        private void EnableVisual()
+        {
+            _spriteRenderer.sprite = _fireballSprite;
+            if (_currentEffect is not null)
+            {
+                _currentEffect.gameObject.SetActive(true);
+            }
+        }
         
+        private void DisableVisual()
+        {
+            _spriteRenderer.sprite = _originalSprite;
+            if (_currentEffect is not null)
+            {
+                _currentEffect.gameObject.SetActive(false);
+            }
+        }
     }
 }

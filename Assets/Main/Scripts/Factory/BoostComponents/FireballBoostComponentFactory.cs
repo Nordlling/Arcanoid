@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace Main.Scripts.Factory.BoostComponents
 {
-    public class FireballComponentFactory : IBoostComponentFactory
+    public class FireballBoostComponentFactory : IBoostComponentFactory
     {   
         public FireballConfig FireballConfig;
         
