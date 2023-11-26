@@ -1,6 +1,7 @@
 using System;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
+using Main.Scripts.Logic.Platforms.PlatformSystems;
 using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
@@ -10,12 +11,10 @@ namespace Main.Scripts.Logic.Platforms
     {
         public Transform BallPoint => _ballPoint;
         [SerializeField]  private Transform _ballPoint;
-        
-        [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private float _movingSpeed;
-        [SerializeField] private float _minDistanceToMove;
-        [SerializeField] private float _decelerationSpeed;
 
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+
+        private ISpeedPlatformSystem _speedPlatformSystem;
         private ZonesManager _zonesManager;
         private Camera _camera;
         private ITimeProvider _timeProvider;
@@ -29,8 +28,9 @@ namespace Main.Scripts.Logic.Platforms
         private bool _decelerate;
         private float _currentSpeed;
 
-        public void Construct(ZonesManager zonesManager, Camera viewCamera, ITimeProvider timeProvider)
+        public void Construct(ISpeedPlatformSystem speedPlatformSystem, ZonesManager zonesManager, Camera viewCamera, ITimeProvider timeProvider)
         {
+            _speedPlatformSystem = speedPlatformSystem;
             _zonesManager = zonesManager;
             _camera = viewCamera;
             _timeProvider = timeProvider;
@@ -75,13 +75,13 @@ namespace Main.Scripts.Logic.Platforms
             
             if (Input.GetMouseButtonDown(0))
             {
-                _currentSpeed = _movingSpeed;
                 _move = true;
                 _decelerate = false;
             }
             
             if (Input.GetMouseButton(0))
             {
+                _currentSpeed = _speedPlatformSystem.MovingSpeed;
                 _targetPosition.x = mousePosition.x;
             }
 
@@ -100,7 +100,7 @@ namespace Main.Scripts.Logic.Platforms
 
         private void DecelerateSpeed()
         {
-            _currentSpeed -= _decelerationSpeed;
+            _currentSpeed -= _speedPlatformSystem.DecelerationSpeed;
             if (_currentSpeed <= 0f)
             {
                 _move = false;
@@ -111,7 +111,7 @@ namespace Main.Scripts.Logic.Platforms
         {
             float deltaSpeed = _currentSpeed * _timeProvider.DeltaTime;
             
-            if (Math.Abs(_targetPosition.x - _currentPosition.x) < _minDistanceToMove)
+            if (Math.Abs(_targetPosition.x - _currentPosition.x) < _speedPlatformSystem.MinDistanceToMove)
             {
                 _currentPosition = _targetPosition;
             } 

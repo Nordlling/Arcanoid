@@ -10,9 +10,9 @@ using Object = UnityEngine.Object;
 
 namespace Main.Scripts.Factory.BoostComponents
 {
-    public class PlatformSizeComponentFactory : IBoostComponentFactory
+    public class PlatformSpeedComponentFactory : IBoostComponentFactory
     {   
-        public SizePlatformConfig SizePlatformConfig;
+        public SpeedPlatformConfig SpeedPlatformConfig;
         
         public void AddComponent<T>(ServiceContainer serviceContainer, T unit, SpawnContext spawnContext) where T : SpawnableItemMono
         {
@@ -20,15 +20,15 @@ namespace Main.Scripts.Factory.BoostComponents
             {
                 return;
             }
-            PlatformBoostSize ballBoostSpeed = boost.AddComponent<PlatformBoostSize>();
-            ballBoostSpeed.Construct(boost, SizePlatformConfig, serviceContainer.Get<ISizePlatformSystem>());
+            PlatformBoostSpeed platformBoostSpeed = boost.AddComponent<PlatformBoostSpeed>();
+            platformBoostSpeed.Construct(boost, SpeedPlatformConfig, serviceContainer.Get<ISpeedPlatformSystem>());
         }
         
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono
         {
-            if (unit.TryGetComponent(out PlatformBoostSize platformBoostSize))
+            if (unit.TryGetComponent(out PlatformBoostSpeed platformBoostSpeed))
             {
-                Object.Destroy(platformBoostSize);
+                Object.Destroy(platformBoostSpeed);
             }
         }
     }

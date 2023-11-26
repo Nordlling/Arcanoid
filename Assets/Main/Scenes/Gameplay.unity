@@ -212,7 +212,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthConfig: {fileID: 11400000, guid: 1f75a685be6d4844db1a5fddeeee3316, type: 2}
-  _camera: {fileID: 519420031}
   _bounder: {fileID: 337934841}
   _boundsVisualizer: {fileID: 1841900599}
 --- !u!114 &145077515 stripped
@@ -1109,6 +1108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 519420031}
   _platform: {fileID: 1059321679}
+  _platformConfig: {fileID: 11400000, guid: 6e40eaa41ba2c3243a5af9660056121c, type: 2}
 --- !u!4 &1677989035
 Transform:
   m_ObjectHideFlags: 0
