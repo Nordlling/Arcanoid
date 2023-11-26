@@ -38,6 +38,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 5399a857aba8fd64d8e644bea64e69c4, type: 3}
     - {fileID: 21300000, guid: bb1d3c4c76b9f1a468d003d188514a5f, type: 3}
     - {fileID: 21300000, guid: 05d6b6b5b046a46448872a42d2806da6, type: 3}
+    - {fileID: 21300000, guid: 1493da4180ca93c4194811286f583f76, type: 3}
+    - {fileID: 21300000, guid: c9b29c5a29b5bcc46a848e8ce16bc6b9, type: 3}
     - {fileID: 21300000, guid: 8e192438a5e17d743949030db33e0f29, type: 3}
     - {fileID: 11400000, guid: dea437bfd01b84044988bdb833ed2db9, type: 2}
     - {fileID: 21300000, guid: 140d2ff44e3b28b46a00904c0dc0c1cd, type: 3}
@@ -52,6 +54,10 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8ff3a8a14669fdd45aae117f35306832, type: 2}
     - {fileID: 21300000, guid: 069e10c5ebe007745b70d15528cc9a32, type: 3}
     - {fileID: 11400000, guid: 3d8b6dfc4ec1fd54b8a2e88c98d66ec5, type: 2}
+    - {fileID: 21300000, guid: 02180feb9cbce874ebedb4189e22a346, type: 3}
+    - {fileID: 11400000, guid: cdd8cc17e63c78f4cab1c0dbfc396a28, type: 2}
+    - {fileID: 21300000, guid: 6cb4c30b1b153bd48aa846959b7e1e81, type: 3}
+    - {fileID: 11400000, guid: 4d23b220a39aaba4aa1e20f34650b8f7, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -70,7 +76,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 17
+      Data: 19
     - Name: 
       Entry: 7
       Data: 
@@ -968,6 +974,110 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 18
+    - Name: $v
+      Entry: 7
+      Data: 76|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 77|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 22
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: CheckToWin
+      Entry: 5
+      Data: true
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 78|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 79|Main.Scripts.Factory.BlockComponents.BoosterKeeperComponentFactory,
+        Assembly-CSharp
+    - Name: BoostID
+      Entry: 1
+      Data: IncreaseLifeBoost
+    - Name: EffectKey
+      Entry: 1
+      Data: BlockDestroy
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: 19
+    - Name: $v
+      Entry: 7
+      Data: 80|Main.Scripts.Configs.BlockInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 81|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 23
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: CheckToWin
+      Entry: 5
+      Data: true
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 82|Main.Scripts.Factory.Components.IBlockComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 83|Main.Scripts.Factory.BlockComponents.BoosterKeeperComponentFactory,
+        Assembly-CSharp
+    - Name: BoostID
+      Entry: 1
+      Data: DecreaseLifeBoost
+    - Name: EffectKey
+      Entry: 1
+      Data: BlockDestroy
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -975,18 +1085,18 @@ MonoBehaviour:
       Data: 
     - Name: BoostInfos
       Entry: 7
-      Data: 76|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Main.Scripts.Configs.BoostInfo,
+      Data: 84|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Main.Scripts.Configs.BoostInfo,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 77|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+      Data: 85|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
         mscorlib]], mscorlib
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 12
-      Data: 7
+      Data: 9
     - Name: 
       Entry: 7
       Data: 
@@ -995,55 +1105,10 @@ MonoBehaviour:
       Data: FastBallBoost
     - Name: $v
       Entry: 7
-      Data: 78|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+      Data: 86|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
     - Name: BasicInfo
       Entry: 7
-      Data: 79|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
-    - Name: Visual
-      Entry: 10
-      Data: 22
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: ComponentFactories
-      Entry: 7
-      Data: 80|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 81|Main.Scripts.Factory.BoostComponents.BallSpeedComponentFactory, Assembly-CSharp
-    - Name: SpeedBallConfig
-      Entry: 10
-      Data: 23
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 1
-      Data: SlowBallBoost
-    - Name: $v
-      Entry: 7
-      Data: 82|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
-    - Name: BasicInfo
-      Entry: 7
-      Data: 83|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+      Data: 87|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 24
@@ -1052,13 +1117,13 @@ MonoBehaviour:
       Data: 
     - Name: ComponentFactories
       Entry: 7
-      Data: 84|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+      Data: 88|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 85|Main.Scripts.Factory.BoostComponents.BallSpeedComponentFactory, Assembly-CSharp
+      Data: 89|Main.Scripts.Factory.BoostComponents.BallSpeedComponentFactory, Assembly-CSharp
     - Name: SpeedBallConfig
       Entry: 10
       Data: 25
@@ -1082,13 +1147,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: UpsizePlatformBoost
+      Data: SlowBallBoost
     - Name: $v
       Entry: 7
-      Data: 86|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+      Data: 90|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
     - Name: BasicInfo
       Entry: 7
-      Data: 87|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+      Data: 91|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 26
@@ -1097,15 +1162,14 @@ MonoBehaviour:
       Data: 
     - Name: ComponentFactories
       Entry: 7
-      Data: 88|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+      Data: 92|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 89|Main.Scripts.Factory.BoostComponents.PlatformSizeComponentFactory,
-        Assembly-CSharp
-    - Name: SizePlatformConfig
+      Data: 93|Main.Scripts.Factory.BoostComponents.BallSpeedComponentFactory, Assembly-CSharp
+    - Name: SpeedBallConfig
       Entry: 10
       Data: 27
     - Name: 
@@ -1128,13 +1192,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: DownsizePlatformBoost
+      Data: UpsizePlatformBoost
     - Name: $v
       Entry: 7
-      Data: 90|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+      Data: 94|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
     - Name: BasicInfo
       Entry: 7
-      Data: 91|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+      Data: 95|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 28
@@ -1143,13 +1207,13 @@ MonoBehaviour:
       Data: 
     - Name: ComponentFactories
       Entry: 7
-      Data: 92|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+      Data: 96|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 93|Main.Scripts.Factory.BoostComponents.PlatformSizeComponentFactory,
+      Data: 97|Main.Scripts.Factory.BoostComponents.PlatformSizeComponentFactory,
         Assembly-CSharp
     - Name: SizePlatformConfig
       Entry: 10
@@ -1174,13 +1238,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: FireballBoost
+      Data: DownsizePlatformBoost
     - Name: $v
       Entry: 7
-      Data: 94|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+      Data: 98|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
     - Name: BasicInfo
       Entry: 7
-      Data: 95|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+      Data: 99|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 30
@@ -1189,16 +1253,62 @@ MonoBehaviour:
       Data: 
     - Name: ComponentFactories
       Entry: 7
-      Data: 96|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+      Data: 100|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 97|Main.Scripts.Factory.BoostComponents.FireballComponentFactory, Assembly-CSharp
-    - Name: FireballConfig
+      Data: 101|Main.Scripts.Factory.BoostComponents.PlatformSizeComponentFactory,
+        Assembly-CSharp
+    - Name: SizePlatformConfig
       Entry: 10
       Data: 31
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: FireballBoost
+    - Name: $v
+      Entry: 7
+      Data: 102|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 103|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 32
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 104|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 105|Main.Scripts.Factory.BoostComponents.FireballComponentFactory, Assembly-CSharp
+    - Name: FireballConfig
+      Entry: 10
+      Data: 33
     - Name: 
       Entry: 8
       Data: 
@@ -1222,29 +1332,29 @@ MonoBehaviour:
       Data: FastPlatformBoost
     - Name: $v
       Entry: 7
-      Data: 98|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+      Data: 106|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
     - Name: BasicInfo
       Entry: 7
-      Data: 99|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+      Data: 107|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
-      Data: 32
+      Data: 34
     - Name: 
       Entry: 8
       Data: 
     - Name: ComponentFactories
       Entry: 7
-      Data: 100|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+      Data: 108|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 101|Main.Scripts.Factory.BoostComponents.PlatformSpeedComponentFactory,
+      Data: 109|Main.Scripts.Factory.BoostComponents.PlatformSpeedComponentFactory,
         Assembly-CSharp
     - Name: SpeedPlatformConfig
       Entry: 10
-      Data: 33
+      Data: 35
     - Name: 
       Entry: 8
       Data: 
@@ -1268,29 +1378,119 @@ MonoBehaviour:
       Data: SlowPlatformBoost
     - Name: $v
       Entry: 7
-      Data: 102|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+      Data: 110|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
     - Name: BasicInfo
       Entry: 7
-      Data: 103|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+      Data: 111|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
-      Data: 34
+      Data: 36
     - Name: 
       Entry: 8
       Data: 
     - Name: ComponentFactories
       Entry: 7
-      Data: 104|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+      Data: 112|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 105|Main.Scripts.Factory.BoostComponents.PlatformSpeedComponentFactory,
+      Data: 113|Main.Scripts.Factory.BoostComponents.PlatformSpeedComponentFactory,
         Assembly-CSharp
     - Name: SpeedPlatformConfig
       Entry: 10
-      Data: 35
+      Data: 37
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: IncreaseLifeBoost
+    - Name: $v
+      Entry: 7
+      Data: 114|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 115|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 38
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 116|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 117|Main.Scripts.Factory.BoostComponents.LifeComponentFactory, Assembly-CSharp
+    - Name: LifeConfig
+      Entry: 10
+      Data: 39
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: DecreaseLifeBoost
+    - Name: $v
+      Entry: 7
+      Data: 118|Main.Scripts.Configs.BoostInfo, Assembly-CSharp
+    - Name: BasicInfo
+      Entry: 7
+      Data: 119|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+    - Name: Visual
+      Entry: 10
+      Data: 40
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ComponentFactories
+      Entry: 7
+      Data: 120|Main.Scripts.Factory.Components.IBoostComponentFactory[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 121|Main.Scripts.Factory.BoostComponents.LifeComponentFactory, Assembly-CSharp
+    - Name: LifeConfig
+      Entry: 10
+      Data: 41
     - Name: 
       Entry: 8
       Data: 
