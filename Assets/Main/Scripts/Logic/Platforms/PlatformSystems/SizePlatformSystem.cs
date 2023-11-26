@@ -4,7 +4,7 @@ using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
 using UnityEngine;
 
-namespace Main.Scripts.Logic.Platforms
+namespace Main.Scripts.Logic.Platforms.PlatformSystems
 {
     public class SizePlatformSystem : ISizePlatformSystem, ITickable, IRestartable
     {
@@ -63,10 +63,5 @@ namespace Main.Scripts.Logic.Platforms
         {
             _targetSize = _initialPlatformSize;
         }
-    }
-
-    public interface ISizePlatformSystem
-    {
-        void ActivateSizeBoost(SizePlatformConfig sizePlatformConfig);
     }
 }
