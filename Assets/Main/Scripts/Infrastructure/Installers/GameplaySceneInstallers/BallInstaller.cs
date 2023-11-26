@@ -27,6 +27,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             RegisterBallContainer(serviceContainer);
             RegisterBallBoundsChecker(serviceContainer);
             RegisterBallSpeedSystem(serviceContainer);
+            RegisterExtraBallSystem(serviceContainer);
             RegisterFireballSystem(serviceContainer);
         }
 
@@ -83,6 +84,12 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             serviceContainer.SetService<ITickable, BallSpeedSystem>(ballSpeedSystem);
             
             SetGameplayStates(serviceContainer, ballSpeedSystem);
+        }
+        
+        private void RegisterExtraBallSystem(ServiceContainer serviceContainer)
+        {
+            ExtraBallSystem extraBallSystem = new ExtraBallSystem(serviceContainer.Get<IBallContainer>());
+            serviceContainer.SetService<IExtraBallSystem, ExtraBallSystem>(extraBallSystem);;
         }
         
         private void RegisterFireballSystem(ServiceContainer serviceContainer)

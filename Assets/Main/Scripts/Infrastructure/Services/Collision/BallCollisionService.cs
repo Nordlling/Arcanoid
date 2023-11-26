@@ -14,12 +14,14 @@ namespace Main.Scripts.Infrastructure.Services.Collision
             new ChangeAngleOnHitHandler(),
             new HealthHandler(1),
             new EnteredCollisionHandler<Explosion>(),
+            new EnteredCollisionHandler<ExtraBall>(),
             new EnteredCollisionHandler<BoostKeeper>()
         };
         
         private readonly ITriggerHandler[] _triggerHandlers = {
             new HealthHandler(999),
             new EnteredTriggerHandler<Explosion>(),
+            new EnteredTriggerHandler<ExtraBall>(),
             new EnteredTriggerHandler<BoostKeeper>(),
             new EnteredTriggerHandler<DestroyOnFireball>()
         };

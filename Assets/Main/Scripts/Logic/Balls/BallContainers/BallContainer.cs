@@ -3,6 +3,7 @@ using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Logic.Platforms;
+using UnityEngine;
 
 namespace Main.Scripts.Logic.Balls.BallContainers
 {
@@ -29,7 +30,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             _healthService = healthService;
         }
 
-        public void CreateBall()
+        public void CreateBallOnPlatform()
         {
             if (_ballKeeper.Ball is not null)
             {
@@ -44,6 +45,19 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             }
             Balls.Add(ball);
             _ballKeeper.Ball = ball.BallMovement;
+        }
+        
+        public void CreateBall(Vector2 position)
+        {
+            SpawnContext spawnContext = new SpawnContext { Position = position };
+            Ball ball = _ballFactory.Spawn(spawnContext);
+            ball.transform.position = position;
+            if (isFireball)
+            {
+                ball.Fireball.EnableVisual();
+            }
+            ball.BallMovement.StartMove(180f, 180f);
+            Balls.Add(ball);
         }
 
         public void RemoveBall(Ball ball)
@@ -85,7 +99,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
 
         public void PrePlay()
         {
-            CreateBall();
+            CreateBallOnPlatform();
         }
 
         public void Win()
