@@ -49,9 +49,7 @@ namespace Main.Scripts.UI.Views
 
         private void Subscribe()
         {
-            _healthService.OnDecreased += DecreaseHealth;
-            _healthService.OnIncreased += IncreaseHealth;
-            _healthService.OnReset += ResetHealths;
+            _healthService.OnChanged += RefreshHealth;
         }
 
         private void OnDestroy()
@@ -61,28 +59,17 @@ namespace Main.Scripts.UI.Views
 
         private void Unsubscribe()
         {
-            _healthService.OnDecreased -= DecreaseHealth;
-            _healthService.OnIncreased -= IncreaseHealth;
-            _healthService.OnReset -= ResetHealths;
-        }
-
-        private void ResetHealths()
-        {
-            _currentHealthCount = _allHealthImages.Count;
-            
-            foreach (Image healthImage in _allHealthImages)
-            {
-                _changeImageColorAnimation.Play(healthImage, _fullHealthColor);
-            }
+            _healthService.OnChanged -= RefreshHealth;
         }
 
         private void DecreaseHealth()
         {
-            if (_currentHealthCount > 0)
+            if (_currentHealthCount <= 0)
             {
-                _currentHealthCount--;
-                _changeImageColorAnimation.Play(_allHealthImages[_currentHealthCount],  _emptyHealthColor);
+                return;
             }
+            _currentHealthCount--;
+            _changeImageColorAnimation.Play(_allHealthImages[_currentHealthCount],  _emptyHealthColor);
         }
 
         private void IncreaseHealth()
@@ -90,6 +77,16 @@ namespace Main.Scripts.UI.Views
             _changeImageColorAnimation.Play(_allHealthImages[_currentHealthCount],  _fullHealthColor);
             _currentHealthCount++;
             
+        }
+        
+        private void RefreshHealth()
+        {
+            _currentHealthCount = _healthService.LeftHealths;
+            for (int i = 0; i < _allHealthImages.Count; i++)
+            {
+                Color color = i < _currentHealthCount ?  _fullHealthColor : _emptyHealthColor;
+                _changeImageColorAnimation.Play(_allHealthImages[i], color);
+            }
         }
 
         private void ClearAllChildren()

@@ -1,17 +1,18 @@
 using System;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.GameplayStates;
+using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.Healths
 {
     public class HealthService : IHealthService, IRestartable
     {
-        public event Action OnDecreased;
-        public event Action OnIncreased;
-        public event Action OnReset;
+        public event Action OnChanged;
         
         private readonly IGameplayStateMachine _gameplayStateMachine;
         private readonly HealthConfig _healthConfig;
+
+        public int MaxHealth => _healthConfig.HealthCount;
 
         public HealthService( 
             IGameplayStateMachine gameplayStateMachine,
@@ -33,11 +34,10 @@ namespace Main.Scripts.Infrastructure.Services.Healths
         public void DecreaseHealth()
         {
             LeftHealths--;
-            OnDecreased?.Invoke();
+            OnChanged?.Invoke();
             
-            if (LeftHealths < 0)
+            if (TryLose())
             {
-                _gameplayStateMachine.Enter<LoseState>();
                 return;
             }
             
@@ -46,8 +46,24 @@ namespace Main.Scripts.Infrastructure.Services.Healths
 
         public void IncreaseHealth()
         {
+            if (LeftHealths >= _healthConfig.HealthCount)
+            {
+                return;
+            }
             LeftHealths++;
-            OnIncreased?.Invoke();
+            OnChanged?.Invoke();
+        }
+
+        public void ChangeHealth(int count, bool canDie)
+        {
+            LeftHealths += count;
+            if (canDie && TryLose())
+            {
+                return;
+            }
+
+            LeftHealths = Mathf.Clamp(LeftHealths, 0, _healthConfig.HealthCount);
+            OnChanged?.Invoke();
         }
 
         public void Restart()
@@ -55,10 +71,21 @@ namespace Main.Scripts.Infrastructure.Services.Healths
             ResetHealth();
         }
 
+        private bool TryLose()
+        {
+            if (LeftHealths >= 0)
+            {
+                return false;
+            }
+            _gameplayStateMachine.Enter<LoseState>();
+            return true;
+
+        }
+
         private void ResetHealth()
         {
             LeftHealths = _healthConfig.HealthCount;
-            OnReset?.Invoke();
+            OnChanged?.Invoke();
         }
 
         private void InitHealth(HealthConfig healthConfig)
