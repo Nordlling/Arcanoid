@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovingSpeed: 6
   DecelerationSpeed: 0.25
-  MinDistanceToMove: 0.05
+  MinDistanceToMove: 0.06
