@@ -9,6 +9,7 @@ namespace Main.Scripts.Logic.Blocks
         public string ID { get; private set; }
         public bool CheckToWin  { get; private set; }
         public Vector2Int GridPosition { get; set; }
+        public Vector3 SizeRatio { get; set; }
         
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public SpriteRenderer BreakSpriteRenderer => _breakSpriteRenderer;

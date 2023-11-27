@@ -27,7 +27,8 @@ namespace Main.Scripts.Logic.Boosts
 
         public void Interact()
         {
-            _boostContainer.CreateBoost(_boostId, transform.position);
+            Boost boost = _boostContainer.CreateBoost(_boostId, transform.position);
+            boost.transform.localScale = Vector3.Scale(boost.transform.localScale, _block.SizeRatio);
             CreateEffect();
             _block.Destroy();
         }

@@ -1,6 +1,7 @@
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
+using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.Zones;
 using UnityEngine;
 
@@ -44,11 +45,12 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
                     SpawnContext spawnContext = new SpawnContext { ID = gameGridInfo.LevelMap[x, y].ToString(), Position = spawnPosition};
                     
-                    var block = _blockFactory.Spawn(spawnContext);
+                    Block block = _blockFactory.Spawn(spawnContext);
                     
                     if (block != null)
                     {
                         block.transform.localScale = new Vector3(_blockScale.x, _blockScale.y, 1f);
+                        block.SizeRatio = new Vector3(_blockScale.x / 1f, _blockScale.y / 1f, 1f);
                         block.GridPosition = new Vector2Int(x, y);
                     }
 

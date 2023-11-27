@@ -17,12 +17,13 @@ namespace Main.Scripts.Logic.Boosts
             _boostFactory = boostFactory;
         }
 
-        public void CreateBoost(string ID, Vector2 position)
+        public Boost CreateBoost(string ID, Vector2 position)
         {
             _spawnContext.ID = ID;
             _spawnContext.Position = position;
             Boost boost = _boostFactory.Spawn(_spawnContext);
             Boosts.Add(boost);
+            return boost;
         }
 
         public void RemoveBoost(Boost boost)
