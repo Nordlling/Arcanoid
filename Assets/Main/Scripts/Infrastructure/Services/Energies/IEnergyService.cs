@@ -12,6 +12,8 @@ namespace Main.Scripts.Infrastructure.Services.Energies
         int EnergyCapacity { get; }
         int EnergyForPlay { get; }
         int EnergyForLastTry { get; }
+        float CurrentSecondsToRecharge { get; }
+        float AllSecondsToRecharge { get; }
 
         event Action OnEnergyChanged;
     }
