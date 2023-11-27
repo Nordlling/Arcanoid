@@ -271,7 +271,7 @@ MonoBehaviour:
   _poolSetting:
     SpawnableItemMono: {fileID: 3403901167193901610, guid: 3a4d6cdf7b11f90478d57a594d4466ef, type: 3}
     Container: {fileID: 257771760}
-    StartSize: 100
+    StartSize: 50
 --- !u!1 &307181720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,7 +1908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8753613360061135227, guid: 973bf037bdce61d4a9f2f9e52df43953, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -65.00006
+      value: -65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 973bf037bdce61d4a9f2f9e52df43953, type: 3}

@@ -126,6 +126,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             {
                 _ballFactory.Despawn(ball);
             }
+            Balls.Clear();
         }
     }
 }

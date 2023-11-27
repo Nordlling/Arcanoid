@@ -24,6 +24,7 @@ namespace Main.Scripts.Logic.Balls
             _rigidbody = ballRigidbody;
 
             _direction = Vector2.zero;
+            _rigidbody.velocity = _direction;
         }
         
         public void StartMove(float leftAngle, float rightAngle)

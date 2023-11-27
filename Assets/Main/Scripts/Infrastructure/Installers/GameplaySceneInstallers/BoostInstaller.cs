@@ -6,6 +6,7 @@ using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Logic.Boosts;
 using Main.Scripts.Logic.Explosions;
+using Main.Scripts.Logic.Zones;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 {
@@ -14,6 +15,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             RegisterBoostContainer(serviceContainer);
+            RegisterBoostBoundsChecker(serviceContainer);
             RegisterBoostCollisionService(serviceContainer);
             RegisterExplosionSystem(serviceContainer);
         }
@@ -25,6 +27,16 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             serviceContainer.SetService<IBoostContainer, BoostContainer>(boostContainer);
             
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(boostContainer);
+        }
+        
+        private void RegisterBoostBoundsChecker(ServiceContainer serviceContainer)
+        {
+            BoostBoundsChecker boostBoundsChecker = new BoostBoundsChecker( 
+                serviceContainer.Get<ZonesManager>(),
+                serviceContainer.Get<IBoostContainer>());
+            
+            serviceContainer.SetServiceSelf(boostBoundsChecker);
+            serviceContainer.SetService<ITickable, BoostBoundsChecker>(boostBoundsChecker);
         }
 
         private void RegisterBoostCollisionService(ServiceContainer serviceContainer)
