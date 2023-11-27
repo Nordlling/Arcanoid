@@ -5,6 +5,7 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Logic.Boosts;
 using Main.Scripts.Pool;
+using UnityEngine;
 
 namespace Main.Scripts.Factory
 {
@@ -35,6 +36,7 @@ namespace Main.Scripts.Factory
             boost.SpriteRenderer.sprite = boostInfo.BasicInfo.Visual;
             boost.CollisionDetector.Construct(_serviceContainer.Get<IBoostCollisionService>());
             boost.transform.position = spawnContext.Position;
+            boost.transform.localScale = Vector3.one;
             boost.BoostMovement.Construct(_serviceContainer.Get<ITimeProvider>());
 
             IBoostComponentFactory[] componentFactories = boostInfo.ComponentFactories;
