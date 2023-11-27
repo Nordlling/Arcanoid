@@ -191,7 +191,7 @@ namespace Main.Scripts.Logic.Explosions
         {
             _spawnContext.Position = worldPosition;
             Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(explosionConfig.ExplosionEffectKey);
+            effect.EnableEffect(explosionConfig.ExplosionEffectKey, true);
         }
 
         private int CalculateMaxDepth(ExplosionConfig explosionConfig)
