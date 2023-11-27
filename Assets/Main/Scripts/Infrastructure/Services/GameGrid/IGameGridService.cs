@@ -15,6 +15,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         bool IsWithinArrayBounds(Vector2Int position);
         void EnableTriggerForAllBlocks();
         void DisableTriggerForAllBlocks();
+        void KillAllWinnableBlocks(float time);
         
         event Action OnDestroyed;
 

@@ -1,4 +1,5 @@
 using Main.Scripts.Infrastructure.Services.Collision;
+using Main.Scripts.Logic.Boosts;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Blocks
@@ -7,10 +8,12 @@ namespace Main.Scripts.Logic.Blocks
     {
         private int _healthCount;
         private int _currentHealthCount;
-        
-        public void Construct(int healthCount)
+        private Block _block;
+
+        public void Construct(int healthCount, Block block)
         {
             _healthCount = healthCount;
+            _block = block;
 
             _currentHealthCount = _healthCount;
         }
@@ -27,15 +30,25 @@ namespace Main.Scripts.Logic.Blocks
             {
                 healthVisual.RefreshDamageView(count);
             }
-            
-            if (_currentHealthCount <= 0 && TryGetComponent(out Block block))
+
+            if (_currentHealthCount > 0)
             {
-                if (healthVisual is not null)
-                {
-                    healthVisual.RefreshDieView();
-                }
-                block.Destroy();
+                return;
             }
+            
+            if (TryGetComponent(out BoostKeeper boostKeeper))
+            {
+                boostKeeper.Interact();
+                return;
+            }
+            
+            if (healthVisual is not null)
+            {
+                healthVisual.RefreshDieView();
+            }
+                
+            _block.Destroy();
         }
+        
     }
 }

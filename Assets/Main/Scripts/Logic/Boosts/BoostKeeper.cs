@@ -27,6 +27,11 @@ namespace Main.Scripts.Logic.Boosts
 
         public void Interact()
         {
+            if (_block.TryGetComponent(out Health _))
+            {
+                return;
+            }
+            
             Boost boost = _boostContainer.CreateBoost(_boostId, transform.position);
             boost.transform.localScale = Vector3.Scale(boost.transform.localScale, _block.SizeRatio);
             CreateEffect();

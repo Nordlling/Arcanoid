@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Energies;
+using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,11 +17,12 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _menuButton;
+        [SerializeField] private Button _skipButton;
         [SerializeField] private EnergyBarUIView _energyBarUIView;
         
         private IGameStateMachine _gameStateMachine;
         private IEnergyService _energyService;
-
+        
         protected override void OnInitialize()
         {
             base.OnInitialize();
@@ -35,16 +37,18 @@ namespace Main.Scripts.UI.Views
             _continueButton.onClick.AddListener(ContinueGame);
             _restartButton.onClick.AddListener(RestartGame);
             _menuButton.onClick.AddListener(ExitGame);
+            _skipButton.onClick.AddListener(SkipLevel);
             _energyBarUIView.OnOpen();
             _energyBarUIView.RefreshEnergy();
         }
-        
+
         protected override void OnClose()
         {
             base.OnClose();
             _continueButton.onClick.RemoveListener(ContinueGame);
             _restartButton.onClick.RemoveListener(RestartGame);
             _menuButton.onClick.RemoveListener(ExitGame);
+            _skipButton.onClick.RemoveListener(SkipLevel);
             _energyBarUIView.OnClose();
         }
 
@@ -74,6 +78,16 @@ namespace Main.Scripts.UI.Views
             Close();
             await Task.Yield();
             gamePlayStateMachine.EnterPreviousState();
+        }
+
+        private async void SkipLevel()
+        {
+            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
+            IGameGridService gameGridService = _serviceContainer.Get<IGameGridService>();
+            Close();
+            await Task.Yield();
+            gamePlayStateMachine.EnterPreviousState();
+            gameGridService.KillAllWinnableBlocks(3);
         }
     }
 }
