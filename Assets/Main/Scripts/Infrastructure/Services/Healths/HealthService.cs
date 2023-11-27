@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.GameplayStates;
 using UnityEngine;
@@ -66,9 +67,10 @@ namespace Main.Scripts.Infrastructure.Services.Healths
             OnChanged?.Invoke();
         }
 
-        public void Restart()
+        public Task Restart()
         {
             ResetHealth();
+            return Task.CompletedTask;
         }
 
         private bool TryLose()

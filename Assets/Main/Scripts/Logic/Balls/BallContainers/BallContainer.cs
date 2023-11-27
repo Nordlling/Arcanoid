@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Healths;
@@ -109,15 +110,17 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             OnSwitchedFireball?.Invoke(isFireball);
         }
 
-        public void PrePlay()
+        public Task PrePlay()
         {
             CreateBallOnPlatform();
+            return Task.CompletedTask;
         }
 
-        public void Restart()
+        public Task Restart()
         {
             isFireball = false;
             ClearAllBalls();
+            return Task.CompletedTask;
         }
 
         private void ClearAllBalls()

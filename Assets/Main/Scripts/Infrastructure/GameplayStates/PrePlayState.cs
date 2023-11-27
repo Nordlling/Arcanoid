@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Main.Scripts.UI;
+using System.Threading.Tasks;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
@@ -15,16 +15,17 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             }
         }
 
-        public void Enter()
+        public async Task Enter()
         {
             foreach (IPrePlayable restartable in _prePlayables)
             {
-                restartable.PrePlay();
+                await restartable.PrePlay();
             }
         }
 
-        public void Exit()
+        public Task Exit()
         {
+            return Task.CompletedTask;
         }
 
         public GameplayStateMachine StateMachine { get; set; }
@@ -32,6 +33,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
 
     public interface IPrePlayable : IGameplayStatable
     {
-        void PrePlay();
+        Task PrePlay();
     }
 }

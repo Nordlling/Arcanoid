@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.GameplayStates;
 using UnityEngine;
@@ -29,9 +30,10 @@ namespace Main.Scripts.Infrastructure.Services.Difficulty
             Speed = Mathf.Lerp(_difficultyConfig.StartBallSpeed, _difficultyConfig.FinishBallSpeed, interpolation);
         }
 
-        public void Restart()
+        public Task Restart()
         {
             ResetDifficulty();
+            return Task.CompletedTask;
         }
 
         private void ResetDifficulty()

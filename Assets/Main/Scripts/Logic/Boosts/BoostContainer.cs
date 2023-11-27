@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using UnityEngine;
@@ -32,9 +33,10 @@ namespace Main.Scripts.Logic.Boosts
             _boostFactory.Despawn(boost);
         }
 
-        public void Restart()
+        public Task Restart()
         {
             ClearAllBoosts();
+            return Task.CompletedTask;
         }
 
         private void ClearAllBoosts()

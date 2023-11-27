@@ -268,10 +268,11 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             }
         }
 
-        public void Restart()
+        public Task Restart()
         {
             DespawnBlocks();
             CreateLevelMap();
+            return Task.CompletedTask;
         }
 
         private void DespawnBlocks()

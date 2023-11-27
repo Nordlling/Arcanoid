@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
@@ -14,17 +15,18 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             }
         }
 
-        public void Enter()
+        public async Task Enter()
         {
             foreach (IRestartable restartable in _restartables)
             {
-                restartable.Restart();
+                await restartable.Restart();
             }
             StateMachine.Enter<PrepareState>();
         }
 
-        public void Exit()
+        public Task Exit()
         {
+            return Task.CompletedTask;
         }
 
         public GameplayStateMachine StateMachine { get; set; }
@@ -32,6 +34,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
 
     public interface IRestartable : IGameplayStatable
     {
-        void Restart();
+        Task Restart();
     }
 }
