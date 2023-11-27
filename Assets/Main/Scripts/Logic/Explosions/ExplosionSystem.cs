@@ -21,6 +21,7 @@ namespace Main.Scripts.Logic.Explosions
 
         private readonly SpawnContext _spawnContext = new();
         private readonly Dictionary<BlockPlaceInfo, ExplosionInfo> _explosions = new();
+        private readonly ExplosionInteractionProcessor _explosionInteractionProcessor = new();
 
         public ExplosionSystem(
             IGameGridService gameGridService, 
@@ -178,41 +179,12 @@ namespace Main.Scripts.Logic.Explosions
                     continue;
                 }
                 CreateEffect(cell.BlockPlaceInfo.WorldPosition, explosionInfo.ExplosionConfig);
-                TryExplodeBlock(cell.BlockPlaceInfo.Block, explosionInfo.ExplosionConfig);
+                _explosionInteractionProcessor.ExplodedBlockProcessing(cell.BlockPlaceInfo.Block, explosionInfo.ExplosionConfig);
                 
                 childrenCells.AddRange(cell.Childrens);
             }
 
             explosionInfo.CurrentCells = childrenCells;
-        }
-
-        private void TryExplodeBlock(Block block, ExplosionConfig explosionConfig)
-        {
-            if (block is null)
-            {
-                return;
-            }
-            
-            if (block.TryGetComponent(out Health health))
-            {
-                health.TakeDamage(explosionConfig.Damage);
-            }
-            
-            if (block.TryGetComponent(out Explosion explosion))
-            {
-                explosion.Interact();
-            }
-
-            if (block.TryGetComponent(out DestroyOnExplode destroyOnExplode))
-            {
-                destroyOnExplode.Explode();
-            }
-            
-            if (block.TryGetComponent(out BoostKeeper boostKeeper))
-            {
-                boostKeeper.Interact();
-            }
-
         }
 
         private void CreateEffect(Vector2 worldPosition, ExplosionConfig explosionConfig)
