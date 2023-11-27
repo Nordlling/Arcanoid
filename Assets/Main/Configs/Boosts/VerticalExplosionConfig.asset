@@ -17,5 +17,7 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: -1}
   Length: -1
-  SecondsPerWave: 0.4
+  SecondsPerWave: 0.35
   ExplosionEffectKey: Explosion
+  Chain: 0
+  CellIdsToFindTargets: 

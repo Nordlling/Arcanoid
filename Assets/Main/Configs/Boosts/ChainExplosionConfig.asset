@@ -19,7 +19,7 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: 0, y: -1}
   Length: -1
-  SecondsPerWave: 0.4
+  SecondsPerWave: 0.3
   ExplosionEffectKey: Explosion
   Chain: 1
   CellIdsToFindTargets: 01000000020000000300000004000000
