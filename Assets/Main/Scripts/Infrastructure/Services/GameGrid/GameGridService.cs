@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Main.Scripts.Factory;
 using Main.Scripts.GameGrid;
 using Main.Scripts.Infrastructure.GameplayStates;
@@ -8,6 +9,7 @@ using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Logic.Blocks;
+using Main.Scripts.Logic.Boosts;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.GameGrid
@@ -135,6 +137,43 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         public void DisableTriggerForAllBlocks()
         {
             SwitchTriggerForAllBlocks(false);
+        }
+        
+        public async void KillAllWinnableBlocks(float time)
+        {
+            int interval = (int)(time / AllBlocksToWin * 1000);
+            
+            for (int x = 0; x < _gameGridInfo.Size.x; x++)
+            {
+                for (int y = 0; y < _gameGridInfo.Size.y; y++)
+                {
+                    if (_currentLevel[x, y].Block == null || !_currentLevel[x, y].CheckToWin)
+                    {
+                        continue;
+                    }
+                    await KillBlock(_currentLevel[x, y].Block, interval);
+                }
+            }
+        }
+
+        private async Task KillBlock(Block block, int interval)
+        {
+            if (block.TryGetComponent(out Health health))
+            {
+                health.TakeDamage(999);
+            }
+
+            if (block.TryGetComponent(out BoostKeeper boostKeeper))
+            {
+                boostKeeper.Interact();
+            }
+            
+            if (block.TryGetComponent(out Explosion explosion))
+            {
+                explosion.Interact();
+            }
+
+            await Task.Delay(interval);
         }
 
         private void SwitchTriggerForAllBlocks(bool enabled)

@@ -18,7 +18,7 @@ namespace Main.Scripts.Factory.BlockComponents
                 return;
             }
             Health health = block.AddComponent<Health>();
-            health.Construct(HealthCount);
+            health.Construct(HealthCount, block);
         }
         
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono
