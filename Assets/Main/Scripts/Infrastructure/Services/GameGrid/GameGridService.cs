@@ -179,6 +179,11 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             {
                 explosion.Interact();
             }
+            
+            if (block.TryGetComponent(out ExtraBall extraBall))
+            {
+                extraBall.Interact();
+            }
 
             await Task.Delay(interval);
         }
