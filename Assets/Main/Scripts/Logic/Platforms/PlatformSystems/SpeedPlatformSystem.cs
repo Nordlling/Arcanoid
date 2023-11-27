@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Configs;
 using Main.Scripts.Configs.Boosts;
 using Main.Scripts.Infrastructure.GameplayStates;
@@ -48,9 +49,10 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
             MinDistanceToMove *= _speedPlatformConfig.SpeedMultiplier;
         }
 
-        public void Restart()
+        public Task Restart()
         {
             _boostTime = 0f;
+            return Task.CompletedTask;
         }
     }
 }

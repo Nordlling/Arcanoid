@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
@@ -43,10 +44,11 @@ namespace Main.Scripts.UI.Views
             _runningCounterAnimation.UpdateTime(_timeProvider.Stopped ? 0f : 1f);
         }
 
-        public void Restart()
+        public Task Restart()
         {
             RefreshPackProgress();
             RefreshLevelProgress();
+            return Task.CompletedTask;
         }
 
         private void Subscribe()

@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Main.Scripts.Configs.Boosts;
 using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services.GameGrid;
-using Main.Scripts.Logic.Blocks;
-using Main.Scripts.Logic.Boosts;
 using Main.Scripts.Logic.Effects;
 using UnityEngine;
 
@@ -46,9 +45,10 @@ namespace Main.Scripts.Logic.Explosions
             CalculateExplosionPath(rootCell, explosionConfig, targetIDs, maxDepth);
         }
 
-        public void Restart()
+        public Task Restart()
         {
             _explosions.Clear();
+            return Task.CompletedTask;
         }
 
         public void Tick()
@@ -191,7 +191,7 @@ namespace Main.Scripts.Logic.Explosions
         {
             _spawnContext.Position = worldPosition;
             Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(explosionConfig.ExplosionEffectKey);
+            effect.EnableEffect(explosionConfig.ExplosionEffectKey, true);
         }
 
         private int CalculateMaxDepth(ExplosionConfig explosionConfig)

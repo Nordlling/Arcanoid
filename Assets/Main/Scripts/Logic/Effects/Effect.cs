@@ -15,6 +15,7 @@ namespace Main.Scripts.Logic.Effects
         [SerializeField] private EffectInfo[] _effects;
 
         private EffectInfo _enabledEffect;
+        private bool _timeDependent = true;
 
         public void Construct(IEffectFactory effectFactory, ITimeProvider timeProvider)
         {
@@ -22,8 +23,9 @@ namespace Main.Scripts.Logic.Effects
             _timeProvider = timeProvider;
         }
 
-        public void EnableEffect(string effectKey)
+        public void EnableEffect(string effectKey, bool timeDependent)
         {
+            _timeDependent = timeDependent;
             TryEnableEffect(effectKey);
         }
 
@@ -57,15 +59,17 @@ namespace Main.Scripts.Logic.Effects
             {
                 return;
             }
-            
-            UpdateTimeForEffects();
 
-            if (_enabledEffect.Effect.IsAlive())
+            if (!_enabledEffect.Effect.IsAlive())
             {
+                DisableEffect();
                 return;
             }
             
-            DisableEffect();
+            if (_timeDependent)
+            {
+                UpdateTimeForEffects();
+            }
         }
 
         private void UpdateTimeForEffects()

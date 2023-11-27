@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using UnityEngine;
 
@@ -37,34 +38,40 @@ namespace Main.Scripts.Infrastructure.Provides
             _cachedTimeScale = _timeScale;
         }
 
-        public void Pause()
+        public Task Pause()
         {
             StopTime();
+            return Task.CompletedTask;
         }
 
-        public void UnPause()
+        public Task UnPause()
         {
             TurnBackTime();
+            return Task.CompletedTask;
         }
 
-        public void GameOver()
+        public Task GameOver()
         {
             StopTime();
+            return Task.CompletedTask;
         }
 
-        public void Win()
+        public Task Win()
         {
             StopTime();
+            return Task.CompletedTask;
         }
 
-        public void PrePlay()
+        public Task PrePlay()
         {
             SetRealTime();
+            return Task.CompletedTask;
         }
 
-        public void Play()
+        public Task Play()
         {
             TurnBackTime();
+            return Task.CompletedTask;
         }
     }
 }

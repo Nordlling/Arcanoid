@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Configs.Boosts;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Installers;
@@ -59,9 +60,10 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
             
         }
 
-        public void Restart()
+        public Task Restart()
         {
             _targetSize = _initialPlatformSize;
+            return Task.CompletedTask;
         }
     }
 }

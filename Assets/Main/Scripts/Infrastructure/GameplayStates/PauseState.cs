@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
@@ -14,19 +15,19 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             }
         }
 
-        public void Enter()
+        public async Task Enter()
         {
             foreach (IPauseable pauseable in _pauseables)
             {
-                pauseable.Pause();
+                await pauseable.Pause();
             }
         }
 
-        public void Exit()
+        public async Task Exit()
         {
             foreach (IPauseable pauseable in _pauseables)
             {
-                pauseable.UnPause();
+                await pauseable.UnPause();
             }
         }
 
@@ -35,7 +36,7 @@ namespace Main.Scripts.Infrastructure.GameplayStates
 
     public interface IPauseable : IGameplayStatable
     {
-        void Pause();
-        void UnPause();
+        Task Pause();
+        Task UnPause();
     }
 }

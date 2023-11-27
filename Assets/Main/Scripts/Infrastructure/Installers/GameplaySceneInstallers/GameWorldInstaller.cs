@@ -1,3 +1,5 @@
+using Main.Scripts.Configs;
+using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
@@ -11,10 +13,15 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [Header("Scene Objects")]
         [SerializeField] private Bounder _bounder;
         [SerializeField] private BoundsVisualizer _boundsVisualizer;
+        [SerializeField] private Transform _finalEffectTransform;
+        
+        [Header("Configs")]
+        [SerializeField] private WinConfig _winConfig;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             RegisterTimeProvider(serviceContainer);
+            RegisterFinalService(serviceContainer);
             RegisterBounder(serviceContainer);
         }
 
@@ -23,6 +30,21 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             TimeProvider timeProvider = new TimeProvider();
             serviceContainer.SetService<ITimeProvider, TimeProvider>(timeProvider);
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(timeProvider);
+        }
+
+        private void RegisterFinalService(ServiceContainer serviceContainer)
+        {
+            SpawnContext spawnContext = new SpawnContext { Position = _finalEffectTransform.position };
+            
+            WinService winService = new WinService(
+                serviceContainer.Get<ITimeProvider>(),
+                serviceContainer.Get<IEffectFactory>(),
+                spawnContext,
+                _winConfig
+            );
+            
+            serviceContainer.SetServiceSelf(winService);
+            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(winService);
         }
 
         private void RegisterBounder(ServiceContainer serviceContainer)

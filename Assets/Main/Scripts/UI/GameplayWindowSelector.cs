@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.UI.Views;
 
@@ -15,31 +16,36 @@ namespace Main.Scripts.UI
             _gameplayWindowsKeysInfo = gameplayWindowsKeysInfo;
         }
         
-        public void Pause()
+        public Task Pause()
         {
             TryOpenWindow<PauseUIView>(_gameplayWindowsKeysInfo.PauseKey, _gameplayWindowsKeysInfo.DefaultKey);
+            return Task.CompletedTask;
         }
 
-        public void UnPause()
+        public Task UnPause()
         {
             TryCloseWindow<PauseUIView>(_gameplayWindowsKeysInfo.PauseKey, _gameplayWindowsKeysInfo.DefaultKey);
+            return Task.CompletedTask;
         }
 
-        public void GameOver()
+        public Task GameOver()
         {
             TryOpenWindow<GameOverUIView>(_gameplayWindowsKeysInfo.GameOverKey, _gameplayWindowsKeysInfo.DefaultKey);
+            return Task.CompletedTask;
         }
 
-        public void Win()
+        public Task Win()
         {
             TryOpenWindow<WinUIView>(_gameplayWindowsKeysInfo.WinKey, _gameplayWindowsKeysInfo.DefaultKey);
+            return Task.CompletedTask;
         }
 
-        public void PrePlay()
+        public Task PrePlay()
         {
             TryCloseWindow<WinUIView>(_gameplayWindowsKeysInfo.WinKey, _gameplayWindowsKeysInfo.DefaultKey);
             TryCloseWindow<PauseUIView>(_gameplayWindowsKeysInfo.PauseKey, _gameplayWindowsKeysInfo.DefaultKey);
             TryCloseWindow<GameOverUIView>(_gameplayWindowsKeysInfo.GameOverKey, _gameplayWindowsKeysInfo.DefaultKey);
+            return Task.CompletedTask;
         }
 
         private void TryCloseWindow<T>(string key, string defaultKey) where T : UIView

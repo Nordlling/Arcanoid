@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
@@ -29,15 +30,17 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             _gameplayStateMachine = gameplayStateMachine;
         }
 
-        public void PrePlay()
+        public Task PrePlay()
         {
             _isPrePlay = true;
+            return Task.CompletedTask;
         }
 
-        public void Play()
+        public Task Play()
         {
             _isPrePlay = false;
             TryStartBallMove();
+            return Task.CompletedTask;
         }
 
         public void Tick()

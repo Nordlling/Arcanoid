@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Configs.Boosts;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Installers;
@@ -49,9 +50,10 @@ namespace Main.Scripts.Logic.Balls.BallSystems
             _boostTime -= _timeProvider.DeltaTime;
         }
 
-        public void Restart()
+        public Task Restart()
         {
             _boostTime = 0f;
+            return Task.CompletedTask;
         }
         
     }

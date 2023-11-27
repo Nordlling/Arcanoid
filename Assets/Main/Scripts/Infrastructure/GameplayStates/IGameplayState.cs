@@ -1,10 +1,12 @@
+using System.Threading.Tasks;
+
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
     public interface IGameplayState
     {
         void AddStatable(IGameplayStatable gameplayStatable);
-        void Enter();
-        void Exit();
+        Task Enter();
+        Task Exit();
         GameplayStateMachine StateMachine { get; set; }
     }
 }

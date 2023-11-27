@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
@@ -16,21 +17,22 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             }
         }
 
-        public void Enter()
+        public async Task Enter()
         {
             foreach (IPlayable playable in _playables)
             {
-                playable.Play();
+                await playable.Play();
             }
         }
 
-        public void Exit()
+        public Task Exit()
         {
+            return Task.CompletedTask;
         }
     }
 
     public interface IPlayable : IGameplayStatable
     {
-        void Play();
+        Task Play();
     }
 }

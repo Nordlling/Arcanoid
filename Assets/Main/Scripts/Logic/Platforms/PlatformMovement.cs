@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Logic.Platforms.PlatformSystems;
@@ -39,19 +40,22 @@ namespace Main.Scripts.Logic.Platforms
             _targetPosition.y = _currentPosition.y;
         }
 
-        public void Lose()
+        public Task Lose()
         {
             _stop = true;
+            return Task.CompletedTask;
         }
 
-        public void Win()
+        public Task Win()
         {
             _stop = true;
+            return Task.CompletedTask;
         }
 
-        public void PrePlay()
+        public Task PrePlay()
         {
             _stop = false;
+            return Task.CompletedTask;
         }
 
         private void Update()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
@@ -14,16 +15,17 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             }
         }
 
-        public void Enter()
+        public async Task Enter()
         {
             foreach (IGameOverable gameOverable in _gameOverables)
             {
-                gameOverable.GameOver();
+                await gameOverable.GameOver();
             }
         }
 
-        public void Exit()
+        public Task Exit()
         {
+            return Task.CompletedTask;
         }
 
         public GameplayStateMachine StateMachine { get; set; }
@@ -31,6 +33,6 @@ namespace Main.Scripts.Infrastructure.GameplayStates
 
     public interface IGameOverable : IGameplayStatable
     {
-        void GameOver();
+        Task GameOver();
     }
 }
