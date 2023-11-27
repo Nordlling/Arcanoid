@@ -31,7 +31,7 @@ namespace Main.Scripts.Factory
             BoostInfo boostInfo = _tiledBlockConfig.BoostInfos[spawnContext.ID];
             
             Boost boost = (Boost)_poolProvider.PoolItemView.Spawn();
-            boost.Construct(spawnContext.ID, this);
+            boost.Construct(spawnContext.ID, _serviceContainer.Get<IBoostContainer>());
             boost.SpriteRenderer.sprite = boostInfo.BasicInfo.Visual;
             boost.CollisionDetector.Construct(_serviceContainer.Get<IBoostCollisionService>());
             boost.transform.position = spawnContext.Position;

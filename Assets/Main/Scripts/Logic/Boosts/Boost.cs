@@ -16,17 +16,17 @@ namespace Main.Scripts.Logic.Boosts
         [SerializeField] private CollisionDetector _collisionDetector;
         [SerializeField] private BoostMovement _boostMovement;
         
-        private IBoostFactory _boostFactory;
+        private IBoostContainer _boostContainer;
 
-        public void Construct(string id, IBoostFactory boostFactory)
+        public void Construct(string id, IBoostContainer boostContainer)
         {
             ID = id;
-            _boostFactory = boostFactory;
+            _boostContainer = boostContainer;
         }
         
         public void Destroy()
         {
-            _boostFactory.Despawn(this);
+            _boostContainer.RemoveBoost(this);
         }
     }
 }

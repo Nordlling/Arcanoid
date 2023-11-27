@@ -10,7 +10,6 @@ namespace Main.Scripts.Infrastructure.Services.Collision
 {
     public class BallCollisionService : IBallCollisionService
     {
-        
         private readonly ICollisionHandler[] _collisionHandlers = {
             new ChangeAngleOnHitHandler(),
             new HealthHandler<Component>(1),

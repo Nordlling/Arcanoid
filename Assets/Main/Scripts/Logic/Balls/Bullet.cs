@@ -1,7 +1,6 @@
 using Main.Scripts.Configs.Boosts;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services.Collision;
-using Main.Scripts.Logic.Balls.BallContainers;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Balls
@@ -9,7 +8,6 @@ namespace Main.Scripts.Logic.Balls
     public class Bullet : MonoBehaviour, ITriggerInteractable
     {
         private Ball _ball;
-        private IBallContainer _ballContainer;
         private ITimeProvider _timeProvider;
 
         private Vector2 _currentPosition;
@@ -18,10 +16,9 @@ namespace Main.Scripts.Logic.Balls
         private float _invulnerabilityTime = 0.3f;
         public MachineGunConfig MachineGunConfig { get; private set; }
 
-        public void Construct(Ball ball, IBallContainer ballContainer, ITimeProvider timeProvider)
+        public void Construct(Ball ball, ITimeProvider timeProvider)
         {
             _ball = ball;
-            _ballContainer = ballContainer;
             _timeProvider = timeProvider;
             _currentPosition = transform.position;
         }
@@ -51,7 +48,7 @@ namespace Main.Scripts.Logic.Balls
                 return;
             }
             
-            _ballContainer.RemoveBall(_ball);
+            _ball.Destroy();
         }
     }
 }

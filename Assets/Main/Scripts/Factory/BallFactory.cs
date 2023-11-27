@@ -3,6 +3,7 @@ using Main.Scripts.Factory.Components;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Logic.Balls;
+using Main.Scripts.Logic.Balls.BallContainers;
 using Main.Scripts.Pool;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace Main.Scripts.Factory
             BallInfo ballInfo = _ballsConfig.BallInfos[spawnContext.ID];
             Ball ball = (Ball)_poolProvider.PoolItemView.Spawn();
             
-            ball.Construct(spawnContext.ID, this);
+            ball.Construct(spawnContext.ID, _serviceContainer.Get<IBallContainer>());
             
             if (spawnContext.Parent is not null)
             {

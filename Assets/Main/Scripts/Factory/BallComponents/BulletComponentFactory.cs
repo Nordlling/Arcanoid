@@ -19,7 +19,7 @@ namespace Main.Scripts.Factory.BallComponents
             }
             Bullet bullet = ball.AddComponent<Bullet>();
             ball.Collider.isTrigger = true;
-            bullet.Construct(ball, serviceContainer.Get<IBallContainer>(), serviceContainer.Get<ITimeProvider>());
+            bullet.Construct(ball, serviceContainer.Get<ITimeProvider>());
         }
         
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono
