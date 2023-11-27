@@ -1,5 +1,5 @@
 using System;
-using Main.Scripts.Data;
+using System.Threading.Tasks;
 using Main.Scripts.Logic.Blocks;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         bool IsWithinArrayBounds(Vector2Int position);
         void EnableTriggerForAllBlocks();
         void DisableTriggerForAllBlocks();
-        void KillAllWinnableBlocks(float time);
+        Task KillAllWinnableBlocks(float time);
         
         event Action OnDestroyed;
 

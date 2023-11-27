@@ -26,6 +26,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         private void RegisterGameplayUI(ServiceContainer serviceContainer)
         {
             _gameplayUIView.Construct(serviceContainer.Get<IGameplayStateMachine>(), serviceContainer.Get<WinService>());
+            serviceContainer.SetServiceSelf(_gameplayUIView);
         }
         
         private void RegisterProgressUI(ServiceContainer serviceContainer)

@@ -84,10 +84,13 @@ namespace Main.Scripts.UI.Views
         {
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
             IGameGridService gameGridService = _serviceContainer.Get<IGameGridService>();
+            GameplayUIView gameplayUIView = _serviceContainer.Get<GameplayUIView>();
             Close();
+            gameplayUIView.GraphicRaycaster.enabled = false;
             await Task.Yield();
             await gamePlayStateMachine.EnterPreviousState();
-            gameGridService.KillAllWinnableBlocks(3);
+            await gameGridService.KillAllWinnableBlocks(2);
+            gameplayUIView.GraphicRaycaster.enabled = false;
         }
     }
 }

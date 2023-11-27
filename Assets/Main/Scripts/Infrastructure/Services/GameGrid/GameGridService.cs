@@ -139,7 +139,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             SwitchTriggerForAllBlocks(false);
         }
         
-        public async void KillAllWinnableBlocks(float time)
+        public async Task KillAllWinnableBlocks(float time)
         {
             int interval = (int)(time / AllBlocksToWin * 1000);
             

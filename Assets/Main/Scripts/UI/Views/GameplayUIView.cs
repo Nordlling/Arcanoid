@@ -7,6 +7,8 @@ namespace Main.Scripts.UI.Views
 {
     public class GameplayUIView : MonoBehaviour
     {
+        public GraphicRaycaster GraphicRaycaster => _graphicRaycaster;
+        
         [SerializeField] private Button _pauseButton;
         [SerializeField] private GraphicRaycaster _graphicRaycaster;
 
