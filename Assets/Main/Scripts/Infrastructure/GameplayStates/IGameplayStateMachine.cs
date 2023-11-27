@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.Services;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
@@ -6,8 +7,8 @@ namespace Main.Scripts.Infrastructure.GameplayStates
     {
         void AddState(IGameplayState state);
         void AddGameplayStatable(IGameplayStatable gameplayStatable);
-        void Enter<TState>() where TState : class, IGameplayState;
-        void EnterPreviousState();
+        Task Enter<TState>() where TState : class, IGameplayState;
+        Task EnterPreviousState();
         bool IsSameState<TState>() where TState : class, IGameplayState;
     }
 }

@@ -21,7 +21,7 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 await loseable.Lose();
             }
-            StateMachine.Enter<GameOverState>();
+            await StateMachine.Enter<GameOverState>();
         }
 
         public Task Exit()

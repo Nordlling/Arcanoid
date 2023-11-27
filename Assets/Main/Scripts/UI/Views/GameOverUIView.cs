@@ -59,10 +59,10 @@ namespace Main.Scripts.UI.Views
                 return;
             }
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
-            gamePlayStateMachine.Enter<RestartState>();
+            await gamePlayStateMachine.Enter<RestartState>();
             Close();
             await Task.Yield();
-            gamePlayStateMachine.Enter<PrePlayState>();
+            await  gamePlayStateMachine.Enter<PrePlayState>();
         }
 
         private async void LastTry()
@@ -76,7 +76,7 @@ namespace Main.Scripts.UI.Views
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
             Close();
             await Task.Yield();
-            gamePlayStateMachine.Enter<PrePlayState>();
+            await gamePlayStateMachine.Enter<PrePlayState>();
         }
 
         private async void ExitGame()

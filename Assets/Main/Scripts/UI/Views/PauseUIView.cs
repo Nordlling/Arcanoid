@@ -66,10 +66,10 @@ namespace Main.Scripts.UI.Views
                 return;
             }
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
-            gamePlayStateMachine.Enter<RestartState>();
+            await gamePlayStateMachine.Enter<RestartState>();
             Close();
             await Task.Yield();
-            gamePlayStateMachine.Enter<PrePlayState>();
+            await gamePlayStateMachine.Enter<PrePlayState>();
         }
 
         private async void ContinueGame()
@@ -77,7 +77,7 @@ namespace Main.Scripts.UI.Views
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
             Close();
             await Task.Yield();
-            gamePlayStateMachine.EnterPreviousState();
+            await gamePlayStateMachine.EnterPreviousState();
         }
 
         private async void SkipLevel()
@@ -86,7 +86,7 @@ namespace Main.Scripts.UI.Views
             IGameGridService gameGridService = _serviceContainer.Get<IGameGridService>();
             Close();
             await Task.Yield();
-            gamePlayStateMachine.EnterPreviousState();
+            await gamePlayStateMachine.EnterPreviousState();
             gameGridService.KillAllWinnableBlocks(3);
         }
     }

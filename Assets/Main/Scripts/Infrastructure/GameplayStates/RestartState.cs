@@ -21,7 +21,7 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             {
                 await restartable.Restart();
             }
-            StateMachine.Enter<PrepareState>();
+            await StateMachine.Enter<PrepareState>();
         }
 
         public Task Exit()

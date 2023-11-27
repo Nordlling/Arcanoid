@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Main.Scripts.Infrastructure.GameplayStates
 {
@@ -29,17 +30,17 @@ namespace Main.Scripts.Infrastructure.GameplayStates
             return _activeState is TState;
         }
 
-        public void EnterPreviousState()
+        public async Task EnterPreviousState()
         {
             _activeState?.Exit();
             (_activeState, _previousState) = (_previousState, _activeState);
-            _activeState.Enter();
+            await _activeState.Enter();
         }
 
-        public void Enter<TState>() where TState : class, IGameplayState
+        public async Task Enter<TState>() where TState : class, IGameplayState
         {
             IGameplayState state = ChangeState<TState>();
-            state.Enter();
+            await state.Enter();
         }
 
         private TState ChangeState<TState>() where TState : class, IGameplayState

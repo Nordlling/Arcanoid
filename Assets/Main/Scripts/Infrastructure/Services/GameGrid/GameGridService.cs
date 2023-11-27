@@ -156,6 +156,13 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             }
         }
 
+        public Task Restart()
+        {
+            DespawnBlocks();
+            CreateLevelMap();
+            return Task.CompletedTask;
+        }
+
         private async Task KillBlock(Block block, int interval)
         {
             if (block.TryGetComponent(out Health health))
@@ -266,13 +273,6 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                     }
                 }
             }
-        }
-
-        public Task Restart()
-        {
-            DespawnBlocks();
-            CreateLevelMap();
-            return Task.CompletedTask;
         }
 
         private void DespawnBlocks()
