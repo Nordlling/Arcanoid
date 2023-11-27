@@ -42,6 +42,10 @@ namespace Main.Scripts.Logic.Explosions
             CellInfo rootCell = explosionInfo.RootCell;
             List<int> targetIDs = FindTargetBlockIDs(rootCell.BlockPlaceInfo.GridPosition, explosionConfig);
             int maxDepth = CalculateMaxDepth(explosionConfig);
+            if (explosionConfig.Chain && targetIDs.Count == 0)
+            {
+                return;
+            }
             CalculateExplosionPath(rootCell, explosionConfig, targetIDs, maxDepth);
         }
 
