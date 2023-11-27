@@ -19,7 +19,7 @@ namespace Main.Scripts.Factory.BlockComponents
                 return;
             }
             HealthVisual healthVisual = unit.AddComponent<HealthVisual>();
-            healthVisual.Construct(serviceContainer.Get<IEffectFactory>(), block.BreakSpriteRenderer, BlockHealthVisualConfig);
+            healthVisual.Construct(serviceContainer.Get<IEffectFactory>(), block.BreakSpriteRenderer, BlockHealthVisualConfig, block.Visual);
         }
 
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono

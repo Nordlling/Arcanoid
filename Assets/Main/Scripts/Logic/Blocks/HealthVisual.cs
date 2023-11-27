@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Main.Scripts.Configs;
 using Main.Scripts.Factory;
 using Main.Scripts.Logic.Effects;
@@ -10,21 +11,26 @@ namespace Main.Scripts.Logic.Blocks
         private IEffectFactory _effectFactory;
         private SpriteRenderer _breakSpriteRenderer;
         private BlockHealthVisualConfig _blockHealthVisualConfig;
-        
+        private GameObject _visual;
+
         private int _breakSpriteIndex;
         private string _damageEffectKey;
         private string _destroyEffectKey;
         private readonly SpawnContext _spawnContext = new();
 
+        private Sequence _sequence;
+
         public void Construct(
             IEffectFactory effectFactory,
             SpriteRenderer breakSpriteRenderer, 
-            BlockHealthVisualConfig blockHealthVisualConfig)
+            BlockHealthVisualConfig blockHealthVisualConfig,
+            GameObject visual)
         {
             _effectFactory = effectFactory;
             _breakSpriteRenderer = breakSpriteRenderer;
             _blockHealthVisualConfig = blockHealthVisualConfig;
-            
+            _visual = visual;
+
             _breakSpriteIndex = -1;
             _breakSpriteRenderer.sprite = null;
         }
@@ -37,8 +43,9 @@ namespace Main.Scripts.Logic.Blocks
                 _breakSpriteIndex = _blockHealthVisualConfig.HealthSprites.Length - 1;
             }
             _breakSpriteRenderer.sprite = _blockHealthVisualConfig.HealthSprites[_breakSpriteIndex];
-            
+
             CreateEffect(_blockHealthVisualConfig.DamageEffectKey);
+            PlayAnimation();
         }
         
         public void RefreshDieView()
@@ -55,6 +62,17 @@ namespace Main.Scripts.Logic.Blocks
             _spawnContext.Position = transform.position;
             Effect effect = _effectFactory.Spawn(_spawnContext);
             effect.EnableEffect(effectKey, true);
+        }
+
+        private void PlayAnimation()
+        {
+            _sequence?.Kill();
+            
+            Vector3 originalScale = _visual.transform.localScale;
+
+            _sequence = DOTween.Sequence()
+                .Append(_visual.transform.DOPunchScale(originalScale * 0.2f, 0.2f, 1, 1).SetEase(Ease.InOutQuad))
+                .OnKill(() => _visual.transform.localScale = originalScale);
         }
     }
 }
