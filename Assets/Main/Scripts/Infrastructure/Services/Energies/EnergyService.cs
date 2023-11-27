@@ -14,6 +14,7 @@ namespace Main.Scripts.Infrastructure.Services.Energies
 
         private CancellationTokenSource _cancelToken = new();
         private const int _saveInterval = 5000;
+        private int _leftSaveInterval;
         private EnergyData _energyData;
 
         public int EnergyCount => _energyData.EnergyCount;
@@ -21,6 +22,10 @@ namespace Main.Scripts.Infrastructure.Services.Energies
         public int EnergyCapacity => _energyConfig.InitialEnergyCapacity;
         public int EnergyForPlay => _energyConfig.EnergyWasteForPlay;
         public int EnergyForLastTry => _energyConfig.EnergyForLastTry;
+
+        public float CurrentSecondsToRecharge => _energyData.SecondsToRecharge;
+        public float AllSecondsToRecharge => _energyConfig.SecondsForRecharge;
+        
         public event Action OnEnergyChanged;
 
         public EnergyService(ISaveLoadService saveLoadService, EnergyConfig energyConfig)
@@ -65,6 +70,7 @@ namespace Main.Scripts.Infrastructure.Services.Energies
         {
             _cancelToken = new();
             RechargeAsync();
+            SaveIntervalAsync();
         }
 
         private void InitEnergyData()
@@ -96,7 +102,7 @@ namespace Main.Scripts.Infrastructure.Services.Energies
             Save();
         }
         
-        private async void RechargeAsync()
+        private async void SaveIntervalAsync()
         {
             while (true)
             {
@@ -106,17 +112,32 @@ namespace Main.Scripts.Infrastructure.Services.Energies
                 {
                     break;
                 }
+                
+                Save();
+            }
+        }
+        
+        private async void RechargeAsync()
+        {
+            while (true)
+            {
+                await Task.Delay(1000);
+                
+                if (_cancelToken.Token.IsCancellationRequested)
+                {
+                    break;
+                }
 
                 if (_energyData.EnergyCount >= _energyConfig.InitialEnergyCapacity)
                 {
+                    _energyData.SecondsToRecharge = 0f;
                     continue;
                 }
                 
-                _energyData.SecondsToRecharge -= _saveInterval / (float)1000;
+                _energyData.SecondsToRecharge -= 1f;
             
                 if (_energyData.SecondsToRecharge > 0)
                 {
-                    Save();
                     continue;
                 }
 
@@ -124,13 +145,12 @@ namespace Main.Scripts.Infrastructure.Services.Energies
             
                 if (_energyData.EnergyCount + 1 > _energyConfig.InitialEnergyCapacity)
                 {
-                    Save();
                     continue;
                 }
 
                 PreviousEnergyCount = EnergyCount;
                 _energyData.EnergyCount++;
-                SaveWithChanges();
+                OnEnergyChanged?.Invoke();
             }
         }
 
