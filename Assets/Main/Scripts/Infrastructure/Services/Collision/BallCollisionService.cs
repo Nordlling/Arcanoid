@@ -23,7 +23,7 @@ namespace Main.Scripts.Infrastructure.Services.Collision
             new EnteredTriggerHandler<Component, Explosion>(),
             new EnteredTriggerHandler<Component, ExtraBall>(),
             new EnteredTriggerHandler<Component, BoostKeeper>(),
-            new EnteredTriggerHandler<Component, DestroyOnFireball>(),
+            new EnteredTriggerHandler<Fireball, DestroyOnFireball>(),
             new HitOnBulletHandler(),
             new AcceptedTriggerHandler<Bullet, DestroyBulletOnHit>()
         };

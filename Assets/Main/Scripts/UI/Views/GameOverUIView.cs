@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.States;
@@ -19,9 +21,17 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private Button _menuButton;
         [SerializeField] private EnergyBarUIView _energyBarUIView;
         [SerializeField] private TextMeshProUGUI _lastTryCostValue;
+        [SerializeField] private float _lastTryPause;
+        [SerializeField] private Vector3 _spawnOffset;
+        [SerializeField] private float _animationDuration;
+        [SerializeField] private GameObject _localRaycastBlocker;
 
         private IGameStateMachine _gameStateMachine;
         private IEnergyService _energyService;
+
+        private Vector3 _originalPosition;
+        private float _originalPositionY;
+        private Vector3 _spawnPosition;
 
         protected override void OnInitialize()
         {
@@ -29,11 +39,13 @@ namespace Main.Scripts.UI.Views
             _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
             _energyService = _serviceContainer.Get<IEnergyService>();
             _energyBarUIView.Construct(_energyService);
+            _originalPosition = transform.position;
         }
         
-        protected override void OnOpen()
+        protected override async void OnOpen()
         {
             base.OnOpen();
+            await PlayShowAnimation();
             _restartButton.onClick.AddListener(RestartGame);
             _lastTryButton.onClick.AddListener(LastTry);
             _menuButton.onClick.AddListener(ExitGame);
@@ -51,6 +63,24 @@ namespace Main.Scripts.UI.Views
             _energyBarUIView.OnClose();
         }
 
+        private async UniTask PlayShowAnimation()
+        {
+            _localRaycastBlocker.SetActive(true);
+            _spawnPosition = transform.position;
+            _spawnPosition += _spawnOffset;
+            transform.position = _spawnPosition;
+            
+            await transform.DOMoveY(_originalPosition.y, _animationDuration);
+            _localRaycastBlocker.SetActive(false);
+        }
+        
+        private async UniTask PlayHideAnimation()
+        {
+            _localRaycastBlocker.SetActive(true);
+            await transform.DOMoveY(_spawnPosition.y, _animationDuration);
+            _localRaycastBlocker.SetActive(false);
+        }
+
         private async void RestartGame()
         {
             if (!_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
@@ -58,10 +88,12 @@ namespace Main.Scripts.UI.Views
                 _energyBarUIView.Focus();
                 return;
             }
+
+            await PlayHideAnimation();
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
             await gamePlayStateMachine.Enter<RestartState>();
             Close();
-            await Task.Yield();
+            await UniTask.Yield();
             await  gamePlayStateMachine.Enter<PrePlayState>();
         }
 
@@ -73,6 +105,9 @@ namespace Main.Scripts.UI.Views
                 return;
             }
             
+            _localRaycastBlocker.SetActive(true);
+            await Task.Delay((int)(_lastTryPause * 1000));
+            await PlayHideAnimation();
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
             Close();
             await Task.Yield();
@@ -81,6 +116,7 @@ namespace Main.Scripts.UI.Views
 
         private async void ExitGame()
         {
+            _localRaycastBlocker.SetActive(true);
             await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
             Close();
         }
