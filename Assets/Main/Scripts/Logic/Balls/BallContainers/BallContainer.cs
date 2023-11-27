@@ -37,11 +37,11 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             _healthService = healthService;
         }
 
-        public void CreateBallOnPlatform()
+        public Ball CreateBallOnPlatform()
         {
             if (_ballKeeper.Ball is not null)
             {
-                return;
+                return null;
             }
 
             _spawnContext.ID = _ballKey;
@@ -55,6 +55,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             _ballKeeper.Ball = ball;
             
             Balls.Add(ball);
+            return ball;
         }
         
         public Ball CreateBall(Vector2 position, float leftAngle, float rightAngle)
@@ -83,7 +84,6 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             Ball ball = _ballFactory.Spawn(_spawnContext);
             
             Balls.Add(ball);
-           
             return ball;
         }
 

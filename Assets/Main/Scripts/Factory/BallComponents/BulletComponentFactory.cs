@@ -2,7 +2,6 @@ using Main.Scripts.Factory.Components;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Logic.Balls;
-using Main.Scripts.Logic.Balls.BallContainers;
 using Main.Scripts.Pool;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
@@ -24,16 +23,11 @@ namespace Main.Scripts.Factory.BallComponents
         
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono
         {
-            if (unit is not Ball ball)
-            {
-                return;
-            }
-
-            ball.Collider.isTrigger = false;
             if (unit.TryGetComponent(out Bullet bullet))
             {
                 Object.Destroy(bullet);
             }
         }
+        
     }
 }

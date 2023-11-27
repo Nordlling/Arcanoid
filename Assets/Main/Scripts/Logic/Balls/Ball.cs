@@ -7,7 +7,7 @@ namespace Main.Scripts.Logic.Balls
 {
     public class Ball : SpawnableItemMono
     {
-        public string ID;
+        public string ID { get; private set; }
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public CircleCollider2D Collider => _collider;
         public CollisionDetector CollisionDetector => _collisionDetector;

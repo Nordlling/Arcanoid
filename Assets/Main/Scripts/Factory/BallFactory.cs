@@ -47,6 +47,7 @@ namespace Main.Scripts.Factory
             ball.SpriteRenderer.sprite = ballInfo.BasicInfo.Visual;
             ball.CollisionDetector.Construct(_serviceContainer.Get<IBallCollisionService>());
             ball.Collider.radius = ball.SpriteRenderer.bounds.extents.x;
+            ball.Collider.isTrigger = false;
 
             IBallComponentFactory[] componentFactories = ballInfo.ComponentFactories;
             
