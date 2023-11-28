@@ -24,13 +24,7 @@ namespace Main.Scripts.Logic.Effects
             _timeProvider = timeProvider;
         }
 
-        public void EnableEffect(string effectKey)
-        {
-            EnableEffect(effectKey, true, true);
-            TryEnableEffect(effectKey);
-        }
-
-        public void EnableEffect(string effectKey, bool timeDependent, bool destroyOnFinish)
+        public void EnableEffect(string effectKey, bool timeDependent = true, bool destroyOnFinish = true)
         {
             _timeDependent = timeDependent;
             _destroyOnFinish = destroyOnFinish;

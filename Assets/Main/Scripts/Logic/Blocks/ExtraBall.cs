@@ -14,9 +14,7 @@ namespace Main.Scripts.Logic.Blocks
         private IExtraBallSystem _extraBallSystem;
         private IEffectFactory _effectFactory;
         private string _effectKey;
-
-        private readonly SpawnContext _spawnContext = new();
-
+        
         public void Construct(
             Block block,
             IExtraBallSystem extraBallSystem, 
@@ -31,16 +29,10 @@ namespace Main.Scripts.Logic.Blocks
 
         public void Interact()
         {
-            _extraBallSystem.ActivateExtraBallBoost(transform.position);
-            CreateEffect();
+            Vector2 spawnPosition = transform.position;
+            _extraBallSystem.ActivateExtraBallBoost(spawnPosition);
+            _effectFactory.SpawnAndEnable(spawnPosition, _effectKey);
             _block.Destroy();
-        }
-        
-        private void CreateEffect()
-        {
-            _spawnContext.Position = transform.position;
-            Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(_effectKey);
         }
     }
 }
