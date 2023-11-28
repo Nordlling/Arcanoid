@@ -1,4 +1,5 @@
 using Main.Scripts.Configs.Boosts;
+using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Logic.Boosts;
 using UnityEngine;
@@ -20,7 +21,8 @@ namespace Main.Scripts.Infrastructure.Services.Healths
 
         public void Interact()
         {
-            _lifeSystem.ActivateLifeBoost(_lifeConfig);
+            _lifeSystem.ActivateLifeBoost(_lifeConfig, transform.position);
+            
             _boost.Destroy();
         }
         

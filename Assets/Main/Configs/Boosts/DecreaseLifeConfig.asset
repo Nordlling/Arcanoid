@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: DecreaseLifeConfig
   m_EditorClassIdentifier: 
   Count: -1
+  UsageEffectKey: Hurt

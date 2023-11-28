@@ -6,5 +6,6 @@ namespace Main.Scripts.Configs.Boosts
     public class LifeConfig : ScriptableObject
     {
         public int Count;
+        public string UsageEffectKey;
     }
 }

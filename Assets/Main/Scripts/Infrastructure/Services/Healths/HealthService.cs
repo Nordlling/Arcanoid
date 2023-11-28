@@ -55,16 +55,24 @@ namespace Main.Scripts.Infrastructure.Services.Healths
             OnChanged?.Invoke();
         }
 
-        public void ChangeHealth(int count, bool canDie)
+        public bool TryChangeHealth(int count, bool canDie)
         {
-            LeftHealths += count;
+            int result = LeftHealths + count;
+            
             if (canDie && TryLose())
             {
-                return;
+                return true;
             }
 
-            LeftHealths = Mathf.Clamp(LeftHealths, 0, _healthConfig.HealthCount);
+            result = Mathf.Clamp(result, 0, _healthConfig.HealthCount);
+            if (result == LeftHealths)
+            {
+                return false;
+            }
+
+            LeftHealths = result;
             OnChanged?.Invoke();
+            return true;
         }
 
         public Task Restart()

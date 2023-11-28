@@ -20,7 +20,11 @@ namespace Main.Scripts.Factory.BoostComponents
                 return;
             }
             LifeBoost lifeBoost = boost.AddComponent<LifeBoost>();
-            lifeBoost.Construct(boost, LifeConfig, serviceContainer.Get<ILifeSystem>());
+            lifeBoost.Construct(
+                boost, 
+                LifeConfig, 
+                serviceContainer.Get<ILifeSystem>()
+                );
         }
         
         public void RemoveComponent<T>(T unit) where T : SpawnableItemMono
