@@ -14,10 +14,11 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [Header("Scene Objects")]
         [SerializeField] private Bounder _bounder;
         [SerializeField] private BoundsVisualizer _boundsVisualizer;
-        [SerializeField] private Transform _finalEffectTransform;
+        [SerializeField] private Transform _winEffectPoint;
+        [SerializeField] private Transform _loseEffectPoint;
         
         [Header("Configs")]
-        [SerializeField] private WinConfig _winConfig;
+        [SerializeField] private FinalConfig _finalConfig;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -35,18 +36,17 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
 
         private void RegisterFinalService(ServiceContainer serviceContainer)
         {
-            SpawnContext spawnContext = new SpawnContext { Position = _finalEffectTransform.position };
-            
-            WinService winService = new WinService(
+            FinalService finalService = new FinalService(
                 serviceContainer.Get<ITimeProvider>(),
                 serviceContainer.Get<IEffectFactory>(),
                 serviceContainer.Get<ComprehensiveRaycastBlocker>(),
-                _winConfig,
-                spawnContext
+                _finalConfig,
+                _winEffectPoint.position,
+                _loseEffectPoint.position
             );
             
-            serviceContainer.SetServiceSelf(winService);
-            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(winService);
+            serviceContainer.SetServiceSelf(finalService);
+            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(finalService);
         }
 
         private void RegisterBounder(ServiceContainer serviceContainer)
