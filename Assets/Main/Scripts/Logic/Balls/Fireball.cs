@@ -43,7 +43,7 @@ namespace Main.Scripts.Logic.Balls
 
             _spawnContext.Position = transform.position;
             _currentEffect = _effectFactory.Spawn(_spawnContext);
-            _currentEffect.EnableEffect(_fireballEffectKey, true);
+            _currentEffect.EnableEffect(_fireballEffectKey);
             _currentEffect.gameObject.SetActive(false);
 
             _ballContainer.OnSwitchedFireball += SwitchFireball;
@@ -68,7 +68,7 @@ namespace Main.Scripts.Logic.Balls
             {
                 return;
             }
-            _currentEffect.DisableEffect();
+            _currentEffect.DespawnEffect();
             _currentEffect = null;
         }
 

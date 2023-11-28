@@ -61,7 +61,7 @@ namespace Main.Scripts.Logic.Blocks
             }
             _spawnContext.Position = transform.position;
             Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(effectKey, true);
+            effect.EnableEffect(effectKey);
         }
 
         private void PlayAnimation()

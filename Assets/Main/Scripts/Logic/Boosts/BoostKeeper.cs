@@ -42,7 +42,7 @@ namespace Main.Scripts.Logic.Boosts
         {
             _spawnContext.Position = transform.position;
             Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(_effectKey, true);
+            effect.EnableEffect(_effectKey);
         }
     }
 }
