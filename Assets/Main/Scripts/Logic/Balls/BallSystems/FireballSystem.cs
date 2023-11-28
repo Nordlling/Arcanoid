@@ -11,15 +11,15 @@ namespace Main.Scripts.Logic.Balls.BallSystems
     public class FireballSystem : IFireballSystem, ITickable, IRestartable
     {
         private readonly ITimeProvider _timeProvider;
-        private readonly IGameGridService _gameGridService;
+        private readonly IGameGridController _gameGridController;
         private readonly IBallContainer _ballContainer;
 
         private bool _activated;
         private float _boostTime;
 
-        public FireballSystem(ITimeProvider timeProvider, IGameGridService gameGridService, IBallContainer ballContainer)
+        public FireballSystem(ITimeProvider timeProvider, IGameGridController gameGridController, IBallContainer ballContainer)
         {
-            _gameGridService = gameGridService;
+            _gameGridController = gameGridController;
             _timeProvider = timeProvider;
             _ballContainer = ballContainer;
         }
@@ -28,7 +28,7 @@ namespace Main.Scripts.Logic.Balls.BallSystems
         {
             _activated = true;
             _boostTime = fireballConfig.Duration;
-            _gameGridService.EnableTriggerForAllBlocks();
+            _gameGridController.EnableTriggerForAllBlocks();
             _ballContainer.FireAllBalls();
         }
 
@@ -42,7 +42,7 @@ namespace Main.Scripts.Logic.Balls.BallSystems
             if (_boostTime <= 0f)
             {
                 _activated = true;
-                _gameGridService.DisableTriggerForAllBlocks();
+                _gameGridController.DisableTriggerForAllBlocks();
                 _ballContainer.UnfireAllBalls();
                 return;
             }

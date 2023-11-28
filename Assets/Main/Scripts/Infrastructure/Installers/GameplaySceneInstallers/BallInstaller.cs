@@ -74,6 +74,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             
             serviceContainer.SetServiceSelf(ballBoundsChecker);
             serviceContainer.SetService<ITickable, BallBoundsChecker>(ballBoundsChecker);
+            
+            SetGameplayStates(serviceContainer, ballBoundsChecker);
         }
         
         private void RegisterBallSpeedSystem(ServiceContainer serviceContainer)
@@ -98,7 +100,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         {
             FireballSystem fireballSystem = new FireballSystem(
                 serviceContainer.Get<ITimeProvider>(),
-                serviceContainer.Get<IGameGridService>(),
+                serviceContainer.Get<IGameGridController>(),
                 serviceContainer.Get<IBallContainer>());
             
             serviceContainer.SetService<IFireballSystem, FireballSystem>(fireballSystem);

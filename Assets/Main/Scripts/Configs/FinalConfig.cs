@@ -6,6 +6,7 @@ namespace Main.Scripts.Configs
     public class FinalConfig : ScriptableObject
     {
         public int Delay;
+        public float InitTimeScale;
         public int WinDuration;
         public int LoseDuration;
         public string WinEffectKey;

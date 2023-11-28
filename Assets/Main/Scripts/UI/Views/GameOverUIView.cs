@@ -94,7 +94,6 @@ namespace Main.Scripts.UI.Views
             await gamePlayStateMachine.Enter<RestartState>();
             Close();
             await UniTask.Yield();
-            await  gamePlayStateMachine.Enter<PrePlayState>();
         }
 
         private async void LastTry()

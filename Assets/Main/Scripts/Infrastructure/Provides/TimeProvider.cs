@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Provides
 {
-    public class TimeProvider : ITimeProvider, IPauseable, IGameOverable, IWinable, IPrePlayable, IPlayable
+    public class TimeProvider : ITimeProvider, IPauseable, IGameOverable, IWinable, IPrePlayable, IPlayable, IRestartable
     {
         private float _timeScale = 1f;
         private float _cachedTimeScale = 1f;
@@ -71,6 +71,12 @@ namespace Main.Scripts.Infrastructure.Provides
         public Task Play()
         {
             TurnBackTime();
+            return Task.CompletedTask;
+        }
+
+        public Task Restart()
+        {
+            StopTime();
             return Task.CompletedTask;
         }
     }

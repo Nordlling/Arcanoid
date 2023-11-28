@@ -73,7 +73,6 @@ namespace Main.Scripts.UI.Views
                 gamePlayStateMachine?.Enter<RestartState>();
                 Close();
                 await Task.Yield();
-                gamePlayStateMachine?.Enter<PrePlayState>();
             }
         }
 

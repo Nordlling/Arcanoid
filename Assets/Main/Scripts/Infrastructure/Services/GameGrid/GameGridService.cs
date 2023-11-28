@@ -9,12 +9,11 @@ using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Logic.Blocks;
-using Main.Scripts.Logic.Boosts;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.GameGrid
 {
-    public class GameGridService : IGameGridService, IInitializable, IRestartable
+    public class GameGridService : IGameGridService, IInitializable
     {
         private readonly IBlockFactory _blockFactory;
         private readonly ISimpleLoader _simpleLoader;
@@ -26,8 +25,8 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         private readonly IEnergyService _energyService;
 
         private GameGridInfo _gameGridInfo;
-        private BlockPlaceInfo[,] _currentLevel;
-
+        
+        public BlockPlaceInfo[,] CurrentLevel { get; private set; }
         public int AllBlocks { get; private set; }
         public int AllBlocksToWin { get; private set; }
         public int DestroyedBlocksToWin { get; private set; }
@@ -59,7 +58,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         {
             CreateLevelMap();
         }
-        
+
         public bool TryGetBlock(out Block block, Vector2Int gridPosition)
         {
             block = null;
@@ -68,12 +67,12 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                 return false;
             }
 
-            if (_currentLevel[gridPosition.x, gridPosition.y].Block == null)
+            if (CurrentLevel[gridPosition.x, gridPosition.y].Block == null)
             {
                 return false;
             }
 
-            block = _currentLevel[gridPosition.x, gridPosition.y].Block;
+            block = CurrentLevel[gridPosition.x, gridPosition.y].Block;
             return true;
 
         }
@@ -87,7 +86,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                 return false;
             }
 
-            worldPosition = _currentLevel[gridPosition.x, gridPosition.y].WorldPosition;
+            worldPosition = CurrentLevel[gridPosition.x, gridPosition.y].WorldPosition;
             return true;
         }
 
@@ -100,7 +99,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                 return false;
             }
 
-            blockPlaceInfo = _currentLevel[gridPosition.x, gridPosition.y];
+            blockPlaceInfo = CurrentLevel[gridPosition.x, gridPosition.y];
             return true;
         }
 
@@ -118,88 +117,26 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                 return false;
             }
             
-            blockPlaceInfo = _currentLevel[position.x, position.y];
+            blockPlaceInfo = CurrentLevel[position.x, position.y];
             RemoveBlock(blockPlaceInfo);
             return true;
         }
 
         public bool IsWithinArrayBounds(Vector2Int position)
         {
-            return position.x >= 0 && position.x < _currentLevel.GetLength(0) 
-                                   && position.y >= 0 && position.y < _currentLevel.GetLength(1);
-        }
-
-        public void EnableTriggerForAllBlocks()
-        {
-            SwitchTriggerForAllBlocks(true);
-        }
-        
-        public void DisableTriggerForAllBlocks()
-        {
-            SwitchTriggerForAllBlocks(false);
-        }
-        
-        public async Task KillAllWinnableBlocks(float time)
-        {
-            int interval = (int)(time / AllBlocksToWin * 1000);
-            
-            for (int x = 0; x < _gameGridInfo.Size.x; x++)
-            {
-                for (int y = 0; y < _gameGridInfo.Size.y; y++)
-                {
-                    if (_currentLevel[x, y].Block == null || !_currentLevel[x, y].CheckToWin)
-                    {
-                        continue;
-                    }
-                    await KillBlock(_currentLevel[x, y].Block, interval);
-                }
-            }
+            return position.x >= 0 && position.x < CurrentLevel.GetLength(0) 
+                                   && position.y >= 0 && position.y < CurrentLevel.GetLength(1);
         }
 
         public Task Restart()
         {
-            DespawnBlocks();
-            CreateLevelMap();
             return Task.CompletedTask;
         }
 
-        private async Task KillBlock(Block block, int interval)
+        public void RestartLevel()
         {
-            if (block.TryGetComponent(out Health health))
-            {
-                health.TakeDamage(999);
-            }
-
-            if (block.TryGetComponent(out BoostKeeper boostKeeper))
-            {
-                boostKeeper.Interact();
-            }
-            
-            if (block.TryGetComponent(out Explosion explosion))
-            {
-                explosion.Interact();
-            }
-            
-            if (block.TryGetComponent(out ExtraBall extraBall))
-            {
-                extraBall.Interact();
-            }
-
-            await Task.Delay(interval);
-        }
-
-        private void SwitchTriggerForAllBlocks(bool enabled)
-        {
-            for (int x = 0; x < _gameGridInfo.Size.x; x++)
-            {
-                for (int y = 0; y < _gameGridInfo.Size.y; y++)
-                {
-                    if (_currentLevel[x, y].Block != null)
-                    {
-                        _currentLevel[x, y].Block.Collider.isTrigger = enabled;
-                    }
-                }
-            }
+            DespawnBlocks();
+            CreateLevelMap();
         }
 
         private void RemoveBlock(BlockPlaceInfo blockPlaceInfo)
@@ -247,17 +184,19 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         private void CheckGridToWin()
         {
-            if (DestroyedBlocksToWin >= AllBlocksToWin)
+            if (DestroyedBlocksToWin < AllBlocksToWin)
             {
-                _packService.LevelUp();
-                _energyService.RewardEnergy();
-                _gameplayStateMachine.Enter<WinState>();
+                return;
             }
+            
+            _packService.LevelUp();
+            _energyService.RewardEnergy();
+            _gameplayStateMachine.Enter<WinState>();
         }
 
         private void InitGrid()
         {
-            _currentLevel = _blockPlacer.SpawnGrid(_gameGridInfo);
+            CurrentLevel = _blockPlacer.SpawnGrid(_gameGridInfo);
             AllBlocks = 0;
             AllBlocksToWin = 0;
             DestroyedBlocksToWin = 0;
@@ -266,13 +205,13 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             {
                 for (int y = 0; y < _gameGridInfo.Size.y; y++)
                 {
-                    if (_currentLevel[x, y].ID == 0)
+                    if (CurrentLevel[x, y].ID == 0)
                     {
                         continue;
                     }
                     
                     AllBlocks++;
-                    if (_currentLevel[x, y].CheckToWin)
+                    if (CurrentLevel[x, y].CheckToWin)
                     {
                         AllBlocksToWin++;
                     }
@@ -286,14 +225,12 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             {
                 for (int y = 0; y < _gameGridInfo.Size.y; y++)
                 {
-                    if (_currentLevel[x, y].Block != null)
+                    if (CurrentLevel[x, y].Block is not null)
                     {
-                        _currentLevel[x, y].Block.Collider.isTrigger = false;
-                        _blockFactory.Despawn(_currentLevel[x, y].Block);
+                        _blockFactory.Despawn(CurrentLevel[x, y].Block);
                     }
                 }
             }
         }
-        
     }
 }

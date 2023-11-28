@@ -34,6 +34,7 @@ namespace Main.Scripts.Factory
             block.transform.position = spawnContext.Position;
             block.SpriteRenderer.sprite = blockInfo.BasicInfo.Visual;
             block.Collider.size = block.SpriteRenderer.size;
+            block.Collider.isTrigger = false;
             
             IBlockComponentFactory[] componentFactories = blockInfo.ComponentFactories;
             

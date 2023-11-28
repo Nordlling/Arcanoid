@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FinalConfig
   m_EditorClassIdentifier: 
   Delay: 10
+  InitTimeScale: 0.1
   WinDuration: 2000
   LoseDuration: 1000
   WinEffectKey: Win

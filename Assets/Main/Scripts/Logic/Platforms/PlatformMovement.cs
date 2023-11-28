@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Platforms
 {
-    public class PlatformMovement : MonoBehaviour, ILoseable, IWinable, IPrePlayable
+    public class PlatformMovement : MonoBehaviour, ILoseable, IWinable, IPrePlayable, IRestartable
     {
         public Transform BallPoint => _ballPoint;
         [SerializeField]  private Transform _ballPoint;
@@ -55,6 +55,12 @@ namespace Main.Scripts.Logic.Platforms
         public Task PrePlay()
         {
             _stop = false;
+            return Task.CompletedTask;
+        }
+
+        public Task Restart()
+        {
+            _stop = true;
             return Task.CompletedTask;
         }
 
