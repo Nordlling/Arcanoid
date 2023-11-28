@@ -18,7 +18,6 @@ namespace Main.Scripts.Logic.Explosions
         private readonly IEffectFactory _effectFactory;
         private readonly ITimeProvider _timeProvider;
 
-        private readonly SpawnContext _spawnContext = new();
         private readonly Dictionary<BlockPlaceInfo, ExplosionInfo> _explosions = new();
         private readonly ExplosionInteractionProcessor _explosionInteractionProcessor = new();
 
@@ -182,20 +181,15 @@ namespace Main.Scripts.Logic.Explosions
                 {
                     continue;
                 }
-                CreateEffect(cell.BlockPlaceInfo.WorldPosition, explosionInfo.ExplosionConfig);
+                
+                _effectFactory.SpawnAndEnable(cell.BlockPlaceInfo.WorldPosition, explosionInfo.ExplosionConfig.ExplosionEffectKey);
+                
                 _explosionInteractionProcessor.ExplodedBlockProcessing(cell.BlockPlaceInfo.Block, explosionInfo.ExplosionConfig);
                 
                 childrenCells.AddRange(cell.Childrens);
             }
 
             explosionInfo.CurrentCells = childrenCells;
-        }
-
-        private void CreateEffect(Vector2 worldPosition, ExplosionConfig explosionConfig)
-        {
-            _spawnContext.Position = worldPosition;
-            Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(explosionConfig.ExplosionEffectKey, true);
         }
 
         private int CalculateMaxDepth(ExplosionConfig explosionConfig)

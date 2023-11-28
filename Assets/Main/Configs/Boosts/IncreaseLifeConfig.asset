@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: IncreaseLifeConfig
   m_EditorClassIdentifier: 
   Count: 1
+  UsageEffectKey: Heal

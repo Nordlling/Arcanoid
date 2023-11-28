@@ -1,4 +1,5 @@
 using Main.Scripts.Configs;
+using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.Healths;
@@ -28,7 +29,7 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         
         private void RegisterLifeSystem(ServiceContainer serviceContainer)
         {
-            LifeSystem lifeSystem = new LifeSystem(serviceContainer.Get<IHealthService>());
+            LifeSystem lifeSystem = new LifeSystem(serviceContainer.Get<IHealthService>(), serviceContainer.Get<IEffectFactory>());
 
             serviceContainer.SetService<ILifeSystem, LifeSystem>(lifeSystem);
         }

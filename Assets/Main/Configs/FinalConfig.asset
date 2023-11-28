@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b48fee0678e24e90a633a92d40e85f9d, type: 3}
-  m_Name: WinConfig
+  m_Name: FinalConfig
   m_EditorClassIdentifier: 
-  Duration: 1000
   Delay: 10
-  EffectKey: Win
+  InitTimeScale: 0.1
+  WinDuration: 2000
+  LoseDuration: 1000
+  WinEffectKey: Win
+  LoseEffectKey: Lose

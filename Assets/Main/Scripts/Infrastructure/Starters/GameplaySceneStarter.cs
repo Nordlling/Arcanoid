@@ -5,9 +5,9 @@ namespace Main.Scripts.Infrastructure.Starters
 {
     public class GameplaySceneStarter : ISceneStarter
     {
-        public void StartScene(ServiceContainer serviceContainer)
+        public async void StartScene(ServiceContainer serviceContainer)
         {
-            serviceContainer.Get<IGameplayStateMachine>().Enter<PrePlayState>();
+            await serviceContainer.Get<IGameplayStateMachine>().Enter<PrepareState>();
         }
 
     }

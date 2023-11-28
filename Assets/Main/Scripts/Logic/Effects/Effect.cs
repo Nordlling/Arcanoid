@@ -16,6 +16,7 @@ namespace Main.Scripts.Logic.Effects
 
         private EffectInfo _enabledEffect;
         private bool _timeDependent = true;
+        private bool _destroyOnFinish = true;
 
         public void Construct(IEffectFactory effectFactory, ITimeProvider timeProvider)
         {
@@ -23,10 +24,33 @@ namespace Main.Scripts.Logic.Effects
             _timeProvider = timeProvider;
         }
 
-        public void EnableEffect(string effectKey, bool timeDependent)
+        public void EnableEffect(string effectKey, bool timeDependent = true, bool destroyOnFinish = true)
         {
             _timeDependent = timeDependent;
+            _destroyOnFinish = destroyOnFinish;
             TryEnableEffect(effectKey);
+        }
+
+        public void DisableEffect()
+        {
+            if (_enabledEffect is null)
+            {
+                return;
+            }
+            
+            _enabledEffect.Effect.gameObject.SetActive(false);
+        }
+
+        public void DespawnEffect()
+        {
+            if (_enabledEffect is null)
+            {
+                return;
+            }
+            
+            _enabledEffect.Effect.gameObject.SetActive(false);
+            _effectFactory.Despawn(this);
+            _enabledEffect = null;
         }
 
         public async void EnableEffectForTime(string effectKey, float seconds)
@@ -41,18 +65,6 @@ namespace Main.Scripts.Logic.Effects
             DisableEffect();
         }
 
-        public void DisableEffect()
-        {
-            if (_enabledEffect is null)
-            {
-                return;
-            }
-            
-            _enabledEffect.Effect.gameObject.SetActive(false);
-            _effectFactory.Despawn(this);
-            _enabledEffect = null;
-        }
-
         private void Update()
         {
             if (_enabledEffect is null || !_enabledEffect.Effect.gameObject.activeSelf)
@@ -62,13 +74,25 @@ namespace Main.Scripts.Logic.Effects
 
             if (!_enabledEffect.Effect.IsAlive())
             {
-                DisableEffect();
+                FinishEffect();
                 return;
             }
             
             if (_timeDependent)
             {
                 UpdateTimeForEffects();
+            }
+        }
+
+        private void FinishEffect()
+        {
+            if (_destroyOnFinish)
+            {
+                DespawnEffect();
+            }
+            else
+            {
+                DisableEffect();
             }
         }
 

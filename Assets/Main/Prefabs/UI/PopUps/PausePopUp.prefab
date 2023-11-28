@@ -372,6 +372,7 @@ MonoBehaviour:
   _menuButton: {fileID: 7790142859016611516}
   _skipButton: {fileID: 381381854462128821}
   _energyBarUIView: {fileID: 8796202622981480775}
+  _skipDuration: 2
 --- !u!1 &8458846162249886144
 GameObject:
   m_ObjectHideFlags: 0

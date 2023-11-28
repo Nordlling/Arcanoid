@@ -13,9 +13,7 @@ namespace Main.Scripts.Logic.Boosts
         private string _boostId;
         private IEffectFactory _effectFactory;
         private string _effectKey;
-       
-        private readonly SpawnContext _spawnContext = new();
-
+        
         public void Construct(Block block, IBoostContainer boostContainer, IEffectFactory effectFactory, string boostId, string effectKey)
         {
             _block = block;
@@ -32,17 +30,14 @@ namespace Main.Scripts.Logic.Boosts
                 return;
             }
             
-            Boost boost = _boostContainer.CreateBoost(_boostId, transform.position);
+            Vector2 spawnPosition = transform.position;
+            
+            Boost boost = _boostContainer.CreateBoost(_boostId, spawnPosition);
             boost.transform.localScale = Vector3.Scale(boost.transform.localScale, _block.SizeRatio);
-            CreateEffect();
+           
+            _effectFactory.SpawnAndEnable(spawnPosition, _effectKey);
+            
             _block.Destroy();
-        }
-
-        private void CreateEffect()
-        {
-            _spawnContext.Position = transform.position;
-            Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(_effectKey, true);
         }
     }
 }

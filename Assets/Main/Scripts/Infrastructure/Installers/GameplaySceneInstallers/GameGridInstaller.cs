@@ -9,6 +9,7 @@ using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.GameGrid.Loader;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Logic.Zones;
+using Main.Scripts.UI.Views;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
@@ -58,10 +59,17 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                     serviceContainer.Get<IEnergyService>()
                 );
 
+            GameGridController gameGridController = new GameGridController(
+                gameGridService,
+                serviceContainer.Get<IGameplayStateMachine>(),
+                serviceContainer.Get<ComprehensiveRaycastBlocker>());
+            
             serviceContainer.SetService<IGameGridService, GameGridService>(gameGridService);
             serviceContainer.SetService<IInitializable, GameGridService>(gameGridService);
+            
+            serviceContainer.SetService<IGameGridController, GameGridController>(gameGridController);
 
-            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(gameGridService);
+            serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(gameGridController);
         }
     }
 }

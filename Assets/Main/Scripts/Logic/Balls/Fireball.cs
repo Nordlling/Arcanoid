@@ -15,7 +15,6 @@ namespace Main.Scripts.Logic.Balls
 
         private Sprite _originalSprite;
         private Effect _currentEffect;
-        private readonly SpawnContext _spawnContext = new();
 
         public void Construct(
             IEffectFactory effectFactory, 
@@ -36,15 +35,18 @@ namespace Main.Scripts.Logic.Balls
         private void Init()
         {
             _originalSprite = _spriteRenderer.sprite;
+            
             if (string.IsNullOrEmpty(_fireballEffectKey))
             {
                 return;
             }
-
-            _spawnContext.Position = transform.position;
-            _currentEffect = _effectFactory.Spawn(_spawnContext);
-            _currentEffect.EnableEffect(_fireballEffectKey, true);
-            _currentEffect.gameObject.SetActive(false);
+            
+            _currentEffect = _effectFactory.SpawnAndEnable(transform.position, _fireballEffectKey);
+            
+            if (_currentEffect is not null)
+            {
+                _currentEffect.gameObject.SetActive(false);
+            }
 
             _ballContainer.OnSwitchedFireball += SwitchFireball;
         }
@@ -68,7 +70,7 @@ namespace Main.Scripts.Logic.Balls
             {
                 return;
             }
-            _currentEffect.DisableEffect();
+            _currentEffect.DespawnEffect();
             _currentEffect = null;
         }
 

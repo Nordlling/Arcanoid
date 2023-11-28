@@ -8,7 +8,7 @@ namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
     public class ApplicationInstaller : MonoInstaller
     {
         [SerializeField] private ApplicationConfig _applicationConfig;
-        [SerializeField] private ApplicationService _applicationServicePrefab;
+        [SerializeField] private ApplicationService _applicationService;
 
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
@@ -17,9 +17,8 @@ namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
         
         private void RegisterApplicationService(ServiceContainer serviceContainer)
         {
-            ApplicationService applicationService = Instantiate(_applicationServicePrefab);
-            applicationService.Construct(_applicationConfig);
-            serviceContainer.SetService<IApplicationService, ApplicationService>(applicationService);
+            _applicationService.Construct(_applicationConfig);
+            serviceContainer.SetService<IApplicationService, ApplicationService>(_applicationService);
         }
     }
 }

@@ -3,6 +3,7 @@ using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.States;
+using Main.Scripts.Logic.Balls;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,14 +21,18 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private Button _skipButton;
         [SerializeField] private EnergyBarUIView _energyBarUIView;
         
+        [SerializeField] private float _skipDuration;
+
         private IGameStateMachine _gameStateMachine;
         private IEnergyService _energyService;
-        
+        private ComprehensiveRaycastBlocker _comprehensiveRaycastBlocker;
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
             _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
             _energyService = _serviceContainer.Get<IEnergyService>();
+            _comprehensiveRaycastBlocker = _serviceContainer.Get<ComprehensiveRaycastBlocker>();
             _energyBarUIView.Construct(_energyService);
         }
         
@@ -69,7 +74,6 @@ namespace Main.Scripts.UI.Views
             await gamePlayStateMachine.Enter<RestartState>();
             Close();
             await Task.Yield();
-            await gamePlayStateMachine.Enter<PrePlayState>();
         }
 
         private async void ContinueGame()
@@ -83,14 +87,13 @@ namespace Main.Scripts.UI.Views
         private async void SkipLevel()
         {
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
-            IGameGridService gameGridService = _serviceContainer.Get<IGameGridService>();
-            GameplayUIView gameplayUIView = _serviceContainer.Get<GameplayUIView>();
+            IGameGridController gameGridService = _serviceContainer.Get<IGameGridController>();
             Close();
-            gameplayUIView.GraphicRaycaster.enabled = false;
+            _comprehensiveRaycastBlocker.Enable();
             await Task.Yield();
             await gamePlayStateMachine.EnterPreviousState();
-            await gameGridService.KillAllWinnableBlocks(2);
-            gameplayUIView.GraphicRaycaster.enabled = false;
+            _serviceContainer.Get<BallBoundsChecker>().Check = false;
+            await gameGridService.KillAllWinnableBlocks(_skipDuration);
         }
     }
 }

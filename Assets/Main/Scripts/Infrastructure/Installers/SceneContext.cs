@@ -14,7 +14,7 @@ namespace Main.Scripts.Infrastructure.Installers
         private readonly List<IInitializable> _initializables = new();
         private readonly List<ITickable> _tickables = new();
 
-        public void Setup(ServiceContainer serviceContainer,  TaskCompletionSource<bool> tcs = null)
+        public void Setup(ServiceContainer serviceContainer, TaskCompletionSource<bool> tcs = null)
         {
             BuildContainer(serviceContainer);
             _initializables.AddRange(serviceContainer.GetServices<IInitializable>());

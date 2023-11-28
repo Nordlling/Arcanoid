@@ -16,7 +16,6 @@ namespace Main.Scripts.Logic.Blocks
         private int _breakSpriteIndex;
         private string _damageEffectKey;
         private string _destroyEffectKey;
-        private readonly SpawnContext _spawnContext = new();
 
         private Sequence _sequence;
 
@@ -44,24 +43,14 @@ namespace Main.Scripts.Logic.Blocks
             }
             _breakSpriteRenderer.sprite = _blockHealthVisualConfig.HealthSprites[_breakSpriteIndex];
 
-            CreateEffect(_blockHealthVisualConfig.DamageEffectKey);
+            _effectFactory.SpawnAndEnable(transform.position, _blockHealthVisualConfig.DamageEffectKey);
+            
             PlayAnimation();
         }
         
         public void RefreshDieView()
         {
-            CreateEffect(_blockHealthVisualConfig.DestroyEffectKey);
-        }
-
-        private void CreateEffect(string effectKey)
-        {
-            if (string.IsNullOrEmpty(effectKey))
-            {
-                return;
-            }
-            _spawnContext.Position = transform.position;
-            Effect effect = _effectFactory.Spawn(_spawnContext);
-            effect.EnableEffect(effectKey, true);
+            _effectFactory.SpawnAndEnable(transform.position, _blockHealthVisualConfig.DestroyEffectKey);
         }
 
         private void PlayAnimation()

@@ -12,6 +12,6 @@ namespace Main.Scripts.Infrastructure.Services.Healths
         bool IsMaxHealth();
         void DecreaseHealth();
         void IncreaseHealth();
-        void ChangeHealth(int count, bool canDie);
+        bool TryChangeHealth(int count, bool canDie);
     }
 }
