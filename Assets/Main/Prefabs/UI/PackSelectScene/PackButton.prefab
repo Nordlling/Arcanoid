@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7092596130810180561}
   - component: {fileID: 5801421889591792676}
   - component: {fileID: 1061287376551654525}
+  - component: {fileID: 5453633224255478475}
   - component: {fileID: 7760482362164556677}
   m_Layer: 5
   m_Name: PackButton
@@ -121,12 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb583390a7d45aa9c883a6da544e3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pauseDuration: 0
   _animationDuration: 2
+  _pauseDuration: 0
   _vibrato: 1
   _elasticity: 1
-  _scaleMultiplier: {x: 0.1, y: 0.25, z: 1}
   _loops: 2
+  _scaleMultiplier: {x: 0.1, y: 0.25, z: 1}
 --- !u!114 &1061287376551654525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +172,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5453633224255478475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2527904295485548195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d13ba408ad407291737a3cd64f5225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1061287376551654525}
+  _image: {fileID: 1139667877369093258}
+  _imageTransform: {fileID: 8156878770299126846}
+  _pressedColor: {r: 0, g: 0, b: 0, a: 0}
+  _animationDuration: 0.1
+  _buttonPressedScale: {x: 0.9, y: 1}
+  _buttonPressedMoveOffset: {x: 0, y: 0}
 --- !u!114 &7760482362164556677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +312,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3956870350b3dd943ace05bfaf1d936a, type: 3}
+--- !u!114 &1139667877369093258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7518360649007360845, guid: 3956870350b3dd943ace05bfaf1d936a, type: 3}
+  m_PrefabInstance: {fileID: 7459787032594347975}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4009178663793096477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2714645341673189901 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4767666338741126602, guid: 3956870350b3dd943ace05bfaf1d936a, type: 3}
