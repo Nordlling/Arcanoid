@@ -443,6 +443,7 @@ Transform:
   - {fileID: 1693853883014392865}
   - {fileID: 1420733342775889242}
   - {fileID: 4737132130049313216}
+  - {fileID: 2357621288221508048}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -467,3 +468,49 @@ MonoBehaviour:
   - {fileID: 8905136833045254077}
   - {fileID: 8560639222993621983}
   - {fileID: 1950892234059341731}
+  - {fileID: 5400301358217591621}
+--- !u!1 &8608441093454358180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2357621288221508048}
+  - component: {fileID: 5400301358217591621}
+  m_Layer: 0
+  m_Name: ComprehensiveRaycastBlockerInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2357621288221508048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608441093454358180}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2984380768963955549}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5400301358217591621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608441093454358180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0716d5b30f784330afa0c542ae29025f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _comprehensiveRaycastBlocker: {fileID: -7072916489847829806, guid: 4bcdfba809bf2154ea0160e92ab78d3c, type: 3}

@@ -22,12 +22,14 @@ namespace Main.Scripts.UI.Views
         
         private IGameStateMachine _gameStateMachine;
         private IEnergyService _energyService;
-        
+        private ComprehensiveRaycastBlocker _comprehensiveRaycastBlocker;
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
             _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
             _energyService = _serviceContainer.Get<IEnergyService>();
+            _comprehensiveRaycastBlocker = _serviceContainer.Get<ComprehensiveRaycastBlocker>();
             _energyBarUIView.Construct(_energyService);
         }
         
@@ -84,13 +86,11 @@ namespace Main.Scripts.UI.Views
         {
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
             IGameGridService gameGridService = _serviceContainer.Get<IGameGridService>();
-            GameplayUIView gameplayUIView = _serviceContainer.Get<GameplayUIView>();
             Close();
-            gameplayUIView.GraphicRaycaster.enabled = false;
+            _comprehensiveRaycastBlocker.Enable();
             await Task.Yield();
             await gamePlayStateMachine.EnterPreviousState();
             await gameGridService.KillAllWinnableBlocks(2);
-            gameplayUIView.GraphicRaycaster.enabled = false;
         }
     }
 }

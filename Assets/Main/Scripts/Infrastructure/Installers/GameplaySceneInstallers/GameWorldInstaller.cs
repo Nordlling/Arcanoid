@@ -4,6 +4,7 @@ using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Logic.Bounds;
+using Main.Scripts.UI.Views;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
@@ -39,8 +40,9 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             WinService winService = new WinService(
                 serviceContainer.Get<ITimeProvider>(),
                 serviceContainer.Get<IEffectFactory>(),
-                spawnContext,
-                _winConfig
+                serviceContainer.Get<ComprehensiveRaycastBlocker>(),
+                _winConfig,
+                spawnContext
             );
             
             serviceContainer.SetServiceSelf(winService);
