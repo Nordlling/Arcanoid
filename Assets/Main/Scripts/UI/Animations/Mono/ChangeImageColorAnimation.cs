@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Animations
+namespace Main.Scripts.UI.Animations.Mono
 {
     public class ChangeImageColorAnimation : MonoBehaviour
     {

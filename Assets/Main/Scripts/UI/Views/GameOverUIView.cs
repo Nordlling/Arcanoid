@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.States;
+using Main.Scripts.UI.Animations;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -23,21 +23,26 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private TextMeshProUGUI _lastTryCostValue;
         [SerializeField] private float _lastTryPause;
         [SerializeField] private Vector3 _spawnOffset;
+        
+        [Header("Animation")]
         [SerializeField] private float _animationDuration;
-        [SerializeField] private GameObject _localRaycastBlocker;
 
         private IGameStateMachine _gameStateMachine;
         private IEnergyService _energyService;
+        private ComprehensiveRaycastBlocker _comprehensiveRaycastBlocker;
 
         private Vector3 _originalPosition;
         private float _originalPositionY;
         private Vector3 _spawnPosition;
+
+        private TransformAnimations _transformAnimations = new();
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
             _gameStateMachine = _serviceContainer.Get<IGameStateMachine>();
             _energyService = _serviceContainer.Get<IEnergyService>();
+            _comprehensiveRaycastBlocker = _serviceContainer.Get<ComprehensiveRaycastBlocker>();
             _energyBarUIView.Construct(_energyService);
             _originalPosition = transform.position;
         }
@@ -65,20 +70,20 @@ namespace Main.Scripts.UI.Views
 
         private async UniTask PlayShowAnimation()
         {
-            _localRaycastBlocker.SetActive(true);
-            _spawnPosition = transform.position;
-            _spawnPosition += _spawnOffset;
-            transform.position = _spawnPosition;
+            _comprehensiveRaycastBlocker.Enable();
             
-            await transform.DOMoveY(_originalPosition.y, _animationDuration);
-            _localRaycastBlocker.SetActive(false);
+            _spawnPosition = _originalPosition + _spawnOffset;
+            transform.position = _spawnPosition;
+            await _transformAnimations.MoveTo(transform, _originalPosition, _animationDuration);
+            
+            _comprehensiveRaycastBlocker.Disable();
         }
         
         private async UniTask PlayHideAnimation()
         {
-            _localRaycastBlocker.SetActive(true);
-            await transform.DOMoveY(_spawnPosition.y, _animationDuration);
-            _localRaycastBlocker.SetActive(false);
+            _comprehensiveRaycastBlocker.Enable();
+            await _transformAnimations.MoveTo(transform, _spawnPosition, _animationDuration);
+            _comprehensiveRaycastBlocker.Disable();
         }
 
         private async void RestartGame()
@@ -104,18 +109,16 @@ namespace Main.Scripts.UI.Views
                 return;
             }
             
-            _localRaycastBlocker.SetActive(true);
+            _comprehensiveRaycastBlocker.Enable();
             await Task.Delay((int)(_lastTryPause * 1000));
             await PlayHideAnimation();
-            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
             Close();
-            await Task.Yield();
-            await gamePlayStateMachine.Enter<PrePlayState>();
+            
+            await _serviceContainer.Get<IGameplayStateMachine>().Enter<PrePlayState>();
         }
 
         private async void ExitGame()
         {
-            _localRaycastBlocker.SetActive(true);
             await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
             Close();
         }

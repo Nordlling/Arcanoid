@@ -1,7 +1,7 @@
 using System;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Localization;
-using Main.Scripts.UI.Animations;
+using Main.Scripts.UI.Animations.Mono;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

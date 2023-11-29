@@ -5,7 +5,7 @@ using Main.Scripts.Infrastructure.Provides;
 using TMPro;
 using UnityEngine;
 
-namespace Main.Scripts.UI.Animations
+namespace Main.Scripts.UI.Animations.Mono
 {
     public class RunningCounterAnimation : MonoBehaviour
     {

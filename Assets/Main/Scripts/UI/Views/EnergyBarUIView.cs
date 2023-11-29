@@ -1,5 +1,5 @@
 using Main.Scripts.Infrastructure.Services.Energies;
-using Main.Scripts.UI.Animations;
+using Main.Scripts.UI.Animations.Mono;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
