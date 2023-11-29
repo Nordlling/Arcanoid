@@ -63,6 +63,7 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
         public Task Restart()
         {
             _targetSize = _initialPlatformSize;
+            _activated = false;
             return Task.CompletedTask;
         }
     }

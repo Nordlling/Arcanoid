@@ -41,7 +41,7 @@ namespace Main.Scripts.Logic.Balls.BallSystems
             
             if (_boostTime <= 0f)
             {
-                _activated = true;
+                _activated = false;
                 _gameGridController.DisableTriggerForAllBlocks();
                 _ballContainer.UnfireAllBalls();
                 return;
@@ -53,6 +53,7 @@ namespace Main.Scripts.Logic.Balls.BallSystems
         public Task Restart()
         {
             _boostTime = 0f;
+            _activated = false;
             return Task.CompletedTask;
         }
         
