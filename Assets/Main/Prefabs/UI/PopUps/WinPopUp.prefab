@@ -893,7 +893,7 @@ MonoBehaviour:
   _mapImage: {fileID: 3227854766074301812}
   _mapStrokeImage: {fileID: 2661163299088049240}
   _buttonGroup: {fileID: 9060545971789884546}
-  _buttonShowDuration: 0.8
+  _buttonShowDuration: 0.5
 --- !u!1 &7475113470546305120
 GameObject:
   m_ObjectHideFlags: 0

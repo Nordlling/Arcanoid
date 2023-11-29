@@ -4,5 +4,5 @@
 	"MapImagePath": "Packs/Pack3/Map",
 	"ButtonColorRGB": "#DDCC38",
 	"LevelsPathTemplate": "Packs/AllLevels/Level{0}",
-	"LevelsCount": 7
+	"LevelsCount": 8
 }
