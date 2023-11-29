@@ -2,7 +2,7 @@
 	"PackID": "Pack3",
 	"PackName": "MILKYWAY",
 	"MapImagePath": "Packs/Pack3/Map",
-	"ButtonColor": "#DDCC38",
+	"ButtonColorRGB": "#DDCC38",
 	"LevelsPathTemplate": "Packs/AllLevels/Level{0}",
 	"LevelsCount": 7
 }

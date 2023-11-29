@@ -75,11 +75,9 @@ namespace Main.Scripts.UI.Buttons
 
         private void RefreshStaticInfo(PackInfo packInfo)
         {
-            ColorUtility.TryParseHtmlString(packInfo.ButtonColor, out Color currentColor);
-            
             for (int i = 0; i < _coloredImages.Length; i++)
             {
-                _coloredImages[i].color = currentColor;
+                _coloredImages[i].color = packInfo.ButtonColor;
             }
 
             _packNameValue.Localize(_packService.PackInfos[_packIndex].PackName);
