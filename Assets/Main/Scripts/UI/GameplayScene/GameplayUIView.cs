@@ -2,7 +2,7 @@ using Main.Scripts.Infrastructure.GameplayStates;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.GameplayScene
 {
     public class GameplayUIView : MonoBehaviour
     {

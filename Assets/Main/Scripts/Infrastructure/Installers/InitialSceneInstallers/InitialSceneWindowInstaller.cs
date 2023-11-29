@@ -1,6 +1,6 @@
 using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.UI;
-using Main.Scripts.UI.Views;
+using Main.Scripts.UI.InitialScene;
 
 namespace Main.Scripts.Infrastructure.Installers.InitialSceneInstallers
 {

@@ -2,11 +2,13 @@ using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Infrastructure.States;
+using Main.Scripts.UI.Animations.Mono;
+using Main.Scripts.UI.CommonViews;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.PopUps
 {
     public class WinUIView : UIView
     {

@@ -4,7 +4,7 @@ using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Logic.Balls;
 using Main.Scripts.Logic.Effects;
-using Main.Scripts.UI.Views;
+using Main.Scripts.UI.CommonViews;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Provides

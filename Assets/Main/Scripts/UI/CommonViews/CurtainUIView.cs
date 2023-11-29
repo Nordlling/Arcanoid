@@ -1,10 +1,8 @@
-using System;
 using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.CommonViews
 {
     public class CurtainUIView : MonoBehaviour
     {

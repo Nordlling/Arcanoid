@@ -1,41 +1,42 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Energies;
-using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.States;
-using Main.Scripts.Logic.Balls;
 using Main.Scripts.UI.Animations;
+using Main.Scripts.UI.CommonViews;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.PopUps
 {
-    public class PauseUIView : UIView
+    public class GameOverUIView : UIView
     {
         [ValueDropdown("GetSceneNames")]
         [SerializeField] private string _menuSceneName;
         
-        [SerializeField] private Button _continueButton;
         [SerializeField] private Button _restartButton;
+        [SerializeField] private Button _lastTryButton;
         [SerializeField] private Button _menuButton;
-        [SerializeField] private Button _skipButton;
         [SerializeField] private EnergyBarUIView _energyBarUIView;
-        [SerializeField] private float _skipDuration;
-        
+        [SerializeField] private TextMeshProUGUI _lastTryCostValue;
+        [SerializeField] private float _lastTryPause;
+
         [Header("Animation")]
-        [SerializeField] private Vector3 _showFirstStepScale;
-        [SerializeField] private Vector3 _showSecondTargetScale;
-        [SerializeField] private float _showFirstStepDuration;
-        [SerializeField] private float _showSecondsStepDuration;
-        [SerializeField] private float _hideDuration;
-        
+        [SerializeField] private Vector3 _spawnOffset;
+        [SerializeField] private float _animationDuration;
 
         private IGameStateMachine _gameStateMachine;
         private IEnergyService _energyService;
         private ComprehensiveRaycastBlocker _comprehensiveRaycastBlocker;
 
-        private readonly TransformAnimations _transformAnimations = new();
+        private Vector3 _originalPosition;
+        private float _originalPositionY;
+        private Vector3 _spawnPosition;
+
+        private TransformAnimations _transformAnimations = new();
 
         protected override void OnInitialize()
         {
@@ -44,50 +45,48 @@ namespace Main.Scripts.UI.Views
             _energyService = _serviceContainer.Get<IEnergyService>();
             _comprehensiveRaycastBlocker = _serviceContainer.Get<ComprehensiveRaycastBlocker>();
             _energyBarUIView.Construct(_energyService);
+            _originalPosition = transform.position;
         }
         
-        protected override void OnOpen()
+        protected override async void OnOpen()
         {
             base.OnOpen();
-            _continueButton.onClick.AddListener(ContinueGame);
             _restartButton.onClick.AddListener(RestartGame);
+            _lastTryButton.onClick.AddListener(LastTry);
             _menuButton.onClick.AddListener(ExitGame);
-            _skipButton.onClick.AddListener(SkipLevel);
             _energyBarUIView.OnOpen();
             _energyBarUIView.RefreshEnergy();
-            PlayShowAnimation();
+            
+            _lastTryCostValue.text = _energyService.WasteForLastTry.ToString();
+            
+            await PlayShowAnimation();
         }
-
+        
         protected override void OnClose()
         {
             base.OnClose();
-            _continueButton.onClick.RemoveListener(ContinueGame);
             _restartButton.onClick.RemoveListener(RestartGame);
+            _lastTryButton.onClick.RemoveListener(LastTry);
             _menuButton.onClick.RemoveListener(ExitGame);
-            _skipButton.onClick.RemoveListener(SkipLevel);
             _energyBarUIView.OnClose();
         }
 
-        private async void PlayShowAnimation()
+        private async UniTask PlayShowAnimation()
         {
             _comprehensiveRaycastBlocker.Enable();
-            transform.localScale = Vector3.zero;
-            await _transformAnimations.ScaleTo(transform, _showFirstStepScale, _showFirstStepDuration);
-            await _transformAnimations.ScaleTo(transform, _showSecondTargetScale, _showSecondsStepDuration);
+            
+            _spawnPosition = _originalPosition + _spawnOffset;
+            transform.position = _spawnPosition;
+            await _transformAnimations.MoveTo(transform, _originalPosition, _animationDuration);
+            
             _comprehensiveRaycastBlocker.Disable();
         }
         
-        private async Task PlayHideAnimation()
+        private async UniTask PlayHideAnimation()
         {
             _comprehensiveRaycastBlocker.Enable();
-            await _transformAnimations.ScaleTo(transform, Vector3.zero, _hideDuration);
+            await _transformAnimations.MoveTo(transform, _spawnPosition, _animationDuration);
             _comprehensiveRaycastBlocker.Disable();
-        }
-
-        private async void ExitGame()
-        {
-            await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
-            Close();
         }
 
         private async void RestartGame()
@@ -98,31 +97,33 @@ namespace Main.Scripts.UI.Views
                 _serviceContainer.Get<IWindowsManager>().GetWindow<NoEnergyUIView>()?.Open();
                 return;
             }
-            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
+
+            await PlayHideAnimation();
+            Close();
+            await _serviceContainer.Get<IGameplayStateMachine>().Enter<RestartState>();
+        }
+
+        private async void LastTry()
+        {
+            if (!_energyService.TryWasteEnergy(_energyService.WasteForLastTry))
+            {
+                _energyBarUIView.Focus();
+                _serviceContainer.Get<IWindowsManager>().GetWindow<NoEnergyUIView>()?.Open();
+                return;
+            }
             
-            await PlayHideAnimation();
-            Close();
-            await gamePlayStateMachine.Enter<RestartState>();
-        }
-
-        private async void ContinueGame()
-        {
-            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
-            await PlayHideAnimation();
-            Close();
-            await gamePlayStateMachine.EnterPreviousState();
-        }
-
-        private async void SkipLevel()
-        {
-            await PlayHideAnimation();
-            Close();
-
-
-            await _serviceContainer.Get<IGameplayStateMachine>().EnterPreviousState();
-            _serviceContainer.Get<BallBoundsChecker>().Check = false;
             _comprehensiveRaycastBlocker.Enable();
-            await _serviceContainer.Get<IGameGridController>().KillAllWinnableBlocks(_skipDuration);
+            await Task.Delay((int)(_lastTryPause * 1000));
+            await PlayHideAnimation();
+            Close();
+            
+            await _serviceContainer.Get<IGameplayStateMachine>().Enter<PrePlayState>();
+        }
+
+        private async void ExitGame()
+        {
+            await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
+            Close();
         }
     }
 }

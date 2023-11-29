@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.UI.Animations;
+using Main.Scripts.UI.CommonViews;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.PopUps
 {
     public class NoEnergyUIView : UIView
     {

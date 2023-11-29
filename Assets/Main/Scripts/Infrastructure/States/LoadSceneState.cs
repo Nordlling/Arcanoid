@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Services;
-using Main.Scripts.UI.Views;
+using Main.Scripts.UI.CommonViews;
 
 namespace Main.Scripts.Infrastructure.States
 {

@@ -5,7 +5,7 @@ using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Logic.Blocks;
 using Main.Scripts.Logic.Boosts;
-using Main.Scripts.UI.Views;
+using Main.Scripts.UI.CommonViews;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.GameGrid

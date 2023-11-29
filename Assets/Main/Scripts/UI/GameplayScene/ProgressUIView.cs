@@ -9,7 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.GameplayScene
 {
     public class ProgressUIView : MonoBehaviour, IInitializable, ITickable, IRestartable
     {

@@ -4,7 +4,7 @@ using Main.Scripts.Infrastructure.Services;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Infrastructure.Services.Packs;
-using Main.Scripts.UI.Views;
+using Main.Scripts.UI.GameplayScene;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
-using Main.Scripts.UI.Views;
+using Main.Scripts.UI.PopUps;
 
 namespace Main.Scripts.UI
 {

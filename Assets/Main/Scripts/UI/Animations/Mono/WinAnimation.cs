@@ -2,12 +2,12 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Main.Scripts.Infrastructure.Services.Packs;
 using Main.Scripts.Localization;
+using Main.Scripts.UI.CommonViews;
 using TMPro;
-using Main.Scripts.UI.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.Animations.Mono
 {
     public class WinAnimation : MonoBehaviour
     {

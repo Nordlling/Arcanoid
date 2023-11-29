@@ -3,7 +3,7 @@ using Main.Scripts.Localization;
 using TMPro;
 using UnityEngine;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.PackSelectScene
 {
 	public class LanguageSelectUIView : MonoBehaviour
 	{

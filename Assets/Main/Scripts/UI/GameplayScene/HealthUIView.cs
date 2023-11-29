@@ -5,7 +5,7 @@ using Main.Scripts.UI.Animations.Mono;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Main.Scripts.UI.Views
+namespace Main.Scripts.UI.GameplayScene
 {
     public class HealthUIView : MonoBehaviour, IInitializable
     {
@@ -15,10 +15,12 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private Color _fullHealthColor;
         [SerializeField] private Color _emptyHealthColor;
 
-        private int _currentHealthCount;
-        private readonly List<Image> _allHealthImages = new();
-        
         private IHealthService _healthService;
+        
+        private readonly List<Image> _allHealthImages = new();
+
+        private int _currentHealthCount;
+
 
         public void Construct(IHealthService healthService)
         {
@@ -59,23 +61,6 @@ namespace Main.Scripts.UI.Views
 
         private void Unsubscribe()
         {
-            _healthService.OnChanged -= RefreshHealth;
-        }
-
-        private void DecreaseHealth()
-        {
-            if (_currentHealthCount <= 0)
-            {
-                return;
-            }
-            _currentHealthCount--;
-            _changeImageColorAnimation.Play(_allHealthImages[_currentHealthCount],  _emptyHealthColor);
-        }
-
-        private void IncreaseHealth()
-        {
-            _changeImageColorAnimation.Play(_allHealthImages[_currentHealthCount],  _fullHealthColor);
-            _currentHealthCount++;
             
         }
         
@@ -98,5 +83,6 @@ namespace Main.Scripts.UI.Views
                 Destroy(child.gameObject);
             }
         }
+        
     }
 }

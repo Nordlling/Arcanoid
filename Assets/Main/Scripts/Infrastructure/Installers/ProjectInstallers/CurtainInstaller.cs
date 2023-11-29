@@ -1,5 +1,5 @@
 using Main.Scripts.Infrastructure.Services;
-using Main.Scripts.UI.Views;
+using Main.Scripts.UI.CommonViews;
 using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Installers.ProjectInstallers
