@@ -59,7 +59,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                 serviceContainer.Get<Platform>().PlatformMovement,
                 serviceContainer.Get<IBallFactory>(),
                 serviceContainer.Get<BallKeeper>(),
-                serviceContainer.Get<IHealthService>());
+                serviceContainer.Get<IHealthService>(),
+                serviceContainer.Get<Shaker>());
             
             serviceContainer.SetService<IBallContainer, BallContainer>(ballContainer);
             

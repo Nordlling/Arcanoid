@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: ZonesConfig
   m_EditorClassIdentifier: 
   GridZone:
-    UpperOffset: 0.18
+    UpperOffset: 0.105
     BottomOffset: 0
-    LeftOffset: 0.04
-    RightOffset: 0.04
+    LeftOffset: 0.02
+    RightOffset: 0.02
     Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   LivingZone:
     UpperOffset: 0
-    BottomOffset: -0.05
+    BottomOffset: -0.02
     LeftOffset: -0.2
     RightOffset: -0.2
     Color: {r: 1, g: 0, b: 0, a: 1}

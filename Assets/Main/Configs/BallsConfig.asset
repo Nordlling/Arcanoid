@@ -53,6 +53,9 @@ MonoBehaviour:
     - Name: Visual
       Entry: 10
       Data: 0
+    - Name: DestroyEffectKey
+      Entry: 1
+      Data: BallDestroy
     - Name: 
       Entry: 8
       Data: 
@@ -61,7 +64,7 @@ MonoBehaviour:
       Data: 4|Main.Scripts.Factory.Components.IBallComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 5|Main.Scripts.Factory.BallComponents.BallMovementComponentFactory, Assembly-CSharp
@@ -77,6 +80,15 @@ MonoBehaviour:
     - Name: FireballEffectKey
       Entry: 1
       Data: Fireball
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Main.Scripts.Factory.BallComponents.HitEffectComponentFactory, Assembly-CSharp
+    - Name: HitEffectKey
+      Entry: 1
+      Data: BallHit
     - Name: 
       Entry: 8
       Data: 
@@ -100,25 +112,28 @@ MonoBehaviour:
       Data: Bullet
     - Name: $v
       Entry: 7
-      Data: 7|Main.Scripts.Configs.BallInfo, Assembly-CSharp
+      Data: 8|Main.Scripts.Configs.BallInfo, Assembly-CSharp
     - Name: BasicInfo
       Entry: 7
-      Data: 8|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
+      Data: 9|Main.Scripts.Configs.BasicInfo, Assembly-CSharp
     - Name: Visual
       Entry: 10
       Data: 2
+    - Name: DestroyEffectKey
+      Entry: 1
+      Data: BulletDestroy
     - Name: 
       Entry: 8
       Data: 
     - Name: ComponentFactories
       Entry: 7
-      Data: 9|Main.Scripts.Factory.Components.IBallComponentFactory[], Assembly-CSharp
+      Data: 10|Main.Scripts.Factory.Components.IBallComponentFactory[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 10|Main.Scripts.Factory.BallComponents.BulletComponentFactory, Assembly-CSharp
+      Data: 11|Main.Scripts.Factory.BallComponents.BulletComponentFactory, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

@@ -15,6 +15,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
         private readonly IBallFactory _ballFactory;
         private readonly BallKeeper _ballKeeper;
         private readonly IHealthService _healthService;
+        private readonly Shaker _shaker;
 
         private bool isFireball;
 
@@ -29,12 +30,14 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             PlatformMovement platformMovement, 
             IBallFactory ballFactory, 
             BallKeeper ballKeeper,
-            IHealthService healthService)
+            IHealthService healthService,
+            Shaker shaker)
         {
             _platformMovement = platformMovement;
             _ballFactory = ballFactory;
             _ballKeeper = ballKeeper;
             _healthService = healthService;
+            _shaker = shaker;
         }
 
         public Ball CreateBallOnPlatform()
@@ -94,6 +97,7 @@ namespace Main.Scripts.Logic.Balls.BallContainers
 
             if (Balls.Count <= 0)
             {
+                _shaker.Shake();
                 _healthService.DecreaseHealth();
             }
         }

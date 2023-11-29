@@ -12,10 +12,12 @@ namespace Main.Scripts.Infrastructure.Services.Collision
     {
         private readonly ICollisionHandler[] _collisionHandlers = {
             new ChangeAngleOnHitHandler(),
+            new ShakeOnHitHandler(),
             new HealthHandler<Component>(1),
             new EnteredCollisionHandler<Explosion>(),
             new EnteredCollisionHandler<ExtraBall>(),
-            new EnteredCollisionHandler<BoostKeeper>()
+            new EnteredCollisionHandler<BoostKeeper>(),
+            new AcceptedCollisionHandler<HitEffect>()
         };
         
         private readonly ITriggerHandler[] _triggerHandlers = {

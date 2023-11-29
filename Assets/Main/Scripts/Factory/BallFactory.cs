@@ -32,7 +32,11 @@ namespace Main.Scripts.Factory
             BallInfo ballInfo = _ballsConfig.BallInfos[spawnContext.ID];
             Ball ball = (Ball)_poolProvider.PoolItemView.Spawn();
             
-            ball.Construct(spawnContext.ID, _serviceContainer.Get<IBallContainer>());
+            ball.Construct(
+                spawnContext.ID, 
+                _serviceContainer.Get<IBallContainer>(),
+                _serviceContainer.Get<IEffectFactory>(),
+                ballInfo.BasicInfo.DestroyEffectKey);
             
             if (spawnContext.Parent is not null)
             {
