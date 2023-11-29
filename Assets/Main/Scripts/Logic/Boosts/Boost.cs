@@ -17,15 +17,20 @@ namespace Main.Scripts.Logic.Boosts
         [SerializeField] private BoostMovement _boostMovement;
         
         private IBoostContainer _boostContainer;
+        private string _destroyEffectKey;
+        private IEffectFactory _effectFactory;
 
-        public void Construct(string id, IBoostContainer boostContainer)
+        public void Construct(string id, IBoostContainer boostContainer, IEffectFactory effectFactory, string destroyEffectKey)
         {
             ID = id;
             _boostContainer = boostContainer;
+            _effectFactory = effectFactory;
+            _destroyEffectKey = destroyEffectKey;
         }
         
         public void Destroy()
         {
+            _effectFactory.SpawnAndEnable(transform.position, transform.localScale, _destroyEffectKey);
             _boostContainer.RemoveBoost(this);
         }
     }

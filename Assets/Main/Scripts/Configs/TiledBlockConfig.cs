@@ -32,5 +32,6 @@ namespace Main.Scripts.Configs
     public class BasicInfo
     {
         public Sprite Visual;
+        public string DestroyEffectKey;
     }
 }
