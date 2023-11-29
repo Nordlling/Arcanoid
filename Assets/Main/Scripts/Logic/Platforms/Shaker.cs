@@ -1,31 +1,41 @@
-using Main.Scripts.UI.Animations;
+using System.Threading.Tasks;
+using DG.Tweening;
+using Main.Scripts.Configs;
 using UnityEngine;
 
 namespace Main.Scripts.Logic.Platforms
 {
-    public class Shaker : MonoBehaviour
+    public class Shaker
     {
-        [SerializeField] private Transform _visual;
-        [SerializeField] private float _shakeLength;
-        [SerializeField] private float _duration;
+        private readonly Camera _camera;
+        private readonly ShakerConfig _shakerConfig;
 
         private bool _used;
-        private readonly TransformAnimations _transformAnimations = new();
-        
-        public async void Shake(Vector2 direction)
+
+        public Shaker(Camera camera, ShakerConfig shakerConfig)
         {
+            _camera = camera;
+            _shakerConfig = shakerConfig;
+        }
+
+        public async void Shake()
+        {
+            await Task.Delay((int)(_shakerConfig.Pause * 1000));
+            
+            if (_shakerConfig.EnableVibration)
+            {
+                Handheld.Vibrate();
+            }
+            
             if (_used)
             {
                 return;
             }
 
             _used = true;
-            
-            Vector3 moveDirection = direction * _shakeLength;
-            await _transformAnimations.LocalMoveTo(_visual, _visual.localPosition + moveDirection, _duration);
-            await _transformAnimations.LocalMoveTo(_visual, Vector3.zero, _duration);
-            
-            _used = false;
+            _camera.transform
+                .DOShakePosition(_shakerConfig.ShakeDuration, _shakerConfig.ShakeStrength)
+                .OnComplete(() => _used = false);
         }
     }
 }

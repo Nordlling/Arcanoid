@@ -38,8 +38,8 @@ Transform:
   - {fileID: 5498293099050523110}
   - {fileID: 8778557494138118565}
   - {fileID: 4764894698393306835}
-  - {fileID: 2892531951133213530}
   - {fileID: 1770747843196848112}
+  - {fileID: 2892531951133213530}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -280,7 +280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3467755636147466019, guid: a80fb5ac65aec1b41afb0c1ced9fa9a0, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3467755636147466019, guid: a80fb5ac65aec1b41afb0c1ced9fa9a0, type: 3}
       propertyPath: m_LocalScale.x
@@ -375,7 +375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 484736, guid: 511016cb1e68a7c4e850f451b62da54a, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 484736, guid: 511016cb1e68a7c4e850f451b62da54a, type: 3}
       propertyPath: m_LocalScale.x
@@ -542,6 +542,66 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198240264361987454, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: lengthInSec
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 198240264361987454, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198240264361987454, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 198240264361987454, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 198359957661721904, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: lengthInSec
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 198359957661721904, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198359957661721904, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198616579032010596, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: lengthInSec
+      value: 0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 198616579032010596, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198616579032010596, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198755127273645396, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: lengthInSec
+      value: 0.175
+      objectReference: {fileID: 0}
+    - target: {fileID: 198755127273645396, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198755127273645396, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[2].time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198755127273645396, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[3].time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198821592052895758, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: lengthInSec
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 198821592052895758, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
       propertyPath: UVModule.flipU
       value: 0
@@ -549,6 +609,18 @@ PrefabInstance:
     - target: {fileID: 198821592052895758, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
       propertyPath: UVModule.flipV
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198821592052895758, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: simulationSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198821592052895758, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 198821592052895758, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].time
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 199020907459637576, guid: d40daeea4cf90c14a8a1e4d0ac436ac8, type: 3}
       propertyPath: m_Flip.x

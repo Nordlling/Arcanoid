@@ -7,7 +7,7 @@ namespace Main.Scripts.Infrastructure.Services.Collision.CollisionHandlers
     {
         public void Handle(GameObject acceptedObject, Collision2D enteredCollision)
         {
-            if (enteredCollision.gameObject.TryGetComponent(out Shaker shakeOnHit))
+            if (enteredCollision.gameObject.TryGetComponent(out PlatformShaker shakeOnHit))
             {
                 shakeOnHit.Shake(enteredCollision.relativeVelocity.normalized * -1f);
             }

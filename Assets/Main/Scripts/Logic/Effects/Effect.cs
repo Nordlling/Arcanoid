@@ -15,6 +15,7 @@ namespace Main.Scripts.Logic.Effects
         [SerializeField] private EffectInfo[] _effects;
 
         private EffectInfo _enabledEffect;
+        private float _initialSimulationSpeed;
         private bool _timeDependent = true;
         private bool _destroyOnFinish = true;
 
@@ -101,7 +102,7 @@ namespace Main.Scripts.Logic.Effects
             for (int i = 0; i < _enabledEffect.Particles.Length; i++)
             {
                 var effect = _enabledEffect.Particles[i].main;
-                effect.simulationSpeed = _timeProvider.Stopped ? 0f : 1f;
+                effect.simulationSpeed = _timeProvider.Stopped ? 0f : _initialSimulationSpeed;
             }
         }
 
@@ -117,6 +118,7 @@ namespace Main.Scripts.Logic.Effects
             DisableEffect();
 
             _enabledEffect = effectInfo;
+            _initialSimulationSpeed = _enabledEffect.Effect.main.simulationSpeed;
             _enabledEffect.Effect.gameObject.SetActive(true);
             return true;
         }
