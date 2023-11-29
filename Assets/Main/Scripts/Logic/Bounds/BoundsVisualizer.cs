@@ -29,6 +29,7 @@ namespace Main.Scripts.Logic.Bounds
             foreach (BoundInfo spawnInfo in _bounder.BoundInfos)
             {
                 SetPosition(spawnInfo);
+                _bounder.RelocateBounders();
                 DrawSpawnField(spawnInfo);
             }
         }
