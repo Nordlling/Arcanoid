@@ -13,9 +13,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         private readonly ZonesManager _zonesManager;
         private readonly GameGridConfig _gameGridConfig;
         
-        private Vector2 _blockWithSpacingScale;
-        private Vector2 _blockWithSpacingSize;
-        private Vector2 _blockScale;
+        private Vector3 _blockWithSpacingScale;
+        private Vector3 _blockWithSpacingSize;
+        private Vector3 _blockScale;
         private Vector2 _firstBlockPosition;
 
         public BlockPlacer(IBlockFactory blockFactory, ZonesManager zonesManager, GameGridConfig gameGridConfig)
@@ -57,7 +57,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                     
                     if (block != null)
                     {
-                        block.transform.localScale = Vector2.zero;
+                        block.transform.localScale = Vector3.zero;
                         block.SizeRatio = new Vector3(_blockScale.x / 1f, _blockScale.y / 1f, 1f);
                         block.GridPosition = new Vector2Int(x, y);
                     }
@@ -83,9 +83,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
             float blockWithSpacingWidth = gameGridRect.width / gridWidth;
             float spriteRatio = blockWithSpacingWidth / spriteSize.x;
             
-            _blockWithSpacingSize = new Vector2(blockWithSpacingWidth, blockWithSpacingWidth * aspectRatio);
-            _blockWithSpacingScale = new Vector2(spriteRatio, spriteRatio);
-            _blockScale = _blockWithSpacingScale - new Vector2(_gameGridConfig.Spacing * 2f, _gameGridConfig.Spacing * 2f);
+            _blockWithSpacingSize = new Vector3(blockWithSpacingWidth, blockWithSpacingWidth * aspectRatio, 1f);
+            _blockWithSpacingScale = new Vector3(spriteRatio, spriteRatio, 1f);
+            _blockScale = _blockWithSpacingScale - new Vector3(_gameGridConfig.Spacing * 2f, _gameGridConfig.Spacing * 2f, 1f);
             _firstBlockPosition = new Vector2(gameGridRect.xMin + _blockWithSpacingSize.x * 0.5f, gameGridRect.yMax - _blockWithSpacingSize.y * 0.5f);
         }
     }

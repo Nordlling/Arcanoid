@@ -21,7 +21,7 @@ namespace Main.Scripts.Infrastructure.Services.Healths
 
         public void Interact()
         {
-            _lifeSystem.ActivateLifeBoost(_lifeConfig, transform.position);
+            _lifeSystem.ActivateLifeBoost(_lifeConfig, transform.position, transform.localScale);
             
             _boost.Destroy();
         }

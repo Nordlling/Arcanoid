@@ -5,6 +5,6 @@ namespace Main.Scripts.Infrastructure.Services.Healths
 {
     public interface ILifeSystem
     {
-        void ActivateLifeBoost(LifeConfig lifeConfig, Vector2 position);
+        void ActivateLifeBoost(LifeConfig lifeConfig, Vector2 position, Vector3 scale);
     }
 }

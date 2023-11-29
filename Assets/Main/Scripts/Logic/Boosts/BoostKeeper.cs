@@ -35,7 +35,7 @@ namespace Main.Scripts.Logic.Boosts
             Boost boost = _boostContainer.CreateBoost(_boostId, spawnPosition);
             boost.transform.localScale = Vector3.Scale(boost.transform.localScale, _block.SizeRatio);
            
-            _effectFactory.SpawnAndEnable(spawnPosition, _effectKey);
+            _effectFactory.SpawnAndEnable(spawnPosition, transform.localScale, _effectKey);
             
             _block.Destroy();
         }

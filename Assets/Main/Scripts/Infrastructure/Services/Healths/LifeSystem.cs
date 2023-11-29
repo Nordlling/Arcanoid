@@ -15,11 +15,11 @@ namespace Main.Scripts.Infrastructure.Services.Healths
             _effectFactory = effectFactory;
         }
 
-        public void ActivateLifeBoost(LifeConfig lifeConfig, Vector2 position)
+        public void ActivateLifeBoost(LifeConfig lifeConfig, Vector2 position, Vector3 scale)
         {
             if (_healthService.TryChangeHealth(lifeConfig.Count, false))
             {
-                _effectFactory.SpawnAndEnable(position, lifeConfig.UsageEffectKey);
+                _effectFactory.SpawnAndEnable(position, scale, lifeConfig.UsageEffectKey);
             }
         }
         

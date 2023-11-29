@@ -31,7 +31,7 @@ namespace Main.Scripts.Logic.Blocks
         {
             Vector2 spawnPosition = transform.position;
             _extraBallSystem.ActivateExtraBallBoost(spawnPosition);
-            _effectFactory.SpawnAndEnable(spawnPosition, _effectKey);
+            _effectFactory.SpawnAndEnable(spawnPosition, transform.localScale, _effectKey);
             _block.Destroy();
         }
     }

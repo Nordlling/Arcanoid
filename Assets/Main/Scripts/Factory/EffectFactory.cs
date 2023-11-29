@@ -24,10 +24,16 @@ namespace Main.Scripts.Factory
             Effect effect = (Effect)_poolProvider.PoolItemView.Spawn();
             effect.Construct(this, _serviceContainer.Get<ITimeProvider>());
             effect.transform.position = spawnContext.Position;
+            effect.transform.localScale = spawnContext.Scale;
             return effect;
         }
 
         public Effect SpawnAndEnable(Vector2 position, string effectKey)
+        {
+            return SpawnAndEnable(position, Vector3.one, effectKey);
+        }
+
+        public Effect SpawnAndEnable(Vector2 position, Vector3 scale, string effectKey)
         {
             if (string.IsNullOrEmpty(effectKey))
             {
@@ -36,6 +42,7 @@ namespace Main.Scripts.Factory
             
             _spawnContext.Reset();
             _spawnContext.Position = position;
+            _spawnContext.Scale = scale;
             Effect effect = Spawn(_spawnContext);
             effect.EnableEffect(effectKey);
             return effect;

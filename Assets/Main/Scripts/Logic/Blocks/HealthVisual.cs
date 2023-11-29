@@ -43,14 +43,14 @@ namespace Main.Scripts.Logic.Blocks
             }
             _breakSpriteRenderer.sprite = _blockHealthVisualConfig.HealthSprites[_breakSpriteIndex];
 
-            _effectFactory.SpawnAndEnable(transform.position, _blockHealthVisualConfig.DamageEffectKey);
+            _effectFactory.SpawnAndEnable(transform.position, transform.localScale, _blockHealthVisualConfig.DamageEffectKey);
             
             PlayAnimation();
         }
         
         public void RefreshDieView()
         {
-            _effectFactory.SpawnAndEnable(transform.position, _blockHealthVisualConfig.DestroyEffectKey);
+            _effectFactory.SpawnAndEnable(transform.position, transform.localScale,  _blockHealthVisualConfig.DestroyEffectKey);
         }
 
         private void PlayAnimation()

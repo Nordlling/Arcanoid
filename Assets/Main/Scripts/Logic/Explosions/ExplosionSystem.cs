@@ -182,7 +182,7 @@ namespace Main.Scripts.Logic.Explosions
                     continue;
                 }
                 
-                _effectFactory.SpawnAndEnable(cell.BlockPlaceInfo.WorldPosition, explosionInfo.ExplosionConfig.ExplosionEffectKey);
+                _effectFactory.SpawnAndEnable(cell.BlockPlaceInfo.WorldPosition, cell.BlockPlaceInfo.Size, explosionInfo.ExplosionConfig.ExplosionEffectKey);
                 
                 _explosionInteractionProcessor.ExplodedBlockProcessing(cell.BlockPlaceInfo.Block, explosionInfo.ExplosionConfig);
                 
