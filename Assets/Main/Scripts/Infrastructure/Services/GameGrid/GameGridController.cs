@@ -118,10 +118,9 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         private async Task HideAllBlocks(float time)
         {
             float interval = time / _gameGridService.AllBlocks;
-            
-            for (int y = 0; y < _gameGridService.GridSize.y; y++)
+            for (int y = _gameGridService.GridSize.y - 1; y >= 0; y--)
             {
-                for (int x = 0; x < _gameGridService.GridSize.x; x++)
+                for (int x = _gameGridService.GridSize.x - 1; x >= 0; x--)
                 {
                     BlockPlaceInfo blockPlaceInfo = _gameGridService.CurrentLevel[x, y];
                     if (blockPlaceInfo.Block is null)
