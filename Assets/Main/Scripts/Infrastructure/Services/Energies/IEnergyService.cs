@@ -5,15 +5,18 @@ namespace Main.Scripts.Infrastructure.Services.Energies
     public interface IEnergyService : IService
     {
         bool TryWasteEnergy(int energyCost);
-        void RewardEnergy();
+        void RewardEnergy(int energyCost);
 
         int PreviousEnergyCount { get; }
-        int EnergyCount { get; }
         int EnergyCapacity { get; }
-        int EnergyForPlay { get; }
-        int EnergyForLastTry { get; }
+        int WasteForPlay { get; }
+        int WasteForLastTry { get; }
+        int RewardForPass { get; }
+        int RewardForBuy { get; }
+        int EnergyCount { get; }
         float CurrentSecondsToRecharge { get; }
         float AllSecondsToRecharge { get; }
+
 
         event Action OnEnergyChanged;
     }

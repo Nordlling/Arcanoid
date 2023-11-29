@@ -52,7 +52,7 @@ namespace Main.Scripts.UI.Views
             PackProgress packProgress = _packService.PackProgresses[_packService.WonPackIndex];
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
 
-            if (IsReplayablePack(packProgress) || IsLastPack(packProgress) || !_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
+            if (IsReplayablePack(packProgress) || IsLastPack(packProgress) || !_energyService.TryWasteEnergy(_energyService.WasteForPlay))
             {
                 await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
                 Close();

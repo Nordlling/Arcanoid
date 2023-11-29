@@ -56,7 +56,7 @@ namespace Main.Scripts.UI.Views
             _energyBarUIView.OnOpen();
             _energyBarUIView.RefreshEnergy();
             
-            _lastTryCostValue.text = _energyService.EnergyForLastTry.ToString();
+            _lastTryCostValue.text = _energyService.WasteForLastTry.ToString();
             
             await PlayShowAnimation();
         }
@@ -90,9 +90,10 @@ namespace Main.Scripts.UI.Views
 
         private async void RestartGame()
         {
-            if (!_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
+            if (!_energyService.TryWasteEnergy(_energyService.WasteForPlay))
             {
                 _energyBarUIView.Focus();
+                _serviceContainer.Get<IWindowsManager>().GetWindow<NoEnergyUIView>()?.Open();
                 return;
             }
 
@@ -103,9 +104,10 @@ namespace Main.Scripts.UI.Views
 
         private async void LastTry()
         {
-            if (!_energyService.TryWasteEnergy(_energyService.EnergyForLastTry))
+            if (!_energyService.TryWasteEnergy(_energyService.WasteForLastTry))
             {
                 _energyBarUIView.Focus();
+                _serviceContainer.Get<IWindowsManager>().GetWindow<NoEnergyUIView>()?.Open();
                 return;
             }
             

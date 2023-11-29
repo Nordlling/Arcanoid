@@ -188,7 +188,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
             _isWin = true;
             _packService.LevelUp();
-            _energyService.RewardEnergy();
+            _energyService.RewardEnergy(_energyService.RewardForPass);
             _gameplayStateMachine.Enter<WinState>();
         }
 

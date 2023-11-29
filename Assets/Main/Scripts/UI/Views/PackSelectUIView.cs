@@ -110,15 +110,15 @@ namespace Main.Scripts.UI.Views
 
         private async void OpenPackSelect()
         {
-            if (_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
-            {
-                await _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
-                Close();
-            }
-            else
+            if (!_energyService.TryWasteEnergy(_energyService.WasteForPlay))
             {
                 _energyBarUIView.Focus();
+                _serviceContainer.Get<IWindowsManager>().GetWindow<NoEnergyUIView>()?.Open();
+                return;
             }
+            
+            await _gameStateMachine.Enter<TransitSceneState, string>(_gameplaySceneName);
+            Close();
         }
 
         private async void Back()

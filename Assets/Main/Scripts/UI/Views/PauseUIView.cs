@@ -92,9 +92,10 @@ namespace Main.Scripts.UI.Views
 
         private async void RestartGame()
         {
-            if (!_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
+            if (!_energyService.TryWasteEnergy(_energyService.WasteForPlay))
             {
                 _energyBarUIView.Focus();
+                _serviceContainer.Get<IWindowsManager>().GetWindow<NoEnergyUIView>()?.Open();
                 return;
             }
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
