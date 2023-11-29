@@ -2,7 +2,7 @@
 	"PackID": "Pack2",
 	"PackName": "SOMBRERO",
 	"MapImagePath": "Packs/Pack2/Map",
-	"ButtonColor": "#9D58FF",
+	"ButtonColorRGB": "#9D58FF",
 	"LevelsPathTemplate": "Packs/AllLevels/Level{0}",
 	"LevelsCount": 3
 }

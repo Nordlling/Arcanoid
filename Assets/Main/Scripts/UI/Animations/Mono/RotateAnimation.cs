@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Main.Scripts.UI.Animations
+namespace Main.Scripts.UI.Animations.Mono
 {
     public class RotateAnimation : MonoBehaviour
     {

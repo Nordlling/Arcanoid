@@ -4,6 +4,7 @@ using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.States;
 using Main.Scripts.Logic.Balls;
+using Main.Scripts.UI.Animations;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,12 +21,21 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private Button _menuButton;
         [SerializeField] private Button _skipButton;
         [SerializeField] private EnergyBarUIView _energyBarUIView;
-        
         [SerializeField] private float _skipDuration;
+        
+        [Header("Animation")]
+        [SerializeField] private Vector3 _showFirstStepScale;
+        [SerializeField] private Vector3 _showSecondTargetScale;
+        [SerializeField] private float _showFirstStepDuration;
+        [SerializeField] private float _showSecondsStepDuration;
+        [SerializeField] private float _hideDuration;
+        
 
         private IGameStateMachine _gameStateMachine;
         private IEnergyService _energyService;
         private ComprehensiveRaycastBlocker _comprehensiveRaycastBlocker;
+
+        private readonly TransformAnimations _transformAnimations = new();
 
         protected override void OnInitialize()
         {
@@ -45,6 +55,7 @@ namespace Main.Scripts.UI.Views
             _skipButton.onClick.AddListener(SkipLevel);
             _energyBarUIView.OnOpen();
             _energyBarUIView.RefreshEnergy();
+            PlayShowAnimation();
         }
 
         protected override void OnClose()
@@ -57,6 +68,22 @@ namespace Main.Scripts.UI.Views
             _energyBarUIView.OnClose();
         }
 
+        private async void PlayShowAnimation()
+        {
+            _comprehensiveRaycastBlocker.Enable();
+            transform.localScale = Vector3.zero;
+            await _transformAnimations.ScaleTo(transform, _showFirstStepScale, _showFirstStepDuration);
+            await _transformAnimations.ScaleTo(transform, _showSecondTargetScale, _showSecondsStepDuration);
+            _comprehensiveRaycastBlocker.Disable();
+        }
+        
+        private async Task PlayHideAnimation()
+        {
+            _comprehensiveRaycastBlocker.Enable();
+            await _transformAnimations.ScaleTo(transform, Vector3.zero, _hideDuration);
+            _comprehensiveRaycastBlocker.Disable();
+        }
+
         private async void ExitGame()
         {
             await _gameStateMachine.Enter<TransitSceneState, string>(_menuSceneName);
@@ -65,35 +92,37 @@ namespace Main.Scripts.UI.Views
 
         private async void RestartGame()
         {
-            if (!_energyService.TryWasteEnergy(_energyService.EnergyForPlay))
+            if (!_energyService.TryWasteEnergy(_energyService.WasteForPlay))
             {
                 _energyBarUIView.Focus();
+                _serviceContainer.Get<IWindowsManager>().GetWindow<NoEnergyUIView>()?.Open();
                 return;
             }
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
-            await gamePlayStateMachine.Enter<RestartState>();
+            
+            await PlayHideAnimation();
             Close();
-            await Task.Yield();
+            await gamePlayStateMachine.Enter<RestartState>();
         }
 
         private async void ContinueGame()
         {
             IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
+            await PlayHideAnimation();
             Close();
-            await Task.Yield();
             await gamePlayStateMachine.EnterPreviousState();
         }
 
         private async void SkipLevel()
         {
-            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
-            IGameGridController gameGridService = _serviceContainer.Get<IGameGridController>();
+            await PlayHideAnimation();
             Close();
-            _comprehensiveRaycastBlocker.Enable();
-            await Task.Yield();
-            await gamePlayStateMachine.EnterPreviousState();
+
+
+            await _serviceContainer.Get<IGameplayStateMachine>().EnterPreviousState();
             _serviceContainer.Get<BallBoundsChecker>().Check = false;
-            await gameGridService.KillAllWinnableBlocks(_skipDuration);
+            _comprehensiveRaycastBlocker.Enable();
+            await _serviceContainer.Get<IGameGridController>().KillAllWinnableBlocks(_skipDuration);
         }
     }
 }

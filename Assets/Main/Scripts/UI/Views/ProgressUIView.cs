@@ -4,7 +4,7 @@ using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.Packs;
-using Main.Scripts.UI.Animations;
+using Main.Scripts.UI.Animations.Mono;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

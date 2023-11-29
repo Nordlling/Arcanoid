@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.Services.SaveLoad;
 using UnityEditor;
+using UnityEngine;
 
 namespace Main.Scripts.Infrastructure.Services.Energies
 {
@@ -17,12 +18,15 @@ namespace Main.Scripts.Infrastructure.Services.Energies
         private int _leftSaveInterval;
         private EnergyData _energyData;
 
-        public int EnergyCount => _energyData.EnergyCount;
         public int PreviousEnergyCount { get; private set; }
+        
         public int EnergyCapacity => _energyConfig.InitialEnergyCapacity;
-        public int EnergyForPlay => _energyConfig.EnergyWasteForPlay;
-        public int EnergyForLastTry => _energyConfig.EnergyForLastTry;
-
+        public int WasteForPlay => _energyConfig.WasteForPlay;
+        public int WasteForLastTry => _energyConfig.WasteForLastTry;
+        public int RewardForPass => _energyConfig.RewardForPass;
+        public int RewardForBuy => _energyConfig.RewardForBuy;
+        
+        public int EnergyCount => _energyData.EnergyCount;
         public float CurrentSecondsToRecharge => _energyData.SecondsToRecharge;
         public float AllSecondsToRecharge => _energyConfig.SecondsForRecharge;
         
@@ -40,6 +44,12 @@ namespace Main.Scripts.Infrastructure.Services.Energies
 
         public bool TryWasteEnergy(int energyCost)
         {
+            if (energyCost < 0)
+            {
+                Debug.LogWarning("Negative cost");
+                return false;
+            }
+            
             if (_energyData.EnergyCount < energyCost)
             {
                 return false;
@@ -52,11 +62,17 @@ namespace Main.Scripts.Infrastructure.Services.Energies
 
             return true;
         }
-
-        public void RewardEnergy()
+        
+        public void RewardEnergy(int energyCost)
         {
+            if (energyCost < 0)
+            {
+                Debug.LogWarning("Negative cost");
+                return;
+            }
+            
             PreviousEnergyCount = EnergyCount;
-            _energyData.EnergyCount += _energyConfig.EnergyRewardForPass;
+            _energyData.EnergyCount = Math.Min(_energyData.EnergyCount + energyCost, _energyConfig.MaxEnergyCapacity);
             
             if (_energyData.EnergyCount >= _energyConfig.InitialEnergyCapacity)
             {

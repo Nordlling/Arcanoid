@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Main.Scripts.Logic.Balls.BallContainers
 {
-    public class BallKeeper : ITickable, IPrePlayable, IPlayable, IRestartable
+    public class BallKeeper : ITickable, IPrePlayable, IPlayable, IRestartable, IWinable
     {
         private readonly ZonesManager _zonesManager;
         private readonly Camera _camera;
@@ -50,6 +50,13 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             return Task.CompletedTask;
         }
 
+        public Task Win()
+        {
+            Ball = null;
+            _isPrePlay = false;
+            return Task.CompletedTask;
+        }
+
         public void Tick()
         {
             if (!_isPrePlay || _timeProvider.Stopped)
@@ -84,6 +91,5 @@ namespace Main.Scripts.Logic.Balls.BallContainers
             ballMovement.StartMove();
             Ball = null;
         }
-        
     }
 }

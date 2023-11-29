@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: EnergyConfig
   m_EditorClassIdentifier: 
   InitialEnergyCapacity: 30
-  EnergyWasteForPlay: 3
-  EnergyRewardForPass: 5
-  EnergyForLastTry: 6
-  SecondsForRecharge: 480
+  MaxEnergyCapacity: 200
+  WasteForPlay: 3
+  WasteForLastTry: 6
+  RewardForPass: 5
+  RewardForBuy: 2
+  SecondsForRecharge: 120

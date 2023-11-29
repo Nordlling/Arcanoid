@@ -134,7 +134,15 @@ namespace Main.Scripts.Infrastructure.Services.Packs
                 }
 
                 PackInfo packInfo = _simpleParser.ParseText<PackInfo>(packJson);
+                
                 packInfo.MapImage = _simpleLoader.LoadImage(packInfo.MapImagePath);
+
+                if (!ColorUtility.TryParseHtmlString(packInfo.ButtonColorRGB, out Color currentColor))
+                {
+                    currentColor = Color.green;
+                }
+                packInfo.ButtonColor = currentColor;
+                
                 PackInfos.Add(packInfo);
             }
         }

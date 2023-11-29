@@ -55,7 +55,7 @@ namespace Main.Scripts.UI.Views
             if (_saveLoadService.LoadIsPlayed() == 0)
             {
                 transitSceneName = _gameplaySceneName;
-                _energyService.TryWasteEnergy(_energyService.EnergyForPlay);
+                _energyService.TryWasteEnergy(_energyService.WasteForPlay);
                 _saveLoadService.SaveIsPlayed(1);
                 _packService.SelectedPackIndex = 0;
             }

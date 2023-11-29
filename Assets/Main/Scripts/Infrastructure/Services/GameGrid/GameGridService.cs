@@ -25,6 +25,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
         private readonly IEnergyService _energyService;
 
         private GameGridInfo _gameGridInfo;
+        private bool _isWin;
         
         public BlockPlaceInfo[,] CurrentLevel { get; private set; }
         public int AllBlocks { get; private set; }
@@ -128,11 +129,6 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
                                    && position.y >= 0 && position.y < CurrentLevel.GetLength(1);
         }
 
-        public Task Restart()
-        {
-            return Task.CompletedTask;
-        }
-
         public void RestartLevel()
         {
             DespawnBlocks();
@@ -164,6 +160,7 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         private void CreateLevelMap()
         {
+            _isWin = false;
             string currentLevelPath = _packService.GetCurrentLevelPath();
             if (string.IsNullOrEmpty(currentLevelPath))
             {
@@ -184,13 +181,14 @@ namespace Main.Scripts.Infrastructure.Services.GameGrid
 
         private void CheckGridToWin()
         {
-            if (DestroyedBlocksToWin < AllBlocksToWin)
+            if (_isWin || DestroyedBlocksToWin < AllBlocksToWin)
             {
                 return;
             }
-            
+
+            _isWin = true;
             _packService.LevelUp();
-            _energyService.RewardEnergy();
+            _energyService.RewardEnergy(_energyService.RewardForPass);
             _gameplayStateMachine.Enter<WinState>();
         }
 

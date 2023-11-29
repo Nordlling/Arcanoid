@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 8242618820550013730}
   - component: {fileID: 8065197299521308870}
   - component: {fileID: 8144558806817995850}
+  - component: {fileID: 2721689083886462500}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -284,13 +285,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d13ba408ad407291737a3cd64f5225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 8065197299521308870}
   _image: {fileID: 1824724603061070649}
-  _imageTransform: {fileID: 6046146880783873614}
-  _pressedColor: {r: 0.6156863, g: 0.6, b: 0.6, a: 1}
   _animationDuration: 0.1
+  _pressedColor: {r: 0.6156863, g: 0.6, b: 0.6, a: 1}
   _buttonPressedScale: {x: 0.9, y: 0.9}
-  _buttonPressedMoveOffset: {x: 0, y: 0}
+--- !u!225 &2721689083886462500
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020716007030624783}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2176916804783413899
 GameObject:
   m_ObjectHideFlags: 0

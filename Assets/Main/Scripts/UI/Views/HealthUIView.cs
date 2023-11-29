@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Main.Scripts.Infrastructure.Installers;
 using Main.Scripts.Infrastructure.Services.Healths;
-using Main.Scripts.UI.Animations;
+using Main.Scripts.UI.Animations.Mono;
 using UnityEngine;
 using UnityEngine.UI;
 

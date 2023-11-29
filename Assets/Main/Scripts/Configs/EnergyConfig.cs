@@ -6,12 +6,17 @@ namespace Main.Scripts.Configs
     public class EnergyConfig : ScriptableObject
     {
         public int InitialEnergyCapacity = 30;
+        public int MaxEnergyCapacity = 200;
+        
         [Range(1, 100)]
-        public int EnergyWasteForPlay = 3;
+        public int WasteForPlay = 3;
         [Range(1, 100)]
-        public int EnergyRewardForPass = 5;
+        public int WasteForLastTry = 6;
         [Range(1, 100)]
-        public int EnergyForLastTry = 6;
+        public int RewardForPass = 5;
+        [Range(1, 100)]
+        public int RewardForBuy = 9;
+        
         [Min(0)]
         public float SecondsForRecharge = 480;
     }
