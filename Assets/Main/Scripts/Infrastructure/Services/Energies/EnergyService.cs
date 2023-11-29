@@ -92,11 +92,14 @@ namespace Main.Scripts.Infrastructure.Services.Energies
             int accumulatedEnergyCount = (int)(seconds / _energyConfig.SecondsForRecharge);
             _energyData.EnergyCount += accumulatedEnergyCount;
             _energyData.EnergyCount = Math.Min(_energyData.EnergyCount, _energyConfig.InitialEnergyCapacity);
-            _energyData.SecondsToRecharge = _energyConfig.SecondsForRecharge;
 
             if (_energyData.EnergyCount < _energyConfig.InitialEnergyCapacity)
             {
-                _energyData.SecondsToRecharge = (float)(seconds % _energyConfig.SecondsForRecharge);
+                _energyData.SecondsToRecharge -= (float)(seconds % _energyConfig.SecondsForRecharge);
+            }
+            else
+            {
+                _energyData.SecondsToRecharge = _energyConfig.SecondsForRecharge;
             }
 
             Save();
