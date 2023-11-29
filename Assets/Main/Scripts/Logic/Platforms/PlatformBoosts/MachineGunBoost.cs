@@ -21,7 +21,7 @@ namespace Main.Scripts.Logic.Platforms.PlatformBoosts
 
         public void Interact()
         {
-            _machineGunSystem.ActivateMachineGunBoost(_machineGunConfig);
+            _machineGunSystem.ActivateMachineGunBoost(_machineGunConfig, _boost.ID);
             _boost.Destroy();
         }
     }

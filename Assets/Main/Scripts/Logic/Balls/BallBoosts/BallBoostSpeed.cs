@@ -21,7 +21,7 @@ namespace Main.Scripts.Logic.Balls.BallBoosts
 
         public void Interact()
         {
-            _ballSpeedSystem.ActivateSpeedBoost(_speedBallConfig);
+            _ballSpeedSystem.ActivateSpeedBoost(_speedBallConfig, _boost.ID);
             _boost.Destroy();
         }
     }

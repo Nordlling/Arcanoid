@@ -21,7 +21,7 @@ namespace Main.Scripts.Logic.Platforms.PlatformBoosts
 
         public void Interact()
         {
-            _sizePlatformSystem.ActivateSizeBoost(_sizePlatformConfig);
+            _sizePlatformSystem.ActivateSizeBoost(_sizePlatformConfig, _boost.ID);
             _boost.Destroy();
         }
     }

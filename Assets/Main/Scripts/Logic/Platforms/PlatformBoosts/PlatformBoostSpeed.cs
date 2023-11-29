@@ -21,7 +21,7 @@ namespace Main.Scripts.Logic.Platforms.PlatformBoosts
 
         public void Interact()
         {
-            _speedPlatformSystem.ActivateSpeedBoost(_speedPlatformConfig);
+            _speedPlatformSystem.ActivateSpeedBoost(_speedPlatformConfig, _boost.ID);
             _boost.Destroy();
         }
     }

@@ -1,6 +1,7 @@
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.Infrastructure.Services.BoostTimers;
 using Main.Scripts.Infrastructure.Services.GameGrid;
 using Main.Scripts.Infrastructure.Services.Healths;
 using Main.Scripts.Infrastructure.Services.Packs;
@@ -16,11 +17,13 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         [SerializeField] private GameplayUIView _gameplayUIView;
         [SerializeField] private ProgressUIView _progressUIView;
         [SerializeField] private HealthUIView _healthUIView;
+        [SerializeField] private UIBoostTimersView _boostTimersView;
         public override void InstallBindings(ServiceContainer serviceContainer)
         {
             RegisterGameplayUI(serviceContainer);
             RegisterProgressUI(serviceContainer);
             RegisterHealthUI(serviceContainer);
+            RegisterUIBoostTimersView(serviceContainer);
         }
 
         private void RegisterGameplayUI(ServiceContainer serviceContainer)
@@ -47,6 +50,13 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
         {
             _healthUIView.Construct(serviceContainer.Get<IHealthService>());
             serviceContainer.SetService<IInitializable, HealthUIView>(_healthUIView);
+        }
+        
+        private void RegisterUIBoostTimersView(ServiceContainer serviceContainer)
+        {
+            _boostTimersView.Construct(serviceContainer.Get<IBoostTimersService>());
+            serviceContainer.SetService<IInitializable, UIBoostTimersView>(_boostTimersView);
+            serviceContainer.SetService<ITickable, UIBoostTimersView>(_boostTimersView);
         }
     }
 }

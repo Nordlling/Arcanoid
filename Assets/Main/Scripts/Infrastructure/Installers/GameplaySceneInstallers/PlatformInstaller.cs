@@ -2,6 +2,7 @@ using Main.Scripts.Configs;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.Infrastructure.Services.BoostTimers;
 using Main.Scripts.Logic.Platforms;
 using Main.Scripts.Logic.Platforms.PlatformSystems;
 using Main.Scripts.Logic.Zones;
@@ -32,6 +33,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                 serviceContainer.Get<ITimeProvider>(),
                 _platformConfig);
             
+            serviceContainer.Get<IBoostTimersService>().TimerBoosts.Add(speedPlatformSystem);
+            
             serviceContainer.SetService<ITickable, SpeedPlatformSystem>(speedPlatformSystem);
             serviceContainer.SetService<ISpeedPlatformSystem, SpeedPlatformSystem>(speedPlatformSystem);
             serviceContainer.Get<IGameplayStateMachine>().AddGameplayStatable(speedPlatformSystem);
@@ -57,6 +60,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
             SizePlatformSystem sizePlatformSystem = new SizePlatformSystem(
                 serviceContainer.Get<Platform>().StretchedTransform,
                 serviceContainer.Get<ITimeProvider>());
+            
+            serviceContainer.Get<IBoostTimersService>().TimerBoosts.Add(sizePlatformSystem);
             
             serviceContainer.SetService<ITickable, SizePlatformSystem>(sizePlatformSystem);
             serviceContainer.SetService<ISizePlatformSystem, SizePlatformSystem>(sizePlatformSystem);

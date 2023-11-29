@@ -21,6 +21,9 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
         private Vector3 _targetSize;
         private Vector3 _currentSize;
 
+        public string BoostId { get; private set; }
+        public float BoostTime => _boostTime;
+        public bool IsActive => _activated;
 
         public SizePlatformSystem(Transform platformTransform, ITimeProvider timeProvider)
         {
@@ -31,11 +34,12 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
             _currentSize = _initialPlatformSize;
         }
 
-        public void ActivateSizeBoost(SizePlatformConfig sizePlatformConfig)
+        public void ActivateSizeBoost(SizePlatformConfig sizePlatformConfig, string boostId)
         {
             _targetSize.x = _initialPlatformSize.x * sizePlatformConfig.SizeMultiplier;
             _boostTime = sizePlatformConfig.Duration;
             _resizeSpeed = sizePlatformConfig.ResizeSpeed;
+            BoostId = boostId;
             _activated = true;
         }
 

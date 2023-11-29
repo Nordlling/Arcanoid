@@ -16,6 +16,10 @@ namespace Main.Scripts.Logic.Balls.BallSystems
 
         private bool _activated;
         private float _boostTime;
+        
+        public string BoostId { get; private set; }
+        public float BoostTime => _boostTime;
+        public bool IsActive => _activated;
 
         public FireballSystem(ITimeProvider timeProvider, IGameGridController gameGridController, IBallContainer ballContainer)
         {
@@ -24,12 +28,13 @@ namespace Main.Scripts.Logic.Balls.BallSystems
             _ballContainer = ballContainer;
         }
 
-        public void ActivateFireballBoost(FireballConfig fireballConfig)
+        public void ActivateFireballBoost(FireballConfig fireballConfig, string boostId)
         {
             _activated = true;
             _boostTime = fireballConfig.Duration;
             _gameGridController.EnableTriggerForAllBlocks();
             _ballContainer.FireAllBalls();
+            BoostId = boostId;
         }
 
         public void Tick()

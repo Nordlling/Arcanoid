@@ -2,6 +2,7 @@ using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Provides;
 using Main.Scripts.Infrastructure.Services;
+using Main.Scripts.Infrastructure.Services.BoostTimers;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Infrastructure.Services.Difficulty;
 using Main.Scripts.Infrastructure.Services.GameGrid;
@@ -85,6 +86,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                 serviceContainer.Get<IDifficultyService>(),
                 serviceContainer.Get<ITimeProvider>());
             
+            serviceContainer.Get<IBoostTimersService>().TimerBoosts.Add(ballSpeedSystem);
+            
             serviceContainer.SetService<IBallSpeedSystem, BallSpeedSystem>(ballSpeedSystem);
             serviceContainer.SetService<ITickable, BallSpeedSystem>(ballSpeedSystem);
             
@@ -104,6 +107,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                 serviceContainer.Get<IGameGridController>(),
                 serviceContainer.Get<IBallContainer>());
             
+            serviceContainer.Get<IBoostTimersService>().TimerBoosts.Add(fireballSystem);
+            
             serviceContainer.SetService<IFireballSystem, FireballSystem>(fireballSystem);
             serviceContainer.SetService<ITickable, FireballSystem>(fireballSystem);
             
@@ -116,6 +121,8 @@ namespace Main.Scripts.Infrastructure.Installers.GameplaySceneInstallers
                 serviceContainer.Get<Platform>(),
                 serviceContainer.Get<ITimeProvider>(),
                 serviceContainer.Get<IBallContainer>());
+            
+            serviceContainer.Get<IBoostTimersService>().TimerBoosts.Add(machineGunSystem);
             
             serviceContainer.SetService<IMachineGunSystem, MachineGunSystem>(machineGunSystem);
             serviceContainer.SetService<ITickable, MachineGunSystem>(machineGunSystem);

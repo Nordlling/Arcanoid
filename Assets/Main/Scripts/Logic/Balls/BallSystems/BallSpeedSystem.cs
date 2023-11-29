@@ -17,6 +17,10 @@ namespace Main.Scripts.Logic.Balls.BallSystems
         private SpeedBallConfig _speedBallConfig;
 
         public float CurrentSpeed { get; private set; }
+        
+        public string BoostId { get; private set; }
+        public float BoostTime => _boostTime;
+        public bool IsActive => _boostTime > 0f;
 
         public BallSpeedSystem(IDifficultyService difficultyService, ITimeProvider timeProvider)
         {
@@ -24,8 +28,9 @@ namespace Main.Scripts.Logic.Balls.BallSystems
             _timeProvider = timeProvider;
         }
 
-        public void ActivateSpeedBoost(SpeedBallConfig speedBallConfig)
+        public void ActivateSpeedBoost(SpeedBallConfig speedBallConfig, string boostId)
         {
+            BoostId = boostId;
             _speedBallConfig = speedBallConfig;
             _boostTime = _speedBallConfig.Duration;
         }

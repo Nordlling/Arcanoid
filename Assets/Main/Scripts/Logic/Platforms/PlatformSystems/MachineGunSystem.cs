@@ -20,6 +20,9 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
         private float _boostTime;
         private float _fireInterval;
 
+        public string BoostId { get; private set; }
+        public float BoostTime => _boostTime;
+        public bool IsActive => _activated;
 
         public MachineGunSystem(Platform platform, ITimeProvider timeProvider, IBallContainer ballContainer)
         {
@@ -28,11 +31,12 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
             _ballContainer = ballContainer;
         }
 
-        public void ActivateMachineGunBoost(MachineGunConfig machineGunConfig)
+        public void ActivateMachineGunBoost(MachineGunConfig machineGunConfig, string boostId)
         {
             _machineGunConfig = machineGunConfig;
             _boostTime = machineGunConfig.Duration;
             _fireInterval = machineGunConfig.Interval;
+            BoostId = boostId;
             _activated = true;
         }
 
@@ -78,10 +82,6 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
             _activated = false;
             return Task.CompletedTask;
         }
-    }
-
-    public interface IMachineGunSystem
-    {
-        void ActivateMachineGunBoost(MachineGunConfig machineGunConfig);
+        
     }
 }

@@ -21,7 +21,7 @@ namespace Main.Scripts.Logic.Balls.BallBoosts
         
         public void Interact()
         {
-            _fireballSystem.ActivateFireballBoost(_fireballConfig);
+            _fireballSystem.ActivateFireballBoost(_fireballConfig, _boost.ID);
             _boost.Destroy();
         }
     }

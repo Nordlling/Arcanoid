@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bounder: {fileID: 337934841}
   _boundsVisualizer: {fileID: 1841900599}
+  _tiledBlockConfig: {fileID: 11400000, guid: b9b9a1e295076494ebe2d2a2e0b914e0, type: 2}
 --- !u!114 &145077515 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8790793446018296414, guid: 973bf037bdce61d4a9f2f9e52df43953, type: 3}
@@ -1119,6 +1120,7 @@ MonoBehaviour:
   _gameplayUIView: {fileID: 145077515}
   _progressUIView: {fileID: 1818364272452593352}
   _healthUIView: {fileID: 358657478}
+  _boostTimersView: {fileID: 1739030927}
 --- !u!1 &1351698069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,6 +1380,17 @@ Transform:
   m_Father: {fileID: 1559648428}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1739030927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5440226497540092055, guid: 973bf037bdce61d4a9f2f9e52df43953, type: 3}
+  m_PrefabInstance: {fileID: 1818364272452593351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eda5764f49540d587559d1850a4898f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1841900599 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 887182889826869743, guid: 908a32881c4c0e0468be3156e9e3aa04, type: 3}

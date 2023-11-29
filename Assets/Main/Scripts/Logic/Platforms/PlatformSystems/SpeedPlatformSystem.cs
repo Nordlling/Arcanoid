@@ -18,6 +18,10 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
         public float MovingSpeed { get; private set; }
         public float DecelerationSpeed { get; private set; }
         public float MinDistanceToMove { get; private set; }
+        
+        public string BoostId { get; private set; }
+        public float BoostTime => _boostTime;
+        public bool IsActive => _boostTime > 0f;
 
         public SpeedPlatformSystem(ITimeProvider timeProvider, PlatformConfig platformConfig)
         {
@@ -25,10 +29,11 @@ namespace Main.Scripts.Logic.Platforms.PlatformSystems
             _platformConfig = platformConfig;
         }
 
-        public void ActivateSpeedBoost(SpeedPlatformConfig speedPlatformConfig)
+        public void ActivateSpeedBoost(SpeedPlatformConfig speedPlatformConfig, string boostId)
         {
             _speedPlatformConfig = speedPlatformConfig;
             _boostTime = _speedPlatformConfig.Duration;
+            BoostId = boostId;
         }
 
         public void Tick()
