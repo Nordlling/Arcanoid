@@ -130,3 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1818364271979553932}
+  _image: {fileID: 8726647633864814349}

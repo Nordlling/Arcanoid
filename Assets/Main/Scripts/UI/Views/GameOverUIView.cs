@@ -22,9 +22,9 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private EnergyBarUIView _energyBarUIView;
         [SerializeField] private TextMeshProUGUI _lastTryCostValue;
         [SerializeField] private float _lastTryPause;
-        [SerializeField] private Vector3 _spawnOffset;
-        
+
         [Header("Animation")]
+        [SerializeField] private Vector3 _spawnOffset;
         [SerializeField] private float _animationDuration;
 
         private IGameStateMachine _gameStateMachine;
@@ -50,13 +50,15 @@ namespace Main.Scripts.UI.Views
         protected override async void OnOpen()
         {
             base.OnOpen();
-            await PlayShowAnimation();
             _restartButton.onClick.AddListener(RestartGame);
             _lastTryButton.onClick.AddListener(LastTry);
             _menuButton.onClick.AddListener(ExitGame);
             _energyBarUIView.OnOpen();
-            _lastTryCostValue.text = _energyService.EnergyForLastTry.ToString();
             _energyBarUIView.RefreshEnergy();
+            
+            _lastTryCostValue.text = _energyService.EnergyForLastTry.ToString();
+            
+            await PlayShowAnimation();
         }
         
         protected override void OnClose()
@@ -95,10 +97,8 @@ namespace Main.Scripts.UI.Views
             }
 
             await PlayHideAnimation();
-            IGameplayStateMachine gamePlayStateMachine = _serviceContainer.Get<IGameplayStateMachine>();
-            await gamePlayStateMachine.Enter<RestartState>();
             Close();
-            await UniTask.Yield();
+            await _serviceContainer.Get<IGameplayStateMachine>().Enter<RestartState>();
         }
 
         private async void LastTry()

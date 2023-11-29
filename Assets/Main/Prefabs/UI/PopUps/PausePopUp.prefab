@@ -372,7 +372,6 @@ MonoBehaviour:
   _menuButton: {fileID: 7790142859016611516}
   _skipButton: {fileID: 381381854462128821}
   _energyBarUIView: {fileID: 8796202622981480775}
-  _localRaycastBlocker: {fileID: 8458846162249886144}
   _skipDuration: 2
   _showFirstStepScale: {x: 1.1, y: 1.1, z: 1.1}
   _showSecondTargetScale: {x: 1, y: 1, z: 1}
@@ -1250,10 +1249,6 @@ PrefabInstance:
     - target: {fileID: 7557954450188154031, guid: 0f1873d39f01e8f438584b9e15900621, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8164908719714807572, guid: 0f1873d39f01e8f438584b9e15900621, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 7.4996643
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f1873d39f01e8f438584b9e15900621, type: 3}

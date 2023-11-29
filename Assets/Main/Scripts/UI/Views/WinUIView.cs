@@ -1,8 +1,6 @@
-using System.Threading.Tasks;
 using Main.Scripts.Infrastructure.GameplayStates;
 using Main.Scripts.Infrastructure.Services.Energies;
 using Main.Scripts.Infrastructure.Services.Packs;
-using TMPro;
 using Main.Scripts.Infrastructure.States;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,9 +14,9 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private string _menuSceneName;
         
         [SerializeField] private Button _nextButton;
-        [SerializeField] private TextMeshProUGUI _packProgressValue;
-        [SerializeField] private Image _mapImage;
         [SerializeField] private EnergyBarUIView _energyBarUIView;
+        
+        [SerializeField] private WinAnimation _winAnimation;
         
         private IGameStateMachine _gameStateMachine;
         private IPackService _packService;
@@ -31,15 +29,15 @@ namespace Main.Scripts.UI.Views
             _packService = _serviceContainer.Get<IPackService>();
             _energyService = _serviceContainer.Get<IEnergyService>();
             _energyBarUIView.Construct(_energyService);
+            _winAnimation.Construct(_serviceContainer.Get<ComprehensiveRaycastBlocker>(), _serviceContainer.Get<IPackService>());
         }
 
-        protected override void OnOpen()
+        protected override async void OnOpen()
         {
             base.OnOpen();
-            _nextButton.onClick.AddListener(NextGame);
-            SetMapInfo();
             _energyBarUIView.OnOpen();
-            _energyBarUIView.RefreshEnergyWithAnimations();
+            _nextButton.onClick.AddListener(NextGame);
+            await _winAnimation.PlayShowAnimation();
         }
         
         protected override void OnClose()
@@ -47,15 +45,6 @@ namespace Main.Scripts.UI.Views
             base.OnClose();
             _nextButton.onClick.RemoveListener(NextGame);
             _energyBarUIView.OnClose();
-        }
-
-        private void SetMapInfo()
-        {
-            string currentLevelIndex = (_packService.WonLevelIndex + 1).ToString();
-            string allLevels = _packService.PackInfos[_packService.WonPackIndex].LevelsCount.ToString();
-            
-            _packProgressValue.text =$"{currentLevelIndex}/{allLevels}";
-            _mapImage.sprite = _packService.PackInfos[_packService.WonPackIndex].MapImage;
         }
 
         private async void NextGame()
@@ -70,9 +59,9 @@ namespace Main.Scripts.UI.Views
             }
             else
             {
-                gamePlayStateMachine?.Enter<RestartState>();
+                await _winAnimation.PlayHideAnimation();
                 Close();
-                await Task.Yield();
+                gamePlayStateMachine?.Enter<RestartState>();
             }
         }
 

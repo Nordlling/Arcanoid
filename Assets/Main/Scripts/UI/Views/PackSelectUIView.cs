@@ -52,7 +52,7 @@ namespace Main.Scripts.UI.Views
             _lastOpenedButton.Focus();
             _backButton.onClick.AddListener(Back);
             _energyBarUIView.OnOpen();
-            _energyBarUIView.RefreshEnergy();
+            _energyBarUIView.RefreshEnergyWithAnimations();
         }
         
         protected override void OnClose()

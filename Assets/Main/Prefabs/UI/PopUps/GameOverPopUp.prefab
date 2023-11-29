@@ -121,9 +121,8 @@ MonoBehaviour:
   _energyBarUIView: {fileID: 362708046227856131}
   _lastTryCostValue: {fileID: 8653174921159343093}
   _lastTryPause: 2
-  _spawnOffset: {x: 0, y: -7, z: 0}
+  _spawnOffset: {x: 0, y: -10, z: 0}
   _animationDuration: 2
-  _localRaycastBlocker: {fileID: 3160693339632916341}
 --- !u!1 &2335841650376851736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1531,10 @@ PrefabInstance:
       propertyPath: _localizationKey
       value: LASTTRY
       objectReference: {fileID: 0}
+    - target: {fileID: 2846942579999586591, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3565611470590451424, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
       propertyPath: m_text
       value: "\u041F\u041E\u0421\u041B\u0415\u0414\u041D\u042F\u042F \u041F\u041E\u041F\u042B\u0422\u041A\u0410"
@@ -1681,10 +1684,6 @@ PrefabInstance:
     - target: {fileID: 7557954450188154031, guid: 0f1873d39f01e8f438584b9e15900621, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8164908719714807572, guid: 0f1873d39f01e8f438584b9e15900621, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 7.499695
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f1873d39f01e8f438584b9e15900621, type: 3}

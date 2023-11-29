@@ -49,13 +49,13 @@ namespace Main.Scripts.UI.Views
         protected override void OnOpen()
         {
             base.OnOpen();
-            PlayShowAnimation();
             _continueButton.onClick.AddListener(ContinueGame);
             _restartButton.onClick.AddListener(RestartGame);
             _menuButton.onClick.AddListener(ExitGame);
             _skipButton.onClick.AddListener(SkipLevel);
             _energyBarUIView.OnOpen();
             _energyBarUIView.RefreshEnergy();
+            PlayShowAnimation();
         }
 
         protected override void OnClose()
