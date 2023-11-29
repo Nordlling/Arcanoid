@@ -1,6 +1,6 @@
 Key,English,Русский
-Start,Start2,Старт2
-Finish,Finish,Финиш2
+Start,Start,Старт
+Finish,Finish,Финиш
 MENU,MENU,МЕНЮ
 CONTINUE,CONTINUE,ПРОДОЛЖИТЬ
 RESTART,RESTART,РЕСТАРТ
@@ -18,5 +18,5 @@ MILKYWAY,MILKY WAY,МЛЕЧНЫЙ ПУТЬ
 LASTTRY,LAST TRY,ПОСЛЕДНЯЯ ПОПЫТКА
 NextRecharge,1 ENERGY:,1 ЭНЕРГИЯ:
 FullRecharge,FULL ENERGY:,ПОЛНАЯ ЭНЕРГИЯ:
-LACKOFENERGY,НЕ ХВАТАЕТ ЭНЕРГИИ!,LACK OF ENERGY!
-BUY,КУПИТЬ,BUY
+LACKOFENERGY,LACK OF ENERGY!,НЕ ХВАТАЕТ ЭНЕРГИИ!
+BUY,BUY,КУПИТЬ
