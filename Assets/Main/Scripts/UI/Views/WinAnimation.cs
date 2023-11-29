@@ -44,6 +44,7 @@ namespace Main.Scripts.UI.Views
         
         [Header("Button")]
         [SerializeField] private CanvasGroup _buttonGroup;
+        [SerializeField] private float _buttonShowDuration = 0.8f;
         
         
         private IPackService _packService;
@@ -139,7 +140,7 @@ namespace Main.Scripts.UI.Views
 
         private async Task AnimateButton()
         {
-            await _imageAnimations.FadeDo(_buttonGroup, 1f, 1f);
+            await _imageAnimations.FadeDo(_buttonGroup, 1f, _buttonShowDuration);
         }
 
         private async Task AnimateLevelUp()
