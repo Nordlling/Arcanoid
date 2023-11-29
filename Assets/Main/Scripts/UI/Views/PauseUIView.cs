@@ -116,11 +116,11 @@ namespace Main.Scripts.UI.Views
         {
             await PlayHideAnimation();
             Close();
-            
-            _comprehensiveRaycastBlocker.Enable();
-            _serviceContainer.Get<BallBoundsChecker>().Check = false;
+
 
             await _serviceContainer.Get<IGameplayStateMachine>().EnterPreviousState();
+            _serviceContainer.Get<BallBoundsChecker>().Check = false;
+            _comprehensiveRaycastBlocker.Enable();
             await _serviceContainer.Get<IGameGridController>().KillAllWinnableBlocks(_skipDuration);
         }
     }
