@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Main.Scripts.Infrastructure.Services.Packs;
+using Main.Scripts.Localization;
 using TMPro;
 using Main.Scripts.UI.Animations;
 using UnityEngine;
@@ -37,6 +38,7 @@ namespace Main.Scripts.UI.Views
         [SerializeField] private float _changeLevelDuration;
 
         [Header("Pack")]
+        [SerializeField] private LocalizedText _packNameValue;
         [SerializeField] private float _flashDuration = 0.5f;
         [SerializeField] private float _pauseBeforeFlash = 0.5f;
         [SerializeField] private Image _mapImage;
@@ -121,6 +123,7 @@ namespace Main.Scripts.UI.Views
             
             _packProgressValue.text =$"{currentLevelIndex}/{allLevels}";
             _mapImage.sprite = wonPack.MapImage;
+            _packNameValue.Localize(wonPack.PackName);
             _mapStrokeImage.color = wonPack.ButtonColor;
         }
 
@@ -172,6 +175,7 @@ namespace Main.Scripts.UI.Views
             string allLevels = packInfo.LevelsCount.ToString();
 
             _mapImage.sprite = packInfo.MapImage;
+            _packNameValue.Localize(packInfo.PackName);
             _mapStrokeImage.color = packInfo.ButtonColor;
             _packProgressValue.text = $"{nextPackPassLevelsCount}/{allLevels}";
 
