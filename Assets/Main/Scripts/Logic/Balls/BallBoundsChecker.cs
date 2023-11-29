@@ -30,7 +30,7 @@ namespace Main.Scripts.Logic.Balls
             {
                 if (!_zonesManager.IsInLivingZone(_ballContainer.Balls[i].transform.position))
                 {
-                    _ballContainer.RemoveBall(_ballContainer.Balls[i]);
+                    _ballContainer.Balls[i].Destroy();
                 }
             }
         }

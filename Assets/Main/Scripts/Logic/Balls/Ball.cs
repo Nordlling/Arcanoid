@@ -1,3 +1,4 @@
+using Main.Scripts.Factory;
 using Main.Scripts.Infrastructure.Services.Collision;
 using Main.Scripts.Logic.Balls.BallContainers;
 using Main.Scripts.Pool;
@@ -19,15 +20,20 @@ namespace Main.Scripts.Logic.Balls
         [SerializeField] private Rigidbody2D _rigidbody;
         
         private IBallContainer _ballContainer;
+        private IEffectFactory _effectFactory;
+        private string _destroyEffectKey;
 
-        public void Construct(string id, IBallContainer ballContainer)
+        public void Construct(string id, IBallContainer ballContainer, IEffectFactory effectFactory, string destroyEffectKey)
         {
             ID = id;
             _ballContainer = ballContainer;
+            _effectFactory = effectFactory;
+            _destroyEffectKey = destroyEffectKey;
         }
 
         public void Destroy()
         {
+            _effectFactory.SpawnAndEnable(transform.position, _destroyEffectKey);
             _ballContainer.RemoveBall(this);
         }
     }
