@@ -14,10 +14,9 @@ namespace Main.Scripts.UI.GameplayScene
             _boostIcon.sprite = icon;
             
             int totalSeconds = (int)seconds;
-            int minutes = totalSeconds / 60;
-            int remainingSeconds = totalSeconds % 60;
+            int milliseconds = (int)((seconds - totalSeconds) * 100);
 
-            _timerValue.text = $"{minutes:D2}:{remainingSeconds:D2}";
+            _timerValue.text = $"{totalSeconds:D2}.{milliseconds:D2}";
         }
         
     }
