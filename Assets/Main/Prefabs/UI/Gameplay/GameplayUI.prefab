@@ -676,6 +676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuText
       objectReference: {fileID: 0}
+    - target: {fileID: 5682871287962464155, guid: a69c0a18e5238ca4ca05a949443b1c6f, type: 3}
+      propertyPath: _localizationKey
+      value: MENU
+      objectReference: {fileID: 0}
     - target: {fileID: 5763131761046084485, guid: a69c0a18e5238ca4ca05a949443b1c6f, type: 3}
       propertyPath: m_Name
       value: MenuButton

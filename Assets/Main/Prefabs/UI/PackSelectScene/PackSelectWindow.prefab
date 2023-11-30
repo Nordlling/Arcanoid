@@ -1463,6 +1463,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3180926928791462983, guid: 2a876bbc057fb524aa0d818f88f227a8, type: 3}
+      propertyPath: _localizationKey
+      value: BACK
+      objectReference: {fileID: 0}
     - target: {fileID: 3243630420603850841, guid: 2a876bbc057fb524aa0d818f88f227a8, type: 3}
       propertyPath: m_Name
       value: BackButton
