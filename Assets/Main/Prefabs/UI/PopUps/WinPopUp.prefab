@@ -893,7 +893,9 @@ MonoBehaviour:
   _mapImage: {fileID: 3227854766074301812}
   _mapStrokeImage: {fileID: 2661163299088049240}
   _buttonGroup: {fileID: 9060545971789884546}
-  _buttonShowDuration: 0.5
+  _buttonShowDuration: 0.4
+  _buttonBounceScale: 0.95
+  _buttonBounceDuration: 0.2
 --- !u!1 &7475113470546305120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1451,10 @@ PrefabInstance:
     - target: {fileID: 1202526696007727737, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202526696007727737, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2020716007030624783, guid: cb74d7730b33580468a7bebb7d663770, type: 3}
       propertyPath: m_Name

@@ -47,6 +47,8 @@ namespace Main.Scripts.UI.Animations.Mono
         [Header("Button")]
         [SerializeField] private CanvasGroup _buttonGroup;
         [SerializeField] private float _buttonShowDuration = 0.8f;
+        [SerializeField] private float _buttonBounceScale = 0.95f;
+        [SerializeField] private float _buttonBounceDuration = 0.1f;
         
         
         private IPackService _packService;
@@ -144,6 +146,10 @@ namespace Main.Scripts.UI.Animations.Mono
         private async Task AnimateButton()
         {
             await _imageAnimations.FadeDo(_buttonGroup, 1f, _buttonShowDuration);
+            Transform buttonTransform = _buttonGroup.transform;
+            Vector3 originalSize = buttonTransform.localScale;
+            await _transformAnimations.ScaleTo(buttonTransform, originalSize * _buttonBounceScale, _buttonBounceDuration);
+            await _transformAnimations.ScaleTo(buttonTransform, originalSize, _buttonBounceDuration);
         }
 
         private async Task AnimateLevelUp()
