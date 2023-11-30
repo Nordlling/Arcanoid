@@ -119,6 +119,10 @@ namespace Main.Scripts.Logic.Effects
 
             _enabledEffect = effectInfo;
             _initialSimulationSpeed = _enabledEffect.Effect.main.simulationSpeed;
+            if (_initialSimulationSpeed == 0f)
+            {
+                _initialSimulationSpeed = 1f;
+            }
             _enabledEffect.Effect.gameObject.SetActive(true);
             return true;
         }
